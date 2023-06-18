@@ -1,9 +1,9 @@
 # Rust API client for 
 
-API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> <br/></p>   <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> <br/></p>   <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](docs/https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](docs/https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
 
 ## Overview
-This API client was generated by the [swagger-codegen](https://github.com/swagger-api/swagger-codegen) project.  By using the [swagger-spec](https://github.com/swagger-api/swagger-spec) from a remote server, you can easily generate an API client.
+This API client was generated by the [swagger-codegen](docs/https://github.com/swagger-api/swagger-codegen) project.  By using the [swagger-spec](docs/https://github.com/swagger-api/swagger-spec) from a remote server, you can easily generate an API client.
 
 - API version: 1.0
 - Package version: 
@@ -21,165 +21,165 @@ All URIs are relative to *https://apidev.alor.ru*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OrdersApi* | [**command_api_v2clientordersactionslimit**](OrdersApi.md#command_api_v2clientordersactionslimit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/limit | Создание лимитной заявки
-*OrdersApi* | [**command_api_v2clientordersactionslimitput**](OrdersApi.md#command_api_v2clientordersactionslimitput) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/limit/{orderId} | Изменение лимитной заявки
-*OrdersApi* | [**command_api_v2clientordersactionsmarket**](OrdersApi.md#command_api_v2clientordersactionsmarket) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/market | Создание рыночной заявки
-*OrdersApi* | [**command_api_v2clientordersactionsmarketput**](OrdersApi.md#command_api_v2clientordersactionsmarketput) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/market/{orderId} | Изменение рыночной заявки
-*OrdersApi* | [**command_api_v2clientordersdelete**](OrdersApi.md#command_api_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId} | Снятие заявки
-*OrdersApi* | [**v2clientordersactionsestimate**](OrdersApi.md#v2clientordersactionsestimate) | **POST** commandapi/warptrans/TRADE/v2/client/orders/estimate | Провести оценку одной заявки
-*OrdersApi* | [**v2clientordersactionsestimateall**](OrdersApi.md#v2clientordersactionsestimateall) | **POST** commandapi/warptrans/TRADE/v2/client/orders/estimate/all | Провести оценку нескольких заявок
-*OrdersApi* | [**v2clientordersactionsorder_id**](OrdersApi.md#v2clientordersactionsorder_id) | **DELETE** warptrans/{tradeServerCode}/v2/client/orders/{orderId} | Снятие стоп-заявки
-*OrdersApi* | [**v2clientordersactionsstop_loss**](OrdersApi.md#v2clientordersactionsstop_loss) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLoss | Создание стоп-лосс заявки
-*OrdersApi* | [**v2clientordersactionsstop_loss_limit**](OrdersApi.md#v2clientordersactionsstop_loss_limit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLossLimit | Создание стоп-лосс лимит заявки
-*OrdersApi* | [**v2clientordersactionsstop_loss_limitorder_id**](OrdersApi.md#v2clientordersactionsstop_loss_limitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLossLimit/{orderId} | Изменение стоп-лосс лимит заявки
-*OrdersApi* | [**v2clientordersactionsstop_lossorder_id**](OrdersApi.md#v2clientordersactionsstop_lossorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLoss/{orderId} | Изменение стоп-лосс заявки
-*OrdersApi* | [**v2clientordersactionstake_profit**](OrdersApi.md#v2clientordersactionstake_profit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfit | Создание стоп-заявки
-*OrdersApi* | [**v2clientordersactionstake_profit_limit**](OrdersApi.md#v2clientordersactionstake_profit_limit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfitLimit | Создание стоп-лимит заявки
-*OrdersApi* | [**v2clientordersactionstake_profit_limitorder_id**](OrdersApi.md#v2clientordersactionstake_profit_limitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfitLimit/{orderId} | Изменение стоп-лимит заявки
-*OrdersApi* | [**v2clientordersactionstake_profitorder_id**](OrdersApi.md#v2clientordersactionstake_profitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfit/{orderId} | Изменение стоп-заявки
-*OtherApi* | [**local_time**](OtherApi.md#local_time) | **GET** md/v2/time | Запрос текущего UTC времени в формате Unix
-*SecuritiesApi* | [**dev_history**](SecuritiesApi.md#dev_history) | **GET** md/v2/history | Запрос истории для выбранных биржи и инструмента
-*SecuritiesApi* | [**dev_orderbook_exchang_seccode**](SecuritiesApi.md#dev_orderbook_exchang_seccode) | **GET** md/v2/orderbooks/{exchange}/{seccode} | Получение информации о биржевом стакане
-*SecuritiesApi* | [**dev_quotes**](SecuritiesApi.md#dev_quotes) | **GET** md/v2/Securities/{symbols}/quotes | Получение информации о котировках для выбранных инструментов
-*SecuritiesApi* | [**dev_securities_futures**](SecuritiesApi.md#dev_securities_futures) | **GET** md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote | Получение котировки по ближайшему фьючерсу (код)
-*SecuritiesApi* | [**dev_securities_search**](SecuritiesApi.md#dev_securities_search) | **GET** md/v2/Securities | Получение информации о торговых инструментах
-*SecuritiesApi* | [**dev_securities_search_all_trades**](SecuritiesApi.md#dev_securities_search_all_trades) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades | Получение информации о всех сделках по ценным бумагам за сегодня
-*SecuritiesApi* | [**dev_securities_search_exchange**](SecuritiesApi.md#dev_securities_search_exchange) | **GET** md/v2/Securities/{exchange} | Получение информации о торговых инструментах на выбранной бирже
-*SecuritiesApi* | [**dev_securities_search_exchange_code**](SecuritiesApi.md#dev_securities_search_exchange_code) | **GET** md/v2/Securities/{exchange}/{symbol} | Получение информации о выбранном финансовом инструменте
-*SecuritiesApi* | [**risk_rates**](SecuritiesApi.md#risk_rates) | **GET** md/v2/risk/rates | Запрос ставок риска
-*UsersApi* | [**dev_get_all_orders**](UsersApi.md#dev_get_all_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/orders | Получение информации о всех заявках
-*UsersApi* | [**dev_get_all_positions**](UsersApi.md#dev_get_all_positions) | **GET** md/v2/Clients/{exchange}/{portfolio}/positions | Получение информации о позициях
-*UsersApi* | [**dev_get_all_stop_orders**](UsersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
-*UsersApi* | [**dev_get_all_trades**](UsersApi.md#dev_get_all_trades) | **GET** md/v2/Clients/{exchange}/{portfolio}/trades | Получение информации о сделках
-*UsersApi* | [**dev_get_one_order**](UsersApi.md#dev_get_one_order) | **GET** md/v2/clients/{exchange}/{portfolio}/orders/{orderId} | Получение информации о выбранной заявке
-*UsersApi* | [**dev_get_one_position**](UsersApi.md#dev_get_one_position) | **GET** md/v2/Clients/{exchange}/{portfolio}/positions/{symbol} | Получение информации о позициях выбранного инструмента
-*UsersApi* | [**dev_get_one_stop_order**](UsersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
-*UsersApi* | [**dev_get_ticker_trades**](UsersApi.md#dev_get_ticker_trades) | **GET** md/v2/Clients/{exchange}/{portfolio}/{ticker}/trades | Получение информации о сделках по выбранному инструменту
-*UsersApi* | [**dev_user_portfolio**](UsersApi.md#dev_user_portfolio) | **GET** client/v1.0/users/{username}/portfolios | Получение списка серверов портфелей
-*UsersApi* | [**exchange_portfolio_money**](UsersApi.md#exchange_portfolio_money) | **GET** md/v2/clients/legacy/{exchange}/{portfolio}/money | Получение информации по деньгам для выбранного портфеля
-*UsersApi* | [**exchange_portfolio_summary**](UsersApi.md#exchange_portfolio_summary) | **GET** md/v2/clients/{exchange}/{portfolio}/summary | Получение информации о портфеле
-*UsersApi* | [**fortsrisk**](UsersApi.md#fortsrisk) | **GET** md/v2/Clients/{exchange}/{portfolio}/fortsrisk | Получение информации о рисках на срочном рынке
-*UsersApi* | [**risk**](UsersApi.md#risk) | **GET** md/v2/Clients/{exchange}/{portfolio}/risk | Получение информации о рисках
-*UsersApi* | [**trade_stats**](UsersApi.md#trade_stats) | **GET** md/stats/{exchange}/{portfolio}/history/trades | Получение истории сделок
-*UsersApi* | [**trade_stats_by_symbol**](UsersApi.md#trade_stats_by_symbol) | **GET** md/stats/{exchange}/{portfolio}/history/trades/{symbol} | Получение истории сделок (один тикер)
-*V2ordersApi* | [**command_api_v2clientordersactionsstop**](V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп заявки
-*V2ordersApi* | [**command_api_v2clientordersactionsstop_limit**](V2ordersApi.md#command_api_v2clientordersactionsstop_limit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit | Создание стоп-лимитной заявки
-*V2ordersApi* | [**command_api_v2clientordersactionsstop_limitstop_order_id**](V2ordersApi.md#command_api_v2clientordersactionsstop_limitstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit/{stopOrderId} | Изменение стоп-лимитной заявки
-*V2ordersApi* | [**command_api_warp_v2clientordersdelete**](V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId}/ | Снятие заявки
-*V2ordersApi* | [**dev_get_all_stop_orders**](V2ordersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
-*V2ordersApi* | [**dev_get_one_stop_order**](V2ordersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
+*OrdersApi* | [**command_api_v2clientordersactionslimit**](docs/OrdersApi.md#command_api_v2clientordersactionslimit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/limit | Создание лимитной заявки
+*OrdersApi* | [**command_api_v2clientordersactionslimitput**](docs/OrdersApi.md#command_api_v2clientordersactionslimitput) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/limit/{orderId} | Изменение лимитной заявки
+*OrdersApi* | [**command_api_v2clientordersactionsmarket**](docs/OrdersApi.md#command_api_v2clientordersactionsmarket) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/market | Создание рыночной заявки
+*OrdersApi* | [**command_api_v2clientordersactionsmarketput**](docs/OrdersApi.md#command_api_v2clientordersactionsmarketput) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/market/{orderId} | Изменение рыночной заявки
+*OrdersApi* | [**command_api_v2clientordersdelete**](docs/OrdersApi.md#command_api_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId} | Снятие заявки
+*OrdersApi* | [**v2clientordersactionsestimate**](docs/OrdersApi.md#v2clientordersactionsestimate) | **POST** commandapi/warptrans/TRADE/v2/client/orders/estimate | Провести оценку одной заявки
+*OrdersApi* | [**v2clientordersactionsestimateall**](docs/OrdersApi.md#v2clientordersactionsestimateall) | **POST** commandapi/warptrans/TRADE/v2/client/orders/estimate/all | Провести оценку нескольких заявок
+*OrdersApi* | [**v2clientordersactionsorder_id**](docs/OrdersApi.md#v2clientordersactionsorder_id) | **DELETE** warptrans/{tradeServerCode}/v2/client/orders/{orderId} | Снятие стоп-заявки
+*OrdersApi* | [**v2clientordersactionsstop_loss**](docs/OrdersApi.md#v2clientordersactionsstop_loss) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLoss | Создание стоп-лосс заявки
+*OrdersApi* | [**v2clientordersactionsstop_loss_limit**](docs/OrdersApi.md#v2clientordersactionsstop_loss_limit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLossLimit | Создание стоп-лосс лимит заявки
+*OrdersApi* | [**v2clientordersactionsstop_loss_limitorder_id**](docs/OrdersApi.md#v2clientordersactionsstop_loss_limitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLossLimit/{orderId} | Изменение стоп-лосс лимит заявки
+*OrdersApi* | [**v2clientordersactionsstop_lossorder_id**](docs/OrdersApi.md#v2clientordersactionsstop_lossorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/stopLoss/{orderId} | Изменение стоп-лосс заявки
+*OrdersApi* | [**v2clientordersactionstake_profit**](docs/OrdersApi.md#v2clientordersactionstake_profit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfit | Создание стоп-заявки
+*OrdersApi* | [**v2clientordersactionstake_profit_limit**](docs/OrdersApi.md#v2clientordersactionstake_profit_limit) | **POST** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfitLimit | Создание стоп-лимит заявки
+*OrdersApi* | [**v2clientordersactionstake_profit_limitorder_id**](docs/OrdersApi.md#v2clientordersactionstake_profit_limitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfitLimit/{orderId} | Изменение стоп-лимит заявки
+*OrdersApi* | [**v2clientordersactionstake_profitorder_id**](docs/OrdersApi.md#v2clientordersactionstake_profitorder_id) | **PUT** warptrans/{tradeServerCode}/v2/client/orders/actions/takeProfit/{orderId} | Изменение стоп-заявки
+*OtherApi* | [**local_time**](docs/OtherApi.md#local_time) | **GET** md/v2/time | Запрос текущего UTC времени в формате Unix
+*SecuritiesApi* | [**dev_history**](docs/SecuritiesApi.md#dev_history) | **GET** md/v2/history | Запрос истории для выбранных биржи и инструмента
+*SecuritiesApi* | [**dev_orderbook_exchang_seccode**](docs/SecuritiesApi.md#dev_orderbook_exchang_seccode) | **GET** md/v2/orderbooks/{exchange}/{seccode} | Получение информации о биржевом стакане
+*SecuritiesApi* | [**dev_quotes**](docs/SecuritiesApi.md#dev_quotes) | **GET** md/v2/Securities/{symbols}/quotes | Получение информации о котировках для выбранных инструментов
+*SecuritiesApi* | [**dev_securities_futures**](docs/SecuritiesApi.md#dev_securities_futures) | **GET** md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote | Получение котировки по ближайшему фьючерсу (код)
+*SecuritiesApi* | [**dev_securities_search**](docs/SecuritiesApi.md#dev_securities_search) | **GET** md/v2/Securities | Получение информации о торговых инструментах
+*SecuritiesApi* | [**dev_securities_search_all_trades**](docs/SecuritiesApi.md#dev_securities_search_all_trades) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades | Получение информации о всех сделках по ценным бумагам за сегодня
+*SecuritiesApi* | [**dev_securities_search_exchange**](docs/SecuritiesApi.md#dev_securities_search_exchange) | **GET** md/v2/Securities/{exchange} | Получение информации о торговых инструментах на выбранной бирже
+*SecuritiesApi* | [**dev_securities_search_exchange_code**](docs/SecuritiesApi.md#dev_securities_search_exchange_code) | **GET** md/v2/Securities/{exchange}/{symbol} | Получение информации о выбранном финансовом инструменте
+*SecuritiesApi* | [**risk_rates**](docs/SecuritiesApi.md#risk_rates) | **GET** md/v2/risk/rates | Запрос ставок риска
+*UsersApi* | [**dev_get_all_orders**](docs/UsersApi.md#dev_get_all_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/orders | Получение информации о всех заявках
+*UsersApi* | [**dev_get_all_positions**](docs/UsersApi.md#dev_get_all_positions) | **GET** md/v2/Clients/{exchange}/{portfolio}/positions | Получение информации о позициях
+*UsersApi* | [**dev_get_all_stop_orders**](docs/UsersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
+*UsersApi* | [**dev_get_all_trades**](docs/UsersApi.md#dev_get_all_trades) | **GET** md/v2/Clients/{exchange}/{portfolio}/trades | Получение информации о сделках
+*UsersApi* | [**dev_get_one_order**](docs/UsersApi.md#dev_get_one_order) | **GET** md/v2/clients/{exchange}/{portfolio}/orders/{orderId} | Получение информации о выбранной заявке
+*UsersApi* | [**dev_get_one_position**](docs/UsersApi.md#dev_get_one_position) | **GET** md/v2/Clients/{exchange}/{portfolio}/positions/{symbol} | Получение информации о позициях выбранного инструмента
+*UsersApi* | [**dev_get_one_stop_order**](docs/UsersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
+*UsersApi* | [**dev_get_ticker_trades**](docs/UsersApi.md#dev_get_ticker_trades) | **GET** md/v2/Clients/{exchange}/{portfolio}/{ticker}/trades | Получение информации о сделках по выбранному инструменту
+*UsersApi* | [**dev_user_portfolio**](docs/UsersApi.md#dev_user_portfolio) | **GET** client/v1.0/users/{username}/portfolios | Получение списка серверов портфелей
+*UsersApi* | [**exchange_portfolio_money**](docs/UsersApi.md#exchange_portfolio_money) | **GET** md/v2/clients/legacy/{exchange}/{portfolio}/money | Получение информации по деньгам для выбранного портфеля
+*UsersApi* | [**exchange_portfolio_summary**](docs/UsersApi.md#exchange_portfolio_summary) | **GET** md/v2/clients/{exchange}/{portfolio}/summary | Получение информации о портфеле
+*UsersApi* | [**fortsrisk**](docs/UsersApi.md#fortsrisk) | **GET** md/v2/Clients/{exchange}/{portfolio}/fortsrisk | Получение информации о рисках на срочном рынке
+*UsersApi* | [**risk**](docs/UsersApi.md#risk) | **GET** md/v2/Clients/{exchange}/{portfolio}/risk | Получение информации о рисках
+*UsersApi* | [**trade_stats**](docs/UsersApi.md#trade_stats) | **GET** md/stats/{exchange}/{portfolio}/history/trades | Получение истории сделок
+*UsersApi* | [**trade_stats_by_symbol**](docs/UsersApi.md#trade_stats_by_symbol) | **GET** md/stats/{exchange}/{portfolio}/history/trades/{symbol} | Получение истории сделок (один тикер)
+*V2ordersApi* | [**command_api_v2clientordersactionsstop**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп заявки
+*V2ordersApi* | [**command_api_v2clientordersactionsstop_limit**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop_limit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit | Создание стоп-лимитной заявки
+*V2ordersApi* | [**command_api_v2clientordersactionsstop_limitstop_order_id**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop_limitstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit/{stopOrderId} | Изменение стоп-лимитной заявки
+*V2ordersApi* | [**command_api_warp_v2clientordersdelete**](docs/V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId}/ | Снятие заявки
+*V2ordersApi* | [**dev_get_all_stop_orders**](docs/V2ordersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
+*V2ordersApi* | [**dev_get_one_stop_order**](docs/V2ordersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
 
 ## Documentation For Models
 
- - [Alltrade](Alltrade.md)
- - [Alltrades](Alltrades.md)
- - [BodyrequestOrdersActionsLimit](BodyrequestOrdersActionsLimit.md)
- - [BodyrequestOrdersActionsLimitInstrument](BodyrequestOrdersActionsLimitInstrument.md)
- - [BodyrequestOrdersActionsLimitTVput](BodyrequestOrdersActionsLimitTVput.md)
- - [BodyrequestOrdersActionsLimitTv](BodyrequestOrdersActionsLimitTv.md)
- - [BodyrequestOrdersActionsLimitTvInstrument](BodyrequestOrdersActionsLimitTvInstrument.md)
- - [BodyrequestOrdersActionsLimitTvUser](BodyrequestOrdersActionsLimitTvUser.md)
- - [BodyrequestOrdersActionsLimitUser](BodyrequestOrdersActionsLimitUser.md)
- - [BodyrequestOrdersActionsMarket](BodyrequestOrdersActionsMarket.md)
- - [BodyrequestOrdersActionsMarketTVput](BodyrequestOrdersActionsMarketTVput.md)
- - [BodyrequestOrdersActionsMarketTVputUser](BodyrequestOrdersActionsMarketTVputUser.md)
- - [BodyrequestOrdersActionsMarketTv](BodyrequestOrdersActionsMarketTv.md)
- - [BodyrequestOrdersActionsStop](BodyrequestOrdersActionsStop.md)
- - [BodyrequestOrdersActionsStopInstrument](BodyrequestOrdersActionsStopInstrument.md)
- - [BodyrequestOrdersActionsStopLimitTv](BodyrequestOrdersActionsStopLimitTv.md)
- - [BodyrequestOrdersActionsStopLimitTvWarp](BodyrequestOrdersActionsStopLimitTvWarp.md)
- - [BodyrequestOrdersActionsStopLimitTvWarpInstrument](BodyrequestOrdersActionsStopLimitTvWarpInstrument.md)
- - [BodyrequestOrdersActionsStopLimitTvWarpUser](BodyrequestOrdersActionsStopLimitTvWarpUser.md)
- - [BodyrequestOrdersActionsStopMarketTvWarp](BodyrequestOrdersActionsStopMarketTvWarp.md)
- - [BodyrequestOrdersActionsStopTv](BodyrequestOrdersActionsStopTv.md)
- - [BodyrequestOrdersActionsStopUser](BodyrequestOrdersActionsStopUser.md)
- - [BodyrequestOrdersActionsStoplimit](BodyrequestOrdersActionsStoplimit.md)
- - [Duration](Duration.md)
- - [EstimateOrderModel](EstimateOrderModel.md)
- - [EstimateOrderViewModel](EstimateOrderViewModel.md)
- - [Exchange](Exchange.md)
- - [Fortsrisk](Fortsrisk.md)
- - [History](History.md)
- - [HistoryObject](HistoryObject.md)
- - [InlineResponse400](InlineResponse400.md)
- - [JsonFormat](JsonFormat.md)
- - [LifePolicy](LifePolicy.md)
- - [Money](Money.md)
- - [OpcodeEnum](OpcodeEnum.md)
- - [Operation](Operation.md)
- - [Order](Order.md)
- - [OrderStatus](OrderStatus.md)
- - [OrderType](OrderType.md)
- - [Orderbook](Orderbook.md)
- - [OrderbookAsk](OrderbookAsk.md)
- - [OrderbookBid](OrderbookBid.md)
- - [Orders](Orders.md)
- - [OrdersActions400](OrdersActions400.md)
- - [OrdersActions400CommandApi](OrdersActions400CommandApi.md)
- - [OrdersActions400CommandApiOldResponse](OrdersActions400CommandApiOldResponse.md)
- - [OrdersActionsDeleteOrderId](OrdersActionsDeleteOrderId.md)
- - [OrdersActionsDeleteOrderIdCommandApi](OrdersActionsDeleteOrderIdCommandApi.md)
- - [OrdersActionsLimitMarket](OrdersActionsLimitMarket.md)
- - [OrdersActionsLimitMarketCommandApi](OrdersActionsLimitMarketCommandApi.md)
- - [OrdersActionsStopProfitLoss](OrdersActionsStopProfitLoss.md)
- - [OrdersActionsStopProfitLossCommandApi](OrdersActionsStopProfitLossCommandApi.md)
- - [Position](Position.md)
- - [Positions](Positions.md)
- - [Risk](Risk.md)
- - [RiskRate](RiskRate.md)
- - [RiskRates](RiskRates.md)
- - [SchemaEnum](SchemaEnum.md)
- - [Securities](Securities.md)
- - [Security](Security.md)
- - [ServersInfo](ServersInfo.md)
- - [ServersInfo1](ServersInfo1.md)
- - [ServersInfo2](ServersInfo2.md)
- - [ServersInfoTradeServersInfo](ServersInfoTradeServersInfo.md)
- - [ServersInfoTradeServersInfo1](ServersInfoTradeServersInfo1.md)
- - [ServersInfoTradeServersInfo2](ServersInfoTradeServersInfo2.md)
- - [ServersInfo_](ServersInfo_.md)
- - [StopOrderType](StopOrderType.md)
- - [Stoporder](Stoporder.md)
- - [StoporderWarp](StoporderWarp.md)
- - [Stoporders](Stoporders.md)
- - [StopordersWarp](StopordersWarp.md)
- - [Summary](Summary.md)
- - [Symbol](Symbol.md)
- - [SymbolFutures](SymbolFutures.md)
- - [Symbols](Symbols.md)
- - [Time](Time.md)
- - [Trade](Trade.md)
- - [Trades](Trades.md)
- - [WsReqAllTradesGetAndSubscribe](WsReqAllTradesGetAndSubscribe.md)
- - [WsReqBarsGetAndSubscribe](WsReqBarsGetAndSubscribe.md)
- - [WsReqInstrumentsGetAndSubscribeV2](WsReqInstrumentsGetAndSubscribeV2.md)
- - [WsReqOrderBookGetAndSubscribe](WsReqOrderBookGetAndSubscribe.md)
- - [WsReqOrdersGetAndSubscribe](WsReqOrdersGetAndSubscribe.md)
- - [WsReqPositionsGetAndSubscribe](WsReqPositionsGetAndSubscribe.md)
- - [WsReqQuotesSubscribe](WsReqQuotesSubscribe.md)
- - [WsReqRisksGetAndSubscribe](WsReqRisksGetAndSubscribe.md)
- - [WsReqSpectraRisksGetAndSubscribe](WsReqSpectraRisksGetAndSubscribe.md)
- - [WsReqStopOrdersGetAndSubscribe](WsReqStopOrdersGetAndSubscribe.md)
- - [WsReqStopOrdersGetAndSubscribeV2](WsReqStopOrdersGetAndSubscribeV2.md)
- - [WsReqSummariesGetAndSubscribeV2](WsReqSummariesGetAndSubscribeV2.md)
- - [WsReqTradesGetAndSubscribe](WsReqTradesGetAndSubscribe.md)
- - [WsReqUnsubscribe](WsReqUnsubscribe.md)
- - [WsResBarsGetAndSubscribe](WsResBarsGetAndSubscribe.md)
- - [WsResBarsGetAndSubscribeData](WsResBarsGetAndSubscribeData.md)
- - [WsResHandledSuccessfully](WsResHandledSuccessfully.md)
- - [WsResOrderBookGetAndSubscribe](WsResOrderBookGetAndSubscribe.md)
- - [WsResOrdersGetAndSubscribe](WsResOrdersGetAndSubscribe.md)
- - [WsResPositionsGetAndSubscribe](WsResPositionsGetAndSubscribe.md)
- - [WsResPositionsGetAndSubscribeData](WsResPositionsGetAndSubscribeData.md)
- - [WsResQuotesSubscribe](WsResQuotesSubscribe.md)
- - [WsResQuotesSubscribeData](WsResQuotesSubscribeData.md)
- - [WsResRisksGetAndSubscribe](WsResRisksGetAndSubscribe.md)
- - [WsResSpectraRisksGetAndSubscribe](WsResSpectraRisksGetAndSubscribe.md)
- - [WsResStopOrdersGetAndSubscribe](WsResStopOrdersGetAndSubscribe.md)
- - [WsResStopOrdersGetAndSubscribeWarp](WsResStopOrdersGetAndSubscribeWarp.md)
- - [WsResSummariesGetAndSubscribeV2](WsResSummariesGetAndSubscribeV2.md)
- - [WsResSummariesGetAndSubscribeV2Data](WsResSummariesGetAndSubscribeV2Data.md)
- - [WsResTradesGetAndSubscribe](WsResTradesGetAndSubscribe.md)
+ - [Alltrade](docs/Alltrade.md)
+ - [Alltrades](docs/Alltrades.md)
+ - [BodyrequestOrdersActionsLimit](docs/BodyrequestOrdersActionsLimit.md)
+ - [BodyrequestOrdersActionsLimitInstrument](docs/BodyrequestOrdersActionsLimitInstrument.md)
+ - [BodyrequestOrdersActionsLimitTVput](docs/BodyrequestOrdersActionsLimitTVput.md)
+ - [BodyrequestOrdersActionsLimitTv](docs/BodyrequestOrdersActionsLimitTv.md)
+ - [BodyrequestOrdersActionsLimitTvInstrument](docs/BodyrequestOrdersActionsLimitTvInstrument.md)
+ - [BodyrequestOrdersActionsLimitTvUser](docs/BodyrequestOrdersActionsLimitTvUser.md)
+ - [BodyrequestOrdersActionsLimitUser](docs/BodyrequestOrdersActionsLimitUser.md)
+ - [BodyrequestOrdersActionsMarket](docs/BodyrequestOrdersActionsMarket.md)
+ - [BodyrequestOrdersActionsMarketTVput](docs/BodyrequestOrdersActionsMarketTVput.md)
+ - [BodyrequestOrdersActionsMarketTVputUser](docs/BodyrequestOrdersActionsMarketTVputUser.md)
+ - [BodyrequestOrdersActionsMarketTv](docs/BodyrequestOrdersActionsMarketTv.md)
+ - [BodyrequestOrdersActionsStop](docs/BodyrequestOrdersActionsStop.md)
+ - [BodyrequestOrdersActionsStopInstrument](docs/BodyrequestOrdersActionsStopInstrument.md)
+ - [BodyrequestOrdersActionsStopLimitTv](docs/BodyrequestOrdersActionsStopLimitTv.md)
+ - [BodyrequestOrdersActionsStopLimitTvWarp](docs/BodyrequestOrdersActionsStopLimitTvWarp.md)
+ - [BodyrequestOrdersActionsStopLimitTvWarpInstrument](docs/BodyrequestOrdersActionsStopLimitTvWarpInstrument.md)
+ - [BodyrequestOrdersActionsStopLimitTvWarpUser](docs/BodyrequestOrdersActionsStopLimitTvWarpUser.md)
+ - [BodyrequestOrdersActionsStopMarketTvWarp](docs/BodyrequestOrdersActionsStopMarketTvWarp.md)
+ - [BodyrequestOrdersActionsStopTv](docs/BodyrequestOrdersActionsStopTv.md)
+ - [BodyrequestOrdersActionsStopUser](docs/BodyrequestOrdersActionsStopUser.md)
+ - [BodyrequestOrdersActionsStoplimit](docs/BodyrequestOrdersActionsStoplimit.md)
+ - [Duration](docs/Duration.md)
+ - [EstimateOrderModel](docs/EstimateOrderModel.md)
+ - [EstimateOrderViewModel](docs/EstimateOrderViewModel.md)
+ - [Exchange](docs/Exchange.md)
+ - [Fortsrisk](docs/Fortsrisk.md)
+ - [History](docs/History.md)
+ - [HistoryObject](docs/HistoryObject.md)
+ - [InlineResponse400](docs/InlineResponse400.md)
+ - [JsonFormat](docs/JsonFormat.md)
+ - [LifePolicy](docs/LifePolicy.md)
+ - [Money](docs/Money.md)
+ - [OpcodeEnum](docs/OpcodeEnum.md)
+ - [Operation](docs/Operation.md)
+ - [Order](docs/Order.md)
+ - [OrderStatus](docs/OrderStatus.md)
+ - [OrderType](docs/OrderType.md)
+ - [Orderbook](docs/Orderbook.md)
+ - [OrderbookAsk](docs/OrderbookAsk.md)
+ - [OrderbookBid](docs/OrderbookBid.md)
+ - [Orders](docs/Orders.md)
+ - [OrdersActions400](docs/OrdersActions400.md)
+ - [OrdersActions400CommandApi](docs/OrdersActions400CommandApi.md)
+ - [OrdersActions400CommandApiOldResponse](docs/OrdersActions400CommandApiOldResponse.md)
+ - [OrdersActionsDeleteOrderId](docs/OrdersActionsDeleteOrderId.md)
+ - [OrdersActionsDeleteOrderIdCommandApi](docs/OrdersActionsDeleteOrderIdCommandApi.md)
+ - [OrdersActionsLimitMarket](docs/OrdersActionsLimitMarket.md)
+ - [OrdersActionsLimitMarketCommandApi](docs/OrdersActionsLimitMarketCommandApi.md)
+ - [OrdersActionsStopProfitLoss](docs/OrdersActionsStopProfitLoss.md)
+ - [OrdersActionsStopProfitLossCommandApi](docs/OrdersActionsStopProfitLossCommandApi.md)
+ - [Position](docs/Position.md)
+ - [Positions](docs/Positions.md)
+ - [Risk](docs/Risk.md)
+ - [RiskRate](docs/RiskRate.md)
+ - [RiskRates](docs/RiskRates.md)
+ - [SchemaEnum](docs/SchemaEnum.md)
+ - [Securities](docs/Securities.md)
+ - [Security](docs/Security.md)
+ - [ServersInfo](docs/ServersInfo.md)
+ - [ServersInfo1](docs/ServersInfo1.md)
+ - [ServersInfo2](docs/ServersInfo2.md)
+ - [ServersInfoTradeServersInfo](docs/ServersInfoTradeServersInfo.md)
+ - [ServersInfoTradeServersInfo1](docs/ServersInfoTradeServersInfo1.md)
+ - [ServersInfoTradeServersInfo2](docs/ServersInfoTradeServersInfo2.md)
+ - [ServersInfo_](docs/ServersInfo_.md)
+ - [StopOrderType](docs/StopOrderType.md)
+ - [Stoporder](docs/Stoporder.md)
+ - [StoporderWarp](docs/StoporderWarp.md)
+ - [Stoporders](docs/Stoporders.md)
+ - [StopordersWarp](docs/StopordersWarp.md)
+ - [Summary](docs/Summary.md)
+ - [Symbol](docs/Symbol.md)
+ - [SymbolFutures](docs/SymbolFutures.md)
+ - [Symbols](docs/Symbols.md)
+ - [Time](docs/Time.md)
+ - [Trade](docs/Trade.md)
+ - [Trades](docs/Trades.md)
+ - [WsReqAllTradesGetAndSubscribe](docs/WsReqAllTradesGetAndSubscribe.md)
+ - [WsReqBarsGetAndSubscribe](docs/WsReqBarsGetAndSubscribe.md)
+ - [WsReqInstrumentsGetAndSubscribeV2](docs/WsReqInstrumentsGetAndSubscribeV2.md)
+ - [WsReqOrderBookGetAndSubscribe](docs/WsReqOrderBookGetAndSubscribe.md)
+ - [WsReqOrdersGetAndSubscribe](docs/WsReqOrdersGetAndSubscribe.md)
+ - [WsReqPositionsGetAndSubscribe](docs/WsReqPositionsGetAndSubscribe.md)
+ - [WsReqQuotesSubscribe](docs/WsReqQuotesSubscribe.md)
+ - [WsReqRisksGetAndSubscribe](docs/WsReqRisksGetAndSubscribe.md)
+ - [WsReqSpectraRisksGetAndSubscribe](docs/WsReqSpectraRisksGetAndSubscribe.md)
+ - [WsReqStopOrdersGetAndSubscribe](docs/WsReqStopOrdersGetAndSubscribe.md)
+ - [WsReqStopOrdersGetAndSubscribeV2](docs/WsReqStopOrdersGetAndSubscribeV2.md)
+ - [WsReqSummariesGetAndSubscribeV2](docs/WsReqSummariesGetAndSubscribeV2.md)
+ - [WsReqTradesGetAndSubscribe](docs/WsReqTradesGetAndSubscribe.md)
+ - [WsReqUnsubscribe](docs/WsReqUnsubscribe.md)
+ - [WsResBarsGetAndSubscribe](docs/WsResBarsGetAndSubscribe.md)
+ - [WsResBarsGetAndSubscribeData](docs/WsResBarsGetAndSubscribeData.md)
+ - [WsResHandledSuccessfully](docs/WsResHandledSuccessfully.md)
+ - [WsResOrderBookGetAndSubscribe](docs/WsResOrderBookGetAndSubscribe.md)
+ - [WsResOrdersGetAndSubscribe](docs/WsResOrdersGetAndSubscribe.md)
+ - [WsResPositionsGetAndSubscribe](docs/WsResPositionsGetAndSubscribe.md)
+ - [WsResPositionsGetAndSubscribeData](docs/WsResPositionsGetAndSubscribeData.md)
+ - [WsResQuotesSubscribe](docs/WsResQuotesSubscribe.md)
+ - [WsResQuotesSubscribeData](docs/WsResQuotesSubscribeData.md)
+ - [WsResRisksGetAndSubscribe](docs/WsResRisksGetAndSubscribe.md)
+ - [WsResSpectraRisksGetAndSubscribe](docs/WsResSpectraRisksGetAndSubscribe.md)
+ - [WsResStopOrdersGetAndSubscribe](docs/WsResStopOrdersGetAndSubscribe.md)
+ - [WsResStopOrdersGetAndSubscribeWarp](docs/WsResStopOrdersGetAndSubscribeWarp.md)
+ - [WsResSummariesGetAndSubscribeV2](docs/WsResSummariesGetAndSubscribeV2.md)
+ - [WsResSummariesGetAndSubscribeV2Data](docs/WsResSummariesGetAndSubscribeV2Data.md)
+ - [WsResTradesGetAndSubscribe](docs/WsResTradesGetAndSubscribe.md)
 
 ## Documentation For Authorization
 
