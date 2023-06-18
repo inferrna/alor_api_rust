@@ -1,0 +1,24 @@
+[package]
+name = "alor-api"
+version = "0.2.2"
+authors = ["Swagger Codegen team and contributors"]
+edition = "2018"
+
+[dependencies]
+serde = "^1.0"
+serde_derive = "^1.0"
+serde_yaml = "^0.8"
+serde_json = "^1.0"
+base64 = "^0.12"
+futures = "^0.3"
+hyper = { version = "^0.14", features = ["client", "http1", "tcp"] }
+url = "^2"
+headers = "^0.3"
+tokio = { version = "^1", features = ["full"] }
+rust_decimal = { version = "*", features = ["serde","serde-float","maths"] }
+chrono = { version = "^0.4", features = ["serde"] }
+async-trait = "^0.1"
+
+[dev-dependencies]
+tokio-core = "^0.1"
+tokio = { version = "^1", features = ["full"] }
