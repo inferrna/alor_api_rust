@@ -47,11 +47,11 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> Securit
 pub trait SecuritiesApi {
     async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
     async fn dev_orderbook_exchang_seccode(&self, exchange: crate::models::Exchange, seccode: &str, depth: Option<i32>, format: Option<crate::models::JsonFormat>) -> Result<Orderbook, Error<serde_json::Value>>;
-    async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Symbols, Error<serde_json::Value>>;
+    async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Symbol>, Error<serde_json::Value>>;
     async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<SymbolFutures, Error<serde_json::Value>>;
-    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Securities, Error<serde_json::Value>>;
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Alltrades, Error<serde_json::Value>>;
-    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Securities, Error<serde_json::Value>>;
+    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>>;
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
+    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>>;
     async fn dev_securities_search_exchange_code(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Security, Error<serde_json::Value>>;
     async fn risk_rates(&self, exchange: crate::models::Exchange, ticker: Option<&str>, risk_category_id: Option<&str>, search: Option<&str>) -> Result<RiskRates, Error<serde_json::Value>>;
 }
@@ -344,7 +344,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
  /// 
  /// 
  ///
-    async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Symbols, Error<serde_json::Value>> {
+    async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Symbol>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -600,7 +600,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
  /// 
  /// 
  ///
-    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Securities, Error<serde_json::Value>> {
+    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -756,7 +756,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
  /// Example: true
  /// 
  ///
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Alltrades, Error<serde_json::Value>> {
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -887,7 +887,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
  /// 
  /// 
  ///
-    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Securities, Error<serde_json::Value>> {
+    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

@@ -25,7 +25,9 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopTv {
   #[serde(rename = "endTime")]
-  end_time: String,  // 2020-05-21T20:59:00.000Z 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  end_time: DateTime<Utc>,  // 2020-05-21T20:59Z 
   #[serde(rename = "instrument")]
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "quantity")]
@@ -33,7 +35,7 @@ pub struct BodyrequestOrdersActionsStopTv {
   #[serde(rename = "side")]
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
-  stop_end_unix_time: i32,  // 1590094740 
+  stop_end_unix_time: i64,  // 1590094740 
   #[serde(rename = "symbol")]
   symbol: String,  // SBER 
   #[serde(rename = "takeProfit")]
@@ -47,7 +49,7 @@ pub struct BodyrequestOrdersActionsStopTv {
 }
 
 impl BodyrequestOrdersActionsStopTv {
-  pub fn new(end_time: String, instrument: BodyrequestOrdersActionsLimitTvInstrument, quantity: i32, side: Operation, stop_end_unix_time: i32, symbol: String, take_profit: Decimal, trigger_price: Decimal, rtype: String, user: BodyrequestOrdersActionsMarketTVputUser, ) -> BodyrequestOrdersActionsStopTv {
+  pub fn new(end_time: DateTime<Utc>, instrument: BodyrequestOrdersActionsLimitTvInstrument, quantity: i32, side: Operation, stop_end_unix_time: i64, symbol: String, take_profit: Decimal, trigger_price: Decimal, rtype: String, user: BodyrequestOrdersActionsMarketTVputUser, ) -> BodyrequestOrdersActionsStopTv {
     BodyrequestOrdersActionsStopTv {
       end_time: end_time,
       instrument: instrument,
@@ -62,16 +64,16 @@ impl BodyrequestOrdersActionsStopTv {
     }
   }
 
-  pub fn set_end_time(&mut self, end_time: String) {
+  pub fn set_end_time(&mut self, end_time: DateTime<Utc>) {
     self.end_time = end_time;
   }
 
-  pub fn with_end_time(mut self, end_time: String) -> BodyrequestOrdersActionsStopTv {
+  pub fn with_end_time(mut self, end_time: DateTime<Utc>) -> BodyrequestOrdersActionsStopTv {
     self.end_time = end_time;
     self
   }
 
-  pub fn end_time(&self) -> &String {
+  pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
 
@@ -118,16 +120,16 @@ impl BodyrequestOrdersActionsStopTv {
   }
 
 
-  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: i32) {
+  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: i64) {
     self.stop_end_unix_time = stop_end_unix_time;
   }
 
-  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: i32) -> BodyrequestOrdersActionsStopTv {
+  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: i64) -> BodyrequestOrdersActionsStopTv {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
 
-  pub fn stop_end_unix_time(&self) -> &i32 {
+  pub fn stop_end_unix_time(&self) -> &i64 {
     &self.stop_end_unix_time
   }
 

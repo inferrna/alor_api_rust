@@ -123,7 +123,7 @@ async fn dev_get_all_stop_orders_test() {
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: StopordersWarp = api_client.dev_get_all_stop_orders(exchange, portfolio, format).await.unwrap();
+    let response: Vec<StoporderWarp> = api_client.dev_get_all_stop_orders(exchange, portfolio, format).await.unwrap();
 }
 /**
  * Получение информации о выбранной стоп-заявке

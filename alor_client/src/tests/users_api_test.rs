@@ -55,7 +55,7 @@ async fn dev_get_all_orders_test() {
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Orders = api_client.dev_get_all_orders(exchange, portfolio, format).await.unwrap();
+    let response: Vec<Order> = api_client.dev_get_all_orders(exchange, portfolio, format).await.unwrap();
 }
 /**
  * Получение информации о позициях
@@ -74,7 +74,7 @@ async fn dev_get_all_positions_test() {
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let without_currency: SchemaEnum = serde_json::from_value(value).unwrap();
-    let response: Positions = api_client.dev_get_all_positions(exchange, portfolio, format, without_currency).await.unwrap();
+    let response: Vec<Position> = api_client.dev_get_all_positions(exchange, portfolio, format, without_currency).await.unwrap();
 }
 /**
  * Получение информации о стоп-заявках
@@ -91,7 +91,7 @@ async fn dev_get_all_stop_orders_test() {
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: StopordersWarp = api_client.dev_get_all_stop_orders(exchange, portfolio, format).await.unwrap();
+    let response: Vec<StoporderWarp> = api_client.dev_get_all_stop_orders(exchange, portfolio, format).await.unwrap();
 }
 /**
  * Получение информации о сделках
@@ -108,7 +108,7 @@ async fn dev_get_all_trades_test() {
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Trades = api_client.dev_get_all_trades(exchange, portfolio, format).await.unwrap();
+    let response: Vec<Trade> = api_client.dev_get_all_trades(exchange, portfolio, format).await.unwrap();
 }
 /**
  * Получение информации о выбранной заявке
@@ -184,7 +184,7 @@ async fn dev_get_ticker_trades_test() {
     let ticker: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Trades = api_client.dev_get_ticker_trades(exchange, portfolio, ticker, format).await.unwrap();
+    let response: Vec<Trade> = api_client.dev_get_ticker_trades(exchange, portfolio, ticker, format).await.unwrap();
 }
 /**
  * Получение списка серверов портфелей
@@ -290,7 +290,7 @@ async fn trade_stats_test() {
     let descending: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Trades = api_client.trade_stats(exchange, portfolio, date_from, from, limit, descending, format).await.unwrap();
+    let response: Vec<Trade> = api_client.trade_stats(exchange, portfolio, date_from, from, limit, descending, format).await.unwrap();
 }
 /**
  * Получение истории сделок (один тикер)
@@ -317,5 +317,5 @@ async fn trade_stats_by_symbol_test() {
     let descending: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Trades = api_client.trade_stats_by_symbol(exchange, portfolio, symbol, date_from, from, limit, descending, format).await.unwrap();
+    let response: Vec<Trade> = api_client.trade_stats_by_symbol(exchange, portfolio, symbol, date_from, from, limit, descending, format).await.unwrap();
 }

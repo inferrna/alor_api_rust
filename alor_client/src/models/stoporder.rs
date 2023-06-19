@@ -27,7 +27,9 @@ pub struct Stoporder {
   #[serde(rename = "brokerSymbol")]
   broker_symbol: String,  // MOEX:LKOH 
   #[serde(rename = "endTime")]
-  end_time: String,  // 2020-06-16T23:59:59.9990000 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
   exchange: Exchange, 
   #[serde(rename = "existing")]
@@ -53,7 +55,7 @@ pub struct Stoporder {
 }
 
 impl Stoporder {
-  pub fn new(broker_symbol: String, end_time: String, exchange: Exchange, existing: bool, filled_qty_batch: Decimal, id: Decimal, price: Decimal, qty: Decimal, side: Operation, status: OrderStatus, stop_price: Decimal, symbol: String, rtype: StopOrderType, ) -> Stoporder {
+  pub fn new(broker_symbol: String, end_time: DateTime<Utc>, exchange: Exchange, existing: bool, filled_qty_batch: Decimal, id: Decimal, price: Decimal, qty: Decimal, side: Operation, status: OrderStatus, stop_price: Decimal, symbol: String, rtype: StopOrderType, ) -> Stoporder {
     Stoporder {
       broker_symbol: broker_symbol,
       end_time: end_time,
@@ -85,16 +87,16 @@ impl Stoporder {
   }
 
 
-  pub fn set_end_time(&mut self, end_time: String) {
+  pub fn set_end_time(&mut self, end_time: DateTime<Utc>) {
     self.end_time = end_time;
   }
 
-  pub fn with_end_time(mut self, end_time: String) -> Stoporder {
+  pub fn with_end_time(mut self, end_time: DateTime<Utc>) -> Stoporder {
     self.end_time = end_time;
     self
   }
 
-  pub fn end_time(&self) -> &String {
+  pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
 

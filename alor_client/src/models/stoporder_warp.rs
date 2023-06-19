@@ -31,7 +31,9 @@ pub struct StoporderWarp {
   #[serde(rename = "condition")]
   condition: String,  // Less 
   #[serde(rename = "endTime")]
-  end_time: String,  // 2020-06-16T23:59:59.9990000 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
   exchange: Exchange, 
   #[serde(rename = "exchangeOrderId")]
@@ -59,13 +61,15 @@ pub struct StoporderWarp {
   #[serde(rename = "symbol")]
   symbol: String,  // SBER 
   #[serde(rename = "transTime")]
-  trans_time: String,  // 2020-05-16T23:59:59.9990000 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
   rtype: StopOrderType 
 }
 
 impl StoporderWarp {
-  pub fn new(avg_price: Decimal, broker_symbol: String, condition: String, end_time: String, exchange: Exchange, exchange_order_id: Decimal, existing: bool, id: Decimal, portfolio: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: Decimal, side: Operation, status: OrderStatus, stop_price: Decimal, symbol: String, trans_time: String, rtype: StopOrderType, ) -> StoporderWarp {
+  pub fn new(avg_price: Decimal, broker_symbol: String, condition: String, end_time: DateTime<Utc>, exchange: Exchange, exchange_order_id: Decimal, existing: bool, id: Decimal, portfolio: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: Decimal, side: Operation, status: OrderStatus, stop_price: Decimal, symbol: String, trans_time: DateTime<Utc>, rtype: StopOrderType, ) -> StoporderWarp {
     StoporderWarp {
       avg_price: avg_price,
       broker_symbol: broker_symbol,
@@ -131,16 +135,16 @@ impl StoporderWarp {
   }
 
 
-  pub fn set_end_time(&mut self, end_time: String) {
+  pub fn set_end_time(&mut self, end_time: DateTime<Utc>) {
     self.end_time = end_time;
   }
 
-  pub fn with_end_time(mut self, end_time: String) -> StoporderWarp {
+  pub fn with_end_time(mut self, end_time: DateTime<Utc>) -> StoporderWarp {
     self.end_time = end_time;
     self
   }
 
-  pub fn end_time(&self) -> &String {
+  pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
 
@@ -327,16 +331,16 @@ impl StoporderWarp {
   }
 
 
-  pub fn set_trans_time(&mut self, trans_time: String) {
+  pub fn set_trans_time(&mut self, trans_time: DateTime<Utc>) {
     self.trans_time = trans_time;
   }
 
-  pub fn with_trans_time(mut self, trans_time: String) -> StoporderWarp {
+  pub fn with_trans_time(mut self, trans_time: DateTime<Utc>) -> StoporderWarp {
     self.trans_time = trans_time;
     self
   }
 
-  pub fn trans_time(&self) -> &String {
+  pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
 

@@ -27,7 +27,9 @@ pub struct Order {
   #[serde(rename = "brokerSymbol")]
   broker_symbol: String,  // MOEX:SBER 
   #[serde(rename = "endTime")]
-  end_time: String,  // 2020-06-16T23:59:59.9990000 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
   exchange: Exchange, 
   #[serde(rename = "existing")]
@@ -55,13 +57,15 @@ pub struct Order {
   #[serde(rename = "symbol")]
   symbol: String,  // SBER 
   #[serde(rename = "transTime")]
-  trans_time: String,  // 2020-06-16T23:59:59.9990000 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
   rtype: OrderType 
 }
 
 impl Order {
-  pub fn new(broker_symbol: String, end_time: String, exchange: Exchange, existing: bool, filled: Decimal, filled_qty_batch: Decimal, filled_qty_units: Decimal, id: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: Decimal, side: Operation, status: OrderStatus, symbol: String, trans_time: String, rtype: OrderType, ) -> Order {
+  pub fn new(broker_symbol: String, end_time: DateTime<Utc>, exchange: Exchange, existing: bool, filled: Decimal, filled_qty_batch: Decimal, filled_qty_units: Decimal, id: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: Decimal, side: Operation, status: OrderStatus, symbol: String, trans_time: DateTime<Utc>, rtype: OrderType, ) -> Order {
     Order {
       broker_symbol: broker_symbol,
       end_time: end_time,
@@ -97,16 +101,16 @@ impl Order {
   }
 
 
-  pub fn set_end_time(&mut self, end_time: String) {
+  pub fn set_end_time(&mut self, end_time: DateTime<Utc>) {
     self.end_time = end_time;
   }
 
-  pub fn with_end_time(mut self, end_time: String) -> Order {
+  pub fn with_end_time(mut self, end_time: DateTime<Utc>) -> Order {
     self.end_time = end_time;
     self
   }
 
-  pub fn end_time(&self) -> &String {
+  pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
 
@@ -293,16 +297,16 @@ impl Order {
   }
 
 
-  pub fn set_trans_time(&mut self, trans_time: String) {
+  pub fn set_trans_time(&mut self, trans_time: DateTime<Utc>) {
     self.trans_time = trans_time;
   }
 
-  pub fn with_trans_time(mut self, trans_time: String) -> Order {
+  pub fn with_trans_time(mut self, trans_time: DateTime<Utc>) -> Order {
     self.trans_time = trans_time;
     self
   }
 
-  pub fn trans_time(&self) -> &String {
+  pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
 

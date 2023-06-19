@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_get_all_stop_orders**
-> StopordersWarp dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
+> Vec<StoporderWarp> dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
 Получение информации о стоп-заявках
 
 Запрос информации о всех стоп-заявках
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StopordersWarp**](array.md)
+[**Vec<StoporderWarp>**](array.md)
 
 ### Authorization
 

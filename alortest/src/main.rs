@@ -75,4 +75,6 @@ async fn main() {
     //let pf = users_client.dev_user_portfolio("D83884").await.unwrap();
     let pf_summary = users_client.exchange_portfolio_summary(Exchange::SPBX, "D83884", Some(JsonFormat::SIMPLE)).await.unwrap();
     dbg!(pf_summary);
+    let pf_summary = users_client.dev_get_all_positions(Exchange::SPBX, "D83884", None, None).await.unwrap();
+    dbg!(pf_summary);
 }

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **i32** | Идентификатор заявки | [default to null]
+**id** | **i64** | Идентификатор заявки | [default to null]
 **instrument** | [***BodyrequestOrdersActionsLimitTvInstrument**](bodyrequest_OrdersActionsLimitTV_instrument.md) |  | [default to null]
 **quantity** | **i32** | Количество | [default to null]
 **side** | **Operation** |  | [default to null]

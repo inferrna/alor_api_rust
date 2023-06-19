@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_quotes**
-> Symbols dev_quotes(ctx, symbols, optional)
+> Vec<Symbol> dev_quotes(ctx, symbols, optional)
 Получение информации о котировках для выбранных инструментов
 
 Запрос информации о котировках для выбранных инструментов и бирж
@@ -121,7 +121,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Symbols**](array.md)
+[**Vec<Symbol>**](array.md)
 
 ### Authorization
 
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_securities_search**
-> Securities dev_securities_search(ctx, query, optional)
+> Vec<Security> dev_securities_search(ctx, query, optional)
 Получение информации о торговых инструментах
 
 Запрос информации о торговых инструментах
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Securities**](array.md)
+[**Vec<Security>**](array.md)
 
 ### Authorization
 
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_securities_search_all_trades**
-> Alltrades dev_securities_search_all_trades(ctx, exchange, symbol, optional)
+> Vec<Alltrade> dev_securities_search_all_trades(ctx, exchange, symbol, optional)
 Получение информации о всех сделках по ценным бумагам за сегодня
 
 Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Alltrades**](array.md)
+[**Vec<Alltrade>**](array.md)
 
 ### Authorization
 
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_securities_search_exchange**
-> Securities dev_securities_search_exchange(ctx, exchange, optional)
+> Vec<Security> dev_securities_search_exchange(ctx, exchange, optional)
 Получение информации о торговых инструментах на выбранной бирже
 
 Запрос информации об инструментах на выбранной бирже
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Securities**](array.md)
+[**Vec<Security>**](array.md)
 
 ### Authorization
 

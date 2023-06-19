@@ -25,7 +25,7 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsMarketTVput {
   #[serde(rename = "id")]
-  id: i32,  // 18936040296 
+  id: i64,  // 18936040296 
   #[serde(rename = "instrument")]
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "quantity")]
@@ -39,7 +39,7 @@ pub struct BodyrequestOrdersActionsMarketTVput {
 }
 
 impl BodyrequestOrdersActionsMarketTVput {
-  pub fn new(id: i32, instrument: BodyrequestOrdersActionsLimitTvInstrument, quantity: i32, side: Operation, rtype: String, user: BodyrequestOrdersActionsMarketTVputUser, ) -> BodyrequestOrdersActionsMarketTVput {
+  pub fn new(id: i64, instrument: BodyrequestOrdersActionsLimitTvInstrument, quantity: i32, side: Operation, rtype: String, user: BodyrequestOrdersActionsMarketTVputUser, ) -> BodyrequestOrdersActionsMarketTVput {
     BodyrequestOrdersActionsMarketTVput {
       id: id,
       instrument: instrument,
@@ -50,16 +50,16 @@ impl BodyrequestOrdersActionsMarketTVput {
     }
   }
 
-  pub fn set_id(&mut self, id: i32) {
+  pub fn set_id(&mut self, id: i64) {
     self.id = id;
   }
 
-  pub fn with_id(mut self, id: i32) -> BodyrequestOrdersActionsMarketTVput {
+  pub fn with_id(mut self, id: i64) -> BodyrequestOrdersActionsMarketTVput {
     self.id = id;
     self
   }
 
-  pub fn id(&self) -> &i32 {
+  pub fn id(&self) -> &i64 {
     &self.id
   }
 

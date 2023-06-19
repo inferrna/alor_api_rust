@@ -51,7 +51,7 @@ pub struct SymbolFutures {
   #[serde(rename = "last_price")]
   last_price: Decimal,  // 171.82 
   #[serde(rename = "last_price_timestamp")]
-  last_price_timestamp: i32,  // 91022000 
+  last_price_timestamp: i64,  // 91022000 
   #[serde(rename = "lotsize")]
   lotsize: Decimal,  // 10.0 
   #[serde(rename = "lotvalue")]
@@ -73,7 +73,7 @@ pub struct SymbolFutures {
 }
 
 impl SymbolFutures {
-  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i32, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> SymbolFutures {
+  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> SymbolFutures {
     SymbolFutures {
       accrued_int: None,
       accrued_interest: None,
@@ -265,16 +265,16 @@ impl SymbolFutures {
   }
 
 
-  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: i32) {
+  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: i64) {
     self.last_price_timestamp = last_price_timestamp;
   }
 
-  pub fn with_last_price_timestamp(mut self, last_price_timestamp: i32) -> SymbolFutures {
+  pub fn with_last_price_timestamp(mut self, last_price_timestamp: i64) -> SymbolFutures {
     self.last_price_timestamp = last_price_timestamp;
     self
   }
 
-  pub fn last_price_timestamp(&self) -> &i32 {
+  pub fn last_price_timestamp(&self) -> &i64 {
     &self.last_price_timestamp
   }
 

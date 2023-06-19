@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **broker_symbol** | **String** | Пара биржа-Тикер | [default to null]
-**end_time** | **String** | Время завершения (UTC) | [default to null]
+**end_time** | **DateTime<Utc>** | Время завершения (UTC) | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **existing** | **bool** | True - для данных из \&quot;снепшота\&quot;, то есть из истории. False - для новых событий | [default to null]
 **filled** | [***Decimal**](BigDecimal.md) | Количество исполненных (лоты) | [default to null]
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **side** | **Operation** |  | [default to null]
 **status** | **OrderStatus** |  | [default to null]
 **symbol** | **String** | Тикер (Код финансового инструмента) | [default to null]
-**trans_time** | **String** | Время выставления (UTC) | [default to null]
+**trans_time** | **DateTime<Utc>** | Время выставления (UTC) | [default to null]
 **rtype** | **OrderType** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

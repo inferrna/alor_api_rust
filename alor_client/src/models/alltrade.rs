@@ -27,11 +27,11 @@ pub struct Alltrade {
   #[serde(rename = "existing")]
   existing: bool,  // false 
   #[serde(rename = "id")]
-  id: i32,  // 159 
+  id: i64,  // 159 
   #[serde(rename = "oi")]
   oi: i32,  // 523920 
   #[serde(rename = "orderno")]
-  orderno: i32,  // 0 
+  orderno: i64,  // 0 
   #[serde(rename = "price")]
   price: Decimal,  // 142.52 
   #[serde(rename = "qty")]
@@ -41,13 +41,15 @@ pub struct Alltrade {
   #[serde(rename = "symbol")]
   symbol: String,  // SBER 
   #[serde(rename = "time")]
-  time: String,  // 2018-08-07T08:40:03.445Z 
+  //Uncomment this also to deal with limited rfc support on server side
+  //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  time: DateTime<Utc>,  // 2018-08-07T08:40:03.445Z 
   #[serde(rename = "timestamp")]
-  timestamp: i32  // 1611158710768 
+  timestamp: i64  // 1611158710768 
 }
 
 impl Alltrade {
-  pub fn new(existing: bool, id: i32, oi: i32, orderno: i32, price: Decimal, qty: i32, side: Operation, symbol: String, time: String, timestamp: i32, ) -> Alltrade {
+  pub fn new(existing: bool, id: i64, oi: i32, orderno: i64, price: Decimal, qty: i32, side: Operation, symbol: String, time: DateTime<Utc>, timestamp: i64, ) -> Alltrade {
     Alltrade {
       existing: existing,
       id: id,
@@ -76,16 +78,16 @@ impl Alltrade {
   }
 
 
-  pub fn set_id(&mut self, id: i32) {
+  pub fn set_id(&mut self, id: i64) {
     self.id = id;
   }
 
-  pub fn with_id(mut self, id: i32) -> Alltrade {
+  pub fn with_id(mut self, id: i64) -> Alltrade {
     self.id = id;
     self
   }
 
-  pub fn id(&self) -> &i32 {
+  pub fn id(&self) -> &i64 {
     &self.id
   }
 
@@ -104,16 +106,16 @@ impl Alltrade {
   }
 
 
-  pub fn set_orderno(&mut self, orderno: i32) {
+  pub fn set_orderno(&mut self, orderno: i64) {
     self.orderno = orderno;
   }
 
-  pub fn with_orderno(mut self, orderno: i32) -> Alltrade {
+  pub fn with_orderno(mut self, orderno: i64) -> Alltrade {
     self.orderno = orderno;
     self
   }
 
-  pub fn orderno(&self) -> &i32 {
+  pub fn orderno(&self) -> &i64 {
     &self.orderno
   }
 
@@ -174,30 +176,30 @@ impl Alltrade {
   }
 
 
-  pub fn set_time(&mut self, time: String) {
+  pub fn set_time(&mut self, time: DateTime<Utc>) {
     self.time = time;
   }
 
-  pub fn with_time(mut self, time: String) -> Alltrade {
+  pub fn with_time(mut self, time: DateTime<Utc>) -> Alltrade {
     self.time = time;
     self
   }
 
-  pub fn time(&self) -> &String {
+  pub fn time(&self) -> &DateTime<Utc> {
     &self.time
   }
 
 
-  pub fn set_timestamp(&mut self, timestamp: i32) {
+  pub fn set_timestamp(&mut self, timestamp: i64) {
     self.timestamp = timestamp;
   }
 
-  pub fn with_timestamp(mut self, timestamp: i32) -> Alltrade {
+  pub fn with_timestamp(mut self, timestamp: i64) -> Alltrade {
     self.timestamp = timestamp;
     self
   }
 
-  pub fn timestamp(&self) -> &i32 {
+  pub fn timestamp(&self) -> &i64 {
     &self.timestamp
   }
 

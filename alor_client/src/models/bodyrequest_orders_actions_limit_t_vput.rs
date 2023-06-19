@@ -29,7 +29,7 @@ pub struct BodyrequestOrdersActionsLimitTVput {
   #[serde(rename = "icebergVariance")]
   iceberg_variance: Decimal,  // 2 
   #[serde(rename = "id")]
-  id: i32,  // 18936040296 
+  id: i64,  // 18936040296 
   #[serde(rename = "instrument")]
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "price")]
@@ -47,7 +47,7 @@ pub struct BodyrequestOrdersActionsLimitTVput {
 }
 
 impl BodyrequestOrdersActionsLimitTVput {
-  pub fn new(iceberg_fixed: Decimal, iceberg_variance: Decimal, id: i32, instrument: BodyrequestOrdersActionsLimitTvInstrument, price: Decimal, quantity: i32, side: Operation, time_in_force: LifePolicy, rtype: String, user: BodyrequestOrdersActionsLimitTvUser, ) -> BodyrequestOrdersActionsLimitTVput {
+  pub fn new(iceberg_fixed: Decimal, iceberg_variance: Decimal, id: i64, instrument: BodyrequestOrdersActionsLimitTvInstrument, price: Decimal, quantity: i32, side: Operation, time_in_force: LifePolicy, rtype: String, user: BodyrequestOrdersActionsLimitTvUser, ) -> BodyrequestOrdersActionsLimitTVput {
     BodyrequestOrdersActionsLimitTVput {
       iceberg_fixed: iceberg_fixed,
       iceberg_variance: iceberg_variance,
@@ -90,16 +90,16 @@ impl BodyrequestOrdersActionsLimitTVput {
   }
 
 
-  pub fn set_id(&mut self, id: i32) {
+  pub fn set_id(&mut self, id: i64) {
     self.id = id;
   }
 
-  pub fn with_id(mut self, id: i32) -> BodyrequestOrdersActionsLimitTVput {
+  pub fn with_id(mut self, id: i64) -> BodyrequestOrdersActionsLimitTVput {
     self.id = id;
     self
   }
 
-  pub fn id(&self) -> &i32 {
+  pub fn id(&self) -> &i64 {
     &self.id
   }
 

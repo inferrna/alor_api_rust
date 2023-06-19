@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **broker_symbol** | **String** | Пара Биржа:Тикер | [default to null]
-**end_time** | **String** | Время действия заявки (UTC) | [default to null]
+**end_time** | **DateTime<Utc>** | Время действия заявки (UTC) | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **existing** | **bool** | True - для данных из \&quot;снепшота\&quot;, то есть из истории. False - для новых событий | [default to null]
 **filled_qty_batch** | [***Decimal**](BigDecimal.md) | Количество исполненных | [default to null]

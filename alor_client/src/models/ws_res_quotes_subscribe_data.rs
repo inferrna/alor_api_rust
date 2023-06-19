@@ -51,7 +51,7 @@ pub struct WsResQuotesSubscribeData {
   #[serde(rename = "last_price")]
   last_price: Decimal,  // 303.59 
   #[serde(rename = "last_price_timestamp")]
-  last_price_timestamp: i32,  // 1620221538 
+  last_price_timestamp: i64,  // 1620221538 
   #[serde(rename = "lotsize")]
   lotsize: Decimal,  // 10.0 
   #[serde(rename = "lotvalue")]
@@ -73,7 +73,7 @@ pub struct WsResQuotesSubscribeData {
 }
 
 impl WsResQuotesSubscribeData {
-  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i32, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> WsResQuotesSubscribeData {
+  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> WsResQuotesSubscribeData {
     WsResQuotesSubscribeData {
       accrued_int: None,
       accrued_interest: None,
@@ -265,16 +265,16 @@ impl WsResQuotesSubscribeData {
   }
 
 
-  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: i32) {
+  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: i64) {
     self.last_price_timestamp = last_price_timestamp;
   }
 
-  pub fn with_last_price_timestamp(mut self, last_price_timestamp: i32) -> WsResQuotesSubscribeData {
+  pub fn with_last_price_timestamp(mut self, last_price_timestamp: i64) -> WsResQuotesSubscribeData {
     self.last_price_timestamp = last_price_timestamp;
     self
   }
 
-  pub fn last_price_timestamp(&self) -> &i32 {
+  pub fn last_price_timestamp(&self) -> &i64 {
     &self.last_price_timestamp
   }
 

@@ -27,7 +27,7 @@ pub struct BodyrequestOrdersActionsMarket {
   #[serde(rename = "Instrument")]
   instrument: BodyrequestOrdersActionsLimitInstrument, 
   #[serde(rename = "OrderEndUnixTime")]
-  order_end_unix_time: i32,  // 0 
+  order_end_unix_time: i64,  // 0 
   #[serde(rename = "Quantity")]
   quantity: i32,  // 1 
   #[serde(rename = "Side")]
@@ -37,7 +37,7 @@ pub struct BodyrequestOrdersActionsMarket {
 }
 
 impl BodyrequestOrdersActionsMarket {
-  pub fn new(instrument: BodyrequestOrdersActionsLimitInstrument, order_end_unix_time: i32, quantity: i32, side: Operation, user: BodyrequestOrdersActionsLimitUser, ) -> BodyrequestOrdersActionsMarket {
+  pub fn new(instrument: BodyrequestOrdersActionsLimitInstrument, order_end_unix_time: i64, quantity: i32, side: Operation, user: BodyrequestOrdersActionsLimitUser, ) -> BodyrequestOrdersActionsMarket {
     BodyrequestOrdersActionsMarket {
       instrument: instrument,
       order_end_unix_time: order_end_unix_time,
@@ -61,16 +61,16 @@ impl BodyrequestOrdersActionsMarket {
   }
 
 
-  pub fn set_order_end_unix_time(&mut self, order_end_unix_time: i32) {
+  pub fn set_order_end_unix_time(&mut self, order_end_unix_time: i64) {
     self.order_end_unix_time = order_end_unix_time;
   }
 
-  pub fn with_order_end_unix_time(mut self, order_end_unix_time: i32) -> BodyrequestOrdersActionsMarket {
+  pub fn with_order_end_unix_time(mut self, order_end_unix_time: i64) -> BodyrequestOrdersActionsMarket {
     self.order_end_unix_time = order_end_unix_time;
     self
   }
 
-  pub fn order_end_unix_time(&self) -> &i32 {
+  pub fn order_end_unix_time(&self) -> &i64 {
     &self.order_end_unix_time
   }
 

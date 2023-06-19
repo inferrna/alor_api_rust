@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **iceberg_fixed** | [***Decimal**](BigDecimal.md) | Видимая постоянная часть айсберг-заявки в лотах | [default to null]
 **iceberg_variance** | [***Decimal**](BigDecimal.md) | Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок | [default to null]
-**id** | **i32** | Идентификатор заявки | [default to null]
+**id** | **i64** | Идентификатор заявки | [default to null]
 **instrument** | [***BodyrequestOrdersActionsLimitTvInstrument**](bodyrequest_OrdersActionsLimitTV_instrument.md) |  | [default to null]
 **price** | [***Decimal**](BigDecimal.md) | Цена | [default to null]
 **quantity** | **i32** | Количество | [default to null]

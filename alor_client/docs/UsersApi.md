@@ -21,7 +21,7 @@ Method | HTTP request | Description
 [**trade_stats_by_symbol**](UsersApi.md#trade_stats_by_symbol) | **GET** md/stats/{exchange}/{portfolio}/history/trades/{symbol} | Получение истории сделок (один тикер)
 
 # **dev_get_all_orders**
-> Orders dev_get_all_orders(ctx, exchange, portfolio, optional)
+> Vec<Order> dev_get_all_orders(ctx, exchange, portfolio, optional)
 Получение информации о всех заявках
 
 Запрос информации о всех заявках
@@ -45,7 +45,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Orders**](array.md)
+[**Vec<Order>**](array.md)
 
 ### Authorization
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_get_all_positions**
-> Positions dev_get_all_positions(ctx, exchange, portfolio, optional)
+> Vec<Position> dev_get_all_positions(ctx, exchange, portfolio, optional)
 Получение информации о позициях
 
 Запрос информации о позициях
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Positions**](array.md)
+[**Vec<Position>**](array.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_get_all_stop_orders**
-> StopordersWarp dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
+> Vec<StoporderWarp> dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
 Получение информации о стоп-заявках
 
 Запрос информации о всех стоп-заявках
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StopordersWarp**](array.md)
+[**Vec<StoporderWarp>**](array.md)
 
 ### Authorization
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_get_all_trades**
-> Trades dev_get_all_trades(ctx, exchange, portfolio, optional)
+> Vec<Trade> dev_get_all_trades(ctx, exchange, portfolio, optional)
 Получение информации о сделках
 
 Запрос информации о сделках (только за текущую торговую сессию)
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Trades**](array.md)
+[**Vec<Trade>**](array.md)
 
 ### Authorization
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_get_ticker_trades**
-> Trades dev_get_ticker_trades(ctx, exchange, portfolio, ticker, optional)
+> Vec<Trade> dev_get_ticker_trades(ctx, exchange, portfolio, ticker, optional)
 Получение информации о сделках по выбранному инструменту
 
 Запрос информации о сделках по выбранному инструменту
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Trades**](array.md)
+[**Vec<Trade>**](array.md)
 
 ### Authorization
 
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **trade_stats**
-> Trades trade_stats(ctx, exchange, portfolio, optional)
+> Vec<Trade> trade_stats(ctx, exchange, portfolio, optional)
 Получение истории сделок
 
 Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос)
@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Trades**](array.md)
+[**Vec<Trade>**](array.md)
 
 ### Authorization
 
@@ -556,7 +556,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **trade_stats_by_symbol**
-> Trades trade_stats_by_symbol(ctx, exchange, portfolio, symbol, optional)
+> Vec<Trade> trade_stats_by_symbol(ctx, exchange, portfolio, symbol, optional)
 Получение истории сделок (один тикер)
 
 Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Trades**](array.md)
+[**Vec<Trade>**](array.md)
 
 ### Authorization
 

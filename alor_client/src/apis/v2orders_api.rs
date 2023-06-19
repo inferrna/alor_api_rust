@@ -49,7 +49,7 @@ pub trait V2ordersApi {
     async fn command_api_v2clientordersactionsstop_limit(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
     async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i32) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
     async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
-    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<StopordersWarp, Error<serde_json::Value>>;
+    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>>;
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
 }
 
@@ -585,7 +585,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
  /// 
  /// 
  ///
-    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<StopordersWarp, Error<serde_json::Value>> {
+    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

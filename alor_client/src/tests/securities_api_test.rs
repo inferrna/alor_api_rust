@@ -94,7 +94,7 @@ async fn dev_quotes_test() {
     let symbols: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Symbols = api_client.dev_quotes(symbols, format).await.unwrap();
+    let response: Vec<Symbol> = api_client.dev_quotes(symbols, format).await.unwrap();
 }
 /**
  * Получение котировки по ближайшему фьючерсу (код)
@@ -136,7 +136,7 @@ async fn dev_securities_search_test() {
     let exchange: Exchange = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Securities = api_client.dev_securities_search(query, limit, offset, sector, cficode, exchange, format).await.unwrap();
+    let response: Vec<Security> = api_client.dev_securities_search(query, limit, offset, sector, cficode, exchange, format).await.unwrap();
 }
 /**
  * Получение информации о всех сделках по ценным бумагам за сегодня
@@ -163,7 +163,7 @@ async fn dev_securities_search_all_trades_test() {
     let descending: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let include_virtual_trades: bool = serde_json::from_value(value).unwrap();
-    let response: Alltrades = api_client.dev_securities_search_all_trades(exchange, symbol, format, from, to, take, descending, include_virtual_trades).await.unwrap();
+    let response: Vec<Alltrade> = api_client.dev_securities_search_all_trades(exchange, symbol, format, from, to, take, descending, include_virtual_trades).await.unwrap();
 }
 /**
  * Получение информации о торговых инструментах на выбранной бирже
@@ -178,7 +178,7 @@ async fn dev_securities_search_exchange_test() {
     let exchange: Exchange = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: Securities = api_client.dev_securities_search_exchange(exchange, format).await.unwrap();
+    let response: Vec<Security> = api_client.dev_securities_search_exchange(exchange, format).await.unwrap();
 }
 /**
  * Получение информации о выбранном финансовом инструменте

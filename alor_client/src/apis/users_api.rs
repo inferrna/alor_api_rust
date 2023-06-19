@@ -45,21 +45,21 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> UsersAp
 
 #[async_trait::async_trait]
 pub trait UsersApi {
-    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Orders, Error<serde_json::Value>>;
-    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Positions, Error<serde_json::Value>>;
-    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<StopordersWarp, Error<serde_json::Value>>;
-    async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>>;
+    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Order>, Error<serde_json::Value>>;
+    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>>;
+    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>>;
+    async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
     async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>>;
     async fn dev_get_one_position(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Position, Error<serde_json::Value>>;
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
-    async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>>;
+    async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
     async fn dev_user_portfolio(&self, username: &str) -> Result<ServersInfo, Error<serde_json::Value>>;
     async fn exchange_portfolio_money(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Money, Error<serde_json::Value>>;
     async fn exchange_portfolio_summary(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Summary, Error<serde_json::Value>>;
     async fn fortsrisk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Fortsrisk, Error<serde_json::Value>>;
     async fn risk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Risk, Error<serde_json::Value>>;
-    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>>;
-    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>>;
+    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
@@ -83,7 +83,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Orders, Error<serde_json::Value>> {
+    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Order>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -207,7 +207,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Positions, Error<serde_json::Value>> {
+    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -330,7 +330,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<StopordersWarp, Error<serde_json::Value>> {
+    async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -450,7 +450,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>> {
+    async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -946,7 +946,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>> {
+    async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1671,7 +1671,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>> {
+    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1823,7 +1823,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
  /// 
  /// 
  ///
-    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Trades, Error<serde_json::Value>> {
+    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
