@@ -33,7 +33,7 @@ pub struct WsReqBarsGetAndSubscribe {
   #[serde(rename = "format")]
   format: JsonFormat, 
   #[serde(rename = "from")]
-  from: i32,  // 1536557084 
+  from: i64,  // 1536557084 
   #[serde(rename = "guid")]
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
   #[serde(rename = "opcode")]
@@ -45,7 +45,7 @@ pub struct WsReqBarsGetAndSubscribe {
 }
 
 impl WsReqBarsGetAndSubscribe {
-  pub fn new(code: String, delayed: String, exchange: Exchange, format: JsonFormat, from: i32, guid: String, opcode: OpcodeEnum, tf: Duration, token: String, ) -> WsReqBarsGetAndSubscribe {
+  pub fn new(code: String, delayed: String, exchange: Exchange, format: JsonFormat, from: i64, guid: String, opcode: OpcodeEnum, tf: Duration, token: String, ) -> WsReqBarsGetAndSubscribe {
     WsReqBarsGetAndSubscribe {
       code: code,
       delayed: delayed,
@@ -115,16 +115,16 @@ impl WsReqBarsGetAndSubscribe {
   }
 
 
-  pub fn set_from(&mut self, from: i32) {
+  pub fn set_from(&mut self, from: i64) {
     self.from = from;
   }
 
-  pub fn with_from(mut self, from: i32) -> WsReqBarsGetAndSubscribe {
+  pub fn with_from(mut self, from: i64) -> WsReqBarsGetAndSubscribe {
     self.from = from;
     self
   }
 
-  pub fn from(&self) -> &i32 {
+  pub fn from(&self) -> &i64 {
     &self.from
   }
 

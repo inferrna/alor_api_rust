@@ -45,54 +45,242 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> Securit
 
 #[async_trait::async_trait]
 pub trait SecuritiesApi {
+///
+/// Запрос истории для выбранных биржи и инструмента
+///
+/// Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.
+///
+/// # Arguments
+///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `tf` Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) (required)
+    /// 
+    /// 
+    ///
+    /// * `from` Начало отрезка времени (UTC) в формате Unix Time Seconds (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `to` Конец отрезка времени (UTC) в формате Unix Time Seconds (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `untraded` Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера (optional)
+    /// 
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
+///
+/// Получение информации о биржевом стакане
+///
+/// Запрос биржевого стакана
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `seccode` Инструмент (required)
+    /// Example: seccode_example
+    /// 
+    ///
+    /// * `depth` Глубина стакана. Стандартное и максимальное значение - 20 (20х20). (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_orderbook_exchang_seccode(&self, exchange: crate::models::Exchange, seccode: &str, depth: Option<i32>, format: Option<crate::models::JsonFormat>) -> Result<Orderbook, Error<serde_json::Value>>;
+///
+/// Получение информации о котировках для выбранных инструментов
+///
+/// Запрос информации о котировках для выбранных инструментов и бирж
+///
+/// # Arguments
+///
+    /// * `symbols` Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием (required)
+    /// Example: symbols_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Symbol>, Error<serde_json::Value>>;
+///
+/// Получение котировки по ближайшему фьючерсу (код)
+///
+/// Запрос котировки по ближайшему фьючерсу (только по коду, без даты)
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<SymbolFutures, Error<serde_json::Value>>;
+///
+/// Получение информации о торговых инструментах
+///
+/// Запрос информации о торговых инструментах
+///
+/// # Arguments
+///
+    /// * `query` Тикер (Код финансового инструмента) (required)
+    /// Example: query_example
+    /// 
+    ///
+    /// * `limit` Ограничение на количество выдаваемых результатов поиска (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `offset` Смещение начала выборки (для пагинации) (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `sector` Рынок на бирже (optional)
+    /// 
+    /// 
+    ///
+    /// * `cficode` Код финансового инструмента по стандарту ISO 10962 (optional)
+    /// Example: cficode_example
+    /// 
+    ///
+    /// * `exchange` Биржа (optional)
+    /// 
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>>;
+///
+/// Получение информации о всех сделках по ценным бумагам за сегодня
+///
+/// Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
+    /// * `from` Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `to` Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `take` Количество загружаемых элементов (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `descending` Флаг загрузки элементов с конца списка (optional)
+    /// Example: true
+    /// 
+    ///
+    /// * `include_virtual_trades` Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже (optional)
+    /// Example: true
+    /// 
+    ///
     async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
+///
+/// Получение информации о торговых инструментах на выбранной бирже
+///
+/// Запрос информации об инструментах на выбранной бирже
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>>;
+///
+/// Получение информации о выбранном финансовом инструменте
+///
+/// Запрос информации о выбранном финансовом инструменте на бирже
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_securities_search_exchange_code(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Security, Error<serde_json::Value>>;
+///
+/// Запрос ставок риска
+///
+/// Получение ставок риска для маржинальной торговли.
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `ticker` Тикер\\код инструмента, ISIN для облигаций (optional)
+    /// Example: ticker_example
+    /// 
+    ///
+    /// * `risk_category_id` Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента (optional)
+    /// Example: risk_category_id_example
+    /// 
+    ///
+    /// * `search` Часть Тикера\\кода инструмента, ISIN для облигаций. Вернет все совпадения, начинающиеся с  (optional)
+    /// Example: search_example
+    /// 
+    ///
     async fn risk_rates(&self, exchange: crate::models::Exchange, ticker: Option<&str>, risk_category_id: Option<&str>, search: Option<&str>) -> Result<RiskRates, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>SecuritiesApi for SecuritiesApiClient<C> {
- ///
- /// Запрос истории для выбранных биржи и инструмента
- ///
- /// Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.
- ///
- /// # Arguments
- ///
- /// * `symbol` Тикер (Код финансового инструмента) (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `tf` Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) (required)
- /// 
- /// 
- ///
- /// * `from` Начало отрезка времени (UTC) в формате Unix Time Seconds (required)
- /// Example: 56
- /// 
- ///
- /// * `to` Конец отрезка времени (UTC) в формате Unix Time Seconds (required)
- /// Example: 56
- /// 
- ///
- /// * `untraded` Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера (optional)
- /// 
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -202,29 +390,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о биржевом стакане
- ///
- /// Запрос биржевого стакана
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `seccode` Инструмент (required)
- /// Example: seccode_example
- /// 
- ///
- /// * `depth` Глубина стакана. Стандартное и максимальное значение - 20 (20х20). (optional)
- /// Example: 56
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_orderbook_exchang_seccode(&self, exchange: crate::models::Exchange, seccode: &str, depth: Option<i32>, format: Option<crate::models::JsonFormat>) -> Result<Orderbook, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -329,21 +494,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о котировках для выбранных инструментов
- ///
- /// Запрос информации о котировках для выбранных инструментов и бирж
- ///
- /// # Arguments
- ///
- /// * `symbols` Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием (required)
- /// Example: symbols_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_quotes(&self, symbols: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Symbol>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -445,25 +595,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение котировки по ближайшему фьючерсу (код)
- ///
- /// Запрос котировки по ближайшему фьючерсу (только по коду, без даты)
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `symbol` Тикер (Код финансового инструмента) (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<SymbolFutures, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -565,41 +696,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о торговых инструментах
- ///
- /// Запрос информации о торговых инструментах
- ///
- /// # Arguments
- ///
- /// * `query` Тикер (Код финансового инструмента) (required)
- /// Example: query_example
- /// 
- ///
- /// * `limit` Ограничение на количество выдаваемых результатов поиска (optional)
- /// Example: 56
- /// 
- ///
- /// * `offset` Смещение начала выборки (для пагинации) (optional)
- /// Example: 56
- /// 
- ///
- /// * `sector` Рынок на бирже (optional)
- /// 
- /// 
- ///
- /// * `cficode` Код финансового инструмента по стандарту ISO 10962 (optional)
- /// Example: cficode_example
- /// 
- ///
- /// * `exchange` Биржа (optional)
- /// 
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::SchemaEnum>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -717,45 +813,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о всех сделках по ценным бумагам за сегодня
- ///
- /// Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `symbol` Тикер (Код финансового инструмента) (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
- /// * `from` Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
- /// Example: 56
- /// 
- ///
- /// * `to` Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
- /// Example: 56
- /// 
- ///
- /// * `take` Количество загружаемых элементов (optional)
- /// Example: 56
- /// 
- ///
- /// * `descending` Флаг загрузки элементов с конца списка (optional)
- /// Example: true
- /// 
- ///
- /// * `include_virtual_trades` Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже (optional)
- /// Example: true
- /// 
- ///
     async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -872,21 +929,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о торговых инструментах на выбранной бирже
- ///
- /// Запрос информации об инструментах на выбранной бирже
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::JsonFormat>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -988,25 +1030,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Получение информации о выбранном финансовом инструменте
- ///
- /// Запрос информации о выбранном финансовом инструменте на бирже
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `symbol` Тикер (Код финансового инструмента) (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_securities_search_exchange_code(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Security, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1108,29 +1131,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
- ///
- /// Запрос ставок риска
- ///
- /// Получение ставок риска для маржинальной торговли.
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `ticker` Тикер\\код инструмента, ISIN для облигаций (optional)
- /// Example: ticker_example
- /// 
- ///
- /// * `risk_category_id` Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента (optional)
- /// Example: risk_category_id_example
- /// 
- ///
- /// * `search` Часть Тикера\\кода инструмента, ISIN для облигаций. Вернет все совпадения, начинающиеся с  (optional)
- /// Example: search_example
- /// 
- ///
     async fn risk_rates(&self, exchange: crate::models::Exchange, ticker: Option<&str>, risk_category_id: Option<&str>, search: Option<&str>) -> Result<RiskRates, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 

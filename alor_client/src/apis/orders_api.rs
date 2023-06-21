@@ -45,41 +45,342 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> OrdersA
 
 #[async_trait::async_trait]
 pub trait OrdersApi {
+///
+/// Создание лимитной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionslimit(&self, body: crate::models::BodyrequestOrdersActionsLimitTv, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Изменение лимитной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: order_id_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфолио и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка из цифр. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTVput, order_id: &str, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>>;
+///
+/// Создание рыночной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionsmarket(&self, body: crate::models::BodyrequestOrdersActionsMarketTv, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Изменение рыночной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: order_id_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфолио и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка из цифр. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionsmarketput(&self, body: crate::models::BodyrequestOrdersActionsMarketTVput, order_id: &str, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>>;
+///
+/// Снятие заявки
+///
+/// Снятие заявки с указанным идентификатором
+///
+/// # Arguments
+///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `stop` Является стоп-заявкой? (required)
+    /// 
+    /// 
+    ///
+    /// * `json_response` Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. (optional)
+    /// 
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn command_api_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
+///
+/// Провести оценку одной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Параметры заявки (optional)
+    /// 
+    /// 
+    ///
     async fn v2clientordersactionsestimate(&self, body: Option<crate::models::EstimateOrderViewModel>) -> Result<EstimateOrderModel, Error<serde_json::Value>>;
+///
+/// Провести оценку нескольких заявок
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Список параметров заявок (optional)
+    /// 
+    /// 
+    ///
     async fn v2clientordersactionsestimateall(&self, body: Option<Vec<EstimateOrderViewModel>>) -> Result<Vec<EstimateOrderModel>, Error<serde_json::Value>>;
+///
+/// Снятие стоп-заявки
+///
+/// Снятие стоп-заявки с указанным идентификатором
+///
+/// # Arguments
+///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `stop` Является стоп-заявкой? (required)
+    /// Example: true
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i32, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>>;
+///
+/// Создание стоп-лосс заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionsstop_loss(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Создание стоп-лосс лимит заявки
+///
+/// Создание стоп-лосс лимит заявки
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionsstop_loss_limit(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Изменение стоп-лосс лимит заявки
+///
+/// Изменение стоп-лосс лимит заявки с указанным номером
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Изменение стоп-лосс заявки
+///
+/// Изменение стоп-лосс заявки с указанным номером
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Создание стоп-заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionstake_profit(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Создание стоп-лимит заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionstake_profit_limit(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Изменение стоп-лимит заявки
+///
+/// Изменение стоп-лимит заявки с указанным номером
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+///
+/// Изменение стоп-заявки
+///
+/// Изменение стоп-заявки с указанным номером
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `trade_server_code` Код торгового сервера (required)
+    /// Example: trade_server_code_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersApi for OrdersApiClient<C> {
- ///
- /// Создание лимитной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionslimit(&self, body: crate::models::BodyrequestOrdersActionsLimitTv, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -188,25 +489,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение лимитной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: order_id_example
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфолио и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка из цифр. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTVput, order_id: &str, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -315,21 +597,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Создание рыночной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionsmarket(&self, body: crate::models::BodyrequestOrdersActionsMarketTv, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -438,25 +705,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение рыночной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: order_id_example
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфолио и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка из цифр. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionsmarketput(&self, body: crate::models::BodyrequestOrdersActionsMarketTVput, order_id: &str, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -565,37 +813,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Снятие заявки
- ///
- /// Снятие заявки с указанным идентификатором
- ///
- /// # Arguments
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `stop` Является стоп-заявкой? (required)
- /// 
- /// 
- ///
- /// * `json_response` Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. (optional)
- /// 
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn command_api_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -703,17 +920,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Провести оценку одной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Параметры заявки (optional)
- /// 
- /// 
- ///
     async fn v2clientordersactionsestimate(&self, body: Option<crate::models::EstimateOrderViewModel>) -> Result<EstimateOrderModel, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -805,17 +1011,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Провести оценку нескольких заявок
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Список параметров заявок (optional)
- /// 
- /// 
- ///
     async fn v2clientordersactionsestimateall(&self, body: Option<Vec<EstimateOrderViewModel>>) -> Result<Vec<EstimateOrderModel>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -907,33 +1102,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Снятие стоп-заявки
- ///
- /// Снятие стоп-заявки с указанным идентификатором
- ///
- /// # Arguments
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `stop` Является стоп-заявкой? (required)
- /// Example: true
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i32, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1037,25 +1205,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Создание стоп-лосс заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionsstop_loss(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1164,25 +1313,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Создание стоп-лосс лимит заявки
- ///
- /// Создание стоп-лосс лимит заявки
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionsstop_loss_limit(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1291,29 +1421,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение стоп-лосс лимит заявки
- ///
- /// Изменение стоп-лосс лимит заявки с указанным номером
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1422,29 +1529,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение стоп-лосс заявки
- ///
- /// Изменение стоп-лосс заявки с указанным номером
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1553,25 +1637,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Создание стоп-заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionstake_profit(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1680,25 +1745,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Создание стоп-лимит заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionstake_profit_limit(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1807,29 +1853,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение стоп-лимит заявки
- ///
- /// Изменение стоп-лимит заявки с указанным номером
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1938,29 +1961,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
- ///
- /// Изменение стоп-заявки
- ///
- /// Изменение стоп-заявки с указанным номером
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `trade_server_code` Код торгового сервера (required)
- /// Example: trade_server_code_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 

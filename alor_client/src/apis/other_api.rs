@@ -45,18 +45,18 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> OtherAp
 
 #[async_trait::async_trait]
 pub trait OtherApi {
+///
+/// Запрос текущего UTC времени в формате Unix
+///
+/// Запрос текущего UTC времени в формате Unix Time Seconds. Если этот запрос выполнен без авторизации, то будет возвращено время, которое было 15 минут назад.
+///
+/// # Arguments
+///
     async fn local_time(&self, ) -> Result<Time, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OtherApi for OtherApiClient<C> {
- ///
- /// Запрос текущего UTC времени в формате Unix
- ///
- /// Запрос текущего UTC времени в формате Unix Time Seconds. Если этот запрос выполнен без авторизации, то будет возвращено время, которое было 15 минут назад.
- ///
- /// # Arguments
- ///
     async fn local_time(&self, ) -> Result<Time, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 

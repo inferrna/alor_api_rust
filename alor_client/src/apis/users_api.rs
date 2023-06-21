@@ -45,44 +45,358 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> UsersAp
 
 #[async_trait::async_trait]
 pub trait UsersApi {
+///
+/// Получение информации о всех заявках
+///
+/// Запрос информации о всех заявках
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Order>, Error<serde_json::Value>>;
+///
+/// Получение информации о позициях
+///
+/// Запрос информации о позициях
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
+    /// * `without_currency` Исключить из ответа все денежные инструменты, по умолчанию false (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>>;
+///
+/// Получение информации о стоп-заявках
+///
+/// Запрос информации о всех стоп-заявках
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>>;
+///
+/// Получение информации о сделках
+///
+/// Запрос информации о сделках (только за текущую торговую сессию)
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+///
+/// Получение информации о выбранной заявке
+///
+/// Запрос информации о выбранной заявке
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>>;
+///
+/// Получение информации о позициях выбранного инструмента
+///
+/// Запрос информации о позициях выбранного инструмента
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_one_position(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Position, Error<serde_json::Value>>;
+///
+/// Получение информации о выбранной стоп-заявке
+///
+/// Запрос информации о выбранной стоп-заявке
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор стоп-заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
+///
+/// Получение информации о сделках по выбранному инструменту
+///
+/// Запрос информации о сделках по выбранному инструменту
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `ticker` Тикер (Код финансового инструмента) (required)
+    /// Example: ticker_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+///
+/// Получение списка серверов портфелей
+///
+/// Получение списка серверов. В ответе в поле tradeServerCode содержится значение которое надо использовать. Не являются частью API торговой системы.
+///
+/// # Arguments
+///
+    /// * `username` Имя пользователя (required)
+    /// Example: username_example
+    /// 
+    ///
     async fn dev_user_portfolio(&self, username: &str) -> Result<ServersInfo, Error<serde_json::Value>>;
+///
+/// Получение информации по деньгам для выбранного портфеля
+///
+/// Запрос информации о позиции по деньгам. Вызов существует для обратной совместимости с API v1, предпочтительно использовать другие вызовы (/summary, /risk, /positions)
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn exchange_portfolio_money(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Money, Error<serde_json::Value>>;
+///
+/// Получение информации о портфеле
+///
+/// Запрос сводной информации о портфеле
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn exchange_portfolio_summary(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Summary, Error<serde_json::Value>>;
+///
+/// Получение информации о рисках на срочном рынке
+///
+/// Запрос информации о рисках на срочном рынке для выбранного портфеля
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn fortsrisk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Fortsrisk, Error<serde_json::Value>>;
+///
+/// Получение информации о рисках
+///
+/// Запрос информации о рисках
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn risk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Risk, Error<serde_json::Value>>;
+///
+/// Получение истории сделок
+///
+/// Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос)
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `date_from` Начиная с какой даты отдавать историю сделок (optional)
+    /// Example: 2013-10-20
+    /// 
+    ///
+    /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
+    /// Example: from_example
+    /// 
+    ///
+    /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `descending` Флаг обратной сортировки выдачи (optional)
+    /// Example: true
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+///
+/// Получение истории сделок (один тикер)
+///
+/// Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `symbol` Фильтр по инструменту (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `date_from` Начиная с какой даты отдавать историю сделок (optional)
+    /// Example: 2013-10-20
+    /// 
+    ///
+    /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
+    /// Example: from_example
+    /// 
+    ///
+    /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `descending` Флаг обратной сортировки выдачи (optional)
+    /// Example: true
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi for UsersApiClient<C> {
- ///
- /// Получение информации о всех заявках
- ///
- /// Запрос информации о всех заявках
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Order>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -184,29 +498,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о позициях
- ///
- /// Запрос информации о позициях
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
- /// * `without_currency` Исключить из ответа все денежные инструменты, по умолчанию false (optional)
- /// 
- /// 
- ///
     async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -311,25 +602,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о стоп-заявках
- ///
- /// Запрос информации о всех стоп-заявках
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -431,25 +703,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о сделках
- ///
- /// Запрос информации о сделках (только за текущую торговую сессию)
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_all_trades(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -551,29 +804,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о выбранной заявке
- ///
- /// Запрос информации о выбранной заявке
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -675,29 +905,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о позициях выбранного инструмента
- ///
- /// Запрос информации о позициях выбранного инструмента
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `symbol` Тикер (Код финансового инструмента) (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_one_position(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, format: Option<crate::models::JsonFormat>) -> Result<Position, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -799,29 +1006,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о выбранной стоп-заявке
- ///
- /// Запрос информации о выбранной стоп-заявке
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `order_id` Идентификатор стоп-заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -923,29 +1107,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о сделках по выбранному инструменту
- ///
- /// Запрос информации о сделках по выбранному инструменту
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `ticker` Тикер (Код финансового инструмента) (required)
- /// Example: ticker_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_ticker_trades(&self, exchange: crate::models::Exchange, portfolio: &str, ticker: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1047,17 +1208,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение списка серверов портфелей
- ///
- /// Получение списка серверов. В ответе в поле tradeServerCode содержится значение которое надо использовать. Не являются частью API торговой системы.
- ///
- /// # Arguments
- ///
- /// * `username` Имя пользователя (required)
- /// Example: username_example
- /// 
- ///
     async fn dev_user_portfolio(&self, username: &str) -> Result<ServersInfo, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1156,25 +1306,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации по деньгам для выбранного портфеля
- ///
- /// Запрос информации о позиции по деньгам. Вызов существует для обратной совместимости с API v1, предпочтительно использовать другие вызовы (/summary, /risk, /positions)
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn exchange_portfolio_money(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Money, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1276,25 +1407,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о портфеле
- ///
- /// Запрос сводной информации о портфеле
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn exchange_portfolio_summary(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Summary, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1396,25 +1508,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о рисках на срочном рынке
- ///
- /// Запрос информации о рисках на срочном рынке для выбранного портфеля
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn fortsrisk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Fortsrisk, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1516,25 +1609,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение информации о рисках
- ///
- /// Запрос информации о рисках
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn risk(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Risk, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1636,41 +1710,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение истории сделок
- ///
- /// Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос)
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `date_from` Начиная с какой даты отдавать историю сделок (optional)
- /// Example: 2013-10-20
- /// 
- ///
- /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
- /// Example: from_example
- /// 
- ///
- /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
- /// Example: 56
- /// 
- ///
- /// * `descending` Флаг обратной сортировки выдачи (optional)
- /// Example: true
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -1784,45 +1823,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
- ///
- /// Получение истории сделок (один тикер)
- ///
- /// Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `symbol` Фильтр по инструменту (required)
- /// Example: symbol_example
- /// 
- ///
- /// * `date_from` Начиная с какой даты отдавать историю сделок (optional)
- /// Example: 2013-10-20
- /// 
- ///
- /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
- /// Example: from_example
- /// 
- ///
- /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
- /// Example: 56
- /// 
- ///
- /// * `descending` Флаг обратной сортировки выдачи (optional)
- /// Example: true
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 

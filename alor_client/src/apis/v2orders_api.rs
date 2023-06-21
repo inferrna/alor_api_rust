@@ -45,31 +45,138 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> V2order
 
 #[async_trait::async_trait]
 pub trait V2ordersApi {
+///
+/// Создание стоп заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionsstop(&self, body: crate::models::BodyrequestOrdersActionsStopMarketTvWarp, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Создание стоп-лимитной заявки
+///
+/// 
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
     async fn command_api_v2clientordersactionsstop_limit(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Изменение стоп-лимитной заявки
+///
+/// Изменение стоп-лимитной заявки
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
+    /// * `stop_order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
     async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i32) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Снятие заявки
+///
+/// Снятие заявки с указанным идентификатором
+///
+/// # Arguments
+///
+    /// * `order_id` Идентификатор заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `stop` Является стоп-заявкой? (тестирование: всегда true) (required)
+    /// 
+    /// 
+    ///
+    /// * `json_response` Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. (optional)
+    /// 
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
+///
+/// Получение информации о стоп-заявках
+///
+/// Запрос информации о всех стоп-заявках
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>>;
+///
+/// Получение информации о выбранной стоп-заявке
+///
+/// Запрос информации о выбранной стоп-заявке
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio` Идентификатор клиентского портфеля (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `order_id` Идентификатор стоп-заявки (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `format` Формат возвращаемого сервером JSON (optional)
+    /// 
+    /// 
+    ///
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2ordersApi for V2ordersApiClient<C> {
- ///
- /// Создание стоп заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionsstop(&self, body: crate::models::BodyrequestOrdersActionsStopMarketTvWarp, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -178,21 +285,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
- ///
- /// Создание стоп-лимитной заявки
- ///
- /// 
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
     async fn command_api_v2clientordersactionsstop_limit(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -301,25 +393,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
- ///
- /// Изменение стоп-лимитной заявки
- ///
- /// Изменение стоп-лимитной заявки
- ///
- /// # Arguments
- ///
- /// * `body` Тело заявки (required)
- /// 
- /// 
- ///
- /// * `x_alor_reqid` Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. (required)
- /// Example: x_alor_reqid_example
- /// 
- ///
- /// * `stop_order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
     async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i32) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -428,37 +501,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
- ///
- /// Снятие заявки
- ///
- /// Снятие заявки с указанным идентификатором
- ///
- /// # Arguments
- ///
- /// * `order_id` Идентификатор заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `stop` Является стоп-заявкой? (тестирование: всегда true) (required)
- /// 
- /// 
- ///
- /// * `json_response` Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. (optional)
- /// 
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -566,25 +608,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
- ///
- /// Получение информации о стоп-заявках
- ///
- /// Запрос информации о всех стоп-заявках
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_all_stop_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>) -> Result<Vec<StoporderWarp>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -686,29 +709,6 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
- ///
- /// Получение информации о выбранной стоп-заявке
- ///
- /// Запрос информации о выбранной стоп-заявке
- ///
- /// # Arguments
- ///
- /// * `exchange` Биржа (required)
- /// 
- /// 
- ///
- /// * `portfolio` Идентификатор клиентского портфеля (required)
- /// Example: portfolio_example
- /// 
- ///
- /// * `order_id` Идентификатор стоп-заявки (required)
- /// Example: 56
- /// 
- ///
- /// * `format` Формат возвращаемого сервером JSON (optional)
- /// 
- /// 
- ///
     async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
