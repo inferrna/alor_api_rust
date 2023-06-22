@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
   **order_id** | **i32**| Идентификатор заявки | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
   **exchange** | [**Exchange**](.md)| Биржа | 
-  **stop** | [**SchemaEnum**](.md)| Является стоп-заявкой? | 
+  **stop** | **bool**| Является стоп-заявкой? | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -155,8 +155,8 @@ Name | Type | Description  | Notes
  **order_id** | **i32**| Идентификатор заявки | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
  **exchange** | [**Exchange**](.md)| Биржа | 
- **stop** | [**SchemaEnum**](.md)| Является стоп-заявкой? | 
- **json_response** | [**SchemaEnum**](.md)| Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. | 
+ **stop** | **bool**| Является стоп-заявкой? | 
+ **json_response** | **bool**| Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
 
 ### Return type

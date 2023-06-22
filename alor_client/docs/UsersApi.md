@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
  **exchange** | [**Exchange**](.md)| Биржа | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
- **without_currency** | [**SchemaEnum**](.md)| Исключить из ответа все денежные инструменты, по умолчанию false | 
+ **without_currency** | **bool**| Исключить из ответа все денежные инструменты, по умолчанию false | 
 
 ### Return type
 

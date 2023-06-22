@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **delayed** | **String** | Данные c задержкой в 15 минут. Для авторизованых клиентов задержка не применяется. | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **format** | **JsonFormat** |  | [default to null]
-**from** | **i32** | Дата и время (UTC) для первой запрашиваемой свечи | [default to null]
+**from** | **i64** | Дата и время (UTC) для первой запрашиваемой свечи | [default to null]
 **guid** | **String** | Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid. | [default to null]
 **opcode** | **OpcodeEnum** |  | [default to null]
 **tf** | **Duration** |  | [default to null]
