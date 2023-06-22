@@ -25,10 +25,13 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqUnsubscribe {
   #[serde(rename = "guid")]
+  ///Уникальный идентификатор подписки, от которой отписываемся.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
   #[serde(rename = "opcode")]
+  
   opcode: OpcodeEnum, 
   #[serde(rename = "token")]
+  ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
@@ -49,7 +52,7 @@ impl WsReqUnsubscribe {
     self.guid = guid;
     self
   }
-
+  ///Уникальный идентификатор подписки, от которой отписываемся.
   pub fn guid(&self) -> &String {
     &self.guid
   }
@@ -63,7 +66,7 @@ impl WsReqUnsubscribe {
     self.opcode = opcode;
     self
   }
-
+  
   pub fn opcode(&self) -> &OpcodeEnum {
     &self.opcode
   }
@@ -77,7 +80,7 @@ impl WsReqUnsubscribe {
     self.token = token;
     self
   }
-
+  ///JWT токен для авторизации
   pub fn token(&self) -> &String {
     &self.token
   }

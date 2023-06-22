@@ -25,16 +25,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqOrdersGetAndSubscribe {
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "format")]
+  
   format: JsonFormat, 
   #[serde(rename = "guid")]
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
   #[serde(rename = "opcode")]
+  
   opcode: OpcodeEnum, 
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String,  // D61971 
   #[serde(rename = "token")]
+  ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
@@ -58,7 +64,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -72,7 +78,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.format = format;
     self
   }
-
+  
   pub fn format(&self) -> &JsonFormat {
     &self.format
   }
@@ -86,7 +92,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.guid = guid;
     self
   }
-
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
   }
@@ -100,7 +106,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.opcode = opcode;
     self
   }
-
+  
   pub fn opcode(&self) -> &OpcodeEnum {
     &self.opcode
   }
@@ -114,7 +120,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -128,7 +134,7 @@ impl WsReqOrdersGetAndSubscribe {
     self.token = token;
     self
   }
-
+  ///JWT токен для авторизации
   pub fn token(&self) -> &String {
     &self.token
   }

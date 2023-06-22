@@ -25,42 +25,59 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Order {
   #[serde(rename = "brokerSymbol")]
+  ///Пара биржа-Тикер
   broker_symbol: String,  // MOEX:SBER 
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Время завершения (UTC)
   end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // true 
   #[serde(rename = "filled")]
+  ///Количество исполненных (лоты)
   filled: Decimal,  // 1 
   #[serde(rename = "filledQtyBatch")]
+  ///Количество исполненных (лоты)
   filled_qty_batch: Decimal,  // 1 
   #[serde(rename = "filledQtyUnits")]
+  ///Количество исполненных (штуки)
   filled_qty_units: Decimal,  // 1 
   #[serde(rename = "id")]
+  ///Уникальный идентификатор заявки
   id: String,  // 18995978560 
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal,  // 208.6 
   #[serde(rename = "qty")]
+  ///Количество (лоты)
   qty: Decimal,  // 1 
   #[serde(rename = "qtyBatch")]
+  ///Количество (лоты)
   qty_batch: Decimal,  // 1 
   #[serde(rename = "qtyUnits")]
+  ///Количество (штуки)
   qty_units: Decimal,  // 1 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "status")]
+  
   status: OrderStatus, 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "transTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Время выставления (UTC)
   trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
+  
   rtype: OrderType 
 }
 
@@ -95,7 +112,7 @@ impl Order {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Пара биржа-Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -109,7 +126,7 @@ impl Order {
     self.end_time = end_time;
     self
   }
-
+  ///Время завершения (UTC)
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -123,7 +140,7 @@ impl Order {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -137,7 +154,7 @@ impl Order {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -151,7 +168,7 @@ impl Order {
     self.filled = filled;
     self
   }
-
+  ///Количество исполненных (лоты)
   pub fn filled(&self) -> &Decimal {
     &self.filled
   }
@@ -165,7 +182,7 @@ impl Order {
     self.filled_qty_batch = filled_qty_batch;
     self
   }
-
+  ///Количество исполненных (лоты)
   pub fn filled_qty_batch(&self) -> &Decimal {
     &self.filled_qty_batch
   }
@@ -179,7 +196,7 @@ impl Order {
     self.filled_qty_units = filled_qty_units;
     self
   }
-
+  ///Количество исполненных (штуки)
   pub fn filled_qty_units(&self) -> &Decimal {
     &self.filled_qty_units
   }
@@ -193,7 +210,7 @@ impl Order {
     self.id = id;
     self
   }
-
+  ///Уникальный идентификатор заявки
   pub fn id(&self) -> &String {
     &self.id
   }
@@ -207,7 +224,7 @@ impl Order {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -221,7 +238,7 @@ impl Order {
     self.qty = qty;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty(&self) -> &Decimal {
     &self.qty
   }
@@ -235,7 +252,7 @@ impl Order {
     self.qty_batch = qty_batch;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty_batch(&self) -> &Decimal {
     &self.qty_batch
   }
@@ -249,7 +266,7 @@ impl Order {
     self.qty_units = qty_units;
     self
   }
-
+  ///Количество (штуки)
   pub fn qty_units(&self) -> &Decimal {
     &self.qty_units
   }
@@ -263,7 +280,7 @@ impl Order {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -277,7 +294,7 @@ impl Order {
     self.status = status;
     self
   }
-
+  
   pub fn status(&self) -> &OrderStatus {
     &self.status
   }
@@ -291,7 +308,7 @@ impl Order {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -305,7 +322,7 @@ impl Order {
     self.trans_time = trans_time;
     self
   }
-
+  ///Время выставления (UTC)
   pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
@@ -319,7 +336,7 @@ impl Order {
     self.rtype = rtype;
     self
   }
-
+  
   pub fn rtype(&self) -> &OrderType {
     &self.rtype
   }

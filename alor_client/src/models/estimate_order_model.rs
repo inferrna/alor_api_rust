@@ -26,24 +26,33 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct EstimateOrderModel {
   #[serde(rename = "commission")]
+  ///Комиссия
   commission: Decimal, 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "notMarginQuantityToBuy")]
+  ///Количество в лотах к покупке без плеча
   not_margin_quantity_to_buy: Decimal, 
   #[serde(rename = "notMarginQuantityToSell")]
+  ///Количество в лотах к продаже без плеча
   not_margin_quantity_to_sell: Decimal, 
   #[serde(rename = "orderEvaluation")]
+  ///Стоимость заявки
   order_evaluation: Decimal, 
   #[serde(rename = "portfolio")]
   #[serde(default)]
+  ///Портфель клиента
   portfolio: Option<String>, 
   #[serde(rename = "quantityToBuy")]
+  ///Количество в лотах к покупке с плечом
   quantity_to_buy: Decimal, 
   #[serde(rename = "quantityToSell")]
+  ///Количество в лотах к продаже с плечом
   quantity_to_sell: Decimal, 
   #[serde(rename = "ticker")]
   #[serde(default)]
+  ///Инструмент
   ticker: Option<String> 
 }
 
@@ -70,7 +79,7 @@ impl EstimateOrderModel {
     self.commission = commission;
     self
   }
-
+  ///Комиссия
   pub fn commission(&self) -> &Decimal {
     &self.commission
   }
@@ -84,7 +93,7 @@ impl EstimateOrderModel {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -98,7 +107,7 @@ impl EstimateOrderModel {
     self.not_margin_quantity_to_buy = not_margin_quantity_to_buy;
     self
   }
-
+  ///Количество в лотах к покупке без плеча
   pub fn not_margin_quantity_to_buy(&self) -> &Decimal {
     &self.not_margin_quantity_to_buy
   }
@@ -112,7 +121,7 @@ impl EstimateOrderModel {
     self.not_margin_quantity_to_sell = not_margin_quantity_to_sell;
     self
   }
-
+  ///Количество в лотах к продаже без плеча
   pub fn not_margin_quantity_to_sell(&self) -> &Decimal {
     &self.not_margin_quantity_to_sell
   }
@@ -126,7 +135,7 @@ impl EstimateOrderModel {
     self.order_evaluation = order_evaluation;
     self
   }
-
+  ///Стоимость заявки
   pub fn order_evaluation(&self) -> &Decimal {
     &self.order_evaluation
   }
@@ -140,7 +149,7 @@ impl EstimateOrderModel {
     self.portfolio = Some(portfolio);
     self
   }
-
+  ///Портфель клиента
   pub fn portfolio(&self) -> Option<&String> {
     self.portfolio.as_ref()
   }
@@ -157,7 +166,7 @@ impl EstimateOrderModel {
     self.quantity_to_buy = quantity_to_buy;
     self
   }
-
+  ///Количество в лотах к покупке с плечом
   pub fn quantity_to_buy(&self) -> &Decimal {
     &self.quantity_to_buy
   }
@@ -171,7 +180,7 @@ impl EstimateOrderModel {
     self.quantity_to_sell = quantity_to_sell;
     self
   }
-
+  ///Количество в лотах к продаже с плечом
   pub fn quantity_to_sell(&self) -> &Decimal {
     &self.quantity_to_sell
   }
@@ -185,7 +194,7 @@ impl EstimateOrderModel {
     self.ticker = Some(ticker);
     self
   }
-
+  ///Инструмент
   pub fn ticker(&self) -> Option<&String> {
     self.ticker.as_ref()
   }

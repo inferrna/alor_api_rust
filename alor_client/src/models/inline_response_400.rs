@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct InlineResponse400 {
   #[serde(rename = "code")]
+  ///Тип ошибки
   code: String,  // OrderToCancelNotFound (404) 
   #[serde(rename = "message")]
+  ///Описание ошибки
   message: String  // Order to cancel not found 
 }
 
@@ -46,7 +48,7 @@ impl InlineResponse400 {
     self.code = code;
     self
   }
-
+  ///Тип ошибки
   pub fn code(&self) -> &String {
     &self.code
   }
@@ -60,7 +62,7 @@ impl InlineResponse400 {
     self.message = message;
     self
   }
-
+  ///Описание ошибки
   pub fn message(&self) -> &String {
     &self.message
   }

@@ -26,8 +26,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopUser {
   #[serde(rename = "Account")]
+  ///Идентификатор аккаунта пользователя
   account: String,  // L01-00000F00 
   #[serde(rename = "Portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String  // D39004 
 }
 
@@ -47,7 +49,7 @@ impl BodyrequestOrdersActionsStopUser {
     self.account = account;
     self
   }
-
+  ///Идентификатор аккаунта пользователя
   pub fn account(&self) -> &String {
     &self.account
   }
@@ -61,7 +63,7 @@ impl BodyrequestOrdersActionsStopUser {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }

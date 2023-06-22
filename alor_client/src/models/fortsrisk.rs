@@ -25,28 +25,40 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Fortsrisk {
   #[serde(rename = "balanceMoney")]
+  ///Сальдо денежных торговых переводов за текущую сессию (поле будет удалено в будущих обновлениях)
   balance_money: Decimal,  // 1.93 
   #[serde(rename = "fee")]
+  ///Списанный сбор
   fee: Decimal,  // 651717.0 
   #[serde(rename = "isLimitsSet")]
+  ///Наличие установленных денежного и залогового лимитов
   is_limits_set: bool,  // false 
   #[serde(rename = "moneyAmount")]
+  ///Общее количество рублей и дисконтированных в рубли залогов
   money_amount: Decimal,  // 199313.0 
   #[serde(rename = "moneyBlocked")]
+  ///Средства, заблокированные под ГО
   money_blocked: Decimal,  // 12560.0 
   #[serde(rename = "moneyFree")]
+  ///Свободные средства. Сумма рублей и залогов, дисконтированных в рубли, доступная для открытия позиций. (MoneyFree = MoneyAmount + VmInterCl – MoneyBlocked – VmReserve – Fee)
   money_free: Decimal,  // 452404.0 
   #[serde(rename = "moneyOld")]
+  ///Общее количество рублей и дисконтированных в рубли залогов на начало сессии
   money_old: Decimal,  // 651717.0 
   #[serde(rename = "moneyPledgeAmount")]
+  ///Сумма залогов, дисконтированных в рубли
   money_pledge_amount: Decimal,  // 552061.0 
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String,  // D49004 
   #[serde(rename = "varMargin")]
+  ///VmCurrentPositions + VmInterCl
   var_margin: Decimal,  // 552061.0 
   #[serde(rename = "vmCurrentPositions")]
+  ///Сагрегированная вармаржа по текущим позициям
   vm_current_positions: Decimal,  // 199313.0 
   #[serde(rename = "vmInterCl")]
+  ///Вариационная маржа, списанная или полученная в пром. клиринг
   vm_inter_cl: Decimal  // 651717.0 
 }
 
@@ -76,7 +88,7 @@ impl Fortsrisk {
     self.balance_money = balance_money;
     self
   }
-
+  ///Сальдо денежных торговых переводов за текущую сессию (поле будет удалено в будущих обновлениях)
   pub fn balance_money(&self) -> &Decimal {
     &self.balance_money
   }
@@ -90,7 +102,7 @@ impl Fortsrisk {
     self.fee = fee;
     self
   }
-
+  ///Списанный сбор
   pub fn fee(&self) -> &Decimal {
     &self.fee
   }
@@ -104,7 +116,7 @@ impl Fortsrisk {
     self.is_limits_set = is_limits_set;
     self
   }
-
+  ///Наличие установленных денежного и залогового лимитов
   pub fn is_limits_set(&self) -> &bool {
     &self.is_limits_set
   }
@@ -118,7 +130,7 @@ impl Fortsrisk {
     self.money_amount = money_amount;
     self
   }
-
+  ///Общее количество рублей и дисконтированных в рубли залогов
   pub fn money_amount(&self) -> &Decimal {
     &self.money_amount
   }
@@ -132,7 +144,7 @@ impl Fortsrisk {
     self.money_blocked = money_blocked;
     self
   }
-
+  ///Средства, заблокированные под ГО
   pub fn money_blocked(&self) -> &Decimal {
     &self.money_blocked
   }
@@ -146,7 +158,7 @@ impl Fortsrisk {
     self.money_free = money_free;
     self
   }
-
+  ///Свободные средства. Сумма рублей и залогов, дисконтированных в рубли, доступная для открытия позиций. (MoneyFree = MoneyAmount + VmInterCl – MoneyBlocked – VmReserve – Fee)
   pub fn money_free(&self) -> &Decimal {
     &self.money_free
   }
@@ -160,7 +172,7 @@ impl Fortsrisk {
     self.money_old = money_old;
     self
   }
-
+  ///Общее количество рублей и дисконтированных в рубли залогов на начало сессии
   pub fn money_old(&self) -> &Decimal {
     &self.money_old
   }
@@ -174,7 +186,7 @@ impl Fortsrisk {
     self.money_pledge_amount = money_pledge_amount;
     self
   }
-
+  ///Сумма залогов, дисконтированных в рубли
   pub fn money_pledge_amount(&self) -> &Decimal {
     &self.money_pledge_amount
   }
@@ -188,7 +200,7 @@ impl Fortsrisk {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -202,7 +214,7 @@ impl Fortsrisk {
     self.var_margin = var_margin;
     self
   }
-
+  ///VmCurrentPositions + VmInterCl
   pub fn var_margin(&self) -> &Decimal {
     &self.var_margin
   }
@@ -216,7 +228,7 @@ impl Fortsrisk {
     self.vm_current_positions = vm_current_positions;
     self
   }
-
+  ///Сагрегированная вармаржа по текущим позициям
   pub fn vm_current_positions(&self) -> &Decimal {
     &self.vm_current_positions
   }
@@ -230,7 +242,7 @@ impl Fortsrisk {
     self.vm_inter_cl = vm_inter_cl;
     self
   }
-
+  ///Вариационная маржа, списанная или полученная в пром. клиринг
   pub fn vm_inter_cl(&self) -> &Decimal {
     &self.vm_inter_cl
   }

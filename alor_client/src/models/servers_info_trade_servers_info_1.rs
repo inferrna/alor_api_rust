@@ -26,19 +26,25 @@ use crate::serialize_quoted_numbers_opt;
 pub struct ServersInfoTradeServersInfo1 {
   #[serde(rename = "accountNum")]
   #[serde(default)]
+  
   account_num: Option<String>, 
   #[serde(rename = "addresses")]
   #[serde(default)]
+  
   addresses: Option<String>, 
   #[serde(rename = "contracts")]
+  
   contracts: String,  // фьючерсы 
   #[serde(rename = "market")]
   #[serde(default)]
+  
   market: Option<String>, 
   #[serde(rename = "tradeServerCode")]
+  ///Код сервера
   trade_server_code: String,  // FUT1 
   #[serde(rename = "type")]
   #[serde(default)]
+  
   rtype: Option<String> 
 }
 
@@ -62,7 +68,7 @@ impl ServersInfoTradeServersInfo1 {
     self.account_num = Some(account_num);
     self
   }
-
+  
   pub fn account_num(&self) -> Option<&String> {
     self.account_num.as_ref()
   }
@@ -79,7 +85,7 @@ impl ServersInfoTradeServersInfo1 {
     self.addresses = Some(addresses);
     self
   }
-
+  
   pub fn addresses(&self) -> Option<&String> {
     self.addresses.as_ref()
   }
@@ -96,7 +102,7 @@ impl ServersInfoTradeServersInfo1 {
     self.contracts = contracts;
     self
   }
-
+  
   pub fn contracts(&self) -> &String {
     &self.contracts
   }
@@ -110,7 +116,7 @@ impl ServersInfoTradeServersInfo1 {
     self.market = Some(market);
     self
   }
-
+  
   pub fn market(&self) -> Option<&String> {
     self.market.as_ref()
   }
@@ -127,7 +133,7 @@ impl ServersInfoTradeServersInfo1 {
     self.trade_server_code = trade_server_code;
     self
   }
-
+  ///Код сервера
   pub fn trade_server_code(&self) -> &String {
     &self.trade_server_code
   }
@@ -141,7 +147,7 @@ impl ServersInfoTradeServersInfo1 {
     self.rtype = Some(rtype);
     self
   }
-
+  
   pub fn rtype(&self) -> Option<&String> {
     self.rtype.as_ref()
   }

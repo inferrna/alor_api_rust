@@ -25,24 +25,34 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStoplimit {
   #[serde(rename = "Instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitInstrument, 
   #[serde(rename = "OrderEndUnixTime")]
+  ///Время (UTC) завершения сделки в формате Unix Time seconds
   order_end_unix_time: i64,  // 0 
   #[serde(rename = "Price")]
+  ///Цена
   price: i32,  // 210 
   #[serde(rename = "Quantity")]
+  ///Количество
   quantity: i32,  // 1 
   #[serde(rename = "Side")]
+  
   side: Operation, 
   #[serde(rename = "TriggerPrice")]
+  ///Стоп-цена
   trigger_price: i32,  // 205 
   #[serde(rename = "User")]
+  
   user: BodyrequestOrdersActionsLimitUser, 
   #[serde(rename = "icebergFixed")]
+  ///Видимая постоянная часть айсберг-заявки в лотах
   iceberg_fixed: Decimal,  // 100 
   #[serde(rename = "icebergVariance")]
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   iceberg_variance: Decimal,  // 2 
   #[serde(rename = "timeInForce")]
+  
   time_in_force: LifePolicy 
 }
 
@@ -70,7 +80,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitInstrument {
     &self.instrument
   }
@@ -84,7 +94,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.order_end_unix_time = order_end_unix_time;
     self
   }
-
+  ///Время (UTC) завершения сделки в формате Unix Time seconds
   pub fn order_end_unix_time(&self) -> &i64 {
     &self.order_end_unix_time
   }
@@ -98,7 +108,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &i32 {
     &self.price
   }
@@ -112,7 +122,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -126,7 +136,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -140,7 +150,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.trigger_price = trigger_price;
     self
   }
-
+  ///Стоп-цена
   pub fn trigger_price(&self) -> &i32 {
     &self.trigger_price
   }
@@ -154,7 +164,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsLimitUser {
     &self.user
   }
@@ -168,7 +178,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.iceberg_fixed = iceberg_fixed;
     self
   }
-
+  ///Видимая постоянная часть айсберг-заявки в лотах
   pub fn iceberg_fixed(&self) -> &Decimal {
     &self.iceberg_fixed
   }
@@ -182,7 +192,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.iceberg_variance = iceberg_variance;
     self
   }
-
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   pub fn iceberg_variance(&self) -> &Decimal {
     &self.iceberg_variance
   }
@@ -196,7 +206,7 @@ impl BodyrequestOrdersActionsStoplimit {
     self.time_in_force = time_in_force;
     self
   }
-
+  
   pub fn time_in_force(&self) -> &LifePolicy {
     &self.time_in_force
   }

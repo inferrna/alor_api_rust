@@ -25,14 +25,19 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsMarket {
   #[serde(rename = "Instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitInstrument, 
   #[serde(rename = "OrderEndUnixTime")]
+  ///Время (UTC) завершения сделки в формате Unix Time seconds
   order_end_unix_time: i64,  // 0 
   #[serde(rename = "Quantity")]
+  ///Количество
   quantity: i32,  // 1 
   #[serde(rename = "Side")]
+  
   side: Operation, 
   #[serde(rename = "User")]
+  
   user: BodyrequestOrdersActionsLimitUser 
 }
 
@@ -55,7 +60,7 @@ impl BodyrequestOrdersActionsMarket {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitInstrument {
     &self.instrument
   }
@@ -69,7 +74,7 @@ impl BodyrequestOrdersActionsMarket {
     self.order_end_unix_time = order_end_unix_time;
     self
   }
-
+  ///Время (UTC) завершения сделки в формате Unix Time seconds
   pub fn order_end_unix_time(&self) -> &i64 {
     &self.order_end_unix_time
   }
@@ -83,7 +88,7 @@ impl BodyrequestOrdersActionsMarket {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -97,7 +102,7 @@ impl BodyrequestOrdersActionsMarket {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -111,7 +116,7 @@ impl BodyrequestOrdersActionsMarket {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsLimitUser {
     &self.user
   }

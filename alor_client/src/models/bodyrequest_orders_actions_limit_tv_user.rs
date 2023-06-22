@@ -25,6 +25,7 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsLimitTvUser {
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String  // D39004 
 }
 
@@ -43,7 +44,7 @@ impl BodyrequestOrdersActionsLimitTvUser {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }

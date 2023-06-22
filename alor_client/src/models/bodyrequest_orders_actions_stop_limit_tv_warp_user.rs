@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopLimitTvWarpUser {
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String  // D39004 
 }
 
@@ -46,7 +48,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarpUser {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -60,7 +62,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarpUser {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }

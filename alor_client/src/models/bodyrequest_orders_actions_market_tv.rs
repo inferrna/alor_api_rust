@@ -25,14 +25,19 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsMarketTv {
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "quantity")]
+  ///Количество (лоты)
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "type")]
+  ///Тип заявки
   rtype: String,  // market 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsLimitTvUser 
 }
 
@@ -55,7 +60,7 @@ impl BodyrequestOrdersActionsMarketTv {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitTvInstrument {
     &self.instrument
   }
@@ -69,7 +74,7 @@ impl BodyrequestOrdersActionsMarketTv {
     self.quantity = quantity;
     self
   }
-
+  ///Количество (лоты)
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -83,7 +88,7 @@ impl BodyrequestOrdersActionsMarketTv {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -97,7 +102,7 @@ impl BodyrequestOrdersActionsMarketTv {
     self.rtype = rtype;
     self
   }
-
+  ///Тип заявки
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -111,7 +116,7 @@ impl BodyrequestOrdersActionsMarketTv {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsLimitTvUser {
     &self.user
   }

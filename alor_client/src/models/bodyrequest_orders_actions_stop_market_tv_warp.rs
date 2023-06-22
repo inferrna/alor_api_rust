@@ -25,18 +25,25 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopMarketTvWarp {
   #[serde(rename = "condition")]
+  ///Условие срабатывания more/less
   condition: String,  // More 
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, 
   #[serde(rename = "quantity")]
+  ///Количество (лоты)
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
+  ///Срок действия (UTC) в формате Unix Time seconds
   stop_end_unix_time: Decimal,  // 1590094740 
   #[serde(rename = "triggerPrice")]
+  ///Цена срабатывания
   trigger_price: Decimal,  // 191.33 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsStopLimitTvWarpUser 
 }
 
@@ -61,7 +68,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.condition = condition;
     self
   }
-
+  ///Условие срабатывания more/less
   pub fn condition(&self) -> &String {
     &self.condition
   }
@@ -75,7 +82,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsStopLimitTvWarpInstrument {
     &self.instrument
   }
@@ -89,7 +96,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.quantity = quantity;
     self
   }
-
+  ///Количество (лоты)
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -103,7 +110,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -117,7 +124,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
-
+  ///Срок действия (UTC) в формате Unix Time seconds
   pub fn stop_end_unix_time(&self) -> &Decimal {
     &self.stop_end_unix_time
   }
@@ -131,7 +138,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.trigger_price = trigger_price;
     self
   }
-
+  ///Цена срабатывания
   pub fn trigger_price(&self) -> &Decimal {
     &self.trigger_price
   }
@@ -145,7 +152,7 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsStopLimitTvWarpUser {
     &self.user
   }

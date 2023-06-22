@@ -27,24 +27,34 @@ pub struct BodyrequestOrdersActionsStopTv {
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Срок действия
   end_time: DateTime<Utc>,  // 2020-05-21T20:59Z 
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "quantity")]
+  ///Количество
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
+  ///Срок действия (UTC) в формате Unix Time seconds
   stop_end_unix_time: i64,  // 1590094740 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "takeProfit")]
+  ///Стоп-цена
   take_profit: Decimal,  // 190.98 
   #[serde(rename = "triggerPrice")]
+  ///Стоп-цена
   trigger_price: Decimal,  // 190.98 
   #[serde(rename = "type")]
+  ///Тип заявки
   rtype: String,  // takeprofit 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsMarketTVputUser 
 }
 
@@ -72,7 +82,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.end_time = end_time;
     self
   }
-
+  ///Срок действия
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -86,7 +96,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitTvInstrument {
     &self.instrument
   }
@@ -100,7 +110,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -114,7 +124,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -128,7 +138,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
-
+  ///Срок действия (UTC) в формате Unix Time seconds
   pub fn stop_end_unix_time(&self) -> &i64 {
     &self.stop_end_unix_time
   }
@@ -142,7 +152,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -156,7 +166,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.take_profit = take_profit;
     self
   }
-
+  ///Стоп-цена
   pub fn take_profit(&self) -> &Decimal {
     &self.take_profit
   }
@@ -170,7 +180,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.trigger_price = trigger_price;
     self
   }
-
+  ///Стоп-цена
   pub fn trigger_price(&self) -> &Decimal {
     &self.trigger_price
   }
@@ -184,7 +194,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.rtype = rtype;
     self
   }
-
+  ///Тип заявки
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -198,7 +208,7 @@ impl BodyrequestOrdersActionsStopTv {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsMarketTVputUser {
     &self.user
   }

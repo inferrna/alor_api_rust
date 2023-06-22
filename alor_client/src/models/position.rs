@@ -25,48 +25,70 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Position {
   #[serde(rename = "avgPrice")]
+  ///Средняя цена
   avg_price: Decimal,  // 16.6 
   #[serde(rename = "brokerSymbol")]
+  ///Пара Биржа:Тикер
   broker_symbol: String,  // MOEX:LKOH 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "isCurrency")]
+  ///True для валютных остатков (денег), false - для торговых инструментов
   is_currency: bool,  // false 
   #[serde(rename = "lotSize")]
+  ///Размер лота
   lot_size: Decimal,  // 1.0 
   #[serde(rename = "open")]
+  ///Агрегированное количество на момент открытия (начала торгов) (штуки)
   open: Decimal,  // 20.0 
   #[serde(rename = "openQtyBatch")]
+  ///Агрегированное количество на момент открытия (начала торгов) (лоты)
   open_qty_batch: Decimal,  // 20.0 
   #[serde(rename = "openUnits")]
+  ///Количество открытых позиций на момент открытия (начала торгов)
   open_units: Decimal,  // 30.0 
   #[serde(rename = "qty")]
+  ///Агрегированное количество (лоты)
   qty: Decimal,  // 20.0 
   #[serde(rename = "qtyBatch")]
+  ///Агрегированное количество TFuture
   qty_batch: Decimal,  // 20.0 
   #[serde(rename = "qtyT0")]
+  ///Агрегированное количество T0 (штуки)
   qty_t0: Decimal,  // 20.0 
   #[serde(rename = "qtyT0Batch")]
+  ///Агрегированное количество T0 (лоты)
   qty_t0_batch: Decimal,  // 20.0 
   #[serde(rename = "qtyT1")]
+  ///Агрегированное количество T1 (штуки)
   qty_t1: Decimal,  // 20.0 
   #[serde(rename = "qtyT1Batch")]
+  ///Агрегированное количество T1 (лоты)
   qty_t1_batch: Decimal,  // 20.0 
   #[serde(rename = "qtyT2")]
+  ///Агрегированное количество T2 (штуки)
   qty_t2: Decimal,  // 20.0 
   #[serde(rename = "qtyT2Batch")]
+  ///Агрегированное количество T2 (лоты)
   qty_t2_batch: Decimal,  // 20.0 
   #[serde(rename = "qtyTFuture")]
+  ///Количество (штуки)
   qty_t_future: Decimal,  // 20.0 
   #[serde(rename = "qtyTFutureBatch")]
+  ///Агрегированное количество TFuture (лоты)
   qty_t_future_batch: Decimal,  // 20.0 
   #[serde(rename = "qtyUnits")]
+  ///Количество (штуки)
   qty_units: Decimal,  // 20.0 
   #[serde(rename = "shortName")]
+  ///Короткое наименование
   short_name: String,  // ЛУКОЙЛ 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // LKOH 
   #[serde(rename = "unrealisedPl")]
+  
   unrealised_pl: Decimal  // 3250.0 
 }
 
@@ -106,7 +128,7 @@ impl Position {
     self.avg_price = avg_price;
     self
   }
-
+  ///Средняя цена
   pub fn avg_price(&self) -> &Decimal {
     &self.avg_price
   }
@@ -120,7 +142,7 @@ impl Position {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Пара Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -134,7 +156,7 @@ impl Position {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -148,7 +170,7 @@ impl Position {
     self.is_currency = is_currency;
     self
   }
-
+  ///True для валютных остатков (денег), false - для торговых инструментов
   pub fn is_currency(&self) -> &bool {
     &self.is_currency
   }
@@ -162,7 +184,7 @@ impl Position {
     self.lot_size = lot_size;
     self
   }
-
+  ///Размер лота
   pub fn lot_size(&self) -> &Decimal {
     &self.lot_size
   }
@@ -176,7 +198,7 @@ impl Position {
     self.open = open;
     self
   }
-
+  ///Агрегированное количество на момент открытия (начала торгов) (штуки)
   pub fn open(&self) -> &Decimal {
     &self.open
   }
@@ -190,7 +212,7 @@ impl Position {
     self.open_qty_batch = open_qty_batch;
     self
   }
-
+  ///Агрегированное количество на момент открытия (начала торгов) (лоты)
   pub fn open_qty_batch(&self) -> &Decimal {
     &self.open_qty_batch
   }
@@ -204,7 +226,7 @@ impl Position {
     self.open_units = open_units;
     self
   }
-
+  ///Количество открытых позиций на момент открытия (начала торгов)
   pub fn open_units(&self) -> &Decimal {
     &self.open_units
   }
@@ -218,7 +240,7 @@ impl Position {
     self.qty = qty;
     self
   }
-
+  ///Агрегированное количество (лоты)
   pub fn qty(&self) -> &Decimal {
     &self.qty
   }
@@ -232,7 +254,7 @@ impl Position {
     self.qty_batch = qty_batch;
     self
   }
-
+  ///Агрегированное количество TFuture
   pub fn qty_batch(&self) -> &Decimal {
     &self.qty_batch
   }
@@ -246,7 +268,7 @@ impl Position {
     self.qty_t0 = qty_t0;
     self
   }
-
+  ///Агрегированное количество T0 (штуки)
   pub fn qty_t0(&self) -> &Decimal {
     &self.qty_t0
   }
@@ -260,7 +282,7 @@ impl Position {
     self.qty_t0_batch = qty_t0_batch;
     self
   }
-
+  ///Агрегированное количество T0 (лоты)
   pub fn qty_t0_batch(&self) -> &Decimal {
     &self.qty_t0_batch
   }
@@ -274,7 +296,7 @@ impl Position {
     self.qty_t1 = qty_t1;
     self
   }
-
+  ///Агрегированное количество T1 (штуки)
   pub fn qty_t1(&self) -> &Decimal {
     &self.qty_t1
   }
@@ -288,7 +310,7 @@ impl Position {
     self.qty_t1_batch = qty_t1_batch;
     self
   }
-
+  ///Агрегированное количество T1 (лоты)
   pub fn qty_t1_batch(&self) -> &Decimal {
     &self.qty_t1_batch
   }
@@ -302,7 +324,7 @@ impl Position {
     self.qty_t2 = qty_t2;
     self
   }
-
+  ///Агрегированное количество T2 (штуки)
   pub fn qty_t2(&self) -> &Decimal {
     &self.qty_t2
   }
@@ -316,7 +338,7 @@ impl Position {
     self.qty_t2_batch = qty_t2_batch;
     self
   }
-
+  ///Агрегированное количество T2 (лоты)
   pub fn qty_t2_batch(&self) -> &Decimal {
     &self.qty_t2_batch
   }
@@ -330,7 +352,7 @@ impl Position {
     self.qty_t_future = qty_t_future;
     self
   }
-
+  ///Количество (штуки)
   pub fn qty_t_future(&self) -> &Decimal {
     &self.qty_t_future
   }
@@ -344,7 +366,7 @@ impl Position {
     self.qty_t_future_batch = qty_t_future_batch;
     self
   }
-
+  ///Агрегированное количество TFuture (лоты)
   pub fn qty_t_future_batch(&self) -> &Decimal {
     &self.qty_t_future_batch
   }
@@ -358,7 +380,7 @@ impl Position {
     self.qty_units = qty_units;
     self
   }
-
+  ///Количество (штуки)
   pub fn qty_units(&self) -> &Decimal {
     &self.qty_units
   }
@@ -372,7 +394,7 @@ impl Position {
     self.short_name = short_name;
     self
   }
-
+  ///Короткое наименование
   pub fn short_name(&self) -> &String {
     &self.short_name
   }
@@ -386,7 +408,7 @@ impl Position {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -400,7 +422,7 @@ impl Position {
     self.unrealised_pl = unrealised_pl;
     self
   }
-
+  
   pub fn unrealised_pl(&self) -> &Decimal {
     &self.unrealised_pl
   }

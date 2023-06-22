@@ -25,22 +25,31 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqBarsGetAndSubscribe {
   #[serde(rename = "code")]
+  ///Тикер
   code: String,  // SBER 
   #[serde(rename = "delayed")]
+  ///Данные c задержкой в 15 минут. Для авторизованых клиентов задержка не применяется.
   delayed: String,  // false 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "format")]
+  
   format: JsonFormat, 
   #[serde(rename = "from")]
+  ///Дата и время (UTC) для первой запрашиваемой свечи
   from: i64,  // 1536557084 
   #[serde(rename = "guid")]
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
   #[serde(rename = "opcode")]
+  
   opcode: OpcodeEnum, 
   #[serde(rename = "tf")]
+  
   tf: Duration, 
   #[serde(rename = "token")]
+  ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
@@ -67,7 +76,7 @@ impl WsReqBarsGetAndSubscribe {
     self.code = code;
     self
   }
-
+  ///Тикер
   pub fn code(&self) -> &String {
     &self.code
   }
@@ -81,7 +90,7 @@ impl WsReqBarsGetAndSubscribe {
     self.delayed = delayed;
     self
   }
-
+  ///Данные c задержкой в 15 минут. Для авторизованых клиентов задержка не применяется.
   pub fn delayed(&self) -> &String {
     &self.delayed
   }
@@ -95,7 +104,7 @@ impl WsReqBarsGetAndSubscribe {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -109,7 +118,7 @@ impl WsReqBarsGetAndSubscribe {
     self.format = format;
     self
   }
-
+  
   pub fn format(&self) -> &JsonFormat {
     &self.format
   }
@@ -123,7 +132,7 @@ impl WsReqBarsGetAndSubscribe {
     self.from = from;
     self
   }
-
+  ///Дата и время (UTC) для первой запрашиваемой свечи
   pub fn from(&self) -> &i64 {
     &self.from
   }
@@ -137,7 +146,7 @@ impl WsReqBarsGetAndSubscribe {
     self.guid = guid;
     self
   }
-
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
   }
@@ -151,7 +160,7 @@ impl WsReqBarsGetAndSubscribe {
     self.opcode = opcode;
     self
   }
-
+  
   pub fn opcode(&self) -> &OpcodeEnum {
     &self.opcode
   }
@@ -165,7 +174,7 @@ impl WsReqBarsGetAndSubscribe {
     self.tf = tf;
     self
   }
-
+  
   pub fn tf(&self) -> &Duration {
     &self.tf
   }
@@ -179,7 +188,7 @@ impl WsReqBarsGetAndSubscribe {
     self.token = token;
     self
   }
-
+  ///JWT токен для авторизации
   pub fn token(&self) -> &String {
     &self.token
   }

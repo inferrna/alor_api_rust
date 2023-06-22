@@ -25,20 +25,28 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqAllTradesGetAndSubscribe {
   #[serde(rename = "code")]
+  ///Тикер
   code: String,  // SBER 
   #[serde(rename = "depth")]
+  ///Если указать, то перед актуальными данными придут данные о последних N сделках. Максимум 5000.
   depth: Decimal,  // 0 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "format")]
+  
   format: JsonFormat, 
   #[serde(rename = "guid")]
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
   #[serde(rename = "includeVirtualTrades")]
+  ///Указывает, нужно ли отправлять виртуальные (индикативные) сделки
   include_virtual_trades: bool,  // false 
   #[serde(rename = "opcode")]
+  
   opcode: OpcodeEnum, 
   #[serde(rename = "token")]
+  ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
@@ -64,7 +72,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.code = code;
     self
   }
-
+  ///Тикер
   pub fn code(&self) -> &String {
     &self.code
   }
@@ -78,7 +86,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.depth = depth;
     self
   }
-
+  ///Если указать, то перед актуальными данными придут данные о последних N сделках. Максимум 5000.
   pub fn depth(&self) -> &Decimal {
     &self.depth
   }
@@ -92,7 +100,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -106,7 +114,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.format = format;
     self
   }
-
+  
   pub fn format(&self) -> &JsonFormat {
     &self.format
   }
@@ -120,7 +128,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.guid = guid;
     self
   }
-
+  ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
   }
@@ -134,7 +142,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.include_virtual_trades = include_virtual_trades;
     self
   }
-
+  ///Указывает, нужно ли отправлять виртуальные (индикативные) сделки
   pub fn include_virtual_trades(&self) -> &bool {
     &self.include_virtual_trades
   }
@@ -148,7 +156,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.opcode = opcode;
     self
   }
-
+  
   pub fn opcode(&self) -> &OpcodeEnum {
     &self.opcode
   }
@@ -162,7 +170,7 @@ impl WsReqAllTradesGetAndSubscribe {
     self.token = token;
     self
   }
-
+  ///JWT токен для авторизации
   pub fn token(&self) -> &String {
     &self.token
   }

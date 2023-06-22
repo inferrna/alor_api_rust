@@ -25,10 +25,13 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopLimitTvWarpInstrument {
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "instrumentGroup")]
+  ///Борд
   instrument_group: String,  // TQBR 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String  // SBER 
 }
 
@@ -49,7 +52,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarpInstrument {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -63,7 +66,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarpInstrument {
     self.instrument_group = instrument_group;
     self
   }
-
+  ///Борд
   pub fn instrument_group(&self) -> &String {
     &self.instrument_group
   }
@@ -77,7 +80,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarpInstrument {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }

@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct RiskRates {
   #[serde(rename = "list")]
+  ///Ставка риска
   list: Vec<RiskRate>, 
   #[serde(rename = "total")]
+  ///Количество записей
   total: i32  // 23 
 }
 
@@ -46,7 +48,7 @@ impl RiskRates {
     self.list = list;
     self
   }
-
+  ///Ставка риска
   pub fn list(&self) -> &Vec<RiskRate> {
     &self.list
   }
@@ -60,7 +62,7 @@ impl RiskRates {
     self.total = total;
     self
   }
-
+  ///Количество записей
   pub fn total(&self) -> &i32 {
     &self.total
   }

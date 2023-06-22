@@ -26,23 +26,32 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsResSummariesGetAndSubscribeV2Data {
   #[serde(rename = "buyingPower")]
+  ///Покупательская способность
   buying_power: Decimal,  // 5418.27 
   #[serde(rename = "buyingPowerAtMorning")]
+  ///Покупательская способность (на утро)
   buying_power_at_morning: Decimal,  // 5410.89 
   #[serde(rename = "commission")]
   #[serde(default)]
+  ///Суммарная комиссия (null для Срочного рынка)
   commission: Option<Decimal>,  // 24.21 
   #[serde(rename = "initialMargin")]
+  ///Начальная маржа
   initial_margin: Decimal,  // 3539.0 
   #[serde(rename = "portfolioEvaluation")]
+  ///Ликвидный портфель
   portfolio_evaluation: Decimal,  // 8857.0 
   #[serde(rename = "portfolioLiquidationValue")]
+  ///Оценка портфеля
   portfolio_liquidation_value: Decimal,  // 10714.0 
   #[serde(rename = "profit")]
+  ///Прибыль
   profit: Decimal,  // 93.0 
   #[serde(rename = "profitRate")]
+  ///Относительная прибыль
   profit_rate: Decimal,  // 0.87 
   #[serde(rename = "riskBeforeForcePositionClosing")]
+  ///Риск до закрытия
   risk_before_force_position_closing: Decimal  // 7088.0 
 }
 
@@ -69,7 +78,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.buying_power = buying_power;
     self
   }
-
+  ///Покупательская способность
   pub fn buying_power(&self) -> &Decimal {
     &self.buying_power
   }
@@ -83,7 +92,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.buying_power_at_morning = buying_power_at_morning;
     self
   }
-
+  ///Покупательская способность (на утро)
   pub fn buying_power_at_morning(&self) -> &Decimal {
     &self.buying_power_at_morning
   }
@@ -97,7 +106,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.commission = Some(commission);
     self
   }
-
+  ///Суммарная комиссия (null для Срочного рынка)
   pub fn commission(&self) -> Option<&Decimal> {
     self.commission.as_ref()
   }
@@ -114,7 +123,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.initial_margin = initial_margin;
     self
   }
-
+  ///Начальная маржа
   pub fn initial_margin(&self) -> &Decimal {
     &self.initial_margin
   }
@@ -128,7 +137,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.portfolio_evaluation = portfolio_evaluation;
     self
   }
-
+  ///Ликвидный портфель
   pub fn portfolio_evaluation(&self) -> &Decimal {
     &self.portfolio_evaluation
   }
@@ -142,7 +151,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.portfolio_liquidation_value = portfolio_liquidation_value;
     self
   }
-
+  ///Оценка портфеля
   pub fn portfolio_liquidation_value(&self) -> &Decimal {
     &self.portfolio_liquidation_value
   }
@@ -156,7 +165,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.profit = profit;
     self
   }
-
+  ///Прибыль
   pub fn profit(&self) -> &Decimal {
     &self.profit
   }
@@ -170,7 +179,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.profit_rate = profit_rate;
     self
   }
-
+  ///Относительная прибыль
   pub fn profit_rate(&self) -> &Decimal {
     &self.profit_rate
   }
@@ -184,7 +193,7 @@ impl WsResSummariesGetAndSubscribeV2Data {
     self.risk_before_force_position_closing = risk_before_force_position_closing;
     self
   }
-
+  ///Риск до закрытия
   pub fn risk_before_force_position_closing(&self) -> &Decimal {
     &self.risk_before_force_position_closing
   }

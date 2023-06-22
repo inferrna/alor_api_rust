@@ -25,10 +25,13 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct ServersInfo1 {
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String,  // 7500GHC 
   #[serde(rename = "tks")]
+  
   tks: String,  // 7500GHC 
   #[serde(rename = "tradeServersInfo")]
+  
   trade_servers_info: Vec<ServersInfoTradeServersInfo1> 
 }
 
@@ -49,7 +52,7 @@ impl ServersInfo1 {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -63,7 +66,7 @@ impl ServersInfo1 {
     self.tks = tks;
     self
   }
-
+  
   pub fn tks(&self) -> &String {
     &self.tks
   }
@@ -77,7 +80,7 @@ impl ServersInfo1 {
     self.trade_servers_info = trade_servers_info;
     self
   }
-
+  
   pub fn trade_servers_info(&self) -> &Vec<ServersInfoTradeServersInfo1> {
     &self.trade_servers_info
   }

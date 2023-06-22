@@ -25,16 +25,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct HistoryObject {
   #[serde(rename = "close")]
+  ///Цена при закрытии
   close: Decimal,  // 210.83 
   #[serde(rename = "high")]
+  ///Максимальная цена
   high: Decimal,  // 210.83 
   #[serde(rename = "low")]
+  ///Миниимальная цена
   low: Decimal,  // 210.68 
   #[serde(rename = "open")]
+  ///Цена при открытии
   open: Decimal,  // 210.82 
   #[serde(rename = "time")]
+  ///Время (UTC) (Unix time seconds)
   time: i64,  // 1532944740 
   #[serde(rename = "volume")]
+  ///Объём
   volume: i32  // 1944 
 }
 
@@ -58,7 +64,7 @@ impl HistoryObject {
     self.close = close;
     self
   }
-
+  ///Цена при закрытии
   pub fn close(&self) -> &Decimal {
     &self.close
   }
@@ -72,7 +78,7 @@ impl HistoryObject {
     self.high = high;
     self
   }
-
+  ///Максимальная цена
   pub fn high(&self) -> &Decimal {
     &self.high
   }
@@ -86,7 +92,7 @@ impl HistoryObject {
     self.low = low;
     self
   }
-
+  ///Миниимальная цена
   pub fn low(&self) -> &Decimal {
     &self.low
   }
@@ -100,7 +106,7 @@ impl HistoryObject {
     self.open = open;
     self
   }
-
+  ///Цена при открытии
   pub fn open(&self) -> &Decimal {
     &self.open
   }
@@ -114,7 +120,7 @@ impl HistoryObject {
     self.time = time;
     self
   }
-
+  ///Время (UTC) (Unix time seconds)
   pub fn time(&self) -> &i64 {
     &self.time
   }
@@ -128,7 +134,7 @@ impl HistoryObject {
     self.volume = volume;
     self
   }
-
+  ///Объём
   pub fn volume(&self) -> &i32 {
     &self.volume
   }

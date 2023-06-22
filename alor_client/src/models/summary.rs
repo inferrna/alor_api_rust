@@ -25,23 +25,32 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Summary {
   #[serde(rename = "buyingPower")]
+  ///Покупательская способность
   buying_power: Decimal,  // 452404.0 
   #[serde(rename = "buyingPowerAtMorning")]
+  ///Покупательская способность на утро
   buying_power_at_morning: Decimal,  // 439844.15 
   #[serde(rename = "commission")]
   #[serde(default)]
+  ///Суммарная комиссия (null для Срочного рынка)
   commission: Option<Decimal>,  // 24.21 
   #[serde(rename = "initialMargin")]
+  ///Маржа
   initial_margin: Decimal,  // 199313.0 
   #[serde(rename = "portfolioEvaluation")]
+  ///Ликвидный портфель
   portfolio_evaluation: Decimal,  // 651717.0 
   #[serde(rename = "portfolioLiquidationValue")]
+  ///Оценка портфеля
   portfolio_liquidation_value: Decimal,  // 651717.0 
   #[serde(rename = "profit")]
+  ///Прибыль за сегодня
   profit: Decimal,  // 12560.0 
   #[serde(rename = "profitRate")]
+  ///Норма прибыли, %
   profit_rate: Decimal,  // 1.93 
   #[serde(rename = "riskBeforeForcePositionClosing")]
+  ///Риск до закрытия
   risk_before_force_position_closing: Decimal  // 552061.0 
 }
 
@@ -68,7 +77,7 @@ impl Summary {
     self.buying_power = buying_power;
     self
   }
-
+  ///Покупательская способность
   pub fn buying_power(&self) -> &Decimal {
     &self.buying_power
   }
@@ -82,7 +91,7 @@ impl Summary {
     self.buying_power_at_morning = buying_power_at_morning;
     self
   }
-
+  ///Покупательская способность на утро
   pub fn buying_power_at_morning(&self) -> &Decimal {
     &self.buying_power_at_morning
   }
@@ -96,7 +105,7 @@ impl Summary {
     self.commission = Some(commission);
     self
   }
-
+  ///Суммарная комиссия (null для Срочного рынка)
   pub fn commission(&self) -> Option<&Decimal> {
     self.commission.as_ref()
   }
@@ -113,7 +122,7 @@ impl Summary {
     self.initial_margin = initial_margin;
     self
   }
-
+  ///Маржа
   pub fn initial_margin(&self) -> &Decimal {
     &self.initial_margin
   }
@@ -127,7 +136,7 @@ impl Summary {
     self.portfolio_evaluation = portfolio_evaluation;
     self
   }
-
+  ///Ликвидный портфель
   pub fn portfolio_evaluation(&self) -> &Decimal {
     &self.portfolio_evaluation
   }
@@ -141,7 +150,7 @@ impl Summary {
     self.portfolio_liquidation_value = portfolio_liquidation_value;
     self
   }
-
+  ///Оценка портфеля
   pub fn portfolio_liquidation_value(&self) -> &Decimal {
     &self.portfolio_liquidation_value
   }
@@ -155,7 +164,7 @@ impl Summary {
     self.profit = profit;
     self
   }
-
+  ///Прибыль за сегодня
   pub fn profit(&self) -> &Decimal {
     &self.profit
   }
@@ -169,7 +178,7 @@ impl Summary {
     self.profit_rate = profit_rate;
     self
   }
-
+  ///Норма прибыли, %
   pub fn profit_rate(&self) -> &Decimal {
     &self.profit_rate
   }
@@ -183,7 +192,7 @@ impl Summary {
     self.risk_before_force_position_closing = risk_before_force_position_closing;
     self
   }
-
+  ///Риск до закрытия
   pub fn risk_before_force_position_closing(&self) -> &Decimal {
     &self.risk_before_force_position_closing
   }

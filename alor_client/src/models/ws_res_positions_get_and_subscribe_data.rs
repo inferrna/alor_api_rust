@@ -26,50 +26,73 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsResPositionsGetAndSubscribeData {
   #[serde(rename = "avgPrice")]
+  ///Средняя цена сделок по позициям
   avg_price: Decimal,  // 82.3 
   #[serde(rename = "brokerSymbol")]
+  ///Биржа:Тикер
   broker_symbol: String,  // MOEX:AFLT 
   #[serde(rename = "dailyUnrealisedPl")]
+  ///Нереализованная прибыль за день
   daily_unrealised_pl: Decimal,  // 2.8 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "isCurrency")]
+  ///True для валютных остатков (денег), false - для торговых инструментов
   is_currency: bool,  // false 
   #[serde(rename = "lotSize")]
+  ///Размер лота
   lot_size: i32, 
   #[serde(rename = "open")]
+  ///Позиции на момент открытия (начала торгов)
   open: i32, 
   #[serde(rename = "openQtyBatch")]
+  ///Позиции на момент открытия (начала торгов)
   open_qty_batch: i32, 
   #[serde(rename = "openUnits")]
+  ///Позиций на момент открытия (штуки)
   open_units: i32, 
   #[serde(rename = "qty")]
+  ///Количество (лоты)
   qty: i32, 
   #[serde(rename = "qtyBatch")]
+  ///Количество (лоты)
   qty_batch: i32, 
   #[serde(rename = "qtyT0")]
+  ///Количество на дату \"Т0\" (штуки)
   qty_t0: i32, 
   #[serde(rename = "qtyT0Batch")]
+  ///Количество на дату \"Т0\" (лоты)
   qty_t0_batch: i32, 
   #[serde(rename = "qtyT1")]
+  ///Количество на дату \"Т1\" (штуки)
   qty_t1: i32, 
   #[serde(rename = "qtyT1Batch")]
+  ///Количество на дату \"Т1\" (лоты)
   qty_t1_batch: i32, 
   #[serde(rename = "qtyT2")]
+  ///Количество на дату \"Т2\" (штуки)
   qty_t2: i32, 
   #[serde(rename = "qtyT2Batch")]
+  ///Количество на дату \"Т2\" (лоты)
   qty_t2_batch: i32, 
   #[serde(rename = "qtyTFuture")]
+  ///Количество на дату \"TFuture\" (штуки)
   qty_t_future: i32, 
   #[serde(rename = "qtyTFutureBatch")]
+  ///Количество на дату \"TFuture\" (лоты)
   qty_t_future_batch: i32, 
   #[serde(rename = "qtyUnits")]
+  ///Количество (штуки)
   qty_units: i32, 
   #[serde(rename = "shortName")]
+  ///Наименование инструмента
   short_name: String,  // Аэрофлот 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // AFLT 
   #[serde(rename = "unrealisedPl")]
+  ///Нереализованная прибыль
   unrealised_pl: Decimal  // 2.8 
 }
 
@@ -110,7 +133,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.avg_price = avg_price;
     self
   }
-
+  ///Средняя цена сделок по позициям
   pub fn avg_price(&self) -> &Decimal {
     &self.avg_price
   }
@@ -124,7 +147,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -138,7 +161,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.daily_unrealised_pl = daily_unrealised_pl;
     self
   }
-
+  ///Нереализованная прибыль за день
   pub fn daily_unrealised_pl(&self) -> &Decimal {
     &self.daily_unrealised_pl
   }
@@ -152,7 +175,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -166,7 +189,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.is_currency = is_currency;
     self
   }
-
+  ///True для валютных остатков (денег), false - для торговых инструментов
   pub fn is_currency(&self) -> &bool {
     &self.is_currency
   }
@@ -180,7 +203,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.lot_size = lot_size;
     self
   }
-
+  ///Размер лота
   pub fn lot_size(&self) -> &i32 {
     &self.lot_size
   }
@@ -194,7 +217,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.open = open;
     self
   }
-
+  ///Позиции на момент открытия (начала торгов)
   pub fn open(&self) -> &i32 {
     &self.open
   }
@@ -208,7 +231,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.open_qty_batch = open_qty_batch;
     self
   }
-
+  ///Позиции на момент открытия (начала торгов)
   pub fn open_qty_batch(&self) -> &i32 {
     &self.open_qty_batch
   }
@@ -222,7 +245,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.open_units = open_units;
     self
   }
-
+  ///Позиций на момент открытия (штуки)
   pub fn open_units(&self) -> &i32 {
     &self.open_units
   }
@@ -236,7 +259,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty = qty;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty(&self) -> &i32 {
     &self.qty
   }
@@ -250,7 +273,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_batch = qty_batch;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty_batch(&self) -> &i32 {
     &self.qty_batch
   }
@@ -264,7 +287,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t0 = qty_t0;
     self
   }
-
+  ///Количество на дату \"Т0\" (штуки)
   pub fn qty_t0(&self) -> &i32 {
     &self.qty_t0
   }
@@ -278,7 +301,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t0_batch = qty_t0_batch;
     self
   }
-
+  ///Количество на дату \"Т0\" (лоты)
   pub fn qty_t0_batch(&self) -> &i32 {
     &self.qty_t0_batch
   }
@@ -292,7 +315,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t1 = qty_t1;
     self
   }
-
+  ///Количество на дату \"Т1\" (штуки)
   pub fn qty_t1(&self) -> &i32 {
     &self.qty_t1
   }
@@ -306,7 +329,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t1_batch = qty_t1_batch;
     self
   }
-
+  ///Количество на дату \"Т1\" (лоты)
   pub fn qty_t1_batch(&self) -> &i32 {
     &self.qty_t1_batch
   }
@@ -320,7 +343,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t2 = qty_t2;
     self
   }
-
+  ///Количество на дату \"Т2\" (штуки)
   pub fn qty_t2(&self) -> &i32 {
     &self.qty_t2
   }
@@ -334,7 +357,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t2_batch = qty_t2_batch;
     self
   }
-
+  ///Количество на дату \"Т2\" (лоты)
   pub fn qty_t2_batch(&self) -> &i32 {
     &self.qty_t2_batch
   }
@@ -348,7 +371,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t_future = qty_t_future;
     self
   }
-
+  ///Количество на дату \"TFuture\" (штуки)
   pub fn qty_t_future(&self) -> &i32 {
     &self.qty_t_future
   }
@@ -362,7 +385,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_t_future_batch = qty_t_future_batch;
     self
   }
-
+  ///Количество на дату \"TFuture\" (лоты)
   pub fn qty_t_future_batch(&self) -> &i32 {
     &self.qty_t_future_batch
   }
@@ -376,7 +399,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.qty_units = qty_units;
     self
   }
-
+  ///Количество (штуки)
   pub fn qty_units(&self) -> &i32 {
     &self.qty_units
   }
@@ -390,7 +413,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.short_name = short_name;
     self
   }
-
+  ///Наименование инструмента
   pub fn short_name(&self) -> &String {
     &self.short_name
   }
@@ -404,7 +427,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -418,7 +441,7 @@ impl WsResPositionsGetAndSubscribeData {
     self.unrealised_pl = unrealised_pl;
     self
   }
-
+  ///Нереализованная прибыль
   pub fn unrealised_pl(&self) -> &Decimal {
     &self.unrealised_pl
   }

@@ -57,7 +57,7 @@ async fn dev_history_test() {
     let value = json!(/*Put test json here*/);
     let to: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let untraded: SchemaEnum = serde_json::from_value(value).unwrap();
+    let untraded: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let response: History = api_client.dev_history(symbol, exchange, tf, from, to, untraded, format).await.unwrap();

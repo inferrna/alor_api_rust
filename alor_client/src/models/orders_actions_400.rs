@@ -25,6 +25,7 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct OrdersActions400 {
   #[serde(rename = "message")]
+  ///Вид ответа для случая отвергнутой заявки.
   message: String  // Заявка не может быть принята из-за возможного недопустимого снижения уровня маржи. 
 }
 
@@ -43,7 +44,7 @@ impl OrdersActions400 {
     self.message = message;
     self
   }
-
+  ///Вид ответа для случая отвергнутой заявки.
   pub fn message(&self) -> &String {
     &self.message
   }

@@ -25,22 +25,31 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Money {
   #[serde(rename = "cash")]
+  ///Количество средств
   cash: Decimal,  // 25614.89 
   #[serde(rename = "changes")]
+  ///Изменения
   changes: Decimal,  // 525.21 
   #[serde(rename = "comission")]
+  ///Комиссия (в рублях)
   comission: Decimal,  // 2.0 
   #[serde(rename = "free")]
+  ///Свободные средства
   free: Decimal,  // 525.25 
   #[serde(rename = "open")]
+  ///Средства на момент открытия
   open: Decimal,  // 45536.11 
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: Decimal,  // 525.56 
   #[serde(rename = "profit")]
+  ///Прибыль
   profit: Decimal,  // -354.7 
   #[serde(rename = "profitRate")]
+  ///Прибыль в процентах
   profit_rate: Decimal,  // -354.7 
   #[serde(rename = "used")]
+  ///Количество использованных
   used: Decimal  // 45536.11 
 }
 
@@ -67,7 +76,7 @@ impl Money {
     self.cash = cash;
     self
   }
-
+  ///Количество средств
   pub fn cash(&self) -> &Decimal {
     &self.cash
   }
@@ -81,7 +90,7 @@ impl Money {
     self.changes = changes;
     self
   }
-
+  ///Изменения
   pub fn changes(&self) -> &Decimal {
     &self.changes
   }
@@ -95,7 +104,7 @@ impl Money {
     self.comission = comission;
     self
   }
-
+  ///Комиссия (в рублях)
   pub fn comission(&self) -> &Decimal {
     &self.comission
   }
@@ -109,7 +118,7 @@ impl Money {
     self.free = free;
     self
   }
-
+  ///Свободные средства
   pub fn free(&self) -> &Decimal {
     &self.free
   }
@@ -123,7 +132,7 @@ impl Money {
     self.open = open;
     self
   }
-
+  ///Средства на момент открытия
   pub fn open(&self) -> &Decimal {
     &self.open
   }
@@ -137,7 +146,7 @@ impl Money {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &Decimal {
     &self.portfolio
   }
@@ -151,7 +160,7 @@ impl Money {
     self.profit = profit;
     self
   }
-
+  ///Прибыль
   pub fn profit(&self) -> &Decimal {
     &self.profit
   }
@@ -165,7 +174,7 @@ impl Money {
     self.profit_rate = profit_rate;
     self
   }
-
+  ///Прибыль в процентах
   pub fn profit_rate(&self) -> &Decimal {
     &self.profit_rate
   }
@@ -179,7 +188,7 @@ impl Money {
     self.used = used;
     self
   }
-
+  ///Количество использованных
   pub fn used(&self) -> &Decimal {
     &self.used
   }

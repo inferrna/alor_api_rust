@@ -73,7 +73,7 @@ async fn dev_get_all_positions_test() {
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let without_currency: SchemaEnum = serde_json::from_value(value).unwrap();
+    let without_currency: bool = serde_json::from_value(value).unwrap();
     let response: Vec<Position> = api_client.dev_get_all_positions(exchange, portfolio, format, without_currency).await.unwrap();
 }
 /**

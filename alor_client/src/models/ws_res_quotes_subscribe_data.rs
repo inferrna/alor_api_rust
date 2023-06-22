@@ -26,49 +26,70 @@ use crate::serialize_quoted_numbers_opt;
 pub struct WsResQuotesSubscribeData {
   #[serde(rename = "accruedInt")]
   #[serde(default)]
+  ///Начислено
   accrued_int: Option<i32>,  // 0 
   #[serde(rename = "accrued_interest")]
   #[serde(default)]
+  ///Начислено
   accrued_interest: Option<i32>,  // 0 
   #[serde(rename = "ask")]
+  ///Аск
   ask: Decimal,  // 303.65 
   #[serde(rename = "bid")]
+  ///Бид
   bid: Decimal,  // 303.59 
   #[serde(rename = "change")]
   #[serde(default)]
+  ///Разность цены и цены предыдущего закрытия
   change: Option<Decimal>,  // -0.11 
   #[serde(rename = "change_percent")]
   #[serde(default)]
+  ///Относительное изменение цены
   change_percent: Option<Decimal>,  // -0.04 
   #[serde(rename = "description")]
+  ///Короткое описание на русском языке
   description: String,  // Сбербанк России ПАО ао 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "facevalue")]
+  
   facevalue: Decimal,  // 3 
   #[serde(rename = "high_price")]
+  ///Максимальная цена
   high_price: Decimal,  // 305 
   #[serde(rename = "last_price")]
+  ///Последняя цена
   last_price: Decimal,  // 303.59 
   #[serde(rename = "last_price_timestamp")]
+  ///Время последней цены (UTC)
   last_price_timestamp: i64,  // 1620221538 
   #[serde(rename = "lotsize")]
+  ///Размер лота
   lotsize: Decimal,  // 10.0 
   #[serde(rename = "lotvalue")]
+  
   lotvalue: Decimal,  // 3035.9 
   #[serde(rename = "low_price")]
+  ///Минимальная цена
   low_price: Decimal,  // 302.71 
   #[serde(rename = "open_price")]
+  ///Цена открытия
   open_price: Decimal,  // 304.01 
   #[serde(rename = "prev_close_price")]
+  ///Цена предыдущего закрытия
   prev_close_price: Decimal,  // 303.7 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "type")]
+  
   rtype: String,  // CS 
   #[serde(rename = "volume")]
+  ///Объём
   volume: Decimal,  // 3.876708E+7 
   #[serde(rename = "yield")]
+  
   ryield: i32 
 }
 
@@ -107,7 +128,7 @@ impl WsResQuotesSubscribeData {
     self.accrued_int = Some(accrued_int);
     self
   }
-
+  ///Начислено
   pub fn accrued_int(&self) -> Option<&i32> {
     self.accrued_int.as_ref()
   }
@@ -124,7 +145,7 @@ impl WsResQuotesSubscribeData {
     self.accrued_interest = Some(accrued_interest);
     self
   }
-
+  ///Начислено
   pub fn accrued_interest(&self) -> Option<&i32> {
     self.accrued_interest.as_ref()
   }
@@ -141,7 +162,7 @@ impl WsResQuotesSubscribeData {
     self.ask = ask;
     self
   }
-
+  ///Аск
   pub fn ask(&self) -> &Decimal {
     &self.ask
   }
@@ -155,7 +176,7 @@ impl WsResQuotesSubscribeData {
     self.bid = bid;
     self
   }
-
+  ///Бид
   pub fn bid(&self) -> &Decimal {
     &self.bid
   }
@@ -169,7 +190,7 @@ impl WsResQuotesSubscribeData {
     self.change = Some(change);
     self
   }
-
+  ///Разность цены и цены предыдущего закрытия
   pub fn change(&self) -> Option<&Decimal> {
     self.change.as_ref()
   }
@@ -186,7 +207,7 @@ impl WsResQuotesSubscribeData {
     self.change_percent = Some(change_percent);
     self
   }
-
+  ///Относительное изменение цены
   pub fn change_percent(&self) -> Option<&Decimal> {
     self.change_percent.as_ref()
   }
@@ -203,7 +224,7 @@ impl WsResQuotesSubscribeData {
     self.description = description;
     self
   }
-
+  ///Короткое описание на русском языке
   pub fn description(&self) -> &String {
     &self.description
   }
@@ -217,7 +238,7 @@ impl WsResQuotesSubscribeData {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -231,7 +252,7 @@ impl WsResQuotesSubscribeData {
     self.facevalue = facevalue;
     self
   }
-
+  
   pub fn facevalue(&self) -> &Decimal {
     &self.facevalue
   }
@@ -245,7 +266,7 @@ impl WsResQuotesSubscribeData {
     self.high_price = high_price;
     self
   }
-
+  ///Максимальная цена
   pub fn high_price(&self) -> &Decimal {
     &self.high_price
   }
@@ -259,7 +280,7 @@ impl WsResQuotesSubscribeData {
     self.last_price = last_price;
     self
   }
-
+  ///Последняя цена
   pub fn last_price(&self) -> &Decimal {
     &self.last_price
   }
@@ -273,7 +294,7 @@ impl WsResQuotesSubscribeData {
     self.last_price_timestamp = last_price_timestamp;
     self
   }
-
+  ///Время последней цены (UTC)
   pub fn last_price_timestamp(&self) -> &i64 {
     &self.last_price_timestamp
   }
@@ -287,7 +308,7 @@ impl WsResQuotesSubscribeData {
     self.lotsize = lotsize;
     self
   }
-
+  ///Размер лота
   pub fn lotsize(&self) -> &Decimal {
     &self.lotsize
   }
@@ -301,7 +322,7 @@ impl WsResQuotesSubscribeData {
     self.lotvalue = lotvalue;
     self
   }
-
+  
   pub fn lotvalue(&self) -> &Decimal {
     &self.lotvalue
   }
@@ -315,7 +336,7 @@ impl WsResQuotesSubscribeData {
     self.low_price = low_price;
     self
   }
-
+  ///Минимальная цена
   pub fn low_price(&self) -> &Decimal {
     &self.low_price
   }
@@ -329,7 +350,7 @@ impl WsResQuotesSubscribeData {
     self.open_price = open_price;
     self
   }
-
+  ///Цена открытия
   pub fn open_price(&self) -> &Decimal {
     &self.open_price
   }
@@ -343,7 +364,7 @@ impl WsResQuotesSubscribeData {
     self.prev_close_price = prev_close_price;
     self
   }
-
+  ///Цена предыдущего закрытия
   pub fn prev_close_price(&self) -> &Decimal {
     &self.prev_close_price
   }
@@ -357,7 +378,7 @@ impl WsResQuotesSubscribeData {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -371,7 +392,7 @@ impl WsResQuotesSubscribeData {
     self.rtype = rtype;
     self
   }
-
+  
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -385,7 +406,7 @@ impl WsResQuotesSubscribeData {
     self.volume = volume;
     self
   }
-
+  ///Объём
   pub fn volume(&self) -> &Decimal {
     &self.volume
   }
@@ -399,7 +420,7 @@ impl WsResQuotesSubscribeData {
     self.ryield = ryield;
     self
   }
-
+  
   pub fn ryield(&self) -> &i32 {
     &self.ryield
   }

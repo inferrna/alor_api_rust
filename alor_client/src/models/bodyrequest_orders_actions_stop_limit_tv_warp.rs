@@ -25,26 +25,37 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopLimitTvWarp {
   #[serde(rename = "condition")]
+  ///Условие срабатывания more/less
   condition: String,  // More 
   #[serde(rename = "icebergFixed")]
+  ///Видимая постоянная часть айсберг-заявки в лотах
   iceberg_fixed: Decimal,  // 100 
   #[serde(rename = "icebergVariance")]
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   iceberg_variance: Decimal,  // 2 
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, 
   #[serde(rename = "price")]
+  ///Цена выставления лимитной заявки
   price: Decimal,  // 191.33 
   #[serde(rename = "quantity")]
+  ///Количество (лоты)
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
+  ///Срок действия (UTC) в формате Unix Time seconds
   stop_end_unix_time: Decimal,  // 1590094740 
   #[serde(rename = "timeInForce")]
+  
   time_in_force: LifePolicy, 
   #[serde(rename = "triggerPrice")]
+  ///Цена срабатывания
   trigger_price: Decimal,  // 191.33 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsStopLimitTvWarpUser 
 }
 
@@ -73,7 +84,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.condition = condition;
     self
   }
-
+  ///Условие срабатывания more/less
   pub fn condition(&self) -> &String {
     &self.condition
   }
@@ -87,7 +98,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.iceberg_fixed = iceberg_fixed;
     self
   }
-
+  ///Видимая постоянная часть айсберг-заявки в лотах
   pub fn iceberg_fixed(&self) -> &Decimal {
     &self.iceberg_fixed
   }
@@ -101,7 +112,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.iceberg_variance = iceberg_variance;
     self
   }
-
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   pub fn iceberg_variance(&self) -> &Decimal {
     &self.iceberg_variance
   }
@@ -115,7 +126,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsStopLimitTvWarpInstrument {
     &self.instrument
   }
@@ -129,7 +140,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.price = price;
     self
   }
-
+  ///Цена выставления лимитной заявки
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -143,7 +154,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.quantity = quantity;
     self
   }
-
+  ///Количество (лоты)
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -157,7 +168,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -171,7 +182,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
-
+  ///Срок действия (UTC) в формате Unix Time seconds
   pub fn stop_end_unix_time(&self) -> &Decimal {
     &self.stop_end_unix_time
   }
@@ -185,7 +196,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.time_in_force = time_in_force;
     self
   }
-
+  
   pub fn time_in_force(&self) -> &LifePolicy {
     &self.time_in_force
   }
@@ -199,7 +210,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.trigger_price = trigger_price;
     self
   }
-
+  ///Цена срабатывания
   pub fn trigger_price(&self) -> &Decimal {
     &self.trigger_price
   }
@@ -213,7 +224,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsStopLimitTvWarpUser {
     &self.user
   }

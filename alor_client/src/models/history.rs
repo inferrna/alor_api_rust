@@ -25,12 +25,15 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct History {
   #[serde(rename = "history")]
+  
   history: Vec<HistoryObject>, 
   #[serde(rename = "next")]
   #[serde(default)]
+  ///Время (UTC) начала следующей свечи
   next: Option<i32>,  // 1532944860 
   #[serde(rename = "prev")]
   #[serde(default)]
+  ///Время (UTC) начала предыдущей свечи
   prev: Option<i32>  // 1532944860 
 }
 
@@ -51,7 +54,7 @@ impl History {
     self.history = history;
     self
   }
-
+  
   pub fn history(&self) -> &Vec<HistoryObject> {
     &self.history
   }
@@ -65,7 +68,7 @@ impl History {
     self.next = Some(next);
     self
   }
-
+  ///Время (UTC) начала следующей свечи
   pub fn next(&self) -> Option<&i32> {
     self.next.as_ref()
   }
@@ -82,7 +85,7 @@ impl History {
     self.prev = Some(prev);
     self
   }
-
+  ///Время (UTC) начала предыдущей свечи
   pub fn prev(&self) -> Option<&i32> {
     self.prev.as_ref()
   }

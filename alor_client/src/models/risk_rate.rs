@@ -25,45 +25,64 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct RiskRate {
   #[serde(rename = "assetType")]
+  ///Тип актива
   asset_type: String,  // stock 
   #[serde(rename = "createdAt")]
+  ///Время добавления ставки риска
   created_at: String,  // 2021-08-24T10:13:01.6584899 
   #[serde(rename = "currencyCode")]
+  ///Код валюты расчетов
   currency_code: String,  // RUB 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "id")]
+  ///Id записи
   id: Decimal,  // 22229 
   #[serde(rename = "instrument")]
+  ///Инструмент
   instrument: String,  // SBERP 
   #[serde(rename = "isDirect")]
+  ///Является ли зависимость инструмента к базовому активу прямой или обратной.
   is_direct: bool,  // false 
   #[serde(rename = "isMarginal")]
+  ///Доступен ли данный инструмент в маржу. Т.е. есть ли он в списке маржинальных инструментов брокера.
   is_marginal: bool,  // true 
   #[serde(rename = "isShortSellPossible")]
+  ///Разрешен ли шорт по бумаге. True если да.
   is_short_sell_possible: bool,  // true 
   #[serde(rename = "isin")]
+  ///ISIN инструмента. Если есть.
   isin: String,  // RU0009029557 
   #[serde(rename = "rateDown")]
+  ///Ставка риска понижения цены. Применяется для лонгов.
   rate_down: Decimal,  // 10 
   #[serde(rename = "rateSymmetric")]
+  ///Симметричная ставка риска. Приведена для справки, не используется
   rate_symmetric: Decimal,  // 10 
   #[serde(rename = "rateUp")]
+  ///Ставка риска повышения цены. Применяется для шортов.
   rate_up: Decimal,  // 20 
   #[serde(rename = "riskCategoryId")]
+  ///Id категории риска
   risk_category_id: Decimal,  // 1 
   #[serde(rename = "securityRiskCategoryId")]
   #[serde(default)]
+  ///Id категории бумаги для категоризации. 
   security_risk_category_id: Option<Decimal>,  // 1 
   #[serde(rename = "setName")]
   #[serde(default)]
+  ///Чаще всего будет null. Поле показывает к множеству инструменту принадлежит данный инструмент.
   set_name: Option<String>,  // SBER 
   #[serde(rename = "setRate")]
+  ///Ставка риска множества
   set_rate: Decimal,  // 0 
   #[serde(rename = "underlyingAsset")]
   #[serde(default)]
+  ///Чаще всего будет null. Поле показывает к какому базовому инструменту принадлежит данный инструмент.
   underlying_asset: Option<String>,  // SBER 
   #[serde(rename = "updatedAt")]
+  ///Время последнего обновления ставки риска
   updated_at: String  // 2021-10-13T16:01:42.7957367 
 }
 
@@ -100,7 +119,7 @@ impl RiskRate {
     self.asset_type = asset_type;
     self
   }
-
+  ///Тип актива
   pub fn asset_type(&self) -> &String {
     &self.asset_type
   }
@@ -114,7 +133,7 @@ impl RiskRate {
     self.created_at = created_at;
     self
   }
-
+  ///Время добавления ставки риска
   pub fn created_at(&self) -> &String {
     &self.created_at
   }
@@ -128,7 +147,7 @@ impl RiskRate {
     self.currency_code = currency_code;
     self
   }
-
+  ///Код валюты расчетов
   pub fn currency_code(&self) -> &String {
     &self.currency_code
   }
@@ -142,7 +161,7 @@ impl RiskRate {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -156,7 +175,7 @@ impl RiskRate {
     self.id = id;
     self
   }
-
+  ///Id записи
   pub fn id(&self) -> &Decimal {
     &self.id
   }
@@ -170,7 +189,7 @@ impl RiskRate {
     self.instrument = instrument;
     self
   }
-
+  ///Инструмент
   pub fn instrument(&self) -> &String {
     &self.instrument
   }
@@ -184,7 +203,7 @@ impl RiskRate {
     self.is_direct = is_direct;
     self
   }
-
+  ///Является ли зависимость инструмента к базовому активу прямой или обратной.
   pub fn is_direct(&self) -> &bool {
     &self.is_direct
   }
@@ -198,7 +217,7 @@ impl RiskRate {
     self.is_marginal = is_marginal;
     self
   }
-
+  ///Доступен ли данный инструмент в маржу. Т.е. есть ли он в списке маржинальных инструментов брокера.
   pub fn is_marginal(&self) -> &bool {
     &self.is_marginal
   }
@@ -212,7 +231,7 @@ impl RiskRate {
     self.is_short_sell_possible = is_short_sell_possible;
     self
   }
-
+  ///Разрешен ли шорт по бумаге. True если да.
   pub fn is_short_sell_possible(&self) -> &bool {
     &self.is_short_sell_possible
   }
@@ -226,7 +245,7 @@ impl RiskRate {
     self.isin = isin;
     self
   }
-
+  ///ISIN инструмента. Если есть.
   pub fn isin(&self) -> &String {
     &self.isin
   }
@@ -240,7 +259,7 @@ impl RiskRate {
     self.rate_down = rate_down;
     self
   }
-
+  ///Ставка риска понижения цены. Применяется для лонгов.
   pub fn rate_down(&self) -> &Decimal {
     &self.rate_down
   }
@@ -254,7 +273,7 @@ impl RiskRate {
     self.rate_symmetric = rate_symmetric;
     self
   }
-
+  ///Симметричная ставка риска. Приведена для справки, не используется
   pub fn rate_symmetric(&self) -> &Decimal {
     &self.rate_symmetric
   }
@@ -268,7 +287,7 @@ impl RiskRate {
     self.rate_up = rate_up;
     self
   }
-
+  ///Ставка риска повышения цены. Применяется для шортов.
   pub fn rate_up(&self) -> &Decimal {
     &self.rate_up
   }
@@ -282,7 +301,7 @@ impl RiskRate {
     self.risk_category_id = risk_category_id;
     self
   }
-
+  ///Id категории риска
   pub fn risk_category_id(&self) -> &Decimal {
     &self.risk_category_id
   }
@@ -296,7 +315,7 @@ impl RiskRate {
     self.security_risk_category_id = Some(security_risk_category_id);
     self
   }
-
+  ///Id категории бумаги для категоризации. 
   pub fn security_risk_category_id(&self) -> Option<&Decimal> {
     self.security_risk_category_id.as_ref()
   }
@@ -313,7 +332,7 @@ impl RiskRate {
     self.set_name = Some(set_name);
     self
   }
-
+  ///Чаще всего будет null. Поле показывает к множеству инструменту принадлежит данный инструмент.
   pub fn set_name(&self) -> Option<&String> {
     self.set_name.as_ref()
   }
@@ -330,7 +349,7 @@ impl RiskRate {
     self.set_rate = set_rate;
     self
   }
-
+  ///Ставка риска множества
   pub fn set_rate(&self) -> &Decimal {
     &self.set_rate
   }
@@ -344,7 +363,7 @@ impl RiskRate {
     self.underlying_asset = Some(underlying_asset);
     self
   }
-
+  ///Чаще всего будет null. Поле показывает к какому базовому инструменту принадлежит данный инструмент.
   pub fn underlying_asset(&self) -> Option<&String> {
     self.underlying_asset.as_ref()
   }
@@ -361,7 +380,7 @@ impl RiskRate {
     self.updated_at = updated_at;
     self
   }
-
+  ///Время последнего обновления ставки риска
   pub fn updated_at(&self) -> &String {
     &self.updated_at
   }

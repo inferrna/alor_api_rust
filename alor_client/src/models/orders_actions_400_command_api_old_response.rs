@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct OrdersActions400CommandApiOldResponse {
   #[serde(rename = "body")]
+  
   body: String,  // Provided json can't be properly deserialised, perhaps you made an error or forgot some field 
   #[serde(rename = "statusCode")]
+  
   status_code: i32  // 400 
 }
 
@@ -46,7 +48,7 @@ impl OrdersActions400CommandApiOldResponse {
     self.body = body;
     self
   }
-
+  
   pub fn body(&self) -> &String {
     &self.body
   }
@@ -60,7 +62,7 @@ impl OrdersActions400CommandApiOldResponse {
     self.status_code = status_code;
     self
   }
-
+  
   pub fn status_code(&self) -> &i32 {
     &self.status_code
   }

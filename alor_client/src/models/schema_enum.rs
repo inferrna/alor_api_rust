@@ -24,12 +24,15 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum SchemaEnum {
-  #[serde(rename(serialize = "true"))]
-  #[serde(alias = "true")]
-  rTRUE,
-  #[serde(rename(serialize = "false"))]
-  #[serde(alias = "false")]
-  rFALSE,
+  #[serde(rename(serialize = "FORTS"))]
+  #[serde(alias = "FORTS")]
+  FORTS,
+  #[serde(rename(serialize = "FOND"))]
+  #[serde(alias = "FOND")]
+  FOND,
+  #[serde(rename(serialize = "CURR"))]
+  #[serde(alias = "CURR")]
+  CURR,
 }
 /*
 impl ToString for SchemaEnum {

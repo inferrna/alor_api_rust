@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsResBarsGetAndSubscribe {
   #[serde(rename = "data")]
+  
   data: WsResBarsGetAndSubscribeData, 
   #[serde(rename = "guid")]
+  ///Уникальный идентификатор сообщений подписки. Значение во входящем сообщении равно значению одноимённого поля, переданному при установке соединения.
   guid: String  // f35a2373-612c-4518-54af-72025384f59b 
 }
 
@@ -46,7 +48,7 @@ impl WsResBarsGetAndSubscribe {
     self.data = data;
     self
   }
-
+  
   pub fn data(&self) -> &WsResBarsGetAndSubscribeData {
     &self.data
   }
@@ -60,7 +62,7 @@ impl WsResBarsGetAndSubscribe {
     self.guid = guid;
     self
   }
-
+  ///Уникальный идентификатор сообщений подписки. Значение во входящем сообщении равно значению одноимённого поля, переданному при установке соединения.
   pub fn guid(&self) -> &String {
     &self.guid
   }

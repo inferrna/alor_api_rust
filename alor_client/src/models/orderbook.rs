@@ -26,16 +26,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Orderbook {
   #[serde(rename = "asks")]
+  ///Аски
   asks: Vec<OrderbookAsk>, 
   #[serde(rename = "bids")]
+  ///Биды
   bids: Vec<OrderbookBid>, 
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // false 
   #[serde(rename = "ms_timestamp")]
+  ///Время(UTC) в формате Unix Time Milliseconds
   ms_timestamp: Decimal,  // 1610982677578 
   #[serde(rename = "snapshot")]
+  ///Deprecated. Устаревшее поле, будет удалено в будущих обновлениях.
   snapshot: bool,  // true 
   #[serde(rename = "timestamp")]
+  ///Deprecated. Устаревшее поле, будет удалено в будущих обновлениях. Вместо этого поля используйте поле \"ms_timestamp\".
   timestamp: Decimal  // 1610982677 
 }
 
@@ -59,7 +65,7 @@ impl Orderbook {
     self.asks = asks;
     self
   }
-
+  ///Аски
   pub fn asks(&self) -> &Vec<OrderbookAsk> {
     &self.asks
   }
@@ -73,7 +79,7 @@ impl Orderbook {
     self.bids = bids;
     self
   }
-
+  ///Биды
   pub fn bids(&self) -> &Vec<OrderbookBid> {
     &self.bids
   }
@@ -87,7 +93,7 @@ impl Orderbook {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -101,7 +107,7 @@ impl Orderbook {
     self.ms_timestamp = ms_timestamp;
     self
   }
-
+  ///Время(UTC) в формате Unix Time Milliseconds
   pub fn ms_timestamp(&self) -> &Decimal {
     &self.ms_timestamp
   }
@@ -115,7 +121,7 @@ impl Orderbook {
     self.snapshot = snapshot;
     self
   }
-
+  ///Deprecated. Устаревшее поле, будет удалено в будущих обновлениях.
   pub fn snapshot(&self) -> &bool {
     &self.snapshot
   }
@@ -129,7 +135,7 @@ impl Orderbook {
     self.timestamp = timestamp;
     self
   }
-
+  ///Deprecated. Устаревшее поле, будет удалено в будущих обновлениях. Вместо этого поля используйте поле \"ms_timestamp\".
   pub fn timestamp(&self) -> &Decimal {
     &self.timestamp
   }

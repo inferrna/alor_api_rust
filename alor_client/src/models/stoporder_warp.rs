@@ -25,46 +25,65 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct StoporderWarp {
   #[serde(rename = "avg_price")]
+  ///Средняя цена
   avg_price: Decimal,  // 0 
   #[serde(rename = "brokerSymbol")]
+  ///Пара Биржа:Тикер
   broker_symbol: String,  // MOEX:LKOH 
   #[serde(rename = "condition")]
+  ///Условие срабатывания more/less
   condition: String,  // Less 
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Время действия заявки (UTC)
   end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "exchangeOrderId")]
+  ///Уникальный идентификатор стоп-заявки
   exchange_order_id: Decimal,  // 425242362 
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // true 
   #[serde(rename = "id")]
+  ///Уникальный идентификатор стоп-заявки
   id: Decimal,  // 347499 
   #[serde(rename = "portfolio")]
+  ///Пара Биржа:Тикер
   portfolio: String,  // D39004 
   #[serde(rename = "price")]
+  ///Цена(Лимит)
   price: Decimal,  // 208.6 
   #[serde(rename = "qty")]
+  ///Количество (Лоты)
   qty: Decimal,  // 1 
   #[serde(rename = "qtyBatch")]
+  ///Количество (Лоты)
   qty_batch: Decimal,  // 1 
   #[serde(rename = "qtyUnits")]
+  ///Количество (Штуки)
   qty_units: Decimal,  // 10 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "status")]
+  
   status: OrderStatus, 
   #[serde(rename = "stopPrice")]
+  ///Условная цена
   stop_price: Decimal,  // 215 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "transTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Время выставления заявки (UTC)
   trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
+  
   rtype: StopOrderType 
 }
 
@@ -101,7 +120,7 @@ impl StoporderWarp {
     self.avg_price = avg_price;
     self
   }
-
+  ///Средняя цена
   pub fn avg_price(&self) -> &Decimal {
     &self.avg_price
   }
@@ -115,7 +134,7 @@ impl StoporderWarp {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Пара Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -129,7 +148,7 @@ impl StoporderWarp {
     self.condition = condition;
     self
   }
-
+  ///Условие срабатывания more/less
   pub fn condition(&self) -> &String {
     &self.condition
   }
@@ -143,7 +162,7 @@ impl StoporderWarp {
     self.end_time = end_time;
     self
   }
-
+  ///Время действия заявки (UTC)
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -157,7 +176,7 @@ impl StoporderWarp {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -171,7 +190,7 @@ impl StoporderWarp {
     self.exchange_order_id = exchange_order_id;
     self
   }
-
+  ///Уникальный идентификатор стоп-заявки
   pub fn exchange_order_id(&self) -> &Decimal {
     &self.exchange_order_id
   }
@@ -185,7 +204,7 @@ impl StoporderWarp {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -199,7 +218,7 @@ impl StoporderWarp {
     self.id = id;
     self
   }
-
+  ///Уникальный идентификатор стоп-заявки
   pub fn id(&self) -> &Decimal {
     &self.id
   }
@@ -213,7 +232,7 @@ impl StoporderWarp {
     self.portfolio = portfolio;
     self
   }
-
+  ///Пара Биржа:Тикер
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -227,7 +246,7 @@ impl StoporderWarp {
     self.price = price;
     self
   }
-
+  ///Цена(Лимит)
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -241,7 +260,7 @@ impl StoporderWarp {
     self.qty = qty;
     self
   }
-
+  ///Количество (Лоты)
   pub fn qty(&self) -> &Decimal {
     &self.qty
   }
@@ -255,7 +274,7 @@ impl StoporderWarp {
     self.qty_batch = qty_batch;
     self
   }
-
+  ///Количество (Лоты)
   pub fn qty_batch(&self) -> &Decimal {
     &self.qty_batch
   }
@@ -269,7 +288,7 @@ impl StoporderWarp {
     self.qty_units = qty_units;
     self
   }
-
+  ///Количество (Штуки)
   pub fn qty_units(&self) -> &Decimal {
     &self.qty_units
   }
@@ -283,7 +302,7 @@ impl StoporderWarp {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -297,7 +316,7 @@ impl StoporderWarp {
     self.status = status;
     self
   }
-
+  
   pub fn status(&self) -> &OrderStatus {
     &self.status
   }
@@ -311,7 +330,7 @@ impl StoporderWarp {
     self.stop_price = stop_price;
     self
   }
-
+  ///Условная цена
   pub fn stop_price(&self) -> &Decimal {
     &self.stop_price
   }
@@ -325,7 +344,7 @@ impl StoporderWarp {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -339,7 +358,7 @@ impl StoporderWarp {
     self.trans_time = trans_time;
     self
   }
-
+  ///Время выставления заявки (UTC)
   pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
@@ -353,7 +372,7 @@ impl StoporderWarp {
     self.rtype = rtype;
     self
   }
-
+  
   pub fn rtype(&self) -> &StopOrderType {
     &self.rtype
   }

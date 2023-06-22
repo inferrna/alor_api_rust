@@ -117,18 +117,18 @@ pub trait V2ordersApi {
     /// 
     ///
     /// * `stop` Является стоп-заявкой? (тестирование: всегда true) (required)
-    /// 
+    /// Example: true
     /// 
     ///
     /// * `json_response` Ответ в формате JSON. В виде отдельного параметра для обратной совместимости. (optional)
-    /// 
+    /// Example: true
     /// 
     ///
     /// * `format` Формат возвращаемого сервером JSON (optional)
     /// 
     /// 
     ///
-    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
 ///
 /// Получение информации о стоп-заявках
 ///
@@ -501,7 +501,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
-    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: crate::models::SchemaEnum, json_response: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -516,9 +516,9 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
             let has_query_params = true;
             api_query.append_pair("portfolio", &portfolio.outline_print() );
             api_query.append_pair("exchange", &exchange.outline_print());
-            api_query.append_pair("stop", &stop.outline_print());
+            api_query.append_pair("stop", &stop.outline_print() );
         if let Some(json_response) = json_response {
-            api_query.append_pair("jsonResponse", &json_response.outline_print());
+            api_query.append_pair("jsonResponse", &json_response.outline_print() );
         }
         if let Some(format) = format {
             api_query.append_pair("format", &format.outline_print());

@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct OrderbookAsk {
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal,  // 116030 
   #[serde(rename = "volume")]
+  ///Объём
   volume: i32  // 31 
 }
 
@@ -46,7 +48,7 @@ impl OrderbookAsk {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -60,7 +62,7 @@ impl OrderbookAsk {
     self.volume = volume;
     self
   }
-
+  ///Объём
   pub fn volume(&self) -> &i32 {
     &self.volume
   }

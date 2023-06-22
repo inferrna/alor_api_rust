@@ -25,16 +25,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsMarketTVput {
   #[serde(rename = "id")]
+  ///Идентификатор заявки
   id: i64,  // 18936040296 
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "quantity")]
+  ///Количество
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "type")]
+  ///Тип заявки
   rtype: String,  // market 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsMarketTVputUser 
 }
 
@@ -58,7 +64,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.id = id;
     self
   }
-
+  ///Идентификатор заявки
   pub fn id(&self) -> &i64 {
     &self.id
   }
@@ -72,7 +78,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitTvInstrument {
     &self.instrument
   }
@@ -86,7 +92,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -100,7 +106,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -114,7 +120,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.rtype = rtype;
     self
   }
-
+  ///Тип заявки
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -128,7 +134,7 @@ impl BodyrequestOrdersActionsMarketTVput {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsMarketTVputUser {
     &self.user
   }

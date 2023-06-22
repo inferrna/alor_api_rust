@@ -27,18 +27,24 @@ use crate::serialize_quoted_numbers_opt;
 pub struct EstimateOrderViewModel {
   #[serde(rename = "board")]
   #[serde(default)]
+  ///Режим торгов (борд)
   board: Option<String>, 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "lotQuantity")]
+  ///Количество лотов
   lot_quantity: i64, 
   #[serde(rename = "portfolio")]
   #[serde(default)]
+  ///Портфель клиента
   portfolio: Option<String>, 
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal, 
   #[serde(rename = "ticker")]
   #[serde(default)]
+  ///Инструмент
   ticker: Option<String> 
 }
 
@@ -62,7 +68,7 @@ impl EstimateOrderViewModel {
     self.board = Some(board);
     self
   }
-
+  ///Режим торгов (борд)
   pub fn board(&self) -> Option<&String> {
     self.board.as_ref()
   }
@@ -79,7 +85,7 @@ impl EstimateOrderViewModel {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -93,7 +99,7 @@ impl EstimateOrderViewModel {
     self.lot_quantity = lot_quantity;
     self
   }
-
+  ///Количество лотов
   pub fn lot_quantity(&self) -> &i64 {
     &self.lot_quantity
   }
@@ -107,7 +113,7 @@ impl EstimateOrderViewModel {
     self.portfolio = Some(portfolio);
     self
   }
-
+  ///Портфель клиента
   pub fn portfolio(&self) -> Option<&String> {
     self.portfolio.as_ref()
   }
@@ -124,7 +130,7 @@ impl EstimateOrderViewModel {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -138,7 +144,7 @@ impl EstimateOrderViewModel {
     self.ticker = Some(ticker);
     self
   }
-
+  ///Инструмент
   pub fn ticker(&self) -> Option<&String> {
     self.ticker.as_ref()
   }

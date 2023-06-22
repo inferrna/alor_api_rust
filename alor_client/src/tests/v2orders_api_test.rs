@@ -101,9 +101,9 @@ async fn command_api_warp_v2clientordersdelete_test() {
     let value = json!(/*Put test json here*/);
     let exchange: Exchange = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let stop: SchemaEnum = serde_json::from_value(value).unwrap();
+    let stop: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let json_response: SchemaEnum = serde_json::from_value(value).unwrap();
+    let json_response: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let response: OrdersActionsDeleteOrderIdCommandApi = api_client.command_api_warp_v2clientordersdelete(order_id, portfolio, exchange, stop, json_response, format).await.unwrap();

@@ -25,24 +25,34 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsLimitTVput {
   #[serde(rename = "icebergFixed")]
+  ///Видимая постоянная часть айсберг-заявки в лотах
   iceberg_fixed: Decimal,  // 100 
   #[serde(rename = "icebergVariance")]
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   iceberg_variance: Decimal,  // 2 
   #[serde(rename = "id")]
+  ///Идентификатор заявки
   id: i64,  // 18936040296 
   #[serde(rename = "instrument")]
+  
   instrument: BodyrequestOrdersActionsLimitTvInstrument, 
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal,  // 190.97 
   #[serde(rename = "quantity")]
+  ///Количество
   quantity: i32,  // 2 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "timeInForce")]
+  
   time_in_force: LifePolicy, 
   #[serde(rename = "type")]
+  ///Тип заявки
   rtype: String,  // limit 
   #[serde(rename = "user")]
+  
   user: BodyrequestOrdersActionsLimitTvUser 
 }
 
@@ -70,7 +80,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.iceberg_fixed = iceberg_fixed;
     self
   }
-
+  ///Видимая постоянная часть айсберг-заявки в лотах
   pub fn iceberg_fixed(&self) -> &Decimal {
     &self.iceberg_fixed
   }
@@ -84,7 +94,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.iceberg_variance = iceberg_variance;
     self
   }
-
+  ///Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок
   pub fn iceberg_variance(&self) -> &Decimal {
     &self.iceberg_variance
   }
@@ -98,7 +108,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.id = id;
     self
   }
-
+  ///Идентификатор заявки
   pub fn id(&self) -> &i64 {
     &self.id
   }
@@ -112,7 +122,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsLimitTvInstrument {
     &self.instrument
   }
@@ -126,7 +136,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -140,7 +150,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -154,7 +164,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -168,7 +178,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.time_in_force = time_in_force;
     self
   }
-
+  
   pub fn time_in_force(&self) -> &LifePolicy {
     &self.time_in_force
   }
@@ -182,7 +192,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.rtype = rtype;
     self
   }
-
+  ///Тип заявки
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -196,7 +206,7 @@ impl BodyrequestOrdersActionsLimitTVput {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsLimitTvUser {
     &self.user
   }

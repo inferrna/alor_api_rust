@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct OrdersActionsLimitMarket {
   #[serde(rename = "message")]
+  ///Вид ответа на успешно выполненный запрос.
   message: String,  // (162) Заявка на покупку N 9763124 зарегистрирована (1 удовлетворено). 
   #[serde(rename = "orderNumber")]
+  ///Идентификатор заявки
   order_number: i32  // 9763124 
 }
 
@@ -46,7 +48,7 @@ impl OrdersActionsLimitMarket {
     self.message = message;
     self
   }
-
+  ///Вид ответа на успешно выполненный запрос.
   pub fn message(&self) -> &String {
     &self.message
   }
@@ -60,7 +62,7 @@ impl OrdersActionsLimitMarket {
     self.order_number = order_number;
     self
   }
-
+  ///Идентификатор заявки
   pub fn order_number(&self) -> &i32 {
     &self.order_number
   }

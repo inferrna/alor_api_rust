@@ -25,30 +25,43 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Trade {
   #[serde(rename = "board")]
+  ///Код режима торгов
   board: String,  // TQBR 
   #[serde(rename = "brokerSymbol")]
+  ///Пара Биржа:Тикер
   broker_symbol: String,  // GAZP:MOEX 
   #[serde(rename = "date")]
+  ///Дата и время (UTC) закрытия заявки
   date: String,  // 2018-08-07T08:40:03.445Z 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // false 
   #[serde(rename = "id")]
+  ///Уникальный идентификатор сделки
   id: String,  // 159 
   #[serde(rename = "orderno")]
+  ///Идентификатор заявки
   orderno: String,  // 7271479 
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal,  // 142.52 
   #[serde(rename = "qty")]
+  ///Количество (лоты)
   qty: i32,  // 1 
   #[serde(rename = "qtyBatch")]
+  ///Количество (лоты)
   qty_batch: i32,  // 1 
   #[serde(rename = "qtyUnits")]
+  ///Количество (штуки)
   qty_units: i32,  // 1 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента). \"[N/A]\" используется если symbol не определен.
   symbol: String  // GAZP 
 }
 
@@ -79,7 +92,7 @@ impl Trade {
     self.board = board;
     self
   }
-
+  ///Код режима торгов
   pub fn board(&self) -> &String {
     &self.board
   }
@@ -93,7 +106,7 @@ impl Trade {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Пара Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -107,7 +120,7 @@ impl Trade {
     self.date = date;
     self
   }
-
+  ///Дата и время (UTC) закрытия заявки
   pub fn date(&self) -> &String {
     &self.date
   }
@@ -121,7 +134,7 @@ impl Trade {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -135,7 +148,7 @@ impl Trade {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -149,7 +162,7 @@ impl Trade {
     self.id = id;
     self
   }
-
+  ///Уникальный идентификатор сделки
   pub fn id(&self) -> &String {
     &self.id
   }
@@ -163,7 +176,7 @@ impl Trade {
     self.orderno = orderno;
     self
   }
-
+  ///Идентификатор заявки
   pub fn orderno(&self) -> &String {
     &self.orderno
   }
@@ -177,7 +190,7 @@ impl Trade {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -191,7 +204,7 @@ impl Trade {
     self.qty = qty;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty(&self) -> &i32 {
     &self.qty
   }
@@ -205,7 +218,7 @@ impl Trade {
     self.qty_batch = qty_batch;
     self
   }
-
+  ///Количество (лоты)
   pub fn qty_batch(&self) -> &i32 {
     &self.qty_batch
   }
@@ -219,7 +232,7 @@ impl Trade {
     self.qty_units = qty_units;
     self
   }
-
+  ///Количество (штуки)
   pub fn qty_units(&self) -> &i32 {
     &self.qty_units
   }
@@ -233,7 +246,7 @@ impl Trade {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -247,7 +260,7 @@ impl Trade {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента). \"[N/A]\" используется если symbol не определен.
   pub fn symbol(&self) -> &String {
     &self.symbol
   }

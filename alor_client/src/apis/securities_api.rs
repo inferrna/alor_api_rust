@@ -73,14 +73,14 @@ pub trait SecuritiesApi {
     /// 
     ///
     /// * `untraded` Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера (optional)
-    /// 
+    /// Example: true
     /// 
     ///
     /// * `format` Формат возвращаемого сервером JSON (optional)
     /// 
     /// 
     ///
-    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
+    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
 ///
 /// Получение информации о биржевом стакане
 ///
@@ -281,7 +281,7 @@ pub trait SecuritiesApi {
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>SecuritiesApi for SecuritiesApiClient<C> {
-    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<crate::models::SchemaEnum>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>> {
+    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -300,7 +300,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
             api_query.append_pair("from", &from.outline_print() );
             api_query.append_pair("to", &to.outline_print() );
         if let Some(untraded) = untraded {
-            api_query.append_pair("untraded", &untraded.outline_print());
+            api_query.append_pair("untraded", &untraded.outline_print() );
         }
         if let Some(format) = format {
             api_query.append_pair("format", &format.outline_print());

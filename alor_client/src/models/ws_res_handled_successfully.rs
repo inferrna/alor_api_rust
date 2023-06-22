@@ -25,10 +25,13 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsResHandledSuccessfully {
   #[serde(rename = "httpCode")]
+  ///HTTP-код ответа
   http_code: i32,  // 200 
   #[serde(rename = "message")]
+  ///Информация по созданной/отменённой подписке
   message: String,  // Handled successfully 
   #[serde(rename = "requestGuid")]
+  ///Уникальный идентификатор подписки. Значение во входящем сообщении равно значению поля \\\"guid\\\", переданному при установке соединения.
   request_guid: String  // f35a2373-612c-4518-54af-72025384f59b 
 }
 
@@ -49,7 +52,7 @@ impl WsResHandledSuccessfully {
     self.http_code = http_code;
     self
   }
-
+  ///HTTP-код ответа
   pub fn http_code(&self) -> &i32 {
     &self.http_code
   }
@@ -63,7 +66,7 @@ impl WsResHandledSuccessfully {
     self.message = message;
     self
   }
-
+  ///Информация по созданной/отменённой подписке
   pub fn message(&self) -> &String {
     &self.message
   }
@@ -77,7 +80,7 @@ impl WsResHandledSuccessfully {
     self.request_guid = request_guid;
     self
   }
-
+  ///Уникальный идентификатор подписки. Значение во входящем сообщении равно значению поля \\\"guid\\\", переданному при установке соединения.
   pub fn request_guid(&self) -> &String {
     &self.request_guid
   }

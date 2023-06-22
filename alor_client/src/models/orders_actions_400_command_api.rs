@@ -25,8 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct OrdersActions400CommandApi {
   #[serde(rename = "message")]
+  ///Вид ответа для неуникального X-ALOR-REQID
   message: String,  // Request with such X-ALOR-REQID was already handled. We return the response to that request. 
   #[serde(rename = "oldResponse")]
+  
   old_response: OrdersActions400CommandApiOldResponse 
 }
 
@@ -46,7 +48,7 @@ impl OrdersActions400CommandApi {
     self.message = message;
     self
   }
-
+  ///Вид ответа для неуникального X-ALOR-REQID
   pub fn message(&self) -> &String {
     &self.message
   }
@@ -60,7 +62,7 @@ impl OrdersActions400CommandApi {
     self.old_response = old_response;
     self
   }
-
+  
   pub fn old_response(&self) -> &OrdersActions400CommandApiOldResponse {
     &self.old_response
   }

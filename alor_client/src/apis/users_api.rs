@@ -85,10 +85,10 @@ pub trait UsersApi {
     /// 
     ///
     /// * `without_currency` Исключить из ответа все денежные инструменты, по умолчанию false (optional)
-    /// 
+    /// Example: true
     /// 
     ///
-    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>>;
+    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<bool>) -> Result<Vec<Position>, Error<serde_json::Value>>;
 ///
 /// Получение информации о стоп-заявках
 ///
@@ -498,7 +498,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
-    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<crate::models::SchemaEnum>) -> Result<Vec<Position>, Error<serde_json::Value>> {
+    async fn dev_get_all_positions(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::JsonFormat>, without_currency: Option<bool>) -> Result<Vec<Position>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -515,7 +515,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
             api_query.append_pair("format", &format.outline_print());
         }
         if let Some(without_currency) = without_currency {
-            api_query.append_pair("withoutCurrency", &without_currency.outline_print());
+            api_query.append_pair("withoutCurrency", &without_currency.outline_print() );
         }
             for (key, val) in &auth_query {
                 api_query.append_pair(key, val);

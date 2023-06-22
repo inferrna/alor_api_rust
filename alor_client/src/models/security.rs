@@ -26,61 +26,88 @@ use crate::serialize_quoted_numbers_opt;
 pub struct Security {
   #[serde(rename = "ISIN")]
   #[serde(default)]
+  ///Идентификатор ценной бумаги согласно стандарту ISO 6166
   isin: Option<String>,  // RU000A1014L8 
   #[serde(rename = "cancellation")]
+  ///Дата и время (UTC) окончания действия
   cancellation: String,  // 2018-09-03T00:00:00 
   #[serde(rename = "cfiCode")]
+  ///Тип ценной бумаги согласно стандарту ISO 10962
   cfi_code: String,  // ESXXXX 
   #[serde(rename = "complexProductCategory")]
   #[serde(default)]
+  ///Требуемая категория для осуществления торговли инструментом
   complex_product_category: Option<String>,  // 2 
   #[serde(rename = "currency")]
+  ///Валюта
   currency: String,  // RUB 
   #[serde(rename = "description")]
+  ///Краткое описание инструмента
   description: String,  // Сбербанк России ПАО ао 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "facevalue")]
+  ///Номинальная стоимость
   facevalue: Decimal,  // 100.0 
   #[serde(rename = "lotsize")]
+  ///Размер лота
   lotsize: Decimal,  // 1.0 
   #[serde(rename = "marginbuy")]
+  ///Цена маржинальной покупки (заемные средства)
   marginbuy: Decimal,  // 6707.86 
   #[serde(rename = "marginrate")]
+  ///Отношение цены маржинальной покупки к цене последней сделки
   marginrate: Decimal,  // 89.3428 
   #[serde(rename = "marginsell")]
+  ///Цена маржинальной продажи (заемные средства)
   marginsell: Decimal,  // 6707.86 
   #[serde(rename = "minstep")]
+  ///Минимальный шаг цены
   minstep: Decimal,  // 0.01 
   #[serde(rename = "priceMax")]
+  ///Максимальная цена
   price_max: Decimal,  // 79.57 
   #[serde(rename = "priceMin")]
+  ///Минимальная цена
   price_min: Decimal,  // 70.55 
   #[serde(rename = "pricestep")]
+  ///Минимальный шаг цены, выраженный в рублях
   pricestep: Decimal,  // 6.30202 
   #[serde(rename = "primary_board")]
+  ///Код режима торгов
   primary_board: String,  // ROPD 
   #[serde(rename = "rating")]
+  
   rating: Decimal,  // 195613886 
   #[serde(rename = "shortname")]
+  ///Краткое наименование инструмента
   shortname: String,  // Сбербанк 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "theorPrice")]
+  
   theor_price: Decimal,  // 0.0 
   #[serde(rename = "theorPriceLimit")]
+  
   theor_price_limit: Decimal,  // 0.0 
   #[serde(rename = "tradingStatus")]
+  ///Торговый статус инструмента
   trading_status: i32,  // 17 
   #[serde(rename = "tradingStatusInfo")]
   #[serde(default)]
+  ///Описание торгового статуса инструмента
   trading_status_info: Option<String>,  // нормальный период торгов 
   #[serde(rename = "type")]
+  ///Тип
   rtype: String,  // CS 
   #[serde(rename = "volatility")]
+  ///Волативность
   volatility: Decimal,  // 0.0 
   #[serde(rename = "yield")]
   #[serde(default)]
+  
   ryield: Option<String> 
 }
 
@@ -125,7 +152,7 @@ impl Security {
     self.isin = Some(isin);
     self
   }
-
+  ///Идентификатор ценной бумаги согласно стандарту ISO 6166
   pub fn isin(&self) -> Option<&String> {
     self.isin.as_ref()
   }
@@ -142,7 +169,7 @@ impl Security {
     self.cancellation = cancellation;
     self
   }
-
+  ///Дата и время (UTC) окончания действия
   pub fn cancellation(&self) -> &String {
     &self.cancellation
   }
@@ -156,7 +183,7 @@ impl Security {
     self.cfi_code = cfi_code;
     self
   }
-
+  ///Тип ценной бумаги согласно стандарту ISO 10962
   pub fn cfi_code(&self) -> &String {
     &self.cfi_code
   }
@@ -170,7 +197,7 @@ impl Security {
     self.complex_product_category = Some(complex_product_category);
     self
   }
-
+  ///Требуемая категория для осуществления торговли инструментом
   pub fn complex_product_category(&self) -> Option<&String> {
     self.complex_product_category.as_ref()
   }
@@ -187,7 +214,7 @@ impl Security {
     self.currency = currency;
     self
   }
-
+  ///Валюта
   pub fn currency(&self) -> &String {
     &self.currency
   }
@@ -201,7 +228,7 @@ impl Security {
     self.description = description;
     self
   }
-
+  ///Краткое описание инструмента
   pub fn description(&self) -> &String {
     &self.description
   }
@@ -215,7 +242,7 @@ impl Security {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -229,7 +256,7 @@ impl Security {
     self.facevalue = facevalue;
     self
   }
-
+  ///Номинальная стоимость
   pub fn facevalue(&self) -> &Decimal {
     &self.facevalue
   }
@@ -243,7 +270,7 @@ impl Security {
     self.lotsize = lotsize;
     self
   }
-
+  ///Размер лота
   pub fn lotsize(&self) -> &Decimal {
     &self.lotsize
   }
@@ -257,7 +284,7 @@ impl Security {
     self.marginbuy = marginbuy;
     self
   }
-
+  ///Цена маржинальной покупки (заемные средства)
   pub fn marginbuy(&self) -> &Decimal {
     &self.marginbuy
   }
@@ -271,7 +298,7 @@ impl Security {
     self.marginrate = marginrate;
     self
   }
-
+  ///Отношение цены маржинальной покупки к цене последней сделки
   pub fn marginrate(&self) -> &Decimal {
     &self.marginrate
   }
@@ -285,7 +312,7 @@ impl Security {
     self.marginsell = marginsell;
     self
   }
-
+  ///Цена маржинальной продажи (заемные средства)
   pub fn marginsell(&self) -> &Decimal {
     &self.marginsell
   }
@@ -299,7 +326,7 @@ impl Security {
     self.minstep = minstep;
     self
   }
-
+  ///Минимальный шаг цены
   pub fn minstep(&self) -> &Decimal {
     &self.minstep
   }
@@ -313,7 +340,7 @@ impl Security {
     self.price_max = price_max;
     self
   }
-
+  ///Максимальная цена
   pub fn price_max(&self) -> &Decimal {
     &self.price_max
   }
@@ -327,7 +354,7 @@ impl Security {
     self.price_min = price_min;
     self
   }
-
+  ///Минимальная цена
   pub fn price_min(&self) -> &Decimal {
     &self.price_min
   }
@@ -341,7 +368,7 @@ impl Security {
     self.pricestep = pricestep;
     self
   }
-
+  ///Минимальный шаг цены, выраженный в рублях
   pub fn pricestep(&self) -> &Decimal {
     &self.pricestep
   }
@@ -355,7 +382,7 @@ impl Security {
     self.primary_board = primary_board;
     self
   }
-
+  ///Код режима торгов
   pub fn primary_board(&self) -> &String {
     &self.primary_board
   }
@@ -369,7 +396,7 @@ impl Security {
     self.rating = rating;
     self
   }
-
+  
   pub fn rating(&self) -> &Decimal {
     &self.rating
   }
@@ -383,7 +410,7 @@ impl Security {
     self.shortname = shortname;
     self
   }
-
+  ///Краткое наименование инструмента
   pub fn shortname(&self) -> &String {
     &self.shortname
   }
@@ -397,7 +424,7 @@ impl Security {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -411,7 +438,7 @@ impl Security {
     self.theor_price = theor_price;
     self
   }
-
+  
   pub fn theor_price(&self) -> &Decimal {
     &self.theor_price
   }
@@ -425,7 +452,7 @@ impl Security {
     self.theor_price_limit = theor_price_limit;
     self
   }
-
+  
   pub fn theor_price_limit(&self) -> &Decimal {
     &self.theor_price_limit
   }
@@ -439,7 +466,7 @@ impl Security {
     self.trading_status = trading_status;
     self
   }
-
+  ///Торговый статус инструмента
   pub fn trading_status(&self) -> &i32 {
     &self.trading_status
   }
@@ -453,7 +480,7 @@ impl Security {
     self.trading_status_info = Some(trading_status_info);
     self
   }
-
+  ///Описание торгового статуса инструмента
   pub fn trading_status_info(&self) -> Option<&String> {
     self.trading_status_info.as_ref()
   }
@@ -470,7 +497,7 @@ impl Security {
     self.rtype = rtype;
     self
   }
-
+  ///Тип
   pub fn rtype(&self) -> &String {
     &self.rtype
   }
@@ -484,7 +511,7 @@ impl Security {
     self.volatility = volatility;
     self
   }
-
+  ///Волативность
   pub fn volatility(&self) -> &Decimal {
     &self.volatility
   }
@@ -498,7 +525,7 @@ impl Security {
     self.ryield = Some(ryield);
     self
   }
-
+  
   pub fn ryield(&self) -> Option<&String> {
     self.ryield.as_ref()
   }

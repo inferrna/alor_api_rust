@@ -25,30 +25,43 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Risk {
   #[serde(rename = "clientType")]
+  ///Тип клиента
   client_type: String,  // HighRisk 
   #[serde(rename = "correctedMargin")]
+  ///Скорректированная маржа
   corrected_margin: Decimal,  // 15752.115 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "hasForbiddenPositions")]
+  ///Имеются ли запретные позиции
   has_forbidden_positions: bool,  // false 
   #[serde(rename = "hasNegativeQuantity")]
+  ///Имеются ли отрицательные количества
   has_negative_quantity: bool,  // false 
   #[serde(rename = "initialMargin")]
+  ///Начальная маржа
   initial_margin: Decimal,  // 15752.115 
   #[serde(rename = "minimalMargin")]
+  ///Минимальная маржа
   minimal_margin: Decimal,  // 65177.0575 
   #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
   portfolio: String,  // D49004 
   #[serde(rename = "portfolioEvaluation")]
+  ///Общая стоимость портфеля
   portfolio_evaluation: Decimal,  // 646270.9 
   #[serde(rename = "portfolioLiquidationValue")]
+  ///Стоимость ликвидного портфеля
   portfolio_liquidation_value: Decimal,  // 646270.9 
   #[serde(rename = "riskCategoryId")]
+  ///Категория риска
   risk_category_id: i32,  // 2 
   #[serde(rename = "riskCoverageRatioOne")]
+  ///НПР1
   risk_coverage_ratio_one: Decimal,  // 630518.785 
   #[serde(rename = "riskCoverageRatioTwo")]
+  ///НПР2
   risk_coverage_ratio_two: Decimal  // 638394.8425 
 }
 
@@ -79,7 +92,7 @@ impl Risk {
     self.client_type = client_type;
     self
   }
-
+  ///Тип клиента
   pub fn client_type(&self) -> &String {
     &self.client_type
   }
@@ -93,7 +106,7 @@ impl Risk {
     self.corrected_margin = corrected_margin;
     self
   }
-
+  ///Скорректированная маржа
   pub fn corrected_margin(&self) -> &Decimal {
     &self.corrected_margin
   }
@@ -107,7 +120,7 @@ impl Risk {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -121,7 +134,7 @@ impl Risk {
     self.has_forbidden_positions = has_forbidden_positions;
     self
   }
-
+  ///Имеются ли запретные позиции
   pub fn has_forbidden_positions(&self) -> &bool {
     &self.has_forbidden_positions
   }
@@ -135,7 +148,7 @@ impl Risk {
     self.has_negative_quantity = has_negative_quantity;
     self
   }
-
+  ///Имеются ли отрицательные количества
   pub fn has_negative_quantity(&self) -> &bool {
     &self.has_negative_quantity
   }
@@ -149,7 +162,7 @@ impl Risk {
     self.initial_margin = initial_margin;
     self
   }
-
+  ///Начальная маржа
   pub fn initial_margin(&self) -> &Decimal {
     &self.initial_margin
   }
@@ -163,7 +176,7 @@ impl Risk {
     self.minimal_margin = minimal_margin;
     self
   }
-
+  ///Минимальная маржа
   pub fn minimal_margin(&self) -> &Decimal {
     &self.minimal_margin
   }
@@ -177,7 +190,7 @@ impl Risk {
     self.portfolio = portfolio;
     self
   }
-
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -191,7 +204,7 @@ impl Risk {
     self.portfolio_evaluation = portfolio_evaluation;
     self
   }
-
+  ///Общая стоимость портфеля
   pub fn portfolio_evaluation(&self) -> &Decimal {
     &self.portfolio_evaluation
   }
@@ -205,7 +218,7 @@ impl Risk {
     self.portfolio_liquidation_value = portfolio_liquidation_value;
     self
   }
-
+  ///Стоимость ликвидного портфеля
   pub fn portfolio_liquidation_value(&self) -> &Decimal {
     &self.portfolio_liquidation_value
   }
@@ -219,7 +232,7 @@ impl Risk {
     self.risk_category_id = risk_category_id;
     self
   }
-
+  ///Категория риска
   pub fn risk_category_id(&self) -> &i32 {
     &self.risk_category_id
   }
@@ -233,7 +246,7 @@ impl Risk {
     self.risk_coverage_ratio_one = risk_coverage_ratio_one;
     self
   }
-
+  ///НПР1
   pub fn risk_coverage_ratio_one(&self) -> &Decimal {
     &self.risk_coverage_ratio_one
   }
@@ -247,7 +260,7 @@ impl Risk {
     self.risk_coverage_ratio_two = risk_coverage_ratio_two;
     self
   }
-
+  ///НПР2
   pub fn risk_coverage_ratio_two(&self) -> &Decimal {
     &self.risk_coverage_ratio_two
   }

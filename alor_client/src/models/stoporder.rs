@@ -25,32 +25,45 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Stoporder {
   #[serde(rename = "brokerSymbol")]
+  ///Пара Биржа:Тикер
   broker_symbol: String,  // MOEX:LKOH 
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Время действия заявки (UTC)
   end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
+  
   exchange: Exchange, 
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // true 
   #[serde(rename = "filledQtyBatch")]
+  ///Количество исполненных
   filled_qty_batch: Decimal,  // 1 
   #[serde(rename = "id")]
+  ///Уникальный идентификатор стоп-заявки
   id: Decimal,  // 347498 
   #[serde(rename = "price")]
+  ///Цена(Лимит)
   price: Decimal,  // 208.6 
   #[serde(rename = "qty")]
+  ///Количество
   qty: Decimal,  // 1 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "status")]
+  
   status: OrderStatus, 
   #[serde(rename = "stopPrice")]
+  ///Условная цена
   stop_price: Decimal,  // 215 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "type")]
+  
   rtype: StopOrderType 
 }
 
@@ -81,7 +94,7 @@ impl Stoporder {
     self.broker_symbol = broker_symbol;
     self
   }
-
+  ///Пара Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
   }
@@ -95,7 +108,7 @@ impl Stoporder {
     self.end_time = end_time;
     self
   }
-
+  ///Время действия заявки (UTC)
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -109,7 +122,7 @@ impl Stoporder {
     self.exchange = exchange;
     self
   }
-
+  
   pub fn exchange(&self) -> &Exchange {
     &self.exchange
   }
@@ -123,7 +136,7 @@ impl Stoporder {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -137,7 +150,7 @@ impl Stoporder {
     self.filled_qty_batch = filled_qty_batch;
     self
   }
-
+  ///Количество исполненных
   pub fn filled_qty_batch(&self) -> &Decimal {
     &self.filled_qty_batch
   }
@@ -151,7 +164,7 @@ impl Stoporder {
     self.id = id;
     self
   }
-
+  ///Уникальный идентификатор стоп-заявки
   pub fn id(&self) -> &Decimal {
     &self.id
   }
@@ -165,7 +178,7 @@ impl Stoporder {
     self.price = price;
     self
   }
-
+  ///Цена(Лимит)
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -179,7 +192,7 @@ impl Stoporder {
     self.qty = qty;
     self
   }
-
+  ///Количество
   pub fn qty(&self) -> &Decimal {
     &self.qty
   }
@@ -193,7 +206,7 @@ impl Stoporder {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -207,7 +220,7 @@ impl Stoporder {
     self.status = status;
     self
   }
-
+  
   pub fn status(&self) -> &OrderStatus {
     &self.status
   }
@@ -221,7 +234,7 @@ impl Stoporder {
     self.stop_price = stop_price;
     self
   }
-
+  ///Условная цена
   pub fn stop_price(&self) -> &Decimal {
     &self.stop_price
   }
@@ -235,7 +248,7 @@ impl Stoporder {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента)
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -249,7 +262,7 @@ impl Stoporder {
     self.rtype = rtype;
     self
   }
-
+  
   pub fn rtype(&self) -> &StopOrderType {
     &self.rtype
   }

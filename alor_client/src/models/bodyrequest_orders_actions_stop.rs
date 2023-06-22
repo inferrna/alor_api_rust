@@ -25,16 +25,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStop {
   #[serde(rename = "Instrument")]
+  
   instrument: BodyrequestOrdersActionsStopInstrument, 
   #[serde(rename = "OrderEndUnixTime")]
+  ///Время (UTC) завершения сделки в формате Unix Time Seconds
   order_end_unix_time: i64,  // 0 
   #[serde(rename = "Quantity")]
+  ///Количество
   quantity: i32,  // 1 
   #[serde(rename = "Side")]
+  
   side: Operation, 
   #[serde(rename = "TriggerPrice")]
+  ///Стоп-цена
   trigger_price: i32,  // 215 
   #[serde(rename = "User")]
+  
   user: BodyrequestOrdersActionsStopUser 
 }
 
@@ -58,7 +64,7 @@ impl BodyrequestOrdersActionsStop {
     self.instrument = instrument;
     self
   }
-
+  
   pub fn instrument(&self) -> &BodyrequestOrdersActionsStopInstrument {
     &self.instrument
   }
@@ -72,7 +78,7 @@ impl BodyrequestOrdersActionsStop {
     self.order_end_unix_time = order_end_unix_time;
     self
   }
-
+  ///Время (UTC) завершения сделки в формате Unix Time Seconds
   pub fn order_end_unix_time(&self) -> &i64 {
     &self.order_end_unix_time
   }
@@ -86,7 +92,7 @@ impl BodyrequestOrdersActionsStop {
     self.quantity = quantity;
     self
   }
-
+  ///Количество
   pub fn quantity(&self) -> &i32 {
     &self.quantity
   }
@@ -100,7 +106,7 @@ impl BodyrequestOrdersActionsStop {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -114,7 +120,7 @@ impl BodyrequestOrdersActionsStop {
     self.trigger_price = trigger_price;
     self
   }
-
+  ///Стоп-цена
   pub fn trigger_price(&self) -> &i32 {
     &self.trigger_price
   }
@@ -128,7 +134,7 @@ impl BodyrequestOrdersActionsStop {
     self.user = user;
     self
   }
-
+  
   pub fn user(&self) -> &BodyrequestOrdersActionsStopUser {
     &self.user
   }

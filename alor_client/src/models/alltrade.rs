@@ -25,26 +25,36 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Alltrade {
   #[serde(rename = "existing")]
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   existing: bool,  // false 
   #[serde(rename = "id")]
+  ///Уникальный идентификатор.
   id: i64,  // 159 
   #[serde(rename = "oi")]
+  ///Открытый интерес (open interest). Если не поддерживается инстурментом - значение 0.
   oi: i32,  // 523920 
   #[serde(rename = "orderno")]
+  ///Идентификатор заявки
   orderno: i64,  // 0 
   #[serde(rename = "price")]
+  ///Цена
   price: Decimal,  // 142.52 
   #[serde(rename = "qty")]
+  ///Количество
   qty: i32,  // 1 
   #[serde(rename = "side")]
+  
   side: Operation, 
   #[serde(rename = "symbol")]
+  ///Тикер (Код финансового инструмента). \"[N/A]\" используется если symbol не определен.
   symbol: String,  // SBER 
   #[serde(rename = "time")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
+  ///Дата и время (UTC) закрытия заявки
   time: DateTime<Utc>,  // 2018-08-07T08:40:03.445Z 
   #[serde(rename = "timestamp")]
+  ///Время (UTC) в формате Unix Time Milliseconds
   timestamp: i64  // 1611158710768 
 }
 
@@ -72,7 +82,7 @@ impl Alltrade {
     self.existing = existing;
     self
   }
-
+  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -86,7 +96,7 @@ impl Alltrade {
     self.id = id;
     self
   }
-
+  ///Уникальный идентификатор.
   pub fn id(&self) -> &i64 {
     &self.id
   }
@@ -100,7 +110,7 @@ impl Alltrade {
     self.oi = oi;
     self
   }
-
+  ///Открытый интерес (open interest). Если не поддерживается инстурментом - значение 0.
   pub fn oi(&self) -> &i32 {
     &self.oi
   }
@@ -114,7 +124,7 @@ impl Alltrade {
     self.orderno = orderno;
     self
   }
-
+  ///Идентификатор заявки
   pub fn orderno(&self) -> &i64 {
     &self.orderno
   }
@@ -128,7 +138,7 @@ impl Alltrade {
     self.price = price;
     self
   }
-
+  ///Цена
   pub fn price(&self) -> &Decimal {
     &self.price
   }
@@ -142,7 +152,7 @@ impl Alltrade {
     self.qty = qty;
     self
   }
-
+  ///Количество
   pub fn qty(&self) -> &i32 {
     &self.qty
   }
@@ -156,7 +166,7 @@ impl Alltrade {
     self.side = side;
     self
   }
-
+  
   pub fn side(&self) -> &Operation {
     &self.side
   }
@@ -170,7 +180,7 @@ impl Alltrade {
     self.symbol = symbol;
     self
   }
-
+  ///Тикер (Код финансового инструмента). \"[N/A]\" используется если symbol не определен.
   pub fn symbol(&self) -> &String {
     &self.symbol
   }
@@ -184,7 +194,7 @@ impl Alltrade {
     self.time = time;
     self
   }
-
+  ///Дата и время (UTC) закрытия заявки
   pub fn time(&self) -> &DateTime<Utc> {
     &self.time
   }
@@ -198,7 +208,7 @@ impl Alltrade {
     self.timestamp = timestamp;
     self
   }
-
+  ///Время (UTC) в формате Unix Time Milliseconds
   pub fn timestamp(&self) -> &i64 {
     &self.timestamp
   }
