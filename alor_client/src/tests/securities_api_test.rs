@@ -154,9 +154,9 @@ async fn dev_securities_search_all_trades_test() {
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let from: i32 = serde_json::from_value(value).unwrap();
+    let from: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let to: i32 = serde_json::from_value(value).unwrap();
+    let to: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let take: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);

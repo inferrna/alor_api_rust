@@ -197,11 +197,11 @@ pub trait SecuritiesApi {
     /// 
     ///
     /// * `from` Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `to` Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `take` Количество загружаемых элементов (optional)
@@ -216,7 +216,7 @@ pub trait SecuritiesApi {
     /// Example: true
     /// 
     ///
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
 ///
 /// Получение информации о торговых инструментах на выбранной бирже
 ///
@@ -813,7 +813,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i32>, to: Option<i32>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

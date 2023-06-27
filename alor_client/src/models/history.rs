@@ -30,11 +30,11 @@ pub struct History {
   #[serde(rename = "next")]
   #[serde(default)]
   ///Время (UTC) начала следующей свечи
-  next: Option<i32>,  // 1532944860 
+  next: Option<i64>,  // 1532944860 
   #[serde(rename = "prev")]
   #[serde(default)]
   ///Время (UTC) начала предыдущей свечи
-  prev: Option<i32>  // 1532944860 
+  prev: Option<i64>  // 1532944860 
 }
 
 impl History {
@@ -60,16 +60,16 @@ impl History {
   }
 
 
-  pub fn set_next(&mut self, next: i32) {
+  pub fn set_next(&mut self, next: i64) {
     self.next = Some(next);
   }
 
-  pub fn with_next(mut self, next: i32) -> History {
+  pub fn with_next(mut self, next: i64) -> History {
     self.next = Some(next);
     self
   }
   ///Время (UTC) начала следующей свечи
-  pub fn next(&self) -> Option<&i32> {
+  pub fn next(&self) -> Option<&i64> {
     self.next.as_ref()
   }
 
@@ -77,16 +77,16 @@ impl History {
     self.next = None;
   }
 
-  pub fn set_prev(&mut self, prev: i32) {
+  pub fn set_prev(&mut self, prev: i64) {
     self.prev = Some(prev);
   }
 
-  pub fn with_prev(mut self, prev: i32) -> History {
+  pub fn with_prev(mut self, prev: i64) -> History {
     self.prev = Some(prev);
     self
   }
   ///Время (UTC) начала предыдущей свечи
-  pub fn prev(&self) -> Option<&i32> {
+  pub fn prev(&self) -> Option<&i64> {
     self.prev.as_ref()
   }
 
