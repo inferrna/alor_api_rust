@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **price** | [***Decimal**](BigDecimal.md) | Цена выставления лимитной заявки | [default to null]
 **quantity** | **i32** | Количество (лоты) | [default to null]
 **side** | **Operation** |  | [default to null]
-**stop_end_unix_time** | **i64** | Срок действия (UTC) в формате Unix Time seconds | [default to null]
+**stop_end_unix_time** | [***Decimal**](BigDecimal.md) | Срок действия (UTC) в формате Unix Time seconds | [default to null]
 **time_in_force** | **LifePolicy** |  | [default to null]
 **trigger_price** | [***Decimal**](BigDecimal.md) | Цена срабатывания | [default to null]
 **user** | [***BodyrequestOrdersActionsStopLimitTvWarpUser**](bodyrequest_OrdersActionsStopLimitTVWarp_user.md) |  | [default to null]

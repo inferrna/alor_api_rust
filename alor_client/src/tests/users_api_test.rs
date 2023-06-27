@@ -283,7 +283,7 @@ async fn trade_stats_test() {
     let value = json!(/*Put test json here*/);
     let date_from: NaiveDate = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let from: i32 = serde_json::from_value(value).unwrap();
+    let from: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let limit: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
@@ -310,7 +310,7 @@ async fn trade_stats_by_symbol_test() {
     let value = json!(/*Put test json here*/);
     let date_from: NaiveDate = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let from: i32 = serde_json::from_value(value).unwrap();
+    let from: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let limit: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);

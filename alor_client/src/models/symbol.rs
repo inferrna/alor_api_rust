@@ -59,7 +59,7 @@ pub struct Symbol {
   last_price: Decimal,  // 171.82 
   #[serde(rename = "last_price_timestamp")]
   ///UTC-timestamp для значения поля \"last_price\"
-  last_price_timestamp: i64,  // 1610982677 
+  last_price_timestamp: Decimal,  // 1610982677 
   #[serde(rename = "lotsize")]
   ///Размер лота
   lotsize: Decimal,  // 10.0 
@@ -94,7 +94,7 @@ pub struct Symbol {
 }
 
 impl Symbol {
-  pub fn new(accrued_int: i32, accrued_interest: i32, ask: Decimal, bid: Decimal, change: Decimal, change_percent: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> Symbol {
+  pub fn new(accrued_int: i32, accrued_interest: i32, ask: Decimal, bid: Decimal, change: Decimal, change_percent: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: Decimal, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ryield: i32, ) -> Symbol {
     Symbol {
       accrued_int: accrued_int,
       accrued_interest: accrued_interest,
@@ -275,16 +275,16 @@ impl Symbol {
   }
 
 
-  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: i64) {
+  pub fn set_last_price_timestamp(&mut self, last_price_timestamp: Decimal) {
     self.last_price_timestamp = last_price_timestamp;
   }
 
-  pub fn with_last_price_timestamp(mut self, last_price_timestamp: i64) -> Symbol {
+  pub fn with_last_price_timestamp(mut self, last_price_timestamp: Decimal) -> Symbol {
     self.last_price_timestamp = last_price_timestamp;
     self
   }
   ///UTC-timestamp для значения поля \"last_price\"
-  pub fn last_price_timestamp(&self) -> &i64 {
+  pub fn last_price_timestamp(&self) -> &Decimal {
     &self.last_price_timestamp
   }
 

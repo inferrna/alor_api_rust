@@ -337,7 +337,7 @@ pub trait UsersApi {
     /// 
     ///
     /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
-    /// Example: from_example
+    /// Example: 789
     /// 
     ///
     /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
@@ -352,7 +352,7 @@ pub trait UsersApi {
     /// 
     /// 
     ///
-    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<i64>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
 ///
 /// Получение истории сделок (один тикер)
 ///
@@ -377,7 +377,7 @@ pub trait UsersApi {
     /// 
     ///
     /// * `from` Начиная с какого ID (номера сделки) отдавать историю сделок (optional)
-    /// Example: from_example
+    /// Example: 789
     /// 
     ///
     /// * `limit` Количество возвращаемых записей (максимум 1000) (optional)
@@ -392,7 +392,7 @@ pub trait UsersApi {
     /// 
     /// 
     ///
-    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
+    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<i64>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
@@ -1710,7 +1710,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
-    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
+    async fn trade_stats(&self, exchange: crate::models::Exchange, portfolio: &str, date_from: Option<NaiveDate>, from: Option<i64>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1823,7 +1823,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
-    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<&str>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
+    async fn trade_stats_by_symbol(&self, exchange: crate::models::Exchange, portfolio: &str, symbol: &str, date_from: Option<NaiveDate>, from: Option<i64>, limit: Option<i32>, descending: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<Vec<Trade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

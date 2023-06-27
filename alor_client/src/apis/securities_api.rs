@@ -65,11 +65,11 @@ pub trait SecuritiesApi {
     /// 
     ///
     /// * `from` Начало отрезка времени (UTC) в формате Unix Time Seconds (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `to` Конец отрезка времени (UTC) в формате Unix Time Seconds (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `untraded` Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера (optional)
@@ -80,7 +80,7 @@ pub trait SecuritiesApi {
     /// 
     /// 
     ///
-    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
+    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i64, to: i64, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>>;
 ///
 /// Получение информации о биржевом стакане
 ///
@@ -281,7 +281,7 @@ pub trait SecuritiesApi {
 
 #[async_trait::async_trait]
 impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>SecuritiesApi for SecuritiesApiClient<C> {
-    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i32, to: i32, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>> {
+    async fn dev_history(&self, symbol: &str, exchange: crate::models::Exchange, tf: crate::models::Duration, from: i64, to: i64, untraded: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<History, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

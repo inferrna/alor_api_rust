@@ -29,11 +29,11 @@ pub struct OrderbookBid {
   price: Decimal,  // 115820 
   #[serde(rename = "volume")]
   ///Объём
-  volume: i32  // 23 
+  volume: i64  // 23 
 }
 
 impl OrderbookBid {
-  pub fn new(price: Decimal, volume: i32, ) -> OrderbookBid {
+  pub fn new(price: Decimal, volume: i64, ) -> OrderbookBid {
     OrderbookBid {
       price: price,
       volume: volume
@@ -54,16 +54,16 @@ impl OrderbookBid {
   }
 
 
-  pub fn set_volume(&mut self, volume: i32) {
+  pub fn set_volume(&mut self, volume: i64) {
     self.volume = volume;
   }
 
-  pub fn with_volume(mut self, volume: i32) -> OrderbookBid {
+  pub fn with_volume(mut self, volume: i64) -> OrderbookBid {
     self.volume = volume;
     self
   }
   ///Объём
-  pub fn volume(&self) -> &i32 {
+  pub fn volume(&self) -> &i64 {
     &self.volume
   }
 

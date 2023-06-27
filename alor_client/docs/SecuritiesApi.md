@@ -28,8 +28,8 @@ Name | Type | Description  | Notes
   **symbol** | **String**| Тикер (Код финансового инструмента) | 
   **exchange** | [**Exchange**](.md)| Биржа | 
   **tf** | [**Duration**](.md)| Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) | 
-  **from** | **i32**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
-  **to** | **i32**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
+  **from** | **i64**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
+  **to** | **i64**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -39,8 +39,8 @@ Name | Type | Description  | Notes
  **symbol** | **String**| Тикер (Код финансового инструмента) | 
  **exchange** | [**Exchange**](.md)| Биржа | 
  **tf** | [**Duration**](.md)| Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) | 
- **from** | **i32**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
- **to** | **i32**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
+ **from** | **i64**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
+ **to** | **i64**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
  **untraded** | **bool**| Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
 

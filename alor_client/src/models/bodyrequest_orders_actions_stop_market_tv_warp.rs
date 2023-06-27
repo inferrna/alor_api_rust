@@ -38,7 +38,7 @@ pub struct BodyrequestOrdersActionsStopMarketTvWarp {
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
   ///Срок действия (UTC) в формате Unix Time seconds
-  stop_end_unix_time: i64,  // 1590094740 
+  stop_end_unix_time: Decimal,  // 1590094740 
   #[serde(rename = "triggerPrice")]
   ///Цена срабатывания
   trigger_price: Decimal,  // 191.33 
@@ -48,7 +48,7 @@ pub struct BodyrequestOrdersActionsStopMarketTvWarp {
 }
 
 impl BodyrequestOrdersActionsStopMarketTvWarp {
-  pub fn new(condition: String, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, quantity: i32, side: Operation, stop_end_unix_time: i64, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopMarketTvWarp {
+  pub fn new(condition: String, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, quantity: i32, side: Operation, stop_end_unix_time: Decimal, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopMarketTvWarp {
     BodyrequestOrdersActionsStopMarketTvWarp {
       condition: condition,
       instrument: instrument,
@@ -116,16 +116,16 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
   }
 
 
-  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: i64) {
+  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: Decimal) {
     self.stop_end_unix_time = stop_end_unix_time;
   }
 
-  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: i64) -> BodyrequestOrdersActionsStopMarketTvWarp {
+  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: Decimal) -> BodyrequestOrdersActionsStopMarketTvWarp {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
   ///Срок действия (UTC) в формате Unix Time seconds
-  pub fn stop_end_unix_time(&self) -> &i64 {
+  pub fn stop_end_unix_time(&self) -> &Decimal {
     &self.stop_end_unix_time
   }
 

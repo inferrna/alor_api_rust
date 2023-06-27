@@ -41,11 +41,11 @@ pub struct HistoryObject {
   time: i64,  // 1532944740 
   #[serde(rename = "volume")]
   ///Объём
-  volume: i32  // 1944 
+  volume: i64  // 1944 
 }
 
 impl HistoryObject {
-  pub fn new(close: Decimal, high: Decimal, low: Decimal, open: Decimal, time: i64, volume: i32, ) -> HistoryObject {
+  pub fn new(close: Decimal, high: Decimal, low: Decimal, open: Decimal, time: i64, volume: i64, ) -> HistoryObject {
     HistoryObject {
       close: close,
       high: high,
@@ -126,16 +126,16 @@ impl HistoryObject {
   }
 
 
-  pub fn set_volume(&mut self, volume: i32) {
+  pub fn set_volume(&mut self, volume: i64) {
     self.volume = volume;
   }
 
-  pub fn with_volume(mut self, volume: i32) -> HistoryObject {
+  pub fn with_volume(mut self, volume: i64) -> HistoryObject {
     self.volume = volume;
     self
   }
   ///Объём
-  pub fn volume(&self) -> &i32 {
+  pub fn volume(&self) -> &i64 {
     &self.volume
   }
 

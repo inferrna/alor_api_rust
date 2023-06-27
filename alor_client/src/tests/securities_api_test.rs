@@ -53,9 +53,9 @@ async fn dev_history_test() {
     let value = json!(/*Put test json here*/);
     let tf: Duration = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let from: i32 = serde_json::from_value(value).unwrap();
+    let from: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let to: i32 = serde_json::from_value(value).unwrap();
+    let to: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let untraded: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **low** | [***Decimal**](BigDecimal.md) | Миниимальная цена | [default to null]
 **open** | [***Decimal**](BigDecimal.md) | Цена при открытии | [default to null]
 **time** | **i64** | Время (UTC) (Unix time seconds) | [default to null]
-**volume** | **i32** | Объём | [default to null]
+**volume** | **i64** | Объём | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

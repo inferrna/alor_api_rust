@@ -36,7 +36,7 @@ pub struct Orderbook {
   existing: bool,  // false 
   #[serde(rename = "ms_timestamp")]
   ///Время(UTC) в формате Unix Time Milliseconds
-  ms_timestamp: i64,  // 1610982677578 
+  ms_timestamp: Decimal,  // 1610982677578 
   #[serde(rename = "snapshot")]
   ///Deprecated. Устаревшее поле, будет удалено в будущих обновлениях.
   snapshot: bool,  // true 
@@ -46,7 +46,7 @@ pub struct Orderbook {
 }
 
 impl Orderbook {
-  pub fn new(asks: Vec<OrderbookAsk>, bids: Vec<OrderbookBid>, existing: bool, ms_timestamp: i64, snapshot: bool, timestamp: Decimal, ) -> Orderbook {
+  pub fn new(asks: Vec<OrderbookAsk>, bids: Vec<OrderbookBid>, existing: bool, ms_timestamp: Decimal, snapshot: bool, timestamp: Decimal, ) -> Orderbook {
     Orderbook {
       asks: asks,
       bids: bids,
@@ -99,16 +99,16 @@ impl Orderbook {
   }
 
 
-  pub fn set_ms_timestamp(&mut self, ms_timestamp: i64) {
+  pub fn set_ms_timestamp(&mut self, ms_timestamp: Decimal) {
     self.ms_timestamp = ms_timestamp;
   }
 
-  pub fn with_ms_timestamp(mut self, ms_timestamp: i64) -> Orderbook {
+  pub fn with_ms_timestamp(mut self, ms_timestamp: Decimal) -> Orderbook {
     self.ms_timestamp = ms_timestamp;
     self
   }
   ///Время(UTC) в формате Unix Time Milliseconds
-  pub fn ms_timestamp(&self) -> &i64 {
+  pub fn ms_timestamp(&self) -> &Decimal {
     &self.ms_timestamp
   }
 
