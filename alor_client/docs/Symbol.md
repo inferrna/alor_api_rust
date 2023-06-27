@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **facevalue** | [***Decimal**](BigDecimal.md) |  | [default to null]
 **high_price** | [***Decimal**](BigDecimal.md) | Максимальная цена | [default to null]
 **last_price** | [***Decimal**](BigDecimal.md) | Последняя цена | [default to null]
-**last_price_timestamp** | [***Decimal**](BigDecimal.md) | UTC-timestamp для значения поля \&quot;last_price\&quot; | [default to null]
+**last_price_timestamp** | **i64** | UTC-timestamp для значения поля \&quot;last_price\&quot; | [default to null]
 **lotsize** | [***Decimal**](BigDecimal.md) | Размер лота | [default to null]
 **lotvalue** | [***Decimal**](BigDecimal.md) |  | [default to null]
 **low_price** | [***Decimal**](BigDecimal.md) | Минимальная цена | [default to null]

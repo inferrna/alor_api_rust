@@ -47,7 +47,7 @@ pub struct BodyrequestOrdersActionsStopLimitTvWarp {
   side: Operation, 
   #[serde(rename = "stopEndUnixTime")]
   ///Срок действия (UTC) в формате Unix Time seconds
-  stop_end_unix_time: Decimal,  // 1590094740 
+  stop_end_unix_time: i64,  // 1590094740 
   #[serde(rename = "timeInForce")]
   
   time_in_force: LifePolicy, 
@@ -60,7 +60,7 @@ pub struct BodyrequestOrdersActionsStopLimitTvWarp {
 }
 
 impl BodyrequestOrdersActionsStopLimitTvWarp {
-  pub fn new(condition: String, iceberg_fixed: Decimal, iceberg_variance: Decimal, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, price: Decimal, quantity: i32, side: Operation, stop_end_unix_time: Decimal, time_in_force: LifePolicy, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopLimitTvWarp {
+  pub fn new(condition: String, iceberg_fixed: Decimal, iceberg_variance: Decimal, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, price: Decimal, quantity: i32, side: Operation, stop_end_unix_time: i64, time_in_force: LifePolicy, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopLimitTvWarp {
     BodyrequestOrdersActionsStopLimitTvWarp {
       condition: condition,
       iceberg_fixed: iceberg_fixed,
@@ -174,16 +174,16 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
   }
 
 
-  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: Decimal) {
+  pub fn set_stop_end_unix_time(&mut self, stop_end_unix_time: i64) {
     self.stop_end_unix_time = stop_end_unix_time;
   }
 
-  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: Decimal) -> BodyrequestOrdersActionsStopLimitTvWarp {
+  pub fn with_stop_end_unix_time(mut self, stop_end_unix_time: i64) -> BodyrequestOrdersActionsStopLimitTvWarp {
     self.stop_end_unix_time = stop_end_unix_time;
     self
   }
   ///Срок действия (UTC) в формате Unix Time seconds
-  pub fn stop_end_unix_time(&self) -> &Decimal {
+  pub fn stop_end_unix_time(&self) -> &i64 {
     &self.stop_end_unix_time
   }
 
