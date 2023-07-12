@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **exchange** | [**Exchange**](.md)| Биржа | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **exchange** | [**Exchange**](.md)| Биржа | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **order_id** | **i32**| Идентификатор заявки | 
+ **order_id** | **i64**| Идентификатор заявки | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
 
 ### Return type
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **exchange** | [**Exchange**](.md)| Биржа | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **order_id** | **i32**| Идентификатор стоп-заявки | 
+  **order_id** | **i64**| Идентификатор стоп-заявки | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **exchange** | [**Exchange**](.md)| Биржа | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **order_id** | **i32**| Идентификатор стоп-заявки | 
+ **order_id** | **i64**| Идентификатор стоп-заявки | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
 
 ### Return type

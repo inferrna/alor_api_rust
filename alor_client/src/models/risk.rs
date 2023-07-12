@@ -56,7 +56,7 @@ pub struct Risk {
   portfolio_liquidation_value: Decimal,  // 646270.9 
   #[serde(rename = "riskCategoryId")]
   ///Категория риска
-  risk_category_id: i32,  // 2 
+  risk_category_id: i64,  // 2 
   #[serde(rename = "riskCoverageRatioOne")]
   ///НПР1
   risk_coverage_ratio_one: Decimal,  // 630518.785 
@@ -66,7 +66,7 @@ pub struct Risk {
 }
 
 impl Risk {
-  pub fn new(client_type: String, corrected_margin: Decimal, exchange: Exchange, has_forbidden_positions: bool, has_negative_quantity: bool, initial_margin: Decimal, minimal_margin: Decimal, portfolio: String, portfolio_evaluation: Decimal, portfolio_liquidation_value: Decimal, risk_category_id: i32, risk_coverage_ratio_one: Decimal, risk_coverage_ratio_two: Decimal, ) -> Risk {
+  pub fn new(client_type: String, corrected_margin: Decimal, exchange: Exchange, has_forbidden_positions: bool, has_negative_quantity: bool, initial_margin: Decimal, minimal_margin: Decimal, portfolio: String, portfolio_evaluation: Decimal, portfolio_liquidation_value: Decimal, risk_category_id: i64, risk_coverage_ratio_one: Decimal, risk_coverage_ratio_two: Decimal, ) -> Risk {
     Risk {
       client_type: client_type,
       corrected_margin: corrected_margin,
@@ -224,16 +224,16 @@ impl Risk {
   }
 
 
-  pub fn set_risk_category_id(&mut self, risk_category_id: i32) {
+  pub fn set_risk_category_id(&mut self, risk_category_id: i64) {
     self.risk_category_id = risk_category_id;
   }
 
-  pub fn with_risk_category_id(mut self, risk_category_id: i32) -> Risk {
+  pub fn with_risk_category_id(mut self, risk_category_id: i64) -> Risk {
     self.risk_category_id = risk_category_id;
     self
   }
   ///Категория риска
-  pub fn risk_category_id(&self) -> &i32 {
+  pub fn risk_category_id(&self) -> &i64 {
     &self.risk_category_id
   }
 

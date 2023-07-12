@@ -93,10 +93,10 @@ pub trait V2ordersApi {
     /// 
     ///
     /// * `stop_order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
-    async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i32) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+    async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i64) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
 ///
 /// Снятие заявки
 ///
@@ -105,7 +105,7 @@ pub trait V2ordersApi {
 /// # Arguments
 ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `portfolio` Идентификатор клиентского портфеля (required)
@@ -128,7 +128,7 @@ pub trait V2ordersApi {
     /// 
     /// 
     ///
-    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
 ///
 /// Получение информации о стоп-заявках
 ///
@@ -165,14 +165,14 @@ pub trait V2ordersApi {
     /// 
     ///
     /// * `order_id` Идентификатор стоп-заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `format` Формат возвращаемого сервером JSON (optional)
     /// 
     /// 
     ///
-    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
+    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
@@ -393,7 +393,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
-    async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i32) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
+    async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i64) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -501,7 +501,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
-    async fn command_api_warp_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -709,7 +709,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
-    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
+    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

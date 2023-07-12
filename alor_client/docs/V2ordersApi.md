@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStopLimitTvWarp**](BodyrequestOrdersActionsStopLimitTvWarp.md)| Тело заявки | 
   **x_alor_reqid** | **String**| Через точку с запятой портфель и уникальный идентификатор запроса &#x60;&#x60;portfolio;uid&#x60;&#x60;. В качестве идентификатора запроса требуется уникальная случайная строка. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на предыдущий запрос с таким значением идентификатора. | 
-  **stop_order_id** | **i32**| Идентификатор заявки | 
+  **stop_order_id** | **i64**| Идентификатор заявки | 
 
 ### Return type
 
@@ -106,7 +106,7 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
   **exchange** | [**Exchange**](.md)| Биржа | 
   **stop** | **bool**| Является стоп-заявкой? (тестирование: всегда true) | 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **order_id** | **i32**| Идентификатор заявки | 
+ **order_id** | **i64**| Идентификатор заявки | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
  **exchange** | [**Exchange**](.md)| Биржа | 
  **stop** | **bool**| Является стоп-заявкой? (тестирование: всегда true) | 
@@ -189,7 +189,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **exchange** | [**Exchange**](.md)| Биржа | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **order_id** | **i32**| Идентификатор стоп-заявки | 
+  **order_id** | **i64**| Идентификатор стоп-заявки | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **exchange** | [**Exchange**](.md)| Биржа | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **order_id** | **i32**| Идентификатор стоп-заявки | 
+ **order_id** | **i64**| Идентификатор стоп-заявки | 
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
 
 ### Return type

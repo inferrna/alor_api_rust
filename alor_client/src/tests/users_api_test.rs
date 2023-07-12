@@ -124,7 +124,7 @@ async fn dev_get_one_order_test() {
     let value = json!(/*Put test json here*/);
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let response: Order = api_client.dev_get_one_order(exchange, portfolio, order_id, format).await.unwrap();
@@ -162,7 +162,7 @@ async fn dev_get_one_stop_order_test() {
     let value = json!(/*Put test json here*/);
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: JsonFormat = serde_json::from_value(value).unwrap();
     let response: StoporderWarp = api_client.dev_get_one_stop_order(exchange, portfolio, order_id, format).await.unwrap();

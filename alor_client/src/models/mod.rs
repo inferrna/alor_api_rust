@@ -2,6 +2,8 @@ mod alltrade;
 pub use self::alltrade::Alltrade;
 mod alltrades;
 pub use self::alltrades::Alltrades;
+mod alltradeshistory;
+pub use self::alltradeshistory::Alltradeshistory;
 mod bodyrequest_orders_actions_limit;
 pub use self::bodyrequest_orders_actions_limit::BodyrequestOrdersActionsLimit;
 mod bodyrequest_orders_actions_limit_instrument;

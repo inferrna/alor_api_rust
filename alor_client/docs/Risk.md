@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **portfolio** | **String** | Идентификатор клиентского портфеля | [default to null]
 **portfolio_evaluation** | [***Decimal**](BigDecimal.md) | Общая стоимость портфеля | [default to null]
 **portfolio_liquidation_value** | [***Decimal**](BigDecimal.md) | Стоимость ликвидного портфеля | [default to null]
-**risk_category_id** | **i32** | Категория риска | [default to null]
+**risk_category_id** | **i64** | Категория риска | [default to null]
 **risk_coverage_ratio_one** | [***Decimal**](BigDecimal.md) | НПР1 | [default to null]
 **risk_coverage_ratio_two** | [***Decimal**](BigDecimal.md) | НПР2 | [default to null]
 

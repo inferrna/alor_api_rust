@@ -44,6 +44,7 @@ Class | Method | HTTP request | Description
 *SecuritiesApi* | [**dev_securities_futures**](docs/SecuritiesApi.md#dev_securities_futures) | **GET** md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote | Получение котировки по ближайшему фьючерсу (код)
 *SecuritiesApi* | [**dev_securities_search**](docs/SecuritiesApi.md#dev_securities_search) | **GET** md/v2/Securities | Получение информации о торговых инструментах
 *SecuritiesApi* | [**dev_securities_search_all_trades**](docs/SecuritiesApi.md#dev_securities_search_all_trades) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades | Получение информации о всех сделках по ценным бумагам за сегодня
+*SecuritiesApi* | [**dev_securities_search_all_trades_history**](docs/SecuritiesApi.md#dev_securities_search_all_trades_history) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades/history | Получение исторической информации о всех сделках по ценным бумагам
 *SecuritiesApi* | [**dev_securities_search_exchange**](docs/SecuritiesApi.md#dev_securities_search_exchange) | **GET** md/v2/Securities/{exchange} | Получение информации о торговых инструментах на выбранной бирже
 *SecuritiesApi* | [**dev_securities_search_exchange_code**](docs/SecuritiesApi.md#dev_securities_search_exchange_code) | **GET** md/v2/Securities/{exchange}/{symbol} | Получение информации о выбранном финансовом инструменте
 *SecuritiesApi* | [**risk_rates**](docs/SecuritiesApi.md#risk_rates) | **GET** md/v2/risk/rates | Запрос ставок риска
@@ -73,6 +74,7 @@ Class | Method | HTTP request | Description
 
  - [Alltrade](docs/Alltrade.md)
  - [Alltrades](docs/Alltrades.md)
+ - [Alltradeshistory](docs/Alltradeshistory.md)
  - [BodyrequestOrdersActionsLimit](docs/BodyrequestOrdersActionsLimit.md)
  - [BodyrequestOrdersActionsLimitInstrument](docs/BodyrequestOrdersActionsLimitInstrument.md)
  - [BodyrequestOrdersActionsLimitTVput](docs/BodyrequestOrdersActionsLimitTVput.md)

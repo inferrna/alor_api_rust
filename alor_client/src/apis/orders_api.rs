@@ -125,7 +125,7 @@ pub trait OrdersApi {
 /// # Arguments
 ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `portfolio` Идентификатор клиентского портфеля (required)
@@ -148,7 +148,7 @@ pub trait OrdersApi {
     /// 
     /// 
     ///
-    async fn command_api_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
+    async fn command_api_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>>;
 ///
 /// Провести оценку одной заявки
 ///
@@ -185,7 +185,7 @@ pub trait OrdersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `portfolio` Идентификатор клиентского портфеля (required)
@@ -200,7 +200,7 @@ pub trait OrdersApi {
     /// Example: x_alor_reqid_example
     /// 
     ///
-    async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i32, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>>;
+    async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i64, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>>;
 ///
 /// Создание стоп-лосс заявки
 ///
@@ -257,14 +257,14 @@ pub trait OrdersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
     /// Example: x_alor_reqid_example
     /// 
     ///
-    async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+    async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
 ///
 /// Изменение стоп-лосс заявки
 ///
@@ -281,14 +281,14 @@ pub trait OrdersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
     /// Example: x_alor_reqid_example
     /// 
     ///
-    async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+    async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
 ///
 /// Создание стоп-заявки
 ///
@@ -345,14 +345,14 @@ pub trait OrdersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
     /// Example: x_alor_reqid_example
     /// 
     ///
-    async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+    async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
 ///
 /// Изменение стоп-заявки
 ///
@@ -369,14 +369,14 @@ pub trait OrdersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `x_alor_reqid` Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора (required)
     /// Example: x_alor_reqid_example
     /// 
     ///
-    async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
+    async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>>;
 }
 
 #[async_trait::async_trait]
@@ -813,7 +813,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn command_api_v2clientordersdelete(&self, order_id: i32, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
+    async fn command_api_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::JsonFormat>) -> Result<OrdersActionsDeleteOrderIdCommandApi, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1102,7 +1102,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i32, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>> {
+    async fn v2clientordersactionsorder_id(&self, trade_server_code: &str, order_id: i64, portfolio: &str, stop: bool, x_alor_reqid: &str) -> Result<OrdersActionsDeleteOrderId, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1421,7 +1421,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
+    async fn v2clientordersactionsstop_loss_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1529,7 +1529,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
+    async fn v2clientordersactionsstop_lossorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1853,7 +1853,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
+    async fn v2clientordersactionstake_profit_limitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStoplimit, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1961,7 +1961,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i32, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
+    async fn v2clientordersactionstake_profitorder_id(&self, body: crate::models::BodyrequestOrdersActionsStop, trade_server_code: &str, order_id: i64, x_alor_reqid: &str) -> Result<OrdersActionsStopProfitLoss, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

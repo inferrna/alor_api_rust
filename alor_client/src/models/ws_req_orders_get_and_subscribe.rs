@@ -36,6 +36,9 @@ pub struct WsReqOrdersGetAndSubscribe {
   #[serde(rename = "opcode")]
   
   opcode: OpcodeEnum, 
+  #[serde(rename = "orderStatuses")]
+  ///Опциональный фильтр по статусам заявок. Влияет только на фильтрацию первичных исторических данных при подписке
+  order_statuses: Vec<OrderStatus>, 
   #[serde(rename = "portfolio")]
   ///Идентификатор клиентского портфеля
   portfolio: String,  // D61971 
@@ -45,12 +48,13 @@ pub struct WsReqOrdersGetAndSubscribe {
 }
 
 impl WsReqOrdersGetAndSubscribe {
-  pub fn new(exchange: Exchange, format: JsonFormat, guid: String, opcode: OpcodeEnum, portfolio: String, token: String, ) -> WsReqOrdersGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: JsonFormat, guid: String, opcode: OpcodeEnum, order_statuses: Vec<OrderStatus>, portfolio: String, token: String, ) -> WsReqOrdersGetAndSubscribe {
     WsReqOrdersGetAndSubscribe {
       exchange: exchange,
       format: format,
       guid: guid,
       opcode: opcode,
+      order_statuses: order_statuses,
       portfolio: portfolio,
       token: token
     }
@@ -109,6 +113,20 @@ impl WsReqOrdersGetAndSubscribe {
   
   pub fn opcode(&self) -> &OpcodeEnum {
     &self.opcode
+  }
+
+
+  pub fn set_order_statuses(&mut self, order_statuses: Vec<OrderStatus>) {
+    self.order_statuses = order_statuses;
+  }
+
+  pub fn with_order_statuses(mut self, order_statuses: Vec<OrderStatus>) -> WsReqOrdersGetAndSubscribe {
+    self.order_statuses = order_statuses;
+    self
+  }
+  ///Опциональный фильтр по статусам заявок. Влияет только на фильтрацию первичных исторических данных при подписке
+  pub fn order_statuses(&self) -> &Vec<OrderStatus> {
+    &self.order_statuses
   }
 
 

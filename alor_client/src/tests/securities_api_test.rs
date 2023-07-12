@@ -2,6 +2,7 @@
 package io.swagger.client.api;
 
 import .ApiException;
+import io.swagger.client.model.alltradeshistory;
 import io.swagger.client.model.history;
 import io.swagger.client.model.orderbook;
 import io.swagger.client.model.riskRates;
@@ -158,12 +159,39 @@ async fn dev_securities_search_all_trades_test() {
     let value = json!(/*Put test json here*/);
     let to: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
+    let from_id: i64 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let to_id: i64 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
     let take: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let descending: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let include_virtual_trades: bool = serde_json::from_value(value).unwrap();
-    let response: Vec<Alltrade> = api_client.dev_securities_search_all_trades(exchange, symbol, format, from, to, take, descending, include_virtual_trades).await.unwrap();
+    let response: Vec<Alltrade> = api_client.dev_securities_search_all_trades(exchange, symbol, format, from, to, from_id, to_id, take, descending, include_virtual_trades).await.unwrap();
+}
+/**
+ * Получение исторической информации о всех сделках по ценным бумагам
+ *
+ * Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+ *
+ */
+#[tokio::test(core_threads = 3)]
+async fn dev_securities_search_all_trades_history_test() {
+    let api_client = get_client();
+    let value = json!(/*Put test json here*/);
+    let exchange: Exchange = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let symbol: String = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let limit: i32 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let from: i64 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let to: i64 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let offset: i32 = serde_json::from_value(value).unwrap();
+    let response: Alltradeshistory = api_client.dev_securities_search_all_trades_history(exchange, symbol, limit, from, to, offset).await.unwrap();
 }
 /**
  * Получение информации о торговых инструментах на выбранной бирже

@@ -145,14 +145,14 @@ pub trait UsersApi {
     /// 
     ///
     /// * `order_id` Идентификатор заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `format` Формат возвращаемого сервером JSON (optional)
     /// 
     /// 
     ///
-    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>>;
+    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>>;
 ///
 /// Получение информации о позициях выбранного инструмента
 ///
@@ -193,14 +193,14 @@ pub trait UsersApi {
     /// 
     ///
     /// * `order_id` Идентификатор стоп-заявки (required)
-    /// Example: 56
+    /// Example: 789
     /// 
     ///
     /// * `format` Формат возвращаемого сервером JSON (optional)
     /// 
     /// 
     ///
-    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
+    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>>;
 ///
 /// Получение информации о сделках по выбранному инструменту
 ///
@@ -804,7 +804,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
-    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>> {
+    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<Order, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1006,7 +1006,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         res_body
     }
 
-    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i32, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
+    async fn dev_get_one_stop_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::JsonFormat>) -> Result<StoporderWarp, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();

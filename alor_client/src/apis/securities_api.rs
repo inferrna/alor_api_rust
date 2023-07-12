@@ -204,6 +204,14 @@ pub trait SecuritiesApi {
     /// Example: 789
     /// 
     ///
+    /// * `from_id` Начальный номер сделки для фильтра результатов (optional)
+    /// Example: 789
+    /// 
+    ///
+    /// * `to_id` Конечный номер сделки для фильтра результатов (optional)
+    /// Example: 789
+    /// 
+    ///
     /// * `take` Количество загружаемых элементов (optional)
     /// Example: 56
     /// 
@@ -216,7 +224,39 @@ pub trait SecuritiesApi {
     /// Example: true
     /// 
     ///
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, from_id: Option<i64>, to_id: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>>;
+///
+/// Получение исторической информации о всех сделках по ценным бумагам
+///
+/// Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+///
+/// # Arguments
+///
+    /// * `exchange` Биржа (required)
+    /// 
+    /// 
+    ///
+    /// * `symbol` Тикер (Код финансового инструмента) (required)
+    /// Example: symbol_example
+    /// 
+    ///
+    /// * `limit` Ограничение на количество выдаваемых результатов поиска (1-50000) (required)
+    /// Example: 56
+    /// 
+    ///
+    /// * `from` Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
+    /// Example: 789
+    /// 
+    ///
+    /// * `to` Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds (optional)
+    /// Example: 789
+    /// 
+    ///
+    /// * `offset` Смещение начала выборки (для пагинации) (optional)
+    /// Example: 56
+    /// 
+    ///
+    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>) -> Result<Alltradeshistory, Error<serde_json::Value>>;
 ///
 /// Получение информации о торговых инструментах на выбранной бирже
 ///
@@ -813,7 +853,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
+    async fn dev_securities_search_all_trades(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::JsonFormat>, from: Option<i64>, to: Option<i64>, from_id: Option<i64>, to_id: Option<i64>, take: Option<i32>, descending: Option<bool>, include_virtual_trades: Option<bool>) -> Result<Vec<Alltrade>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -835,6 +875,12 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         if let Some(to) = to {
             api_query.append_pair("to", &to.outline_print() );
         }
+        if let Some(from_id) = from_id {
+            api_query.append_pair("fromId", &from_id.outline_print() );
+        }
+        if let Some(to_id) = to_id {
+            api_query.append_pair("toId", &to_id.outline_print() );
+        }
         if let Some(take) = take {
             api_query.append_pair("take", &take.outline_print() );
         }
@@ -854,6 +900,114 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
             }
         };
         let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
+
+        // TODO(farcaller): handle error
+        // if let Err(e) = uri {
+        //     return Box::new(futures::future::err(e));
+        // }
+        //dbg!(&uri_str);
+
+        let uri: hyper::Uri = uri_str.parse().unwrap();
+
+        let mut req =
+            hyper::Request::builder()
+                .method(method)
+                .uri(uri);
+
+        let headers = req.headers_mut().unwrap();
+
+        if let Some(ref user_agent) = configuration.user_agent {
+            headers.insert(hyper::header::USER_AGENT, user_agent.parse().unwrap());
+        }
+
+
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
+
+        let somebody = Body::empty();
+
+        let req = req.body(somebody).unwrap();
+
+        let res = configuration
+            .client.request(req)
+            .await
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        let mut res = res?;
+
+        let status = res.status();
+        let mut res_body: Vec<u8> = vec![];
+
+        while let Some(chunk) = res.body_mut().data().await {
+            let mut chunk_vec = chunk.unwrap().to_vec();
+            res_body.append(chunk_vec.as_mut());
+        }
+
+        //Uncomment to see what went wrong
+/*
+        let string_result = std::str::from_utf8(&res_body).unwrap();
+        let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
+        if let Ok(json_value) = value_result {
+            //Valid json, invalid structure, pretty-printed output
+            eprintln!("{}", serde_json::to_string_pretty(&json_value).unwrap());
+        } else {
+            //Invalid json, raw output
+            dbg!(&string_result);
+        }
+*/
+        let res_body =
+            if status.is_success() {
+                Ok(res_body)
+            } else {
+                Err(Error::from((status, res_body.borrow())))
+            };
+
+        let mut res_body = res_body?;
+
+        let res_body =
+            serde_json::from_slice(res_body.borrow())
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        res_body
+    }
+
+    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>) -> Result<Alltradeshistory, Error<serde_json::Value>> {
+        let configuration: &configuration::Configuration<C> = self.configuration.borrow();
+
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
+        let method = hyper::Method::GET;
+
+        let query_string = {
+            let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
+            let has_query_params = true;
+        if let Some(from) = from {
+            api_query.append_pair("from", &from.outline_print() );
+        }
+        if let Some(to) = to {
+            api_query.append_pair("to", &to.outline_print() );
+        }
+            api_query.append_pair("limit", &limit.outline_print() );
+        if let Some(offset) = offset {
+            api_query.append_pair("offset", &offset.outline_print() );
+        }
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
+                format!("/?{}", api_query.finish())
+            } else {
+                "".to_string()
+            }
+        };
+        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades/history{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {

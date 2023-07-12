@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
   **exchange** | [**Exchange**](.md)| Биржа | 
   **stop** | **bool**| Является стоп-заявкой? | 
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **order_id** | **i32**| Идентификатор заявки | 
+ **order_id** | **i64**| Идентификатор заявки | 
  **portfolio** | **String**| Идентификатор клиентского портфеля | 
  **exchange** | [**Exchange**](.md)| Биржа | 
  **stop** | **bool**| Является стоп-заявкой? | 
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **trade_server_code** | **String**| Код торгового сервера | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **portfolio** | **String**| Идентификатор клиентского портфеля | 
   **stop** | **bool**| Является стоп-заявкой? | 
   **x_alor_reqid** | **String**| Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора | 
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStoplimit**](BodyrequestOrdersActionsStoplimit.md)| Тело заявки | 
   **trade_server_code** | **String**| Код торгового сервера | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **x_alor_reqid** | **String**| Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора | 
 
 ### Return type
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStop**](BodyrequestOrdersActionsStop.md)| Тело заявки | 
   **trade_server_code** | **String**| Код торгового сервера | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **x_alor_reqid** | **String**| Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора | 
 
 ### Return type
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStoplimit**](BodyrequestOrdersActionsStoplimit.md)| Тело заявки | 
   **trade_server_code** | **String**| Код торгового сервера | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **x_alor_reqid** | **String**| Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора | 
 
 ### Return type
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStop**](BodyrequestOrdersActionsStop.md)| Тело заявки | 
   **trade_server_code** | **String**| Код торгового сервера | 
-  **order_id** | **i32**| Идентификатор заявки | 
+  **order_id** | **i64**| Идентификатор заявки | 
   **x_alor_reqid** | **String**| Требуется уникальная случайная строка в качестве идентификатора запроса. Если уже приходил запрос с таким идентификатором, то заявка не будет исполнена повторно, а в качестве ответа будет возвращена копия ответа на первый запрос с таким значением идентификатора | 
 
 ### Return type

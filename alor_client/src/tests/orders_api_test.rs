@@ -121,7 +121,7 @@ async fn command_api_v2clientordersactionsmarketput_test() {
 async fn command_api_v2clientordersdelete_test() {
     let api_client = get_client();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
@@ -172,7 +172,7 @@ async fn v2clientordersactionsorder_id_test() {
     let value = json!(/*Put test json here*/);
     let trade_server_code: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
@@ -231,7 +231,7 @@ async fn v2clientordersactionsstop_loss_limitorder_id_test() {
     let value = json!(/*Put test json here*/);
     let trade_server_code: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let response: OrdersActionsStopProfitLoss = api_client.v2clientordersactionsstop_loss_limitorder_id(body, x_alor_reqid, trade_server_code, order_id).await.unwrap();
 }
 /**
@@ -250,7 +250,7 @@ async fn v2clientordersactionsstop_lossorder_id_test() {
     let value = json!(/*Put test json here*/);
     let trade_server_code: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let response: OrdersActionsStopProfitLoss = api_client.v2clientordersactionsstop_lossorder_id(body, x_alor_reqid, trade_server_code, order_id).await.unwrap();
 }
 /**
@@ -303,7 +303,7 @@ async fn v2clientordersactionstake_profit_limitorder_id_test() {
     let value = json!(/*Put test json here*/);
     let trade_server_code: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let response: OrdersActionsStopProfitLoss = api_client.v2clientordersactionstake_profit_limitorder_id(body, x_alor_reqid, trade_server_code, order_id).await.unwrap();
 }
 /**
@@ -322,6 +322,6 @@ async fn v2clientordersactionstake_profitorder_id_test() {
     let value = json!(/*Put test json here*/);
     let trade_server_code: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let order_id: i32 = serde_json::from_value(value).unwrap();
+    let order_id: i64 = serde_json::from_value(value).unwrap();
     let response: OrdersActionsStopProfitLoss = api_client.v2clientordersactionstake_profitorder_id(body, x_alor_reqid, trade_server_code, order_id).await.unwrap();
 }

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**dev_securities_futures**](SecuritiesApi.md#dev_securities_futures) | **GET** md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote | Получение котировки по ближайшему фьючерсу (код)
 [**dev_securities_search**](SecuritiesApi.md#dev_securities_search) | **GET** md/v2/Securities | Получение информации о торговых инструментах
 [**dev_securities_search_all_trades**](SecuritiesApi.md#dev_securities_search_all_trades) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades | Получение информации о всех сделках по ценным бумагам за сегодня
+[**dev_securities_search_all_trades_history**](SecuritiesApi.md#dev_securities_search_all_trades_history) | **GET** md/v2/Securities/{exchange}/{symbol}/alltrades/history | Получение исторической информации о всех сделках по ценным бумагам
 [**dev_securities_search_exchange**](SecuritiesApi.md#dev_securities_search_exchange) | **GET** md/v2/Securities/{exchange} | Получение информации о торговых инструментах на выбранной бирже
 [**dev_securities_search_exchange_code**](SecuritiesApi.md#dev_securities_search_exchange_code) | **GET** md/v2/Securities/{exchange}/{symbol} | Получение информации о выбранном финансовом инструменте
 [**risk_rates**](SecuritiesApi.md#risk_rates) | **GET** md/v2/risk/rates | Запрос ставок риска
@@ -237,6 +238,8 @@ Name | Type | Description  | Notes
  **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
  **from** | **i64**| Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
  **to** | **i64**| Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
+ **from_id** | **i64**| Начальный номер сделки для фильтра результатов | 
+ **to_id** | **i64**| Конечный номер сделки для фильтра результатов | 
  **take** | **i32**| Количество загружаемых элементов | 
  **descending** | **bool**| Флаг загрузки элементов с конца списка | 
  **include_virtual_trades** | **bool**| Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже | 
@@ -244,6 +247,48 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Vec<Alltrade>**](array.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth), 
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **dev_securities_search_all_trades_history**
+> Alltradeshistory dev_securities_search_all_trades_history(ctx, exchange, symbol, limit, optional)
+Получение исторической информации о всех сделках по ценным бумагам
+
+Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
+  **exchange** | [**Exchange**](.md)| Биржа | 
+  **symbol** | **String**| Тикер (Код финансового инструмента) | 
+  **limit** | **i32**| Ограничение на количество выдаваемых результатов поиска (1-50000) | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exchange** | [**Exchange**](.md)| Биржа | 
+ **symbol** | **String**| Тикер (Код финансового инструмента) | 
+ **limit** | **i32**| Ограничение на количество выдаваемых результатов поиска (1-50000) | 
+ **from** | **i64**| Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
+ **to** | **i64**| Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
+ **offset** | **i32**| Смещение начала выборки (для пагинации) | 
+
+### Return type
+
+[**Alltradeshistory**](alltradeshistory.md)
 
 ### Authorization
 
