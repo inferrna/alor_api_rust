@@ -12,8 +12,6 @@ Method | HTTP request | Description
 [**dev_get_one_position**](UsersApi.md#dev_get_one_position) | **GET** md/v2/Clients/{exchange}/{portfolio}/positions/{symbol} | Получение информации о позициях выбранного инструмента
 [**dev_get_one_stop_order**](UsersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
 [**dev_get_ticker_trades**](UsersApi.md#dev_get_ticker_trades) | **GET** md/v2/Clients/{exchange}/{portfolio}/{ticker}/trades | Получение информации о сделках по выбранному инструменту
-[**dev_user_portfolio**](UsersApi.md#dev_user_portfolio) | **GET** client/v1.0/users/{username}/portfolios | Получение списка серверов портфелей
-[**exchange_portfolio_money**](UsersApi.md#exchange_portfolio_money) | **GET** md/v2/clients/legacy/{exchange}/{portfolio}/money | Получение информации по деньгам для выбранного портфеля
 [**exchange_portfolio_summary**](UsersApi.md#exchange_portfolio_summary) | **GET** md/v2/clients/{exchange}/{portfolio}/summary | Получение информации о портфеле
 [**fortsrisk**](UsersApi.md#fortsrisk) | **GET** md/v2/Clients/{exchange}/{portfolio}/fortsrisk | Получение информации о рисках на срочном рынке
 [**risk**](UsersApi.md#risk) | **GET** md/v2/Clients/{exchange}/{portfolio}/risk | Получение информации о рисках
@@ -31,17 +29,17 @@ Method | HTTP request | Description
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -69,18 +67,18 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
- **without_currency** | **bool**| Исключить из ответа все денежные инструменты, по умолчанию false | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
+ **without_currency** | **bool**|  | 
 
 ### Return type
 
@@ -108,17 +106,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -146,17 +144,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -184,19 +182,19 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **order_id** | **i64**| Идентификатор заявки | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
+  **order_id** | **i64**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **order_id** | **i64**| Идентификатор заявки | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **order_id** | **i64**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -224,19 +222,19 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
+  **symbol** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **symbol** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -264,19 +262,19 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **order_id** | **i64**| Идентификатор стоп-заявки | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
+  **order_id** | **i64**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **order_id** | **i64**| Идентификатор стоп-заявки | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **order_id** | **i64**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -304,89 +302,23 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **ticker** | **String**| Тикер (Код финансового инструмента) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
+  **ticker** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **ticker** | **String**| Тикер (Код финансового инструмента) | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **ticker** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
 [**Vec<Trade>**](array.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth), 
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **dev_user_portfolio**
-> ServersInfo dev_user_portfolio(ctx, username)
-Получение списка серверов портфелей
-
-Получение списка серверов. В ответе в поле tradeServerCode содержится значение которое надо использовать. Не являются частью API торговой системы.
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **username** | **String**| Имя пользователя | 
-
-### Return type
-
-[**ServersInfo**](servers_info.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth), 
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **exchange_portfolio_money**
-> Money exchange_portfolio_money(ctx, exchange, portfolio, optional)
-Получение информации по деньгам для выбранного портфеля
-
-Запрос информации о позиции по деньгам. Вызов существует для обратной совместимости с API v1, предпочтительно использовать другие вызовы (/summary, /risk, /positions)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a map[string]interface{}.
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
-
-### Return type
-
-[**Money**](money.md)
 
 ### Authorization
 
@@ -410,17 +342,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -448,17 +380,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -486,17 +418,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -524,21 +456,21 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **date_from** | **NaiveDate**| Начиная с какой даты отдавать историю сделок | 
- **from** | **i64**| Начиная с какого ID (номера сделки) отдавать историю сделок | 
- **limit** | **i32**| Количество возвращаемых записей (максимум 1000) | 
- **descending** | **bool**| Флаг обратной сортировки выдачи | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **date_from** | **NaiveDate**|  | 
+ **from** | **i64**|  | 
+ **limit** | **i32**|  | 
+ **descending** | **bool**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -566,23 +498,23 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **portfolio** | **String**| Идентификатор клиентского портфеля | 
-  **symbol** | **String**| Фильтр по инструменту | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **portfolio** | **String**|  | 
+  **symbol** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **portfolio** | **String**| Идентификатор клиентского портфеля | 
- **symbol** | **String**| Фильтр по инструменту | 
- **date_from** | **NaiveDate**| Начиная с какой даты отдавать историю сделок | 
- **from** | **i64**| Начиная с какого ID (номера сделки) отдавать историю сделок | 
- **limit** | **i32**| Количество возвращаемых записей (максимум 1000) | 
- **descending** | **bool**| Флаг обратной сортировки выдачи | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **portfolio** | **String**|  | 
+ **symbol** | **String**|  | 
+ **date_from** | **NaiveDate**|  | 
+ **from** | **i64**|  | 
+ **limit** | **i32**|  | 
+ **descending** | **bool**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 

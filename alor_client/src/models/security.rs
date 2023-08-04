@@ -1,7 +1,7 @@
 /* 
  * Alor OpenAPI V2
  *
- * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> <br/></p>   <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+ * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> </p>  <h4>Получение списка портфелей</h4> <p>Получить список доступных портфелей можно из JWT токена</p> <p>Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле <b>portfolios</b>.</p> <br/>  <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
  *
  * OpenAPI spec version: 1.0
  * Contact: openapi@alor.ru
@@ -35,12 +35,12 @@ pub struct Security {
   ///Тип ценной бумаги согласно стандарту ISO 10962
   cfi_code: String,  // ESXXXX 
   #[serde(rename = "complexProductCategory")]
-  #[serde(default)]
-  ///Требуемая категория для осуществления торговли инструментом
-  complex_product_category: Option<String>,  // 2 
+  
+  complex_product_category: ComplexProductCategory, 
   #[serde(rename = "currency")]
+  #[serde(default)]
   ///Валюта
-  currency: String,  // RUB 
+  currency: Option<String>,  // RUB 
   #[serde(rename = "description")]
   ///Краткое описание инструмента
   description: String,  // Сбербанк России ПАО ао 
@@ -93,15 +93,16 @@ pub struct Security {
   
   theor_price_limit: Decimal,  // 0.0 
   #[serde(rename = "tradingStatus")]
-  ///Торговый статус инструмента
+  ///Торговый статус инструмента:   * `18` - Нет торгов / торги закрыты   * `118` - Период открытия   * `103` - Период закрытия   * `2` - Перерыв в торгах   * `17` - Нормальный период торгов   * `102` - Аукцион закрытия   * `106` - Аукцион крупных пакетов   * `107` - Дискретный аукцион   * `119` - Аукцион открытия   * `120` - Период торгов по цене аукциона закрытия 
   trading_status: i32,  // 17 
   #[serde(rename = "tradingStatusInfo")]
   #[serde(default)]
   ///Описание торгового статуса инструмента
   trading_status_info: Option<String>,  // нормальный период торгов 
   #[serde(rename = "type")]
+  #[serde(default)]
   ///Тип
-  rtype: String,  // CS 
+  rtype: Option<String>,  // CS 
   #[serde(rename = "volatility")]
   ///Волативность
   volatility: Decimal,  // 0.0 
@@ -112,13 +113,13 @@ pub struct Security {
 }
 
 impl Security {
-  pub fn new(cancellation: String, cfi_code: String, currency: String, description: String, exchange: Exchange, facevalue: Decimal, lotsize: Decimal, marginbuy: Decimal, marginrate: Decimal, marginsell: Decimal, minstep: Decimal, price_max: Decimal, price_min: Decimal, pricestep: Decimal, primary_board: String, rating: Decimal, shortname: String, symbol: String, theor_price: Decimal, theor_price_limit: Decimal, trading_status: i32, rtype: String, volatility: Decimal, ) -> Security {
+  pub fn new(cancellation: String, cfi_code: String, complex_product_category: ComplexProductCategory, description: String, exchange: Exchange, facevalue: Decimal, lotsize: Decimal, marginbuy: Decimal, marginrate: Decimal, marginsell: Decimal, minstep: Decimal, price_max: Decimal, price_min: Decimal, pricestep: Decimal, primary_board: String, rating: Decimal, shortname: String, symbol: String, theor_price: Decimal, theor_price_limit: Decimal, trading_status: i32, volatility: Decimal, ) -> Security {
     Security {
       isin: None,
       cancellation: cancellation,
       cfi_code: cfi_code,
-      complex_product_category: None,
-      currency: currency,
+      complex_product_category: complex_product_category,
+      currency: None,
       description: description,
       exchange: exchange,
       facevalue: facevalue,
@@ -138,7 +139,7 @@ impl Security {
       theor_price_limit: theor_price_limit,
       trading_status: trading_status,
       trading_status_info: None,
-      rtype: rtype,
+      rtype: None,
       volatility: volatility,
       ryield: None
     }
@@ -189,36 +190,36 @@ impl Security {
   }
 
 
-  pub fn set_complex_product_category(&mut self, complex_product_category: String) {
-    self.complex_product_category = Some(complex_product_category);
+  pub fn set_complex_product_category(&mut self, complex_product_category: ComplexProductCategory) {
+    self.complex_product_category = complex_product_category;
   }
 
-  pub fn with_complex_product_category(mut self, complex_product_category: String) -> Security {
-    self.complex_product_category = Some(complex_product_category);
+  pub fn with_complex_product_category(mut self, complex_product_category: ComplexProductCategory) -> Security {
+    self.complex_product_category = complex_product_category;
     self
   }
-  ///Требуемая категория для осуществления торговли инструментом
-  pub fn complex_product_category(&self) -> Option<&String> {
-    self.complex_product_category.as_ref()
+  
+  pub fn complex_product_category(&self) -> &ComplexProductCategory {
+    &self.complex_product_category
   }
 
-  pub fn reset_complex_product_category(&mut self) {
-    self.complex_product_category = None;
-  }
 
   pub fn set_currency(&mut self, currency: String) {
-    self.currency = currency;
+    self.currency = Some(currency);
   }
 
   pub fn with_currency(mut self, currency: String) -> Security {
-    self.currency = currency;
+    self.currency = Some(currency);
     self
   }
   ///Валюта
-  pub fn currency(&self) -> &String {
-    &self.currency
+  pub fn currency(&self) -> Option<&String> {
+    self.currency.as_ref()
   }
 
+  pub fn reset_currency(&mut self) {
+    self.currency = None;
+  }
 
   pub fn set_description(&mut self, description: String) {
     self.description = description;
@@ -466,7 +467,7 @@ impl Security {
     self.trading_status = trading_status;
     self
   }
-  ///Торговый статус инструмента
+  ///Торговый статус инструмента:   * `18` - Нет торгов / торги закрыты   * `118` - Период открытия   * `103` - Период закрытия   * `2` - Перерыв в торгах   * `17` - Нормальный период торгов   * `102` - Аукцион закрытия   * `106` - Аукцион крупных пакетов   * `107` - Дискретный аукцион   * `119` - Аукцион открытия   * `120` - Период торгов по цене аукциона закрытия 
   pub fn trading_status(&self) -> &i32 {
     &self.trading_status
   }
@@ -490,18 +491,21 @@ impl Security {
   }
 
   pub fn set_rtype(&mut self, rtype: String) {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
   }
 
   pub fn with_rtype(mut self, rtype: String) -> Security {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
     self
   }
   ///Тип
-  pub fn rtype(&self) -> &String {
-    &self.rtype
+  pub fn rtype(&self) -> Option<&String> {
+    self.rtype.as_ref()
   }
 
+  pub fn reset_rtype(&mut self) {
+    self.rtype = None;
+  }
 
   pub fn set_volatility(&mut self, volatility: Decimal) {
     self.volatility = volatility;

@@ -26,24 +26,24 @@ Method | HTTP request | Description
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **tf** | [**Duration**](.md)| Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) | 
-  **from** | **i64**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
-  **to** | **i64**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
+  **symbol** | **String**|  | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **tf** | [**Duration**](.md)|  | 
+  **from** | **i64**|  | 
+  **to** | **i64**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **exchange** | [**Exchange**](.md)| Биржа | 
- **tf** | [**Duration**](.md)| Длительность таймфрейма в секундах или код (\&quot;D\&quot; - дни, \&quot;W\&quot; - недели, \&quot;M\&quot; - месяцы, \&quot;Y\&quot; - годы) | 
- **from** | **i64**| Начало отрезка времени (UTC) в формате Unix Time Seconds | 
- **to** | **i64**| Конец отрезка времени (UTC) в формате Unix Time Seconds | 
- **untraded** | **bool**| Флаг для поиска данных по устаревшим или экспирированным инструментам. При использовании требуется точное совпадение тикера | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **symbol** | **String**|  | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **tf** | [**Duration**](.md)|  | 
+ **from** | **i64**|  | 
+ **to** | **i64**|  | 
+ **untraded** | **bool**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -71,18 +71,18 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **seccode** | **String**| Инструмент | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **seccode** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **seccode** | **String**| Инструмент | 
- **depth** | **i32**| Глубина стакана. Стандартное и максимальное значение - 20 (20х20). | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **seccode** | **String**|  | 
+ **depth** | **i32**|  | [default to 20]
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -110,15 +110,15 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **symbols** | **String**| Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием | 
+  **symbols** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **symbols** | **String**| Принимает несколько пар биржа-тикер. Пары отделены запятыми. Биржа и тикер разделены двоеточием | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **symbols** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -146,17 +146,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **symbol** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **symbol** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -184,20 +184,20 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **query** | **String**| Тикер (Код финансового инструмента) | 
+  **query** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | **String**| Тикер (Код финансового инструмента) | 
- **limit** | **i32**| Ограничение на количество выдаваемых результатов поиска | 
- **offset** | **i32**| Смещение начала выборки (для пагинации) | 
- **sector** | [**SchemaEnum**](.md)| Рынок на бирже | 
- **cficode** | **String**| Код финансового инструмента по стандарту ISO 10962 | 
- **exchange** | [**Exchange**](.md)| Биржа | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **query** | **String**|  | 
+ **limit** | **i32**|  | 
+ **offset** | **i32**|  | 
+ **sector** | [**Sector**](.md)|  | 
+ **cficode** | **String**|  | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -225,24 +225,24 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **symbol** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
- **from** | **i64**| Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
- **to** | **i64**| Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
- **from_id** | **i64**| Начальный номер сделки для фильтра результатов | 
- **to_id** | **i64**| Конечный номер сделки для фильтра результатов | 
- **take** | **i32**| Количество загружаемых элементов | 
- **descending** | **bool**| Флаг загрузки элементов с конца списка | 
- **include_virtual_trades** | **bool**| Флаг загрузки виртуальных (индикативных) сделок, полученных из заявок на питерской бирже | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **symbol** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
+ **from** | **i64**|  | 
+ **to** | **i64**|  | 
+ **from_id** | **i64**|  | 
+ **to_id** | **i64**|  | 
+ **take** | **i32**|  | 
+ **descending** | **bool**|  | 
+ **include_virtual_trades** | **bool**|  | 
 
 ### Return type
 
@@ -270,21 +270,21 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
-  **limit** | **i32**| Ограничение на количество выдаваемых результатов поиска (1-50000) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **symbol** | **String**|  | 
+  **limit** | **i32**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **limit** | **i32**| Ограничение на количество выдаваемых результатов поиска (1-50000) | 
- **from** | **i64**| Начало отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
- **to** | **i64**| Конец отрезка времени (UTC) для фильтра результатов в формате Unix Time Seconds | 
- **offset** | **i32**| Смещение начала выборки (для пагинации) | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **symbol** | **String**|  | 
+ **limit** | **i32**|  | 
+ **from** | **i64**|  | 
+ **to** | **i64**|  | 
+ **offset** | **i32**|  | 
 
 ### Return type
 
@@ -312,15 +312,15 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
+  **exchange** | [**Exchange**](.md)|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -348,17 +348,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
-  **symbol** | **String**| Тикер (Код финансового инструмента) | 
+  **exchange** | [**Exchange**](.md)|  | 
+  **symbol** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **symbol** | **String**| Тикер (Код финансового инструмента) | 
- **format** | [**JsonFormat**](.md)| Формат возвращаемого сервером JSON | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **symbol** | **String**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -386,17 +386,17 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
-  **exchange** | [**Exchange**](.md)| Биржа | 
+  **exchange** | [**Exchange**](.md)|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exchange** | [**Exchange**](.md)| Биржа | 
- **ticker** | **String**| Тикер\\код инструмента, ISIN для облигаций | 
- **risk_category_id** | **String**| Id вашей (или той которая интересует) категории риска. Можно получить из запроса информации по клиенту или через кабинет клиента | 
- **search** | **String**| Часть Тикера\\кода инструмента, ISIN для облигаций. Вернет все совпадения, начинающиеся с  | 
+ **exchange** | [**Exchange**](.md)|  | 
+ **ticker** | **String**|  | 
+ **risk_category_id** | **i32**|  | 
+ **search** | **String**|  | 
 
 ### Return type
 

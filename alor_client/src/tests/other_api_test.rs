@@ -41,5 +41,5 @@ fn get_client() -> OtherApiClient<HttpConnector<GaiResolver>> {
 #[tokio::test(core_threads = 3)]
 async fn local_time_test() {
     let api_client = get_client();
-    let response: Time = api_client.local_time().await.unwrap();
+    let response: i64 = api_client.local_time().await.unwrap();
 }

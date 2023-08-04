@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**local_time**](OtherApi.md#local_time) | **GET** md/v2/time | Запрос текущего UTC времени в формате Unix
 
 # **local_time**
-> Time local_time(ctx, )
+> i64 local_time(ctx, )
 Запрос текущего UTC времени в формате Unix
 
 Запрос текущего UTC времени в формате Unix Time Seconds. Если этот запрос выполнен без авторизации, то будет возвращено время, которое было 15 минут назад.
@@ -17,7 +17,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**Time**
+**i64**
 
 ### Authorization
 

@@ -3,9 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**avg_price** | [***Decimal**](BigDecimal.md) | Средняя цена сделок по позициям | [default to null]
+**avg_price** | **Decimal** | Средняя цена сделок по позициям | [default to null]
 **broker_symbol** | **String** | Биржа:Тикер | [default to null]
-**daily_unrealised_pl** | [***Decimal**](BigDecimal.md) | Нереализованная прибыль за день | [default to null]
+**current_volume** | **Decimal** | Объём, расчитанный по текущей цене | [default to null]
+**daily_unrealised_pl** | **Decimal** | Нереализованная прибыль за день | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **is_currency** | **bool** | True для валютных остатков (денег), false - для торговых инструментов | [default to null]
 **lot_size** | **i32** | Размер лота | [default to null]
@@ -25,7 +26,8 @@ Name | Type | Description | Notes
 **qty_units** | **i32** | Количество (штуки) | [default to null]
 **short_name** | **String** | Наименование инструмента | [default to null]
 **symbol** | **String** | Тикер (Код финансового инструмента) | [default to null]
-**unrealised_pl** | [***Decimal**](BigDecimal.md) | Нереализованная прибыль | [default to null]
+**unrealised_pl** | **Decimal** | Нереализованная прибыль | [default to null]
+**volume** | **Decimal** | Объём, расчитанный по средней цене | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

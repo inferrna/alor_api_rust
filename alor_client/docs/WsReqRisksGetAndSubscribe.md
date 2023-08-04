@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **exchange** | **Exchange** |  | [default to null]
-**format** | **JsonFormat** |  | [default to null]
+**format** | **Format** |  | [default to null]
 **guid** | **String** | Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid. | [default to null]
 **opcode** | **String** | Код операции | [default to null]
 **portfolio** | **String** | Идентификатор клиентского портфеля | [default to null]

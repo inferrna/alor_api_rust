@@ -105,8 +105,8 @@ async fn command_api_warp_v2clientordersdelete_test() {
     let value = json!(/*Put test json here*/);
     let json_response: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
-    let response: OrdersActionsDeleteOrderIdCommandApi = api_client.command_api_warp_v2clientordersdelete(order_id, portfolio, exchange, stop, json_response, format).await.unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
+    let response: String = api_client.command_api_warp_v2clientordersdelete(order_id, portfolio, exchange, stop, json_response, format).await.unwrap();
 }
 /**
  * Получение информации о стоп-заявках
@@ -122,7 +122,7 @@ async fn dev_get_all_stop_orders_test() {
     let value = json!(/*Put test json here*/);
     let portfolio: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Vec<StoporderWarp> = api_client.dev_get_all_stop_orders(exchange, portfolio, format).await.unwrap();
 }
 /**
@@ -141,6 +141,6 @@ async fn dev_get_one_stop_order_test() {
     let value = json!(/*Put test json here*/);
     let order_id: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: StoporderWarp = api_client.dev_get_one_stop_order(exchange, portfolio, order_id, format).await.unwrap();
 }

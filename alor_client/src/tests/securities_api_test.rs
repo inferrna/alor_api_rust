@@ -60,7 +60,7 @@ async fn dev_history_test() {
     let value = json!(/*Put test json here*/);
     let untraded: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: History = api_client.dev_history(symbol, exchange, tf, from, to, untraded, format).await.unwrap();
 }
 /**
@@ -79,7 +79,7 @@ async fn dev_orderbook_exchang_seccode_test() {
     let value = json!(/*Put test json here*/);
     let depth: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Orderbook = api_client.dev_orderbook_exchang_seccode(exchange, seccode, depth, format).await.unwrap();
 }
 /**
@@ -94,7 +94,7 @@ async fn dev_quotes_test() {
     let value = json!(/*Put test json here*/);
     let symbols: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Vec<Symbol> = api_client.dev_quotes(symbols, format).await.unwrap();
 }
 /**
@@ -111,7 +111,7 @@ async fn dev_securities_futures_test() {
     let value = json!(/*Put test json here*/);
     let symbol: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: SymbolFutures = api_client.dev_securities_futures(exchange, symbol, format).await.unwrap();
 }
 /**
@@ -130,13 +130,13 @@ async fn dev_securities_search_test() {
     let value = json!(/*Put test json here*/);
     let offset: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let sector: SchemaEnum = serde_json::from_value(value).unwrap();
+    let sector: Sector = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let cficode: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let exchange: Exchange = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Vec<Security> = api_client.dev_securities_search(query, limit, offset, sector, cficode, exchange, format).await.unwrap();
 }
 /**
@@ -153,7 +153,7 @@ async fn dev_securities_search_all_trades_test() {
     let value = json!(/*Put test json here*/);
     let symbol: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let from: i64 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
@@ -205,7 +205,7 @@ async fn dev_securities_search_exchange_test() {
     let value = json!(/*Put test json here*/);
     let exchange: Exchange = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Vec<Security> = api_client.dev_securities_search_exchange(exchange, format).await.unwrap();
 }
 /**
@@ -222,7 +222,7 @@ async fn dev_securities_search_exchange_code_test() {
     let value = json!(/*Put test json here*/);
     let symbol: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let format: JsonFormat = serde_json::from_value(value).unwrap();
+    let format: Format = serde_json::from_value(value).unwrap();
     let response: Security = api_client.dev_securities_search_exchange_code(exchange, symbol, format).await.unwrap();
 }
 /**
@@ -239,7 +239,7 @@ async fn risk_rates_test() {
     let value = json!(/*Put test json here*/);
     let ticker: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
-    let risk_category_id: String = serde_json::from_value(value).unwrap();
+    let risk_category_id: i32 = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let search: String = serde_json::from_value(value).unwrap();
     let response: RiskRates = api_client.risk_rates(exchange, ticker, risk_category_id, search).await.unwrap();
