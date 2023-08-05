@@ -16,7 +16,7 @@ use std::string::FromUtf8Error;
 use serde_derive::{Serialize, Deserialize};
 use serde::de;
 use base64::{Engine as _, alphabet, engine::{self, general_purpose}, decoded_len_estimate};
-use base64::engine::GeneralPurposeConfig;
+use base64::engine::{DecodePaddingMode, GeneralPurposeConfig};
 use regex::Regex;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
@@ -102,45 +102,18 @@ fn deserialize_stupid_spaced_array<'de, D>(deserializer: D) -> Result<Vec<String
 }
 
 fn get_portfolios(_jwt_token: &str) -> JwtDecodedInfo {
-    let jwt_token = _jwt_token.replace(".", "");
+    let tokens_parts: Vec<&str> = _jwt_token.split('.').collect();
     let decoder = engine::GeneralPurpose::new(
         &alphabet::STANDARD,
-        GeneralPurposeConfig::new().with_decode_allow_trailing_bits(true));
-    let estimate_size = decoded_len_estimate(jwt_token.len());
-    dbg!(estimate_size);
-    let mut raw_bytes = vec![0u8; estimate_size];
-    let mut bytes_decoded = 0;
-    let mut syms2decode = 32;
-    while let Ok(count) = decoder.decode_slice(&jwt_token[..syms2decode], &mut raw_bytes) {
-        bytes_decoded = count;
-        syms2decode += 4;
-    }
-    while let Ok(count) = decoder.decode_slice(&jwt_token[..syms2decode], &mut raw_bytes) {
-        bytes_decoded = count;
-        syms2decode += 1;
-    }
-    dbg!(syms2decode);
-    let raw_string =
-        match String::from_utf8(raw_bytes[..bytes_decoded].to_vec()) {
-            Ok(s) => s,
-            Err(utferr) => {
-                let valid_len = utferr.utf8_error().valid_up_to();
-                String::from_utf8(raw_bytes[..valid_len].to_vec()).unwrap()
-            }
-        };
-    dbg!(&raw_string);
-    let re = Regex::new(r"\{.+?\}").unwrap();
-    let raw_pf_info = re.captures_iter(&raw_string)
-        .skip(1)
-        .take(1)
-        .last()
-        .expect("No matching struct at index 2")
-        .get(0)
-        .expect("No matching struct")
-        .as_str();
-    dbg!(&raw_pf_info);
+        GeneralPurposeConfig::new()
+            .with_decode_allow_trailing_bits(true)
+            .with_decode_padding_mode(DecodePaddingMode::Indifferent));
 
-    serde_json::from_str(&raw_pf_info).unwrap()
+    let info_token_encoded = tokens_parts[1];
+    let info_token_bytes = decoder.decode(info_token_encoded).unwrap();
+    let info_token_str = String::from_utf8(info_token_bytes).unwrap();
+
+    serde_json::from_str(&info_token_str).unwrap()
 }
 
 async fn init_meta_client(token: String) -> Arc<Configuration<HttpsConnector<HttpConnector<GaiResolver>>>> {
