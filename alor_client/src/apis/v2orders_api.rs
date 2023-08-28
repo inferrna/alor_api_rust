@@ -29,6 +29,7 @@ use crate::models::*;
 use super::{Error, configuration};
 use headers::{Authorization, Header};
 use headers::authorization::Credentials;
+use crate::ToUriParam;
 use rust_decimal::Decimal;
 
 pub struct V2ordersApiClient<C: hyper::client::connect::Connect + Clone + Send + Sync> {
@@ -46,7 +47,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static> V2order
 #[async_trait::async_trait]
 pub trait V2ordersApi {
 ///
-/// Создание стоп заявки
+/// Создание стоп-заявки
 ///
 /// 
 ///
@@ -97,6 +98,26 @@ pub trait V2ordersApi {
     /// 
     ///
     async fn command_api_v2clientordersactionsstop_limitstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopLimitTvWarp, x_alor_reqid: &str, stop_order_id: i64) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
+///
+/// Изменение стоп-заявки
+///
+/// Изменение стоп-заявки
+///
+/// # Arguments
+///
+    /// * `body` Тело заявки (required)
+    /// 
+    /// 
+    ///
+    /// * `x_alor_reqid`  (required)
+    /// Example: x_alor_reqid_example
+    /// 
+    ///
+    /// * `stop_order_id`  (required)
+    /// Example: 789
+    /// 
+    ///
+    async fn command_api_v2clientordersactionsstopstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopMarketTvWarp, x_alor_reqid: &str, stop_order_id: i64) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>>;
 ///
 /// Снятие заявки
 ///
@@ -501,6 +522,114 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
         res_body
     }
 
+    async fn command_api_v2clientordersactionsstopstop_order_id(&self, body: crate::models::BodyrequestOrdersActionsStopMarketTvWarp, x_alor_reqid: &str, stop_order_id: i64) -> Result<OrdersActionsLimitMarketCommandApi, Error<serde_json::Value>> {
+        let configuration: &configuration::Configuration<C> = self.configuration.borrow();
+
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
+        let method = hyper::Method::PUT;
+
+        let query_string = {
+            let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
+            let has_query_params = false;
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
+                format!("/?{}", api_query.finish())
+            } else {
+                "".to_string()
+            }
+        };
+        let uri_str = format!("{}/commandapi/warptrans/TRADE/v2/client/orders/actions/stop/{stopOrderId}{}", configuration.base_path, query_string, stopOrderId=stop_order_id.outline_print());
+
+        // TODO(farcaller): handle error
+        // if let Err(e) = uri {
+        //     return Box::new(futures::future::err(e));
+        // }
+        //dbg!(&uri_str);
+
+        let uri: hyper::Uri = uri_str.parse().unwrap();
+
+        let mut req =
+            hyper::Request::builder()
+                .method(method)
+                .uri(uri);
+
+        let headers = req.headers_mut().unwrap();
+
+        if let Some(ref user_agent) = configuration.user_agent {
+            headers.insert(hyper::header::USER_AGENT, user_agent.parse().unwrap());
+        }
+
+        {
+            headers.insert("X-ALOR-REQID", x_alor_reqid.parse().unwrap());
+        }
+
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
+
+        let somebody = Body::empty();
+        let serialized = serde_json::to_string(&body).unwrap();
+        //Pretty print request body if needed for some dbg reasons
+        //let value_result: serde_json::Value = serde_json::from_str(&serialized).unwrap();
+        //eprintln!("\n{}\n", serde_json::to_string_pretty(&value_result).unwrap());
+        headers.insert(hyper::header::CONTENT_TYPE, "application/json".parse().unwrap());
+        headers.insert(hyper::header::CONTENT_LENGTH, format!("{}", serialized.len()).parse().unwrap());
+        let somebody = Body::from(serialized);
+
+        let req = req.body(somebody).unwrap();
+
+        let res = configuration
+            .client.request(req)
+            .await
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        let mut res = res?;
+
+        let status = res.status();
+        let mut res_body: Vec<u8> = vec![];
+
+        while let Some(chunk) = res.body_mut().data().await {
+            let mut chunk_vec = chunk.unwrap().to_vec();
+            res_body.append(chunk_vec.as_mut());
+        }
+
+        //Uncomment to see what went wrong
+/*
+        let string_result = std::str::from_utf8(&res_body).unwrap();
+        let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
+        if let Ok(json_value) = value_result {
+            //Valid json, invalid structure, pretty-printed output
+            eprintln!("{}", serde_json::to_string_pretty(&json_value).unwrap());
+        } else {
+            //Invalid json, raw output
+            dbg!(&string_result);
+        }
+*/
+        let res_body =
+            if status.is_success() {
+                Ok(res_body)
+            } else {
+                Err(Error::from((status, res_body.borrow())))
+            };
+
+        let mut res_body = res_body?;
+
+        let res_body =
+            serde_json::from_slice(res_body.borrow())
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        res_body
+    }
+
     async fn command_api_warp_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::Format>) -> Result<String, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
@@ -633,7 +762,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -734,7 +863,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>V2orders
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), orderId=order_id.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), orderId=order_id.outline_print());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {

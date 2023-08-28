@@ -67,10 +67,12 @@ pub struct RiskRate {
   ///Категория риска. 
   risk_category_id: i32,  // 2 
   #[serde(rename = "securityRiskCategoryId")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Id категории бумаги для категоризации. 
   security_risk_category_id: Option<Decimal>,  // 1 
   #[serde(rename = "setName")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Чаще всего будет null. Поле показывает к множеству инструменту принадлежит данный инструмент.
   set_name: Option<String>,  // SBER 
@@ -78,6 +80,7 @@ pub struct RiskRate {
   ///Ставка риска множества
   set_rate: Decimal,  // 0 
   #[serde(rename = "underlyingAsset")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Чаще всего будет null. Поле показывает к какому базовому инструменту принадлежит данный инструмент.
   underlying_asset: Option<String>,  // SBER 

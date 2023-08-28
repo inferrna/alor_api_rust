@@ -26,6 +26,7 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct EstimateOrderViewModel {
   #[serde(rename = "board")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Режим торгов (борд)
   board: Option<String>, 
@@ -36,6 +37,7 @@ pub struct EstimateOrderViewModel {
   ///Количество лотов
   lot_quantity: i64, 
   #[serde(rename = "portfolio")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Портфель клиента
   portfolio: Option<String>, 
@@ -43,6 +45,7 @@ pub struct EstimateOrderViewModel {
   ///Цена
   price: Decimal, 
   #[serde(rename = "ticker")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Инструмент
   ticker: Option<String> 

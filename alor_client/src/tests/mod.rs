@@ -4,4 +4,5 @@ mod other_api_test;
 mod securities_api_test;
 mod users_api_test;
 mod v2orders_api_test;
+mod ws_orders_api_test;
 

@@ -62,18 +62,26 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**risk**](docs/UsersApi.md#risk) | **GET** md/v2/Clients/{exchange}/{portfolio}/risk | Получение информации о рисках
 *UsersApi* | [**trade_stats**](docs/UsersApi.md#trade_stats) | **GET** md/stats/{exchange}/{portfolio}/history/trades | Получение истории сделок
 *UsersApi* | [**trade_stats_by_symbol**](docs/UsersApi.md#trade_stats_by_symbol) | **GET** md/stats/{exchange}/{portfolio}/history/trades/{symbol} | Получение истории сделок (один тикер)
-*V2ordersApi* | [**command_api_v2clientordersactionsstop**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп заявки
+*V2ordersApi* | [**command_api_v2clientordersactionsstop**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп-заявки
 *V2ordersApi* | [**command_api_v2clientordersactionsstop_limit**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop_limit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit | Создание стоп-лимитной заявки
 *V2ordersApi* | [**command_api_v2clientordersactionsstop_limitstop_order_id**](docs/V2ordersApi.md#command_api_v2clientordersactionsstop_limitstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit/{stopOrderId} | Изменение стоп-лимитной заявки
+*V2ordersApi* | [**command_api_v2clientordersactionsstopstop_order_id**](docs/V2ordersApi.md#command_api_v2clientordersactionsstopstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stop/{stopOrderId} | Изменение стоп-заявки
 *V2ordersApi* | [**command_api_warp_v2clientordersdelete**](docs/V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId}/ | Снятие заявки
 *V2ordersApi* | [**dev_get_all_stop_orders**](docs/V2ordersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
 *V2ordersApi* | [**dev_get_one_stop_order**](docs/V2ordersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
+*WsOrdersApi* | [**create_order_group**](docs/WsOrdersApi.md#create_order_group) | **POST** commandapi/api/orderGroups | Создание группы заявок
+*WsOrdersApi* | [**delete_order_group**](docs/WsOrdersApi.md#delete_order_group) | **DELETE** commandapi/api/orderGroups/{orderGroupId} | Удаление группы заявок
+*WsOrdersApi* | [**get_order_group**](docs/WsOrdersApi.md#get_order_group) | **GET** commandapi/api/orderGroups/{orderGroupId} | Получение информации о группе заявок
+*WsOrdersApi* | [**get_order_groups**](docs/WsOrdersApi.md#get_order_groups) | **GET** commandapi/api/orderGroups | Получение всех групп заявок
+*WsOrdersApi* | [**modify_order_group**](docs/WsOrdersApi.md#modify_order_group) | **PUT** commandapi/api/orderGroups/{orderGroupId} | Редактирование группы заявок
 
 ## Documentation For Models
 
  - [Alltrade](docs/Alltrade.md)
  - [Alltrades](docs/Alltrades.md)
  - [Alltradeshistory](docs/Alltradeshistory.md)
+ - [BodyrequestCreateOrderGroup](docs/BodyrequestCreateOrderGroup.md)
+ - [BodyrequestModifyOrderGroup](docs/BodyrequestModifyOrderGroup.md)
  - [BodyrequestOrdersActionsLimit](docs/BodyrequestOrdersActionsLimit.md)
  - [BodyrequestOrdersActionsLimitInstrument](docs/BodyrequestOrdersActionsLimitInstrument.md)
  - [BodyrequestOrdersActionsLimitTVput](docs/BodyrequestOrdersActionsLimitTVput.md)
@@ -96,12 +104,25 @@ Class | Method | HTTP request | Description
  - [BodyrequestOrdersActionsStopUser](docs/BodyrequestOrdersActionsStopUser.md)
  - [BodyrequestOrdersActionsStoplimit](docs/BodyrequestOrdersActionsStoplimit.md)
  - [ClientType](docs/ClientType.md)
+ - [CommandapiOrderGroupsErrorResponse](docs/CommandapiOrderGroupsErrorResponse.md)
+ - [CommandwsReqAuthorize](docs/CommandwsReqAuthorize.md)
+ - [CommandwsReqCreateLimitOrder](docs/CommandwsReqCreateLimitOrder.md)
+ - [CommandwsReqCreateMarketOrder](docs/CommandwsReqCreateMarketOrder.md)
+ - [CommandwsReqCreateStopLimitOrder](docs/CommandwsReqCreateStopLimitOrder.md)
+ - [CommandwsReqCreateStopOrder](docs/CommandwsReqCreateStopOrder.md)
+ - [CommandwsReqDeleteStopOrder](docs/CommandwsReqDeleteStopOrder.md)
+ - [CommandwsReqUpdateLimitOrder](docs/CommandwsReqUpdateLimitOrder.md)
+ - [CommandwsReqUpdateMarketOrder](docs/CommandwsReqUpdateMarketOrder.md)
+ - [CommandwsReqUpdateStopLimitOrder](docs/CommandwsReqUpdateStopLimitOrder.md)
+ - [CommandwsReqUpdateStopOrder](docs/CommandwsReqUpdateStopOrder.md)
+ - [CommandwsResAuthorize](docs/CommandwsResAuthorize.md)
  - [ComplexProductCategory](docs/ComplexProductCategory.md)
  - [Condition](docs/Condition.md)
  - [Duration](docs/Duration.md)
  - [EstimateOrderModel](docs/EstimateOrderModel.md)
  - [EstimateOrderViewModel](docs/EstimateOrderViewModel.md)
  - [Exchange](docs/Exchange.md)
+ - [ExecutionPolicy](docs/ExecutionPolicy.md)
  - [Format](docs/Format.md)
  - [Fortsrisk](docs/Fortsrisk.md)
  - [History](docs/History.md)
@@ -111,10 +132,14 @@ Class | Method | HTTP request | Description
  - [Money](docs/Money.md)
  - [OpcodeEnum](docs/OpcodeEnum.md)
  - [Order](docs/Order.md)
+ - [OrderGroupItem](docs/OrderGroupItem.md)
+ - [OrderGroupStatus](docs/OrderGroupStatus.md)
  - [OrderStatus](docs/OrderStatus.md)
  - [OrderType](docs/OrderType.md)
  - [Orderbook](docs/Orderbook.md)
  - [OrderbookBid](docs/OrderbookBid.md)
+ - [OrdergroupsActionsGetOrderGroup](docs/OrdergroupsActionsGetOrderGroup.md)
+ - [OrdergroupsActionsGetOrderGroupOrders](docs/OrdergroupsActionsGetOrderGroupOrders.md)
  - [Orders](docs/Orders.md)
  - [OrdersActions400](docs/OrdersActions400.md)
  - [OrdersActions400CommandApi](docs/OrdersActions400CommandApi.md)
@@ -151,7 +176,6 @@ Class | Method | HTTP request | Description
  - [WsReqUnsubscribe](docs/WsReqUnsubscribe.md)
  - [WsResBarsGetAndSubscribe](docs/WsResBarsGetAndSubscribe.md)
  - [WsResBarsGetAndSubscribeData](docs/WsResBarsGetAndSubscribeData.md)
- - [WsResHandledSuccessfully](docs/WsResHandledSuccessfully.md)
  - [WsResOrderBookGetAndSubscribe](docs/WsResOrderBookGetAndSubscribe.md)
  - [WsResOrdersGetAndSubscribe](docs/WsResOrdersGetAndSubscribe.md)
  - [WsResPositionsGetAndSubscribe](docs/WsResPositionsGetAndSubscribe.md)

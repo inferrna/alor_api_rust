@@ -25,10 +25,10 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Symbol {
   #[serde(rename = "accruedInt")]
-  ///Начислено
+  ///Начислено (НКД)
   accrued_int: Decimal,  // 0 
   #[serde(rename = "accrued_interest")]
-  ///Начислено
+  ///Начислено (НКД)
   accrued_interest: Decimal,  // 0 
   #[serde(rename = "ask")]
   ///Аск
@@ -70,6 +70,7 @@ pub struct Symbol {
   ///Минимальная цена
   low_price: Decimal,  // 170.33 
   #[serde(rename = "open_interest")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   
   open_interest: Option<Decimal>, 
@@ -83,19 +84,22 @@ pub struct Symbol {
   ///Тикер (Код финансового инструмента)
   symbol: String,  // KMEZ 
   #[serde(rename = "type")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(default)]
   
-  rtype: String,  // CS 
+  rtype: Option<String>,  // CS 
   #[serde(rename = "volume")]
   ///Объём
   volume: Decimal,  // 3.876708E+7 
   #[serde(rename = "yield")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   
   ryield: Option<i32> 
 }
 
 impl Symbol {
-  pub fn new(accrued_int: Decimal, accrued_interest: Decimal, ask: Decimal, bid: Decimal, change: Decimal, change_percent: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ) -> Symbol {
+  pub fn new(accrued_int: Decimal, accrued_interest: Decimal, ask: Decimal, bid: Decimal, change: Decimal, change_percent: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, volume: Decimal, ) -> Symbol {
     Symbol {
       accrued_int: accrued_int,
       accrued_interest: accrued_interest,
@@ -116,7 +120,7 @@ impl Symbol {
       open_price: open_price,
       prev_close_price: prev_close_price,
       symbol: symbol,
-      rtype: rtype,
+      rtype: None,
       volume: volume,
       ryield: None
     }
@@ -130,7 +134,7 @@ impl Symbol {
     self.accrued_int = accrued_int;
     self
   }
-  ///Начислено
+  ///Начислено (НКД)
   pub fn accrued_int(&self) -> &Decimal {
     &self.accrued_int
   }
@@ -144,7 +148,7 @@ impl Symbol {
     self.accrued_interest = accrued_interest;
     self
   }
-  ///Начислено
+  ///Начислено (НКД)
   pub fn accrued_interest(&self) -> &Decimal {
     &self.accrued_interest
   }
@@ -392,18 +396,21 @@ impl Symbol {
 
 
   pub fn set_rtype(&mut self, rtype: String) {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
   }
 
   pub fn with_rtype(mut self, rtype: String) -> Symbol {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
     self
   }
   
-  pub fn rtype(&self) -> &String {
-    &self.rtype
+  pub fn rtype(&self) -> Option<&String> {
+    self.rtype.as_ref()
   }
 
+  pub fn reset_rtype(&mut self) {
+    self.rtype = None;
+  }
 
   pub fn set_volume(&mut self, volume: Decimal) {
     self.volume = volume;

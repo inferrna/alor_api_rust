@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **current_volume** | **Decimal** | Объём, расчитанный по текущей цене | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **is_currency** | **bool** | True для валютных остатков (денег), false - для торговых инструментов | [default to null]
-**lot_size** | **i32** | Размер лота | [default to null]
+**lot_size** | **Decimal** | Размер лота | [default to null]
 **open** | **Decimal** | Агрегированное количество на момент открытия (начала торгов) (штуки) | [default to null]
 **open_qty_batch** | **Decimal** | Агрегированное количество на момент открытия (начала торгов) (лоты) | [default to null]
 **open_units** | **Decimal** | Количество открытых позиций на момент открытия (начала торгов) | [default to null]

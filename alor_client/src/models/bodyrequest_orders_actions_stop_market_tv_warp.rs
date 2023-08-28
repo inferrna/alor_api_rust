@@ -24,6 +24,9 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopMarketTvWarp {
+  #[serde(rename = "activate")]
+  ///Флаг указывает, создать активную заявку, или не активную. Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной. Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders' 
+  activate: bool,  // true 
   #[serde(rename = "condition")]
   
   condition: Condition, 
@@ -48,8 +51,9 @@ pub struct BodyrequestOrdersActionsStopMarketTvWarp {
 }
 
 impl BodyrequestOrdersActionsStopMarketTvWarp {
-  pub fn new(condition: Condition, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, quantity: i32, side: Side, stop_end_unix_time: i64, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopMarketTvWarp {
+  pub fn new(activate: bool, condition: Condition, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, quantity: i32, side: Side, stop_end_unix_time: i64, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopMarketTvWarp {
     BodyrequestOrdersActionsStopMarketTvWarp {
+      activate: activate,
       condition: condition,
       instrument: instrument,
       quantity: quantity,
@@ -59,6 +63,20 @@ impl BodyrequestOrdersActionsStopMarketTvWarp {
       user: user
     }
   }
+
+  pub fn set_activate(&mut self, activate: bool) {
+    self.activate = activate;
+  }
+
+  pub fn with_activate(mut self, activate: bool) -> BodyrequestOrdersActionsStopMarketTvWarp {
+    self.activate = activate;
+    self
+  }
+  ///Флаг указывает, создать активную заявку, или не активную. Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной. Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders' 
+  pub fn activate(&self) -> &bool {
+    &self.activate
+  }
+
 
   pub fn set_condition(&mut self, condition: Condition) {
     self.condition = condition;

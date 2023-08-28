@@ -29,6 +29,7 @@ use crate::models::*;
 use super::{Error, configuration};
 use headers::{Authorization, Header};
 use headers::authorization::Credentials;
+use crate::ToUriParam;
 use rust_decimal::Decimal;
 
 pub struct UsersApiClient<C: hyper::client::connect::Connect + Clone + Send + Sync> {
@@ -390,7 +391,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -439,12 +440,9 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         }
 
         //Uncomment to see what went wrong
-
+/*
         let string_result = std::str::from_utf8(&res_body).unwrap();
         let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
-        /*
-        dbg!(&status);
-        dbg!(&uri_str);
         if let Ok(json_value) = value_result {
             //Valid json, invalid structure, pretty-printed output
             eprintln!("{}", serde_json::to_string_pretty(&json_value).unwrap());
@@ -452,8 +450,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
             //Invalid json, raw output
             dbg!(&string_result);
         }
-        */
-
+*/
         let res_body =
             if status.is_success() {
                 Ok(res_body)
@@ -498,7 +495,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/positions{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/positions{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -547,7 +544,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
         }
 
         //Uncomment to see what went wrong
-
+/*
         let string_result = std::str::from_utf8(&res_body).unwrap();
         let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
         if let Ok(json_value) = value_result {
@@ -557,7 +554,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
             //Invalid json, raw output
             dbg!(&string_result);
         }
-
+*/
         let res_body =
             if status.is_success() {
                 Ok(res_body)
@@ -599,7 +596,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -700,7 +697,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -801,7 +798,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), orderId=order_id.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), orderId=order_id.outline_print());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -902,7 +899,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/positions/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/positions/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1003,7 +1000,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), orderId=order_id.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), orderId=order_id.outline_print());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1104,7 +1101,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/{ticker}/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), ticker=ticker.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/{ticker}/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), ticker=ticker.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1205,7 +1202,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/summary{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/summary{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1306,7 +1303,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/fortsrisk{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/fortsrisk{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1407,7 +1404,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/risk{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/v2/Clients/{exchange}/{portfolio}/risk{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1520,7 +1517,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/stats/{exchange}/{portfolio}/history/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print());
+        let uri_str = format!("{}/md/stats/{exchange}/{portfolio}/history/trades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1633,7 +1630,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>UsersApi
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/stats/{exchange}/{portfolio}/history/trades/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/stats/{exchange}/{portfolio}/history/trades/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {

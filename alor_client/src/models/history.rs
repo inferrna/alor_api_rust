@@ -28,10 +28,12 @@ pub struct History {
   
   history: Vec<HistoryObject>, 
   #[serde(rename = "next")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Время (UTC) начала следующей свечи
   next: Option<i64>,  // 1532944860 
   #[serde(rename = "prev")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Время (UTC) начала предыдущей свечи
   prev: Option<i64>  // 1532944860 

@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accrued_int** | **Decimal** | Начислено | [optional] [default to null]
-**accrued_interest** | **Decimal** | Начислено | [optional] [default to null]
+**accrued_int** | **Decimal** | Начислено (НКД) | [optional] [default to null]
+**accrued_interest** | **Decimal** | Начислено (НКД) | [optional] [default to null]
 **ask** | **Decimal** | Аск | [default to null]
 **bid** | **Decimal** | Бид | [default to null]
 **change** | **Decimal** | Разность цены и цены предыдущего закрытия | [optional] [default to null]

@@ -62,6 +62,8 @@ mod users_api;
 pub use self::users_api::{ UsersApi, UsersApiClient };
 mod v2orders_api;
 pub use self::v2orders_api::{ V2ordersApi, V2ordersApiClient };
+mod ws_orders_api;
+pub use self::ws_orders_api::{ WsOrdersApi, WsOrdersApiClient };
 
 pub mod configuration;
 pub mod client;

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **daily_unrealised_pl** | **Decimal** | Нереализованная прибыль за день | [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **is_currency** | **bool** | True для валютных остатков (денег), false - для торговых инструментов | [default to null]
-**lot_size** | **i32** | Размер лота | [default to null]
+**lot_size** | **Decimal** | Размер лота | [default to null]
 **open** | **i32** | Позиции на момент открытия (начала торгов) | [default to null]
 **open_qty_batch** | **i32** | Позиции на момент открытия (начала торгов) | [default to null]
 **open_units** | **i32** | Позиций на момент открытия (штуки) | [default to null]

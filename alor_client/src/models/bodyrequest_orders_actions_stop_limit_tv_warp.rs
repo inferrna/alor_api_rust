@@ -24,6 +24,9 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct BodyrequestOrdersActionsStopLimitTvWarp {
+  #[serde(rename = "activate")]
+  ///Флаг указывает, создать активную заявку, или не активную. Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной. Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders' 
+  activate: bool,  // true 
   #[serde(rename = "condition")]
   
   condition: Condition, 
@@ -37,7 +40,7 @@ pub struct BodyrequestOrdersActionsStopLimitTvWarp {
   
   instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, 
   #[serde(rename = "price")]
-  ///Цена выставления лимитной заявки
+  ///Цена выставления стоп-лимитной заявки
   price: Decimal,  // 191.33 
   #[serde(rename = "quantity")]
   ///Количество (лоты)
@@ -60,8 +63,9 @@ pub struct BodyrequestOrdersActionsStopLimitTvWarp {
 }
 
 impl BodyrequestOrdersActionsStopLimitTvWarp {
-  pub fn new(condition: Condition, iceberg_fixed: i32, iceberg_variance: Decimal, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, price: Decimal, quantity: i32, side: Side, stop_end_unix_time: i64, time_in_force: LifePolicy, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopLimitTvWarp {
+  pub fn new(activate: bool, condition: Condition, iceberg_fixed: i32, iceberg_variance: Decimal, instrument: BodyrequestOrdersActionsStopLimitTvWarpInstrument, price: Decimal, quantity: i32, side: Side, stop_end_unix_time: i64, time_in_force: LifePolicy, trigger_price: Decimal, user: BodyrequestOrdersActionsStopLimitTvWarpUser, ) -> BodyrequestOrdersActionsStopLimitTvWarp {
     BodyrequestOrdersActionsStopLimitTvWarp {
+      activate: activate,
       condition: condition,
       iceberg_fixed: iceberg_fixed,
       iceberg_variance: iceberg_variance,
@@ -75,6 +79,20 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
       user: user
     }
   }
+
+  pub fn set_activate(&mut self, activate: bool) {
+    self.activate = activate;
+  }
+
+  pub fn with_activate(mut self, activate: bool) -> BodyrequestOrdersActionsStopLimitTvWarp {
+    self.activate = activate;
+    self
+  }
+  ///Флаг указывает, создать активную заявку, или не активную. Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной. Данный флаг необходим при создании группы заявок с типом 'TriggerBracketOrders' 
+  pub fn activate(&self) -> &bool {
+    &self.activate
+  }
+
 
   pub fn set_condition(&mut self, condition: Condition) {
     self.condition = condition;
@@ -140,7 +158,7 @@ impl BodyrequestOrdersActionsStopLimitTvWarp {
     self.price = price;
     self
   }
-  ///Цена выставления лимитной заявки
+  ///Цена выставления стоп-лимитной заявки
   pub fn price(&self) -> &Decimal {
     &self.price
   }

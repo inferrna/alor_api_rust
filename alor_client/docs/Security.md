@@ -23,13 +23,13 @@ Name | Type | Description | Notes
 **rating** | **Decimal** |  | [default to null]
 **shortname** | **String** | Краткое наименование инструмента | [default to null]
 **symbol** | **String** | Тикер (Код финансового инструмента) | [default to null]
-**theor_price** | **Decimal** |  | [default to null]
-**theor_price_limit** | **Decimal** |  | [default to null]
+**theor_price** | **Decimal** | Теоретическая цена опциона | [default to null]
+**theor_price_limit** | **Decimal** | Теоретическая цена опциона с учетом лимитов | [default to null]
 **trading_status** | **i32** | Торговый статус инструмента:   * &#x60;18&#x60; - Нет торгов / торги закрыты   * &#x60;118&#x60; - Период открытия   * &#x60;103&#x60; - Период закрытия   * &#x60;2&#x60; - Перерыв в торгах   * &#x60;17&#x60; - Нормальный период торгов   * &#x60;102&#x60; - Аукцион закрытия   * &#x60;106&#x60; - Аукцион крупных пакетов   * &#x60;107&#x60; - Дискретный аукцион   * &#x60;119&#x60; - Аукцион открытия   * &#x60;120&#x60; - Период торгов по цене аукциона закрытия  | [default to null]
 **trading_status_info** | **String** | Описание торгового статуса инструмента | [optional] [default to null]
 **rtype** | **String** | Тип | [optional] [default to null]
-**volatility** | **Decimal** | Волативность | [default to null]
-**ryield** | **String** |  | [optional] [default to null]
+**volatility** | **Decimal** | Волатильность | [default to null]
+**ryield** | **i32** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

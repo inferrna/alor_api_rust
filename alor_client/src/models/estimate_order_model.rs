@@ -41,6 +41,7 @@ pub struct EstimateOrderModel {
   ///Стоимость заявки
   order_evaluation: Decimal, 
   #[serde(rename = "portfolio")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Портфель клиента
   portfolio: Option<String>, 
@@ -51,6 +52,7 @@ pub struct EstimateOrderModel {
   ///Количество в лотах к продаже с плечом
   quantity_to_sell: Decimal, 
   #[serde(rename = "ticker")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Инструмент
   ticker: Option<String> 

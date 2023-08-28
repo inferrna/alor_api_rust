@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **String** | Тикер | [default to null]
+**frequency** | **i32** | Интервал в мс между обновлениями данным по подписке | [optional] [default to null]
 **depth** | **i32** | Глубина стакана. Стандартное и максимальное значение - 20 (20х20). | [default to 20]
 **exchange** | **Exchange** |  | [default to null]
 **format** | **Format** |  | [default to null]

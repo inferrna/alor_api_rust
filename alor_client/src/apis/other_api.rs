@@ -29,6 +29,7 @@ use crate::models::*;
 use super::{Error, configuration};
 use headers::{Authorization, Header};
 use headers::authorization::Credentials;
+use crate::ToUriParam;
 use rust_decimal::Decimal;
 
 pub struct OtherApiClient<C: hyper::client::connect::Connect + Clone + Send + Sync> {

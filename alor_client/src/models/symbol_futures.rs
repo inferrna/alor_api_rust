@@ -25,12 +25,14 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct SymbolFutures {
   #[serde(rename = "accruedInt")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
-  ///Начислено
+  ///Начислено (НКД)
   accrued_int: Option<Decimal>,  // 0 
   #[serde(rename = "accrued_interest")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
-  ///Начислено
+  ///Начислено (НКД)
   accrued_interest: Option<Decimal>,  // 0 
   #[serde(rename = "ask")]
   ///Аск
@@ -39,10 +41,12 @@ pub struct SymbolFutures {
   ///Бид
   bid: Decimal,  // 171.82 
   #[serde(rename = "change")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Разность цены и цены предыдущего закрытия
   change: Option<Decimal>,  // -3.08 
   #[serde(rename = "change_percent")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Относительное изменение цены
   change_percent: Option<Decimal>,  // -1.76 
@@ -89,6 +93,7 @@ pub struct SymbolFutures {
   ///Объём
   volume: Decimal,  // 3.876708E+7 
   #[serde(rename = "yield")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   
   ryield: Option<i32> 
@@ -129,7 +134,7 @@ impl SymbolFutures {
     self.accrued_int = Some(accrued_int);
     self
   }
-  ///Начислено
+  ///Начислено (НКД)
   pub fn accrued_int(&self) -> Option<&Decimal> {
     self.accrued_int.as_ref()
   }
@@ -146,7 +151,7 @@ impl SymbolFutures {
     self.accrued_interest = Some(accrued_interest);
     self
   }
-  ///Начислено
+  ///Начислено (НКД)
   pub fn accrued_interest(&self) -> Option<&Decimal> {
     self.accrued_interest.as_ref()
   }

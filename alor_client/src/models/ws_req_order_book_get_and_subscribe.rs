@@ -27,6 +27,11 @@ pub struct WsReqOrderBookGetAndSubscribe {
   #[serde(rename = "code")]
   ///Тикер
   code: String,  // SBER 
+  #[serde(rename = "frequency")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(default)]
+  ///Интервал в мс между обновлениями данным по подписке
+  frequency: Option<i32>,  // 1000 
   #[serde(rename = "depth")]
   ///Глубина стакана. Стандартное и максимальное значение - 20 (20х20).
   depth: i32,  // 10 
@@ -51,6 +56,7 @@ impl WsReqOrderBookGetAndSubscribe {
   pub fn new(code: String, depth: i32, exchange: Exchange, format: Format, guid: String, opcode: OpcodeEnum, token: String, ) -> WsReqOrderBookGetAndSubscribe {
     WsReqOrderBookGetAndSubscribe {
       code: code,
+      frequency: None,
       depth: depth,
       exchange: exchange,
       format: format,
@@ -73,6 +79,23 @@ impl WsReqOrderBookGetAndSubscribe {
     &self.code
   }
 
+
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = Some(frequency);
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqOrderBookGetAndSubscribe {
+    self.frequency = Some(frequency);
+    self
+  }
+  ///Интервал в мс между обновлениями данным по подписке
+  pub fn frequency(&self) -> Option<&i32> {
+    self.frequency.as_ref()
+  }
+
+  pub fn reset_frequency(&mut self) {
+    self.frequency = None;
+  }
 
   pub fn set_depth(&mut self, depth: i32) {
     self.depth = depth;

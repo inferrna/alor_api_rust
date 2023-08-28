@@ -31,6 +31,7 @@ pub struct Summary {
   ///Покупательская способность на утро
   buying_power_at_morning: Decimal,  // 439844.15 
   #[serde(rename = "commission")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Суммарная комиссия (null для Срочного рынка)
   commission: Option<Decimal>,  // 24.21 

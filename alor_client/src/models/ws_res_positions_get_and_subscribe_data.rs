@@ -45,7 +45,7 @@ pub struct WsResPositionsGetAndSubscribeData {
   is_currency: bool,  // false 
   #[serde(rename = "lotSize")]
   ///Размер лота
-  lot_size: i32, 
+  lot_size: Decimal,  // 10.0 
   #[serde(rename = "open")]
   ///Позиции на момент открытия (начала торгов)
   open: i32, 
@@ -103,7 +103,7 @@ pub struct WsResPositionsGetAndSubscribeData {
 }
 
 impl WsResPositionsGetAndSubscribeData {
-  pub fn new(avg_price: Decimal, broker_symbol: String, current_volume: Decimal, daily_unrealised_pl: Decimal, exchange: Exchange, is_currency: bool, lot_size: i32, open: i32, open_qty_batch: i32, open_units: i32, qty: i32, qty_batch: i32, qty_t0: i32, qty_t0_batch: i32, qty_t1: i32, qty_t1_batch: i32, qty_t2: i32, qty_t2_batch: i32, qty_t_future: i32, qty_t_future_batch: i32, qty_units: i32, short_name: String, symbol: String, unrealised_pl: Decimal, volume: Decimal, ) -> WsResPositionsGetAndSubscribeData {
+  pub fn new(avg_price: Decimal, broker_symbol: String, current_volume: Decimal, daily_unrealised_pl: Decimal, exchange: Exchange, is_currency: bool, lot_size: Decimal, open: i32, open_qty_batch: i32, open_units: i32, qty: i32, qty_batch: i32, qty_t0: i32, qty_t0_batch: i32, qty_t1: i32, qty_t1_batch: i32, qty_t2: i32, qty_t2_batch: i32, qty_t_future: i32, qty_t_future_batch: i32, qty_units: i32, short_name: String, symbol: String, unrealised_pl: Decimal, volume: Decimal, ) -> WsResPositionsGetAndSubscribeData {
     WsResPositionsGetAndSubscribeData {
       avg_price: avg_price,
       broker_symbol: broker_symbol,
@@ -217,16 +217,16 @@ impl WsResPositionsGetAndSubscribeData {
   }
 
 
-  pub fn set_lot_size(&mut self, lot_size: i32) {
+  pub fn set_lot_size(&mut self, lot_size: Decimal) {
     self.lot_size = lot_size;
   }
 
-  pub fn with_lot_size(mut self, lot_size: i32) -> WsResPositionsGetAndSubscribeData {
+  pub fn with_lot_size(mut self, lot_size: Decimal) -> WsResPositionsGetAndSubscribeData {
     self.lot_size = lot_size;
     self
   }
   ///Размер лота
-  pub fn lot_size(&self) -> &i32 {
+  pub fn lot_size(&self) -> &Decimal {
     &self.lot_size
   }
 

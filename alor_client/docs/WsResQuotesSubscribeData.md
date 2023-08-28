@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accrued_int** | **i32** | Начислено | [optional] [default to null]
-**accrued_interest** | **i32** | Начислено | [optional] [default to null]
+**accrued_int** | **Decimal** | Начислено (НКД) | [optional] [default to null]
+**accrued_interest** | **Decimal** | Начислено (НКД) | [optional] [default to null]
 **ask** | **Decimal** | Аск | [default to null]
 **bid** | **Decimal** | Бид | [default to null]
 **change** | **Decimal** | Разность цены и цены предыдущего закрытия | [optional] [default to null]
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **open_price** | **Decimal** | Цена открытия | [default to null]
 **prev_close_price** | **Decimal** | Цена предыдущего закрытия | [default to null]
 **symbol** | **String** | Тикер (Код финансового инструмента) | [default to null]
-**rtype** | **String** |  | [default to null]
+**rtype** | **String** |  | [optional] [default to null]
 **volume** | **Decimal** | Объём | [default to null]
 **ryield** | **i32** |  | [optional] [default to null]
 

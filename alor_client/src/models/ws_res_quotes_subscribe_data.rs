@@ -25,13 +25,15 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsResQuotesSubscribeData {
   #[serde(rename = "accruedInt")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
-  ///Начислено
-  accrued_int: Option<i32>,  // 0 
+  ///Начислено (НКД)
+  accrued_int: Option<Decimal>,  // 0 
   #[serde(rename = "accrued_interest")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
-  ///Начислено
-  accrued_interest: Option<i32>,  // 0 
+  ///Начислено (НКД)
+  accrued_interest: Option<Decimal>,  // 0 
   #[serde(rename = "ask")]
   ///Аск
   ask: Decimal,  // 303.65 
@@ -39,10 +41,12 @@ pub struct WsResQuotesSubscribeData {
   ///Бид
   bid: Decimal,  // 303.59 
   #[serde(rename = "change")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Разность цены и цены предыдущего закрытия
   change: Option<Decimal>,  // -0.11 
   #[serde(rename = "change_percent")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Относительное изменение цены
   change_percent: Option<Decimal>,  // -0.04 
@@ -83,19 +87,22 @@ pub struct WsResQuotesSubscribeData {
   ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "type")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(default)]
   
-  rtype: String,  // CS 
+  rtype: Option<String>,  // CS 
   #[serde(rename = "volume")]
   ///Объём
   volume: Decimal,  // 3.876708E+7 
   #[serde(rename = "yield")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   
   ryield: Option<i32> 
 }
 
 impl WsResQuotesSubscribeData {
-  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, rtype: String, volume: Decimal, ) -> WsResQuotesSubscribeData {
+  pub fn new(ask: Decimal, bid: Decimal, description: String, exchange: Exchange, facevalue: Decimal, high_price: Decimal, last_price: Decimal, last_price_timestamp: i64, lotsize: Decimal, lotvalue: Decimal, low_price: Decimal, open_price: Decimal, prev_close_price: Decimal, symbol: String, volume: Decimal, ) -> WsResQuotesSubscribeData {
     WsResQuotesSubscribeData {
       accrued_int: None,
       accrued_interest: None,
@@ -115,22 +122,22 @@ impl WsResQuotesSubscribeData {
       open_price: open_price,
       prev_close_price: prev_close_price,
       symbol: symbol,
-      rtype: rtype,
+      rtype: None,
       volume: volume,
       ryield: None
     }
   }
 
-  pub fn set_accrued_int(&mut self, accrued_int: i32) {
+  pub fn set_accrued_int(&mut self, accrued_int: Decimal) {
     self.accrued_int = Some(accrued_int);
   }
 
-  pub fn with_accrued_int(mut self, accrued_int: i32) -> WsResQuotesSubscribeData {
+  pub fn with_accrued_int(mut self, accrued_int: Decimal) -> WsResQuotesSubscribeData {
     self.accrued_int = Some(accrued_int);
     self
   }
-  ///Начислено
-  pub fn accrued_int(&self) -> Option<&i32> {
+  ///Начислено (НКД)
+  pub fn accrued_int(&self) -> Option<&Decimal> {
     self.accrued_int.as_ref()
   }
 
@@ -138,16 +145,16 @@ impl WsResQuotesSubscribeData {
     self.accrued_int = None;
   }
 
-  pub fn set_accrued_interest(&mut self, accrued_interest: i32) {
+  pub fn set_accrued_interest(&mut self, accrued_interest: Decimal) {
     self.accrued_interest = Some(accrued_interest);
   }
 
-  pub fn with_accrued_interest(mut self, accrued_interest: i32) -> WsResQuotesSubscribeData {
+  pub fn with_accrued_interest(mut self, accrued_interest: Decimal) -> WsResQuotesSubscribeData {
     self.accrued_interest = Some(accrued_interest);
     self
   }
-  ///Начислено
-  pub fn accrued_interest(&self) -> Option<&i32> {
+  ///Начислено (НКД)
+  pub fn accrued_interest(&self) -> Option<&Decimal> {
     self.accrued_interest.as_ref()
   }
 
@@ -386,18 +393,21 @@ impl WsResQuotesSubscribeData {
 
 
   pub fn set_rtype(&mut self, rtype: String) {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
   }
 
   pub fn with_rtype(mut self, rtype: String) -> WsResQuotesSubscribeData {
-    self.rtype = rtype;
+    self.rtype = Some(rtype);
     self
   }
   
-  pub fn rtype(&self) -> &String {
-    &self.rtype
+  pub fn rtype(&self) -> Option<&String> {
+    self.rtype.as_ref()
   }
 
+  pub fn reset_rtype(&mut self) {
+    self.rtype = None;
+  }
 
   pub fn set_volume(&mut self, volume: Decimal) {
     self.volume = volume;

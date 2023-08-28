@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**activate** | **bool** | Флаг указывает, создать активную заявку, или не активную. Не активная заявка отображается в системе, но не участвует в процессе выставления на биржу, пока не станет активной. Данный флаг необходим при создании группы заявок с типом &#x27;TriggerBracketOrders&#x27;  | [default to true]
 **condition** | **Condition** |  | [default to null]
 **instrument** | [***BodyrequestOrdersActionsStopLimitTvWarpInstrument**](bodyrequest_OrdersActionsStopLimitTVWarp_instrument.md) |  | [default to null]
 **quantity** | **i32** | Количество (лоты) | [default to null]

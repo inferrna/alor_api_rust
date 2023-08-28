@@ -29,6 +29,7 @@ use crate::models::*;
 use super::{Error, configuration};
 use headers::{Authorization, Header};
 use headers::authorization::Credentials;
+use crate::ToUriParam;
 use rust_decimal::Decimal;
 
 pub struct OrdersApiClient<C: hyper::client::connect::Connect + Clone + Send + Sync> {
@@ -719,12 +720,20 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
     async fn v2clientordersactionsestimate(&self, body: Option<crate::models::EstimateOrderViewModel>) -> Result<EstimateOrderModel, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
         let method = hyper::Method::POST;
 
         let query_string = {
             let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
             let has_query_params = false;
-            if has_query_params {
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
                 format!("/?{}", api_query.finish())
             } else {
                 "".to_string()
@@ -752,6 +761,12 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         }
 
 
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
 
         let somebody = Body::empty();
         let serialized = serde_json::to_string(&body).unwrap();
@@ -810,12 +825,20 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
     async fn v2clientordersactionsestimateall(&self, body: Option<Vec<EstimateOrderViewModel>>) -> Result<Vec<EstimateOrderModel>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
         let method = hyper::Method::POST;
 
         let query_string = {
             let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
             let has_query_params = false;
-            if has_query_params {
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
                 format!("/?{}", api_query.finish())
             } else {
                 "".to_string()
@@ -843,6 +866,12 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         }
 
 
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
 
         let somebody = Body::empty();
         let serialized = serde_json::to_string(&body).unwrap();

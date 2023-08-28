@@ -41,7 +41,7 @@ pub struct Position {
   is_currency: bool,  // false 
   #[serde(rename = "lotSize")]
   ///Размер лота
-  lot_size: i32,  // 1 
+  lot_size: Decimal,  // 1 
   #[serde(rename = "open")]
   ///Агрегированное количество на момент открытия (начала торгов) (штуки)
   open: Decimal,  // 20.0 
@@ -99,7 +99,7 @@ pub struct Position {
 }
 
 impl Position {
-  pub fn new(avg_price: Decimal, broker_symbol: String, current_volume: Decimal, exchange: Exchange, is_currency: bool, lot_size: i32, open: Decimal, open_qty_batch: Decimal, open_units: Decimal, qty: Decimal, qty_batch: Decimal, qty_t0: Decimal, qty_t0_batch: Decimal, qty_t1: Decimal, qty_t1_batch: Decimal, qty_t2: Decimal, qty_t2_batch: Decimal, qty_t_future: Decimal, qty_t_future_batch: Decimal, qty_units: Decimal, short_name: String, symbol: String, unrealised_pl: Decimal, volume: Decimal, ) -> Position {
+  pub fn new(avg_price: Decimal, broker_symbol: String, current_volume: Decimal, exchange: Exchange, is_currency: bool, lot_size: Decimal, open: Decimal, open_qty_batch: Decimal, open_units: Decimal, qty: Decimal, qty_batch: Decimal, qty_t0: Decimal, qty_t0_batch: Decimal, qty_t1: Decimal, qty_t1_batch: Decimal, qty_t2: Decimal, qty_t2_batch: Decimal, qty_t_future: Decimal, qty_t_future_batch: Decimal, qty_units: Decimal, short_name: String, symbol: String, unrealised_pl: Decimal, volume: Decimal, ) -> Position {
     Position {
       avg_price: avg_price,
       broker_symbol: broker_symbol,
@@ -198,16 +198,16 @@ impl Position {
   }
 
 
-  pub fn set_lot_size(&mut self, lot_size: i32) {
+  pub fn set_lot_size(&mut self, lot_size: Decimal) {
     self.lot_size = lot_size;
   }
 
-  pub fn with_lot_size(mut self, lot_size: i32) -> Position {
+  pub fn with_lot_size(mut self, lot_size: Decimal) -> Position {
     self.lot_size = lot_size;
     self
   }
   ///Размер лота
-  pub fn lot_size(&self) -> &i32 {
+  pub fn lot_size(&self) -> &Decimal {
     &self.lot_size
   }
 

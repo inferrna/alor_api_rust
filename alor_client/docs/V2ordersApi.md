@@ -4,16 +4,17 @@ All URIs are relative to *https://apidev.alor.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**command_api_v2clientordersactionsstop**](V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп заявки
+[**command_api_v2clientordersactionsstop**](V2ordersApi.md#command_api_v2clientordersactionsstop) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stop | Создание стоп-заявки
 [**command_api_v2clientordersactionsstop_limit**](V2ordersApi.md#command_api_v2clientordersactionsstop_limit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit | Создание стоп-лимитной заявки
 [**command_api_v2clientordersactionsstop_limitstop_order_id**](V2ordersApi.md#command_api_v2clientordersactionsstop_limitstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit/{stopOrderId} | Изменение стоп-лимитной заявки
+[**command_api_v2clientordersactionsstopstop_order_id**](V2ordersApi.md#command_api_v2clientordersactionsstopstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stop/{stopOrderId} | Изменение стоп-заявки
 [**command_api_warp_v2clientordersdelete**](V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId}/ | Снятие заявки
 [**dev_get_all_stop_orders**](V2ordersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
 [**dev_get_one_stop_order**](V2ordersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
 
 # **command_api_v2clientordersactionsstop**
 > OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstop(ctx, body, x_alor_reqid)
-Создание стоп заявки
+Создание стоп-заявки
 
 ### Required Parameters
 
@@ -77,6 +78,36 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **body** | [**BodyrequestOrdersActionsStopLimitTvWarp**](BodyrequestOrdersActionsStopLimitTvWarp.md)| Тело заявки | 
+  **x_alor_reqid** | **String**|  | 
+  **stop_order_id** | **i64**|  | 
+
+### Return type
+
+[**OrdersActionsLimitMarketCommandApi**](orders_actions_LimitMarket_CommandAPI.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth), 
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **command_api_v2clientordersactionsstopstop_order_id**
+> OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstopstop_order_id(ctx, body, x_alor_reqid, stop_order_id)
+Изменение стоп-заявки
+
+Изменение стоп-заявки
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
+  **body** | [**BodyrequestOrdersActionsStopMarketTvWarp**](BodyrequestOrdersActionsStopMarketTvWarp.md)| Тело заявки | 
   **x_alor_reqid** | **String**|  | 
   **stop_order_id** | **i64**|  | 
 

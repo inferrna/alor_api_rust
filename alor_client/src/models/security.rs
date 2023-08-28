@@ -25,6 +25,7 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Security {
   #[serde(rename = "ISIN")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Идентификатор ценной бумаги согласно стандарту ISO 6166
   isin: Option<String>,  // RU000A1014L8 
@@ -38,6 +39,7 @@ pub struct Security {
   
   complex_product_category: ComplexProductCategory, 
   #[serde(rename = "currency")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Валюта
   currency: Option<String>,  // RUB 
@@ -87,29 +89,32 @@ pub struct Security {
   ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
   #[serde(rename = "theorPrice")]
-  
+  ///Теоретическая цена опциона
   theor_price: Decimal,  // 0.0 
   #[serde(rename = "theorPriceLimit")]
-  
+  ///Теоретическая цена опциона с учетом лимитов
   theor_price_limit: Decimal,  // 0.0 
   #[serde(rename = "tradingStatus")]
   ///Торговый статус инструмента:   * `18` - Нет торгов / торги закрыты   * `118` - Период открытия   * `103` - Период закрытия   * `2` - Перерыв в торгах   * `17` - Нормальный период торгов   * `102` - Аукцион закрытия   * `106` - Аукцион крупных пакетов   * `107` - Дискретный аукцион   * `119` - Аукцион открытия   * `120` - Период торгов по цене аукциона закрытия 
   trading_status: i32,  // 17 
   #[serde(rename = "tradingStatusInfo")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Описание торгового статуса инструмента
   trading_status_info: Option<String>,  // нормальный период торгов 
   #[serde(rename = "type")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   ///Тип
   rtype: Option<String>,  // CS 
   #[serde(rename = "volatility")]
-  ///Волативность
+  ///Волатильность
   volatility: Decimal,  // 0.0 
   #[serde(rename = "yield")]
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(default)]
   
-  ryield: Option<String> 
+  ryield: Option<i32> 
 }
 
 impl Security {
@@ -439,7 +444,7 @@ impl Security {
     self.theor_price = theor_price;
     self
   }
-  
+  ///Теоретическая цена опциона
   pub fn theor_price(&self) -> &Decimal {
     &self.theor_price
   }
@@ -453,7 +458,7 @@ impl Security {
     self.theor_price_limit = theor_price_limit;
     self
   }
-  
+  ///Теоретическая цена опциона с учетом лимитов
   pub fn theor_price_limit(&self) -> &Decimal {
     &self.theor_price_limit
   }
@@ -515,22 +520,22 @@ impl Security {
     self.volatility = volatility;
     self
   }
-  ///Волативность
+  ///Волатильность
   pub fn volatility(&self) -> &Decimal {
     &self.volatility
   }
 
 
-  pub fn set_ryield(&mut self, ryield: String) {
+  pub fn set_ryield(&mut self, ryield: i32) {
     self.ryield = Some(ryield);
   }
 
-  pub fn with_ryield(mut self, ryield: String) -> Security {
+  pub fn with_ryield(mut self, ryield: i32) -> Security {
     self.ryield = Some(ryield);
     self
   }
   
-  pub fn ryield(&self) -> Option<&String> {
+  pub fn ryield(&self) -> Option<&i32> {
     self.ryield.as_ref()
   }
 

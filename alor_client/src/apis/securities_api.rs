@@ -29,6 +29,7 @@ use crate::models::*;
 use super::{Error, configuration};
 use headers::{Authorization, Header};
 use headers::authorization::Credentials;
+use crate::ToUriParam;
 use rust_decimal::Decimal;
 
 pub struct SecuritiesApiClient<C: hyper::client::connect::Connect + Clone + Send + Sync> {
@@ -458,7 +459,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/orderbooks/{exchange}/{seccode}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), seccode=seccode.outline_print());
+        let uri_str = format!("{}/md/v2/orderbooks/{exchange}/{seccode}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), seccode=seccode.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -507,7 +508,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         }
 
         //Uncomment to see what went wrong
-
+/*
         let string_result = std::str::from_utf8(&res_body).unwrap();
         let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
         if let Ok(json_value) = value_result {
@@ -517,7 +518,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
             //Invalid json, raw output
             dbg!(&string_result);
         }
-
+*/
         let res_body =
             if status.is_success() {
                 Ok(res_body)
@@ -559,7 +560,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Securities/{symbols}/quotes{}", configuration.base_path, query_string, symbols=symbols.outline_print());
+        let uri_str = format!("{}/md/v2/Securities/{symbols}/quotes{}", configuration.base_path, query_string, symbols=symbols.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -660,7 +661,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/actualFuturesQuote{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -899,7 +900,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1007,7 +1008,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades/history{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}/alltrades/history{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {
@@ -1209,15 +1210,15 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
                 "".to_string()
             }
         };
-        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.outline_print());
+        let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
+        let uri: hyper::Uri = uri_str.parse().unwrap();
         // if let Err(e) = uri {
         //     return Box::new(futures::future::err(e));
         // }
-        //dbg!(&uri_str);
+        dbg!(&uri_str);
 
-        let uri: hyper::Uri = uri_str.parse().unwrap();
 
         let mut req =
             hyper::Request::builder()

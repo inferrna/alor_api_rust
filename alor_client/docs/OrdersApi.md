@@ -166,13 +166,14 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2clientordersactionsestimate**
-> EstimateOrderModel v2clientordersactionsestimate(optional)
+> EstimateOrderModel v2clientordersactionsestimate(ctx, optional)
 Провести оценку одной заявки
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -187,7 +188,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth), 
 
 ### HTTP request headers
 
@@ -197,13 +198,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **v2clientordersactionsestimateall**
-> Vec<EstimateOrderModel> v2clientordersactionsestimateall(optional)
+> Vec<EstimateOrderModel> v2clientordersactionsestimateall(ctx, optional)
 Провести оценку нескольких заявок
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -218,7 +220,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[bearerAuth](../README.md#bearerAuth), 
 
 ### HTTP request headers
 
