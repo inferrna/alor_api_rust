@@ -24,18 +24,21 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum OpcodeEnum {
-  #[serde(rename(serialize = "QuotesSubscribe"))]
-  #[serde(alias = "QuotesSubscribe")]
-  QUOTES_SUBSCRIBE,
+  #[serde(rename(serialize = "OrderBookGetAndSubscribe"))]
+  #[serde(alias = "OrderBookGetAndSubscribe")]
+  ORDER_BOOK_GET_AND_SUBSCRIBE,
+  #[serde(rename(serialize = "InstrumentsGetAndSubscribeV2"))]
+  #[serde(alias = "InstrumentsGetAndSubscribeV2")]
+  INSTRUMENTS_GET_AND_SUBSCRIBE_V2,
+  #[serde(rename(serialize = "create:stopLimit"))]
+  #[serde(alias = "create:stopLimit")]
+  CREATESTOP_LIMIT,
   #[serde(rename(serialize = "create:market"))]
   #[serde(alias = "create:market")]
   CREATEMARKET,
-  #[serde(rename(serialize = "StopOrdersGetAndSubscribeV2"))]
-  #[serde(alias = "StopOrdersGetAndSubscribeV2")]
-  STOP_ORDERS_GET_AND_SUBSCRIBE_V2,
-  #[serde(rename(serialize = "create:stop"))]
-  #[serde(alias = "create:stop")]
-  CREATESTOP,
+  #[serde(rename(serialize = "create:limit"))]
+  #[serde(alias = "create:limit")]
+  CREATELIMIT,
   #[serde(rename(serialize = "AllTradesGetAndSubscribe"))]
   #[serde(alias = "AllTradesGetAndSubscribe")]
   ALL_TRADES_GET_AND_SUBSCRIBE,
@@ -45,63 +48,60 @@ pub enum OpcodeEnum {
   #[serde(rename(serialize = "BarsGetAndSubscribe"))]
   #[serde(alias = "BarsGetAndSubscribe")]
   BARS_GET_AND_SUBSCRIBE,
-  #[serde(rename(serialize = "OrdersGetAndSubscribeV2"))]
-  #[serde(alias = "OrdersGetAndSubscribeV2")]
-  ORDERS_GET_AND_SUBSCRIBE_V2,
-  #[serde(rename(serialize = "InstrumentsGetAndSubscribeV2"))]
-  #[serde(alias = "InstrumentsGetAndSubscribeV2")]
-  INSTRUMENTS_GET_AND_SUBSCRIBE_V2,
-  #[serde(rename(serialize = "delete:limit"))]
-  #[serde(alias = "delete:limit")]
-  DELETELIMIT,
-  #[serde(rename(serialize = "unsubscribe"))]
-  #[serde(alias = "unsubscribe")]
-  UNSUBSCRIBE,
   #[serde(rename(serialize = "authorize"))]
   #[serde(alias = "authorize")]
   AUTHORIZE,
   #[serde(rename(serialize = "update:limit"))]
   #[serde(alias = "update:limit")]
   UPDATELIMIT,
+  #[serde(rename(serialize = "update:stopLimit"))]
+  #[serde(alias = "update:stopLimit")]
+  UPDATESTOP_LIMIT,
+  #[serde(rename(serialize = "StopOrdersGetAndSubscribe"))]
+  #[serde(alias = "StopOrdersGetAndSubscribe")]
+  STOP_ORDERS_GET_AND_SUBSCRIBE,
+  #[serde(rename(serialize = "StopOrdersGetAndSubscribeV2"))]
+  #[serde(alias = "StopOrdersGetAndSubscribeV2")]
+  STOP_ORDERS_GET_AND_SUBSCRIBE_V2,
+  #[serde(rename(serialize = "SpectraRisksGetAndSubscribe"))]
+  #[serde(alias = "SpectraRisksGetAndSubscribe")]
+  SPECTRA_RISKS_GET_AND_SUBSCRIBE,
+  #[serde(rename(serialize = "OrdersGetAndSubscribeV2"))]
+  #[serde(alias = "OrdersGetAndSubscribeV2")]
+  ORDERS_GET_AND_SUBSCRIBE_V2,
+  #[serde(rename(serialize = "QuotesSubscribe"))]
+  #[serde(alias = "QuotesSubscribe")]
+  QUOTES_SUBSCRIBE,
+  #[serde(rename(serialize = "PositionsGetAndSubscribeV2"))]
+  #[serde(alias = "PositionsGetAndSubscribeV2")]
+  POSITIONS_GET_AND_SUBSCRIBE_V2,
+  #[serde(rename(serialize = "SummariesGetAndSubscribeV2"))]
+  #[serde(alias = "SummariesGetAndSubscribeV2")]
+  SUMMARIES_GET_AND_SUBSCRIBE_V2,
+  #[serde(rename(serialize = "create:stop"))]
+  #[serde(alias = "create:stop")]
+  CREATESTOP,
+  #[serde(rename(serialize = "delete:limit"))]
+  #[serde(alias = "delete:limit")]
+  DELETELIMIT,
   #[serde(rename(serialize = "update:stop"))]
   #[serde(alias = "update:stop")]
   UPDATESTOP,
+  #[serde(rename(serialize = "unsubscribe"))]
+  #[serde(alias = "unsubscribe")]
+  UNSUBSCRIBE,
   #[serde(rename(serialize = "TradesGetAndSubscribeV2"))]
   #[serde(alias = "TradesGetAndSubscribeV2")]
   TRADES_GET_AND_SUBSCRIBE_V2,
   #[serde(rename(serialize = "delete:stopLimit"))]
   #[serde(alias = "delete:stopLimit")]
   DELETESTOP_LIMIT,
-  #[serde(rename(serialize = "PositionsGetAndSubscribeV2"))]
-  #[serde(alias = "PositionsGetAndSubscribeV2")]
-  POSITIONS_GET_AND_SUBSCRIBE_V2,
-  #[serde(rename(serialize = "create:limit"))]
-  #[serde(alias = "create:limit")]
-  CREATELIMIT,
   #[serde(rename(serialize = "delete:market"))]
   #[serde(alias = "delete:market")]
   DELETEMARKET,
-  #[serde(rename(serialize = "StopOrdersGetAndSubscribe"))]
-  #[serde(alias = "StopOrdersGetAndSubscribe")]
-  STOP_ORDERS_GET_AND_SUBSCRIBE,
-  #[serde(rename(serialize = "SpectraRisksGetAndSubscribe"))]
-  #[serde(alias = "SpectraRisksGetAndSubscribe")]
-  SPECTRA_RISKS_GET_AND_SUBSCRIBE,
   #[serde(rename(serialize = "delete:stop"))]
   #[serde(alias = "delete:stop")]
   DELETESTOP,
-  #[serde(rename(serialize = "SummariesGetAndSubscribeV2"))]
-  #[serde(alias = "SummariesGetAndSubscribeV2")]
-  SUMMARIES_GET_AND_SUBSCRIBE_V2,
-  #[serde(rename(serialize = "OrderBookGetAndSubscribe"))]
-  #[serde(alias = "OrderBookGetAndSubscribe")]
-  ORDER_BOOK_GET_AND_SUBSCRIBE,
-  #[serde(rename(serialize = "create:stopLimit"))]
-  #[serde(alias = "create:stopLimit")]
-  CREATESTOP_LIMIT,
-  #[serde(rename(serialize = "update:stopLimit"))]
-  #[serde(alias = "update:stopLimit")]
-  UPDATESTOP_LIMIT,
 }
 /*
 impl ToString for OpcodeEnum {

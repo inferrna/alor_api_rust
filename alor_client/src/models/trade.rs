@@ -59,6 +59,9 @@ pub struct Trade {
   #[serde(rename = "qtyUnits")]
   ///Количество (штуки)
   qty_units: i32,  // 1 
+  #[serde(rename = "repoSpecificFields")]
+  
+  repo_specific_fields: TradeRepoSpecificFields, 
   #[serde(rename = "side")]
   
   side: Side, 
@@ -68,7 +71,7 @@ pub struct Trade {
 }
 
 impl Trade {
-  pub fn new(board: String, broker_symbol: String, date: DateTime<Utc>, exchange: Exchange, existing: bool, id: Decimal, orderno: String, price: Decimal, qty: i32, qty_batch: i32, qty_units: i32, side: Side, symbol: String, ) -> Trade {
+  pub fn new(board: String, broker_symbol: String, date: DateTime<Utc>, exchange: Exchange, existing: bool, id: Decimal, orderno: String, price: Decimal, qty: i32, qty_batch: i32, qty_units: i32, repo_specific_fields: TradeRepoSpecificFields, side: Side, symbol: String, ) -> Trade {
     Trade {
       board: board,
       broker_symbol: broker_symbol,
@@ -81,6 +84,7 @@ impl Trade {
       qty: qty,
       qty_batch: qty_batch,
       qty_units: qty_units,
+      repo_specific_fields: repo_specific_fields,
       side: side,
       symbol: symbol
     }
@@ -237,6 +241,20 @@ impl Trade {
   ///Количество (штуки)
   pub fn qty_units(&self) -> &i32 {
     &self.qty_units
+  }
+
+
+  pub fn set_repo_specific_fields(&mut self, repo_specific_fields: TradeRepoSpecificFields) {
+    self.repo_specific_fields = repo_specific_fields;
+  }
+
+  pub fn with_repo_specific_fields(mut self, repo_specific_fields: TradeRepoSpecificFields) -> Trade {
+    self.repo_specific_fields = repo_specific_fields;
+    self
+  }
+  
+  pub fn repo_specific_fields(&self) -> &TradeRepoSpecificFields {
+    &self.repo_specific_fields
   }
 
 

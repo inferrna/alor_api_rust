@@ -1213,12 +1213,12 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         let uri_str = format!("{}/md/v2/Securities/{exchange}/{symbol}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), symbol=symbol.to_uri_param());
 
         // TODO(farcaller): handle error
-        let uri: hyper::Uri = uri_str.parse().unwrap();
         // if let Err(e) = uri {
         //     return Box::new(futures::future::err(e));
         // }
-        dbg!(&uri_str);
+        //dbg!(&uri_str);
 
+        let uri: hyper::Uri = uri_str.parse().unwrap();
 
         let mut req =
             hyper::Request::builder()

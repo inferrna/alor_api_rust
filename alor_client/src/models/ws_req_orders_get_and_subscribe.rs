@@ -30,32 +30,24 @@ pub struct WsReqOrdersGetAndSubscribe {
   #[serde(rename = "format")]
   
   format: Format, 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "opcode")]
-  
-  opcode: OpcodeEnum, 
-  #[serde(rename = "orderStatuses")]
-  ///Опциональный фильтр по статусам заявок. Влияет только на фильтрацию первичных исторических данных при подписке
-  order_statuses: Vec<OrderStatus>, 
-  #[serde(rename = "portfolio")]
-  ///Идентификатор клиентского портфеля
-  portfolio: String,  // D61971 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
 impl WsReqOrdersGetAndSubscribe {
-  pub fn new(exchange: Exchange, format: Format, guid: String, opcode: OpcodeEnum, order_statuses: Vec<OrderStatus>, portfolio: String, token: String, ) -> WsReqOrdersGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, ) -> WsReqOrdersGetAndSubscribe {
     WsReqOrdersGetAndSubscribe {
       exchange: exchange,
       format: format,
+      frequency: frequency,
       guid: guid,
-      opcode: opcode,
-      order_statuses: order_statuses,
-      portfolio: portfolio,
       token: token
     }
   }
@@ -88,6 +80,20 @@ impl WsReqOrdersGetAndSubscribe {
   }
 
 
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqOrdersGetAndSubscribe {
+    self.frequency = frequency;
+    self
+  }
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
+  }
+
+
   pub fn set_guid(&mut self, guid: String) {
     self.guid = guid;
   }
@@ -99,48 +105,6 @@ impl WsReqOrdersGetAndSubscribe {
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
-  }
-
-
-  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqOrdersGetAndSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  
-  pub fn opcode(&self) -> &OpcodeEnum {
-    &self.opcode
-  }
-
-
-  pub fn set_order_statuses(&mut self, order_statuses: Vec<OrderStatus>) {
-    self.order_statuses = order_statuses;
-  }
-
-  pub fn with_order_statuses(mut self, order_statuses: Vec<OrderStatus>) -> WsReqOrdersGetAndSubscribe {
-    self.order_statuses = order_statuses;
-    self
-  }
-  ///Опциональный фильтр по статусам заявок. Влияет только на фильтрацию первичных исторических данных при подписке
-  pub fn order_statuses(&self) -> &Vec<OrderStatus> {
-    &self.order_statuses
-  }
-
-
-  pub fn set_portfolio(&mut self, portfolio: String) {
-    self.portfolio = portfolio;
-  }
-
-  pub fn with_portfolio(mut self, portfolio: String) -> WsReqOrdersGetAndSubscribe {
-    self.portfolio = portfolio;
-    self
-  }
-  ///Идентификатор клиентского портфеля
-  pub fn portfolio(&self) -> &String {
-    &self.portfolio
   }
 
 

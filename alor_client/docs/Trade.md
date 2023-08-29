@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **qty** | **i32** | Количество (лоты) | [default to null]
 **qty_batch** | **i32** | Количество (лоты) | [default to null]
 **qty_units** | **i32** | Количество (штуки) | [default to null]
+**repo_specific_fields** | [***TradeRepoSpecificFields**](trade_repoSpecificFields.md) |  | [default to null]
 **side** | **Side** |  | [default to null]
 **symbol** | **String** | Тикер (Код финансового инструмента). \&quot;[N/A]\&quot; используется если symbol не определен. | [default to null]
 

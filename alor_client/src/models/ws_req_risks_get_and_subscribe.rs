@@ -30,28 +30,24 @@ pub struct WsReqRisksGetAndSubscribe {
   #[serde(rename = "format")]
   
   format: Format, 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "opcode")]
-  ///Код операции
-  opcode: String,  // RisksGetAndSubscribe 
-  #[serde(rename = "portfolio")]
-  ///Идентификатор клиентского портфеля
-  portfolio: String,  // D61971 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
 impl WsReqRisksGetAndSubscribe {
-  pub fn new(exchange: Exchange, format: Format, guid: String, opcode: String, portfolio: String, token: String, ) -> WsReqRisksGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, ) -> WsReqRisksGetAndSubscribe {
     WsReqRisksGetAndSubscribe {
       exchange: exchange,
       format: format,
+      frequency: frequency,
       guid: guid,
-      opcode: opcode,
-      portfolio: portfolio,
       token: token
     }
   }
@@ -84,6 +80,20 @@ impl WsReqRisksGetAndSubscribe {
   }
 
 
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqRisksGetAndSubscribe {
+    self.frequency = frequency;
+    self
+  }
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
+  }
+
+
   pub fn set_guid(&mut self, guid: String) {
     self.guid = guid;
   }
@@ -95,34 +105,6 @@ impl WsReqRisksGetAndSubscribe {
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
-  }
-
-
-  pub fn set_opcode(&mut self, opcode: String) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: String) -> WsReqRisksGetAndSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  ///Код операции
-  pub fn opcode(&self) -> &String {
-    &self.opcode
-  }
-
-
-  pub fn set_portfolio(&mut self, portfolio: String) {
-    self.portfolio = portfolio;
-  }
-
-  pub fn with_portfolio(mut self, portfolio: String) -> WsReqRisksGetAndSubscribe {
-    self.portfolio = portfolio;
-    self
-  }
-  ///Идентификатор клиентского портфеля
-  pub fn portfolio(&self) -> &String {
-    &self.portfolio
   }
 
 

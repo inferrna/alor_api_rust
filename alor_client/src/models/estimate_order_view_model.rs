@@ -33,33 +33,33 @@ pub struct EstimateOrderViewModel {
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
+  #[serde(rename = "includeLimitOrders")]
+  ///Учитывать ли лимитные заявки при расчете
+  include_limit_orders: bool, 
   #[serde(rename = "lotQuantity")]
   ///Количество лотов
   lot_quantity: i64, 
   #[serde(rename = "portfolio")]
-  #[serde(skip_serializing_if = "Option::is_none")]
-  #[serde(default)]
   ///Портфель клиента
-  portfolio: Option<String>, 
+  portfolio: String, 
   #[serde(rename = "price")]
   ///Цена
   price: Decimal, 
   #[serde(rename = "ticker")]
-  #[serde(skip_serializing_if = "Option::is_none")]
-  #[serde(default)]
   ///Инструмент
-  ticker: Option<String> 
+  ticker: String 
 }
 
 impl EstimateOrderViewModel {
-  pub fn new(exchange: Exchange, lot_quantity: i64, price: Decimal, ) -> EstimateOrderViewModel {
+  pub fn new(exchange: Exchange, include_limit_orders: bool, lot_quantity: i64, portfolio: String, price: Decimal, ticker: String, ) -> EstimateOrderViewModel {
     EstimateOrderViewModel {
       board: None,
       exchange: exchange,
+      include_limit_orders: include_limit_orders,
       lot_quantity: lot_quantity,
-      portfolio: None,
+      portfolio: portfolio,
       price: price,
-      ticker: None
+      ticker: ticker
     }
   }
 
@@ -94,6 +94,20 @@ impl EstimateOrderViewModel {
   }
 
 
+  pub fn set_include_limit_orders(&mut self, include_limit_orders: bool) {
+    self.include_limit_orders = include_limit_orders;
+  }
+
+  pub fn with_include_limit_orders(mut self, include_limit_orders: bool) -> EstimateOrderViewModel {
+    self.include_limit_orders = include_limit_orders;
+    self
+  }
+  ///Учитывать ли лимитные заявки при расчете
+  pub fn include_limit_orders(&self) -> &bool {
+    &self.include_limit_orders
+  }
+
+
   pub fn set_lot_quantity(&mut self, lot_quantity: i64) {
     self.lot_quantity = lot_quantity;
   }
@@ -109,21 +123,18 @@ impl EstimateOrderViewModel {
 
 
   pub fn set_portfolio(&mut self, portfolio: String) {
-    self.portfolio = Some(portfolio);
+    self.portfolio = portfolio;
   }
 
   pub fn with_portfolio(mut self, portfolio: String) -> EstimateOrderViewModel {
-    self.portfolio = Some(portfolio);
+    self.portfolio = portfolio;
     self
   }
   ///Портфель клиента
-  pub fn portfolio(&self) -> Option<&String> {
-    self.portfolio.as_ref()
+  pub fn portfolio(&self) -> &String {
+    &self.portfolio
   }
 
-  pub fn reset_portfolio(&mut self) {
-    self.portfolio = None;
-  }
 
   pub fn set_price(&mut self, price: Decimal) {
     self.price = price;
@@ -140,21 +151,18 @@ impl EstimateOrderViewModel {
 
 
   pub fn set_ticker(&mut self, ticker: String) {
-    self.ticker = Some(ticker);
+    self.ticker = ticker;
   }
 
   pub fn with_ticker(mut self, ticker: String) -> EstimateOrderViewModel {
-    self.ticker = Some(ticker);
+    self.ticker = ticker;
     self
   }
   ///Инструмент
-  pub fn ticker(&self) -> Option<&String> {
-    self.ticker.as_ref()
+  pub fn ticker(&self) -> &String {
+    &self.ticker
   }
 
-  pub fn reset_ticker(&mut self) {
-    self.ticker = None;
-  }
 
 
   pub fn validate(&self) {

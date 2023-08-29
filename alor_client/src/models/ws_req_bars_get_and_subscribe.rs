@@ -24,77 +24,33 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqBarsGetAndSubscribe {
-  #[serde(rename = "code")]
-  ///Тикер
-  code: String,  // SBER 
-  #[serde(rename = "delayed")]
-  ///Данные c задержкой в 15 минут. Для авторизованых клиентов задержка не применяется.
-  delayed: bool,  // false 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "format")]
   
   format: Format, 
-  #[serde(rename = "from")]
-  ///Дата и время (UTC) для первой запрашиваемой свечи
-  from: i64,  // 1536557084 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "opcode")]
-  
-  opcode: OpcodeEnum, 
-  #[serde(rename = "tf")]
-  
-  tf: Duration, 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
 impl WsReqBarsGetAndSubscribe {
-  pub fn new(code: String, delayed: bool, exchange: Exchange, format: Format, from: i64, guid: String, opcode: OpcodeEnum, tf: Duration, token: String, ) -> WsReqBarsGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, ) -> WsReqBarsGetAndSubscribe {
     WsReqBarsGetAndSubscribe {
-      code: code,
-      delayed: delayed,
       exchange: exchange,
       format: format,
-      from: from,
+      frequency: frequency,
       guid: guid,
-      opcode: opcode,
-      tf: tf,
       token: token
     }
   }
-
-  pub fn set_code(&mut self, code: String) {
-    self.code = code;
-  }
-
-  pub fn with_code(mut self, code: String) -> WsReqBarsGetAndSubscribe {
-    self.code = code;
-    self
-  }
-  ///Тикер
-  pub fn code(&self) -> &String {
-    &self.code
-  }
-
-
-  pub fn set_delayed(&mut self, delayed: bool) {
-    self.delayed = delayed;
-  }
-
-  pub fn with_delayed(mut self, delayed: bool) -> WsReqBarsGetAndSubscribe {
-    self.delayed = delayed;
-    self
-  }
-  ///Данные c задержкой в 15 минут. Для авторизованых клиентов задержка не применяется.
-  pub fn delayed(&self) -> &bool {
-    &self.delayed
-  }
-
 
   pub fn set_exchange(&mut self, exchange: Exchange) {
     self.exchange = exchange;
@@ -124,17 +80,17 @@ impl WsReqBarsGetAndSubscribe {
   }
 
 
-  pub fn set_from(&mut self, from: i64) {
-    self.from = from;
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
   }
 
-  pub fn with_from(mut self, from: i64) -> WsReqBarsGetAndSubscribe {
-    self.from = from;
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqBarsGetAndSubscribe {
+    self.frequency = frequency;
     self
   }
-  ///Дата и время (UTC) для первой запрашиваемой свечи
-  pub fn from(&self) -> &i64 {
-    &self.from
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
   }
 
 
@@ -149,34 +105,6 @@ impl WsReqBarsGetAndSubscribe {
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
-  }
-
-
-  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqBarsGetAndSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  
-  pub fn opcode(&self) -> &OpcodeEnum {
-    &self.opcode
-  }
-
-
-  pub fn set_tf(&mut self, tf: Duration) {
-    self.tf = tf;
-  }
-
-  pub fn with_tf(mut self, tf: Duration) -> WsReqBarsGetAndSubscribe {
-    self.tf = tf;
-    self
-  }
-  
-  pub fn tf(&self) -> &Duration {
-    &self.tf
   }
 
 

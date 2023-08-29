@@ -24,92 +24,45 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqOrderBookGetAndSubscribe {
-  #[serde(rename = "code")]
-  ///Тикер
-  code: String,  // SBER 
-  #[serde(rename = "frequency")]
-  #[serde(skip_serializing_if = "Option::is_none")]
-  #[serde(default)]
-  ///Интервал в мс между обновлениями данным по подписке
-  frequency: Option<i32>,  // 1000 
-  #[serde(rename = "depth")]
-  ///Глубина стакана. Стандартное и максимальное значение - 20 (20х20).
-  depth: i32,  // 10 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "format")]
   
   format: Format, 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "opcode")]
-  
-  opcode: OpcodeEnum, 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
-  token: String  // eyJhbGciOiJ... 
+  token: String,  // eyJhbGciOiJ... 
+  #[serde(rename = "code")]
+  ///Тикер
+  code: String,  // SBER 
+  #[serde(rename = "depth")]
+  ///Глубина стакана. Стандартное и максимальное значение - 20 (20х20).
+  depth: i32,  // 10 
+  #[serde(rename = "opcode")]
+  
+  opcode: OpcodeEnum 
 }
 
 impl WsReqOrderBookGetAndSubscribe {
-  pub fn new(code: String, depth: i32, exchange: Exchange, format: Format, guid: String, opcode: OpcodeEnum, token: String, ) -> WsReqOrderBookGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, code: String, depth: i32, opcode: OpcodeEnum, ) -> WsReqOrderBookGetAndSubscribe {
     WsReqOrderBookGetAndSubscribe {
-      code: code,
-      frequency: None,
-      depth: depth,
       exchange: exchange,
       format: format,
+      frequency: frequency,
       guid: guid,
-      opcode: opcode,
-      token: token
+      token: token,
+      code: code,
+      depth: depth,
+      opcode: opcode
     }
   }
-
-  pub fn set_code(&mut self, code: String) {
-    self.code = code;
-  }
-
-  pub fn with_code(mut self, code: String) -> WsReqOrderBookGetAndSubscribe {
-    self.code = code;
-    self
-  }
-  ///Тикер
-  pub fn code(&self) -> &String {
-    &self.code
-  }
-
-
-  pub fn set_frequency(&mut self, frequency: i32) {
-    self.frequency = Some(frequency);
-  }
-
-  pub fn with_frequency(mut self, frequency: i32) -> WsReqOrderBookGetAndSubscribe {
-    self.frequency = Some(frequency);
-    self
-  }
-  ///Интервал в мс между обновлениями данным по подписке
-  pub fn frequency(&self) -> Option<&i32> {
-    self.frequency.as_ref()
-  }
-
-  pub fn reset_frequency(&mut self) {
-    self.frequency = None;
-  }
-
-  pub fn set_depth(&mut self, depth: i32) {
-    self.depth = depth;
-  }
-
-  pub fn with_depth(mut self, depth: i32) -> WsReqOrderBookGetAndSubscribe {
-    self.depth = depth;
-    self
-  }
-  ///Глубина стакана. Стандартное и максимальное значение - 20 (20х20).
-  pub fn depth(&self) -> &i32 {
-    &self.depth
-  }
-
 
   pub fn set_exchange(&mut self, exchange: Exchange) {
     self.exchange = exchange;
@@ -139,6 +92,20 @@ impl WsReqOrderBookGetAndSubscribe {
   }
 
 
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqOrderBookGetAndSubscribe {
+    self.frequency = frequency;
+    self
+  }
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
+  }
+
+
   pub fn set_guid(&mut self, guid: String) {
     self.guid = guid;
   }
@@ -153,20 +120,6 @@ impl WsReqOrderBookGetAndSubscribe {
   }
 
 
-  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqOrderBookGetAndSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  
-  pub fn opcode(&self) -> &OpcodeEnum {
-    &self.opcode
-  }
-
-
   pub fn set_token(&mut self, token: String) {
     self.token = token;
   }
@@ -178,6 +131,48 @@ impl WsReqOrderBookGetAndSubscribe {
   ///JWT токен для авторизации
   pub fn token(&self) -> &String {
     &self.token
+  }
+
+
+  pub fn set_code(&mut self, code: String) {
+    self.code = code;
+  }
+
+  pub fn with_code(mut self, code: String) -> WsReqOrderBookGetAndSubscribe {
+    self.code = code;
+    self
+  }
+  ///Тикер
+  pub fn code(&self) -> &String {
+    &self.code
+  }
+
+
+  pub fn set_depth(&mut self, depth: i32) {
+    self.depth = depth;
+  }
+
+  pub fn with_depth(mut self, depth: i32) -> WsReqOrderBookGetAndSubscribe {
+    self.depth = depth;
+    self
+  }
+  ///Глубина стакана. Стандартное и максимальное значение - 20 (20х20).
+  pub fn depth(&self) -> &i32 {
+    &self.depth
+  }
+
+
+  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
+    self.opcode = opcode;
+  }
+
+  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqOrderBookGetAndSubscribe {
+    self.opcode = opcode;
+    self
+  }
+  
+  pub fn opcode(&self) -> &OpcodeEnum {
+    &self.opcode
   }
 
 

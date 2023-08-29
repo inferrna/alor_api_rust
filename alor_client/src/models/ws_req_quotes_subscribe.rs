@@ -24,51 +24,33 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqQuotesSubscribe {
-  #[serde(rename = "code")]
-  ///Тикер
-  code: String,  // SBER 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "format")]
   
   format: Format, 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "opcode")]
-  
-  opcode: OpcodeEnum, 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
 impl WsReqQuotesSubscribe {
-  pub fn new(code: String, exchange: Exchange, format: Format, guid: String, opcode: OpcodeEnum, token: String, ) -> WsReqQuotesSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, ) -> WsReqQuotesSubscribe {
     WsReqQuotesSubscribe {
-      code: code,
       exchange: exchange,
       format: format,
+      frequency: frequency,
       guid: guid,
-      opcode: opcode,
       token: token
     }
   }
-
-  pub fn set_code(&mut self, code: String) {
-    self.code = code;
-  }
-
-  pub fn with_code(mut self, code: String) -> WsReqQuotesSubscribe {
-    self.code = code;
-    self
-  }
-  ///Тикер
-  pub fn code(&self) -> &String {
-    &self.code
-  }
-
 
   pub fn set_exchange(&mut self, exchange: Exchange) {
     self.exchange = exchange;
@@ -98,6 +80,20 @@ impl WsReqQuotesSubscribe {
   }
 
 
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqQuotesSubscribe {
+    self.frequency = frequency;
+    self
+  }
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
+  }
+
+
   pub fn set_guid(&mut self, guid: String) {
     self.guid = guid;
   }
@@ -109,20 +105,6 @@ impl WsReqQuotesSubscribe {
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
-  }
-
-
-  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqQuotesSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  
-  pub fn opcode(&self) -> &OpcodeEnum {
-    &self.opcode
   }
 
 

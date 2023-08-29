@@ -24,73 +24,33 @@ use crate::serialize_quoted_numbers_opt;
 
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct WsReqAllTradesGetAndSubscribe {
-  #[serde(rename = "code")]
-  ///Тикер
-  code: String,  // SBER 
-  #[serde(rename = "depth")]
-  ///Если указать, то перед актуальными данными придут данные о последних N сделках.
-  depth: i32,  // 50 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "format")]
   
   format: Format, 
+  #[serde(rename = "frequency")]
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  frequency: i32, 
   #[serde(rename = "guid")]
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   guid: String,  // f35a2373-612c-4518-54af-72025384f59b 
-  #[serde(rename = "includeVirtualTrades")]
-  ///Указывает, нужно ли отправлять виртуальные (индикативные) сделки
-  include_virtual_trades: bool,  // false 
-  #[serde(rename = "opcode")]
-  
-  opcode: OpcodeEnum, 
   #[serde(rename = "token")]
   ///JWT токен для авторизации
   token: String  // eyJhbGciOiJ... 
 }
 
 impl WsReqAllTradesGetAndSubscribe {
-  pub fn new(code: String, depth: i32, exchange: Exchange, format: Format, guid: String, include_virtual_trades: bool, opcode: OpcodeEnum, token: String, ) -> WsReqAllTradesGetAndSubscribe {
+  pub fn new(exchange: Exchange, format: Format, frequency: i32, guid: String, token: String, ) -> WsReqAllTradesGetAndSubscribe {
     WsReqAllTradesGetAndSubscribe {
-      code: code,
-      depth: depth,
       exchange: exchange,
       format: format,
+      frequency: frequency,
       guid: guid,
-      include_virtual_trades: include_virtual_trades,
-      opcode: opcode,
       token: token
     }
   }
-
-  pub fn set_code(&mut self, code: String) {
-    self.code = code;
-  }
-
-  pub fn with_code(mut self, code: String) -> WsReqAllTradesGetAndSubscribe {
-    self.code = code;
-    self
-  }
-  ///Тикер
-  pub fn code(&self) -> &String {
-    &self.code
-  }
-
-
-  pub fn set_depth(&mut self, depth: i32) {
-    self.depth = depth;
-  }
-
-  pub fn with_depth(mut self, depth: i32) -> WsReqAllTradesGetAndSubscribe {
-    self.depth = depth;
-    self
-  }
-  ///Если указать, то перед актуальными данными придут данные о последних N сделках.
-  pub fn depth(&self) -> &i32 {
-    &self.depth
-  }
-
 
   pub fn set_exchange(&mut self, exchange: Exchange) {
     self.exchange = exchange;
@@ -120,6 +80,20 @@ impl WsReqAllTradesGetAndSubscribe {
   }
 
 
+  pub fn set_frequency(&mut self, frequency: i32) {
+    self.frequency = frequency;
+  }
+
+  pub fn with_frequency(mut self, frequency: i32) -> WsReqAllTradesGetAndSubscribe {
+    self.frequency = frequency;
+    self
+  }
+  ///Максимальная частота отдачи данных сервером в миллисекундах.
+  pub fn frequency(&self) -> &i32 {
+    &self.frequency
+  }
+
+
   pub fn set_guid(&mut self, guid: String) {
     self.guid = guid;
   }
@@ -131,34 +105,6 @@ impl WsReqAllTradesGetAndSubscribe {
   ///Уникальный идентификатор сообщений создаваемой подписки. Все входящие сообщения, соответствующие этой подписке, будут иметь такое значение поля guid.
   pub fn guid(&self) -> &String {
     &self.guid
-  }
-
-
-  pub fn set_include_virtual_trades(&mut self, include_virtual_trades: bool) {
-    self.include_virtual_trades = include_virtual_trades;
-  }
-
-  pub fn with_include_virtual_trades(mut self, include_virtual_trades: bool) -> WsReqAllTradesGetAndSubscribe {
-    self.include_virtual_trades = include_virtual_trades;
-    self
-  }
-  ///Указывает, нужно ли отправлять виртуальные (индикативные) сделки
-  pub fn include_virtual_trades(&self) -> &bool {
-    &self.include_virtual_trades
-  }
-
-
-  pub fn set_opcode(&mut self, opcode: OpcodeEnum) {
-    self.opcode = opcode;
-  }
-
-  pub fn with_opcode(mut self, opcode: OpcodeEnum) -> WsReqAllTradesGetAndSubscribe {
-    self.opcode = opcode;
-    self
-  }
-  
-  pub fn opcode(&self) -> &OpcodeEnum {
-    &self.opcode
   }
 
 
@@ -178,8 +124,6 @@ impl WsReqAllTradesGetAndSubscribe {
 
 
   pub fn validate(&self) {
-    let max_value = i32::from(5000);
-    assert!(self.depth<=max_value, "WsReqAllTradesGetAndSubscribe.depth should be <= 5000");
   }
 
 }
