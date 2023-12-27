@@ -19,7 +19,7 @@ Method | HTTP request | Description
 > History dev_history(ctx, symbol, exchange, tf, from, to, optional)
 Запрос истории для выбранных биржи и инструмента
 
-Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.
+**Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется. 
 
 ### Required Parameters
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 > Orderbook dev_orderbook_exchang_seccode(ctx, exchange, seccode, optional)
 Получение информации о биржевом стакане
 
-Запрос биржевого стакана
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос биржевого стакана 
 
 ### Required Parameters
 
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 > Vec<Symbol> dev_quotes(ctx, symbols, optional)
 Получение информации о котировках для выбранных инструментов
 
-Запрос информации о котировках для выбранных инструментов и бирж
+**Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос информации о котировках для выбранных инструментов и бирж 
 
 ### Required Parameters
 
@@ -136,10 +136,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dev_securities_futures**
-> SymbolFutures dev_securities_futures(ctx, exchange, symbol, optional)
+> Vec<Symbol> dev_securities_futures(ctx, exchange, symbol, optional)
 Получение котировки по ближайшему фьючерсу (код)
 
-Запрос котировки по ближайшему фьючерсу (только по коду, без даты)
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос котировки по ближайшему фьючерсу (только по коду, без даты) 
 
 ### Required Parameters
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SymbolFutures**](symbol_futures.md)
+[**Vec<Symbol>**](array.md)
 
 ### Authorization
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 > Vec<Security> dev_securities_search(ctx, query, optional)
 Получение информации о торговых инструментах
 
-Запрос информации о торговых инструментах
+**Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос информации о торговых инструментах 
 
 ### Required Parameters
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Notes
  **query** | **String**|  | 
  **limit** | **i32**|  | 
  **offset** | **i32**|  | 
- **sector** | [**Sector**](.md)|  | 
+ **sector** | [**Market**](.md)|  | 
  **cficode** | **String**|  | 
  **exchange** | [**Exchange**](.md)|  | 
  **format** | [**Format**](.md)|  | 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 > Vec<Alltrade> dev_securities_search_all_trades(ctx, exchange, symbol, optional)
 Получение информации о всех сделках по ценным бумагам за сегодня
 
-Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день 
 
 ### Required Parameters
 
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 > Alltradeshistory dev_securities_search_all_trades_history(ctx, exchange, symbol, limit, optional)
 Получение исторической информации о всех сделках по ценным бумагам
 
-Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются) 
 
 ### Required Parameters
 
@@ -285,6 +285,7 @@ Name | Type | Description  | Notes
  **from** | **i64**|  | 
  **to** | **i64**|  | 
  **offset** | **i32**|  | 
+ **format** | [**Format**](.md)|  | 
 
 ### Return type
 
@@ -305,7 +306,7 @@ Name | Type | Description  | Notes
 > Vec<Security> dev_securities_search_exchange(ctx, exchange, optional)
 Получение информации о торговых инструментах на выбранной бирже
 
-Запрос информации об инструментах на выбранной бирже
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации об инструментах на выбранной бирже 
 
 ### Required Parameters
 
@@ -321,6 +322,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **exchange** | [**Exchange**](.md)|  | 
  **format** | [**Format**](.md)|  | 
+ **market** | [**Market**](.md)|  | 
+ **include_old** | **bool**|  | 
+ **limit** | **i32**|  | 
+ **offset** | **i32**|  | 
 
 ### Return type
 
@@ -341,7 +346,7 @@ Name | Type | Description  | Notes
 > Security dev_securities_search_exchange_code(ctx, exchange, symbol, optional)
 Получение информации о выбранном финансовом инструменте
 
-Запрос информации о выбранном финансовом инструменте на бирже
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о выбранном финансовом инструменте на бирже 
 
 ### Required Parameters
 
@@ -379,7 +384,7 @@ Name | Type | Description  | Notes
 > RiskRates risk_rates(ctx, exchange, optional)
 Запрос ставок риска
 
-Получение ставок риска для маржинальной торговли.
+**Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Получение ставок риска для маржинальной торговли. 
 
 ### Required Parameters
 

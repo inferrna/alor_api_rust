@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**comment** | **String** | Пользовательский комментарий к заявке | [default to null]
 **instrument** | [***BodyrequestOrdersActionsLimitTvInstrument**](bodyrequest_OrdersActionsLimitTV_instrument.md) |  | [default to null]
 **quantity** | **i32** | Количество (лоты) | [default to null]
 **side** | **Side** |  | [default to null]

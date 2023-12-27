@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**comment** | **String** | Пользовательский комментарий к заявке | [default to null]
 **iceberg_fixed** | **i32** | Видимая постоянная часть айсберг-заявки в лотах | [default to null]
 **iceberg_variance** | **Decimal** | Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок | [default to null]
 **instrument** | [***BodyrequestOrdersActionsLimitTvInstrument**](bodyrequest_OrdersActionsLimitTV_instrument.md) |  | [default to null]

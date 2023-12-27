@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**board** | **String** | Режим торгов (борд) | [optional] [default to null]
+**board** | **String** | Код режима торгов (Борд) | [optional] [default to null]
 **exchange** | **Exchange** |  | [default to null]
 **include_limit_orders** | **bool** | Учитывать ли лимитные заявки при расчете | [default to false]
 **lot_quantity** | **i64** | Количество лотов | [default to null]

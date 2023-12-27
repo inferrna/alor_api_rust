@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **close** | **Decimal** | Цена при закрытии | [default to null]
 **high** | **Decimal** | Максимальная цена | [default to null]
-**low** | **Decimal** | Миниимальная цена | [default to null]
+**low** | **Decimal** | Минимальная цена | [default to null]
 **open** | **Decimal** | Цена при открытии | [default to null]
 **time** | **i64** | Время (UTC) (Unix time seconds) | [default to null]
 **volume** | **i32** | Объём | [default to null]

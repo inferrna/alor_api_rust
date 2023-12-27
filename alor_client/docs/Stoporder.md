@@ -4,12 +4,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **broker_symbol** | **String** | Пара Биржа:Тикер | [default to null]
-**end_time** | **DateTime<Utc>** | Время действия заявки (UTC) | [default to null]
+**end_time** | **DateTime<Utc>** | Дата и время завершения (UTC) | [default to null]
 **exchange** | **Exchange** |  | [default to null]
-**existing** | **bool** | True - для данных из \&quot;снепшота\&quot;, то есть из истории. False - для новых событий | [default to null]
+**existing** | **bool** | &#x60;True&#x60; - для данных из \&quot;снепшота\&quot;, то есть из истории. &#x60;False&#x60; - для новых событий | [default to null]
 **filled_qty_batch** | **Decimal** | Количество исполненных | [default to null]
 **id** | **Decimal** | Уникальный идентификатор стоп-заявки | [default to null]
-**price** | **Decimal** | Цена(Лимит) | [default to null]
+**price** | **Decimal** | Цена (Лимит) | [default to null]
 **qty** | **Decimal** | Количество | [default to null]
 **side** | **Side** |  | [default to null]
 **status** | **OrderStatus** |  | [default to null]

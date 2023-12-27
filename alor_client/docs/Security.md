@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **isin** | **String** | Идентификатор ценной бумаги согласно стандарту ISO 6166 | [optional] [default to null]
+**board** | **String** | Код режима торгов (Борд) | [default to null]
 **cancellation** | **String** | Дата и время (UTC) окончания действия | [default to null]
 **cfi_code** | **String** | Тип ценной бумаги согласно стандарту ISO 10962 | [default to null]
 **complex_product_category** | **ComplexProductCategory** |  | [default to null]
@@ -29,7 +30,7 @@ Name | Type | Description | Notes
 **trading_status_info** | **String** | Описание торгового статуса инструмента | [optional] [default to null]
 **rtype** | **String** | Тип | [optional] [default to null]
 **volatility** | **Decimal** | Волатильность | [default to null]
-**ryield** | **i32** |  | [optional] [default to null]
+**ryield** | **i32** | Доходность, рассчитанная по цене сделки | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

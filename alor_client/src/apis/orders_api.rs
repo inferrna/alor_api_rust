@@ -1,7 +1,7 @@
 /* 
  * Alor OpenAPI V2
  *
- * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> </p>  <h4>Получение списка портфелей</h4> <p>Получить список доступных портфелей можно из JWT токена</p> <p>Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле <b>portfolios</b>.</p> <br/>  <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+ * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение.  **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*.  Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)!  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   ### Доступные типы данных * Все сделки * Все заявки * Информация по инструментам * Котировки * Биржевые стаканы * Исторические данные * Позиции * Информация о клиенте  ### Поддерживаемые виды заявок  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  ### Ограничения по частоте запросов На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.  ### Получение списка портфелей Получить список доступных портфелей можно из JWT токена Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле **portfolios**.  ## Авторизация  ### OAuth  **Внимание!** JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  ### Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе [Примеры](https://alor.dev/examples).  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  ### Для ведения операций от своего имени  Выписать себе **refresh token** для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  ## Краткое описание работы с авторизацией  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  **refresh token**.  Механизм  **refresh token**  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у **refresh token**  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  **refresh token**, получаемого обычным способом — 1 месяц.   Срок жизни  **refresh token**, получаемого самостоятельным выписыванием — год.   ---   Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на [openapi@alor.ru](mailto:openapi@alor.ru) или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).   Тестовый контур: `https://apidev.alor.ru`   Боевой контур: `https://api.alor.ru`   --- 
  *
  * OpenAPI spec version: 1.0
  * Contact: openapi@alor.ru
@@ -49,7 +49,7 @@ pub trait OrdersApi {
 ///
 /// Создание лимитной заявки
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по указанной в теле запроса цене. 
 ///
 /// # Arguments
 ///
@@ -65,7 +65,7 @@ pub trait OrdersApi {
 ///
 /// Изменение лимитной заявки
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос изменяет характеристики ранее поданной лимитной заявки с указанным номером 
 ///
 /// # Arguments
 ///
@@ -81,11 +81,11 @@ pub trait OrdersApi {
     /// Example: 789
     /// 
     ///
-    async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTVput, x_alor_reqid: &str, order_id: i64) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>>;
+    async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTv, x_alor_reqid: &str, order_id: i64) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>>;
 ///
 /// Создание рыночной заявки
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по рыночной цене. 
 ///
 /// # Arguments
 ///
@@ -101,7 +101,7 @@ pub trait OrdersApi {
 ///
 /// Изменение рыночной заявки
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос изменяет характеристики ранее поданной рыночной заявки с указанным номером 
 ///
 /// # Arguments
 ///
@@ -121,7 +121,7 @@ pub trait OrdersApi {
 ///
 /// Снятие заявки
 ///
-/// Снятие заявки с указанным идентификатором
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Снятие заявки с указанным идентификатором 
 ///
 /// # Arguments
 ///
@@ -149,11 +149,55 @@ pub trait OrdersApi {
     /// 
     /// 
     ///
-    async fn command_api_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::Format>) -> Result<String, Error<serde_json::Value>>;
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::Format>) -> Result<String, Error<serde_json::Value>>;
+///
+/// Получение информации о всех заявках
+///
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Возвращает информацию о всех заявках для указанного &#x60;portfolio&#x60;, созданных на заданной в параметре &#x60;exchange&#x60; бирже. 
+///
+/// # Arguments
+///
+    /// * `exchange`  (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio`  (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `format`  (optional)
+    /// 
+    /// 
+    ///
+    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::Format>) -> Result<Vec<Order>, Error<serde_json::Value>>;
+///
+/// Получение информации о выбранной заявке
+///
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Возвращает информацию о выбранной в параметре &#x60;orderId&#x60; заявке. 
+///
+/// # Arguments
+///
+    /// * `exchange`  (required)
+    /// 
+    /// 
+    ///
+    /// * `portfolio`  (required)
+    /// Example: portfolio_example
+    /// 
+    ///
+    /// * `order_id`  (required)
+    /// Example: 789
+    /// 
+    ///
+    /// * `format`  (optional)
+    /// 
+    /// 
+    ///
+    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::Format>) -> Result<Order, Error<serde_json::Value>>;
 ///
 /// Провести оценку одной заявки
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
 ///
 /// # Arguments
 ///
@@ -165,7 +209,7 @@ pub trait OrdersApi {
 ///
 /// Провести оценку нескольких заявок
 ///
-/// 
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
 ///
 /// # Arguments
 ///
@@ -286,7 +330,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTVput, x_alor_reqid: &str, order_id: i64) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>> {
+    async fn command_api_v2clientordersactionslimitput(&self, body: crate::models::BodyrequestOrdersActionsLimitTv, x_alor_reqid: &str, order_id: i64) -> Result<OrdersActionsLimitMarket, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -610,7 +654,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
         res_body
     }
 
-    async fn command_api_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::Format>) -> Result<String, Error<serde_json::Value>> {
+    async fn command_api_warp_v2clientordersdelete(&self, order_id: i64, portfolio: &str, exchange: crate::models::Exchange, stop: bool, json_response: Option<bool>, format: Option<crate::models::Format>) -> Result<String, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -642,6 +686,208 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>OrdersAp
             }
         };
         let uri_str = format!("{}/commandapi/warptrans/TRADE/v2/client/orders/{orderId}{}", configuration.base_path, query_string, orderId=order_id.outline_print());
+
+        // TODO(farcaller): handle error
+        // if let Err(e) = uri {
+        //     return Box::new(futures::future::err(e));
+        // }
+        //dbg!(&uri_str);
+
+        let uri: hyper::Uri = uri_str.parse().unwrap();
+
+        let mut req =
+            hyper::Request::builder()
+                .method(method)
+                .uri(uri);
+
+        let headers = req.headers_mut().unwrap();
+
+        if let Some(ref user_agent) = configuration.user_agent {
+            headers.insert(hyper::header::USER_AGENT, user_agent.parse().unwrap());
+        }
+
+
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
+
+        let somebody = Body::empty();
+
+        let req = req.body(somebody).unwrap();
+
+        let res = configuration
+            .client.request(req)
+            .await
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        let mut res = res?;
+
+        let status = res.status();
+        let mut res_body: Vec<u8> = vec![];
+
+        while let Some(chunk) = res.body_mut().data().await {
+            let mut chunk_vec = chunk.unwrap().to_vec();
+            res_body.append(chunk_vec.as_mut());
+        }
+
+        //Uncomment to see what went wrong
+/*
+        let string_result = std::str::from_utf8(&res_body).unwrap();
+        let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
+        if let Ok(json_value) = value_result {
+            //Valid json, invalid structure, pretty-printed output
+            eprintln!("{}", serde_json::to_string_pretty(&json_value).unwrap());
+        } else {
+            //Invalid json, raw output
+            dbg!(&string_result);
+        }
+*/
+        let res_body =
+            if status.is_success() {
+                Ok(res_body)
+            } else {
+                Err(Error::from((status, res_body.borrow())))
+            };
+
+        let mut res_body = res_body?;
+
+        let res_body =
+            serde_json::from_slice(res_body.borrow())
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        res_body
+    }
+
+    async fn dev_get_all_orders(&self, exchange: crate::models::Exchange, portfolio: &str, format: Option<crate::models::Format>) -> Result<Vec<Order>, Error<serde_json::Value>> {
+        let configuration: &configuration::Configuration<C> = self.configuration.borrow();
+
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
+        let method = hyper::Method::GET;
+
+        let query_string = {
+            let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
+            let has_query_params = true;
+        if let Some(format) = format {
+            api_query.append_pair("format", &format.outline_print());
+        }
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
+                format!("/?{}", api_query.finish())
+            } else {
+                "".to_string()
+            }
+        };
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param());
+
+        // TODO(farcaller): handle error
+        // if let Err(e) = uri {
+        //     return Box::new(futures::future::err(e));
+        // }
+        //dbg!(&uri_str);
+
+        let uri: hyper::Uri = uri_str.parse().unwrap();
+
+        let mut req =
+            hyper::Request::builder()
+                .method(method)
+                .uri(uri);
+
+        let headers = req.headers_mut().unwrap();
+
+        if let Some(ref user_agent) = configuration.user_agent {
+            headers.insert(hyper::header::USER_AGENT, user_agent.parse().unwrap());
+        }
+
+
+        for (key, val) in auth_headers {
+            headers.insert(
+                hyper::header::HeaderName::from_str(key.as_ref()).unwrap(),
+                val.parse().unwrap(),
+            );
+        }
+
+        let somebody = Body::empty();
+
+        let req = req.body(somebody).unwrap();
+
+        let res = configuration
+            .client.request(req)
+            .await
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        let mut res = res?;
+
+        let status = res.status();
+        let mut res_body: Vec<u8> = vec![];
+
+        while let Some(chunk) = res.body_mut().data().await {
+            let mut chunk_vec = chunk.unwrap().to_vec();
+            res_body.append(chunk_vec.as_mut());
+        }
+
+        //Uncomment to see what went wrong
+/*
+        let string_result = std::str::from_utf8(&res_body).unwrap();
+        let value_result: Result<serde_json::Value, serde_json::Error> = serde_json::from_str(&string_result);
+        if let Ok(json_value) = value_result {
+            //Valid json, invalid structure, pretty-printed output
+            eprintln!("{}", serde_json::to_string_pretty(&json_value).unwrap());
+        } else {
+            //Invalid json, raw output
+            dbg!(&string_result);
+        }
+*/
+        let res_body =
+            if status.is_success() {
+                Ok(res_body)
+            } else {
+                Err(Error::from((status, res_body.borrow())))
+            };
+
+        let mut res_body = res_body?;
+
+        let res_body =
+            serde_json::from_slice(res_body.borrow())
+            .map_err(|e| -> Error<serde_json::Value> { Error::from(e) });
+
+        res_body
+    }
+
+    async fn dev_get_one_order(&self, exchange: crate::models::Exchange, portfolio: &str, order_id: i64, format: Option<crate::models::Format>) -> Result<Order, Error<serde_json::Value>> {
+        let configuration: &configuration::Configuration<C> = self.configuration.borrow();
+
+        let mut auth_headers = HashMap::<String, String>::new();
+        let mut auth_query = HashMap::<String, String>::new();
+        if let Some(ref token) = configuration.oauth_access_token {
+            auth_headers.insert("Authorization".to_owned(), format!("Bearer {}", token));
+        }
+        let method = hyper::Method::GET;
+
+        let query_string = {
+            let mut api_query = ::url::form_urlencoded::Serializer::new(String::new());
+            let has_query_params = true;
+        if let Some(format) = format {
+            api_query.append_pair("format", &format.outline_print());
+        }
+            for (key, val) in &auth_query {
+                api_query.append_pair(key, val);
+            }
+            if has_query_params || auth_query.len()>0  {
+                format!("/?{}", api_query.finish())
+            } else {
+                "".to_string()
+            }
+        };
+        let uri_str = format!("{}/md/v2/clients/{exchange}/{portfolio}/orders/{orderId}{}", configuration.base_path, query_string, exchange=exchange.outline_print(), portfolio=portfolio.to_uri_param(), orderId=order_id.outline_print());
 
         // TODO(farcaller): handle error
         // if let Err(e) = uri {

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **quantity** | **i32** | Количество | [default to null]
 **side** | **Side** |  | [default to null]
 **user** | [***BodyrequestOrdersActionsLimitUser**](bodyrequest_OrdersActionsLimit_User.md) |  | [default to null]
+**comment** | **String** | Пользовательский комментарий к заявке | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

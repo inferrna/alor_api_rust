@@ -41,7 +41,7 @@ fn get_client() -> V2ordersApiClient<HttpConnector<GaiResolver>> {
 /**
  * Создание стоп-заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -56,7 +56,7 @@ async fn command_api_v2clientordersactionsstop_test() {
 /**
  * Создание стоп-лимитной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -71,7 +71,7 @@ async fn command_api_v2clientordersactionsstop_limit_test() {
 /**
  * Изменение стоп-лимитной заявки
  *
- * Изменение стоп-лимитной заявки
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Изменение стоп-лимитной заявки 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -88,7 +88,7 @@ async fn command_api_v2clientordersactionsstop_limitstop_order_id_test() {
 /**
  * Изменение стоп-заявки
  *
- * Изменение стоп-заявки
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Изменение стоп-заявки 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -105,7 +105,7 @@ async fn command_api_v2clientordersactionsstopstop_order_id_test() {
 /**
  * Снятие заявки
  *
- * Снятие заявки с указанным идентификатором
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Снятие заявки с указанным идентификатором 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -128,7 +128,7 @@ async fn command_api_warp_v2clientordersdelete_test() {
 /**
  * Получение информации о стоп-заявках
  *
- * Запрос информации о всех стоп-заявках
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос информации о всех стоп-заявках 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -145,7 +145,7 @@ async fn dev_get_all_stop_orders_test() {
 /**
  * Получение информации о выбранной стоп-заявке
  *
- * Запрос информации о выбранной стоп-заявке
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос информации о выбранной стоп-заявке 
  *
  */
 #[tokio::test(core_threads = 3)]

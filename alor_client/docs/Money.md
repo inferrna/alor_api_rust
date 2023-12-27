@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **comission** | **Decimal** | Комиссия (в рублях) | [default to null]
 **free** | **Decimal** | Свободные средства | [default to null]
 **open** | **Decimal** | Средства на момент открытия | [default to null]
-**portfolio** | **Decimal** | Идентификатор клиентского портфеля | [default to null]
+**portfolio** | **String** | Идентификатор клиентского портфеля | [default to null]
 **profit** | **Decimal** | Прибыль | [default to null]
 **profit_rate** | **Decimal** | Прибыль в процентах | [default to null]
 **used** | **Decimal** | Количество использованных | [default to null]

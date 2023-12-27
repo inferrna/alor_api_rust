@@ -1,7 +1,7 @@
 /* 
  * Alor OpenAPI V2
  *
- * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> </p>  <h4>Получение списка портфелей</h4> <p>Получить список доступных портфелей можно из JWT токена</p> <p>Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле <b>portfolios</b>.</p> <br/>  <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+ * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение.  **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*.  Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)!  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   ### Доступные типы данных * Все сделки * Все заявки * Информация по инструментам * Котировки * Биржевые стаканы * Исторические данные * Позиции * Информация о клиенте  ### Поддерживаемые виды заявок  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  ### Ограничения по частоте запросов На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.  ### Получение списка портфелей Получить список доступных портфелей можно из JWT токена Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле **portfolios**.  ## Авторизация  ### OAuth  **Внимание!** JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  ### Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе [Примеры](https://alor.dev/examples).  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  ### Для ведения операций от своего имени  Выписать себе **refresh token** для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  ## Краткое описание работы с авторизацией  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  **refresh token**.  Механизм  **refresh token**  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у **refresh token**  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  **refresh token**, получаемого обычным способом — 1 месяц.   Срок жизни  **refresh token**, получаемого самостоятельным выписыванием — год.   ---   Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на [openapi@alor.ru](mailto:openapi@alor.ru) или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).   Тестовый контур: `https://apidev.alor.ru`   Боевой контур: `https://api.alor.ru`   --- 
  *
  * OpenAPI spec version: 1.0
  * Contact: openapi@alor.ru
@@ -25,19 +25,22 @@ use crate::serialize_quoted_numbers_opt;
 #[derive(Debug, Serialize, Deserialize, PartialEq, Clone)]
 pub struct Order {
   #[serde(rename = "brokerSymbol")]
-  ///Пара биржа-Тикер
-  broker_symbol: String,  // MOEX:SBER 
+  ///Пара Биржа:Тикер
+  broker_symbol: String,  // MOEX:LKOH 
+  #[serde(rename = "comment")]
+  ///Пользовательский комментарий к заявке
+  comment: String,  // Первая заявка 
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
-  ///Время завершения (UTC)
+  ///Дата и время завершения (UTC)
   end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "existing")]
-  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
-  existing: bool,  // true 
+  ///`True` - для данных из \"снепшота\", то есть из истории. `False` - для новых событий
+  existing: bool,  // false 
   #[serde(rename = "filled")]
   ///Количество исполненных (лоты)
   filled: Decimal,  // 1 
@@ -46,19 +49,22 @@ pub struct Order {
   filled_qty_batch: Decimal,  // 1 
   #[serde(rename = "filledQtyUnits")]
   ///Количество исполненных (штуки)
-  filled_qty_units: Decimal,  // 1 
+  filled_qty_units: Decimal,  // 10 
   #[serde(rename = "id")]
   ///Уникальный идентификатор заявки
   id: String,  // 18995978560 
+  #[serde(rename = "portfolio")]
+  ///Идентификатор клиентского портфеля
+  portfolio: String,  // D39004 
   #[serde(rename = "price")]
   ///Цена
-  price: Decimal,  // 208.6 
+  price: Decimal,  // 142.52 
   #[serde(rename = "qty")]
   ///Количество (лоты)
-  qty: Decimal,  // 1 
+  qty: i32,  // 1 
   #[serde(rename = "qtyBatch")]
   ///Количество (лоты)
-  qty_batch: Decimal,  // 1 
+  qty_batch: i32,  // 1 
   #[serde(rename = "qtyUnits")]
   ///Количество (штуки)
   qty_units: i32,  // 1 
@@ -71,20 +77,29 @@ pub struct Order {
   #[serde(rename = "symbol")]
   ///Тикер (Код финансового инструмента)
   symbol: String,  // SBER 
+  #[serde(rename = "timeInForce")]
+  
+  time_in_force: LifePolicy, 
   #[serde(rename = "transTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
-  ///Время выставления (UTC)
+  ///Дата и время выставления (UTC)
   trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
   
-  rtype: OrderType 
+  rtype: OrderType, 
+  #[serde(rename = "volume")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(default)]
+  ///Объем, для рыночных заявок - null
+  volume: Option<Decimal>  // 2086.3 
 }
 
 impl Order {
-  pub fn new(broker_symbol: String, end_time: DateTime<Utc>, exchange: Exchange, existing: bool, filled: Decimal, filled_qty_batch: Decimal, filled_qty_units: Decimal, id: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: i32, side: Side, status: OrderStatus, symbol: String, trans_time: DateTime<Utc>, rtype: OrderType, ) -> Order {
+  pub fn new(broker_symbol: String, comment: String, end_time: DateTime<Utc>, exchange: Exchange, existing: bool, filled: Decimal, filled_qty_batch: Decimal, filled_qty_units: Decimal, id: String, portfolio: String, price: Decimal, qty: i32, qty_batch: i32, qty_units: i32, side: Side, status: OrderStatus, symbol: String, time_in_force: LifePolicy, trans_time: DateTime<Utc>, rtype: OrderType, ) -> Order {
     Order {
       broker_symbol: broker_symbol,
+      comment: comment,
       end_time: end_time,
       exchange: exchange,
       existing: existing,
@@ -92,6 +107,7 @@ impl Order {
       filled_qty_batch: filled_qty_batch,
       filled_qty_units: filled_qty_units,
       id: id,
+      portfolio: portfolio,
       price: price,
       qty: qty,
       qty_batch: qty_batch,
@@ -99,8 +115,10 @@ impl Order {
       side: side,
       status: status,
       symbol: symbol,
+      time_in_force: time_in_force,
       trans_time: trans_time,
-      rtype: rtype
+      rtype: rtype,
+      volume: None
     }
   }
 
@@ -112,9 +130,23 @@ impl Order {
     self.broker_symbol = broker_symbol;
     self
   }
-  ///Пара биржа-Тикер
+  ///Пара Биржа:Тикер
   pub fn broker_symbol(&self) -> &String {
     &self.broker_symbol
+  }
+
+
+  pub fn set_comment(&mut self, comment: String) {
+    self.comment = comment;
+  }
+
+  pub fn with_comment(mut self, comment: String) -> Order {
+    self.comment = comment;
+    self
+  }
+  ///Пользовательский комментарий к заявке
+  pub fn comment(&self) -> &String {
+    &self.comment
   }
 
 
@@ -126,7 +158,7 @@ impl Order {
     self.end_time = end_time;
     self
   }
-  ///Время завершения (UTC)
+  ///Дата и время завершения (UTC)
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -154,7 +186,7 @@ impl Order {
     self.existing = existing;
     self
   }
-  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
+  ///`True` - для данных из \"снепшота\", то есть из истории. `False` - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
@@ -216,6 +248,20 @@ impl Order {
   }
 
 
+  pub fn set_portfolio(&mut self, portfolio: String) {
+    self.portfolio = portfolio;
+  }
+
+  pub fn with_portfolio(mut self, portfolio: String) -> Order {
+    self.portfolio = portfolio;
+    self
+  }
+  ///Идентификатор клиентского портфеля
+  pub fn portfolio(&self) -> &String {
+    &self.portfolio
+  }
+
+
   pub fn set_price(&mut self, price: Decimal) {
     self.price = price;
   }
@@ -230,30 +276,30 @@ impl Order {
   }
 
 
-  pub fn set_qty(&mut self, qty: Decimal) {
+  pub fn set_qty(&mut self, qty: i32) {
     self.qty = qty;
   }
 
-  pub fn with_qty(mut self, qty: Decimal) -> Order {
+  pub fn with_qty(mut self, qty: i32) -> Order {
     self.qty = qty;
     self
   }
   ///Количество (лоты)
-  pub fn qty(&self) -> &Decimal {
+  pub fn qty(&self) -> &i32 {
     &self.qty
   }
 
 
-  pub fn set_qty_batch(&mut self, qty_batch: Decimal) {
+  pub fn set_qty_batch(&mut self, qty_batch: i32) {
     self.qty_batch = qty_batch;
   }
 
-  pub fn with_qty_batch(mut self, qty_batch: Decimal) -> Order {
+  pub fn with_qty_batch(mut self, qty_batch: i32) -> Order {
     self.qty_batch = qty_batch;
     self
   }
   ///Количество (лоты)
-  pub fn qty_batch(&self) -> &Decimal {
+  pub fn qty_batch(&self) -> &i32 {
     &self.qty_batch
   }
 
@@ -314,6 +360,20 @@ impl Order {
   }
 
 
+  pub fn set_time_in_force(&mut self, time_in_force: LifePolicy) {
+    self.time_in_force = time_in_force;
+  }
+
+  pub fn with_time_in_force(mut self, time_in_force: LifePolicy) -> Order {
+    self.time_in_force = time_in_force;
+    self
+  }
+  
+  pub fn time_in_force(&self) -> &LifePolicy {
+    &self.time_in_force
+  }
+
+
   pub fn set_trans_time(&mut self, trans_time: DateTime<Utc>) {
     self.trans_time = trans_time;
   }
@@ -322,7 +382,7 @@ impl Order {
     self.trans_time = trans_time;
     self
   }
-  ///Время выставления (UTC)
+  ///Дата и время выставления (UTC)
   pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
@@ -341,6 +401,23 @@ impl Order {
     &self.rtype
   }
 
+
+  pub fn set_volume(&mut self, volume: Decimal) {
+    self.volume = Some(volume);
+  }
+
+  pub fn with_volume(mut self, volume: Decimal) -> Order {
+    self.volume = Some(volume);
+    self
+  }
+  ///Объем, для рыночных заявок - null
+  pub fn volume(&self) -> Option<&Decimal> {
+    self.volume.as_ref()
+  }
+
+  pub fn reset_volume(&mut self) {
+    self.volume = None;
+  }
 
 
   pub fn validate(&self) {

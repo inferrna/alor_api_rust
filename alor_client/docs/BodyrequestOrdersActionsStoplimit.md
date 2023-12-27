@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **side** | **Side** |  | [default to null]
 **trigger_price** | **Decimal** | Стоп-цена | [default to null]
 **user** | [***BodyrequestOrdersActionsLimitUser**](bodyrequest_OrdersActionsLimit_User.md) |  | [default to null]
+**comment** | **String** | Пользовательский комментарий к заявке | [default to null]
 **iceberg_fixed** | **i32** | Видимая постоянная часть айсберг-заявки в лотах | [default to null]
 **iceberg_variance** | **Decimal** | Амплитуда отклонения (в % от icebergFixed) случайной надбавки к видимой части айсберг-заявки. Только срочный рынок | [default to null]
 **time_in_force** | **LifePolicy** |  | [default to null]

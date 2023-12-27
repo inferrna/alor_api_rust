@@ -50,6 +50,8 @@ impl<T> From<serde_json::Error> for Error<T> {
 
 use super::models::*;
 
+mod auth_api;
+pub use self::auth_api::{ AuthApi, AuthApiClient };
 mod deprecated_api;
 pub use self::deprecated_api::{ DeprecatedApi, DeprecatedApiClient };
 mod orders_api;

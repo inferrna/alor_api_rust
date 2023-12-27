@@ -8,13 +8,15 @@ Method | HTTP request | Description
 [**command_api_v2clientordersactionsstop_limit**](V2ordersApi.md#command_api_v2clientordersactionsstop_limit) | **POST** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit | Создание стоп-лимитной заявки
 [**command_api_v2clientordersactionsstop_limitstop_order_id**](V2ordersApi.md#command_api_v2clientordersactionsstop_limitstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stopLimit/{stopOrderId} | Изменение стоп-лимитной заявки
 [**command_api_v2clientordersactionsstopstop_order_id**](V2ordersApi.md#command_api_v2clientordersactionsstopstop_order_id) | **PUT** commandapi/warptrans/TRADE/v2/client/orders/actions/stop/{stopOrderId} | Изменение стоп-заявки
-[**command_api_warp_v2clientordersdelete**](V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId}/ | Снятие заявки
+[**command_api_warp_v2clientordersdelete**](V2ordersApi.md#command_api_warp_v2clientordersdelete) | **DELETE** commandapi/warptrans/TRADE/v2/client/orders/{orderId} | Снятие заявки
 [**dev_get_all_stop_orders**](V2ordersApi.md#dev_get_all_stop_orders) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders | Получение информации о стоп-заявках
 [**dev_get_one_stop_order**](V2ordersApi.md#dev_get_one_stop_order) | **GET** md/v2/clients/{exchange}/{portfolio}/stoporders/{orderId} | Получение информации о выбранной стоп-заявке
 
 # **command_api_v2clientordersactionsstop**
 > OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstop(ctx, body, x_alor_reqid)
 Создание стоп-заявки
+
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`. 
 
 ### Required Parameters
 
@@ -43,6 +45,8 @@ Name | Type | Description  | Notes
 > OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstop_limit(ctx, body, x_alor_reqid)
 Создание стоп-лимитной заявки
 
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`. 
+
 ### Required Parameters
 
 Name | Type | Description  | Notes
@@ -70,7 +74,7 @@ Name | Type | Description  | Notes
 > OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstop_limitstop_order_id(ctx, body, x_alor_reqid, stop_order_id)
 Изменение стоп-лимитной заявки
 
-Изменение стоп-лимитной заявки
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Изменение стоп-лимитной заявки 
 
 ### Required Parameters
 
@@ -100,7 +104,7 @@ Name | Type | Description  | Notes
 > OrdersActionsLimitMarketCommandApi command_api_v2clientordersactionsstopstop_order_id(ctx, body, x_alor_reqid, stop_order_id)
 Изменение стоп-заявки
 
-Изменение стоп-заявки
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Изменение стоп-заявки 
 
 ### Required Parameters
 
@@ -130,7 +134,7 @@ Name | Type | Description  | Notes
 > String command_api_warp_v2clientordersdelete(ctx, order_id, portfolio, exchange, stop, optional)
 Снятие заявки
 
-Снятие заявки с указанным идентификатором
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Снятие заявки с указанным идентификатором 
 
 ### Required Parameters
 
@@ -173,7 +177,7 @@ Name | Type | Description  | Notes
 > Vec<StoporderWarp> dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
 Получение информации о стоп-заявках
 
-Запрос информации о всех стоп-заявках
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о всех стоп-заявках 
 
 ### Required Parameters
 
@@ -211,7 +215,7 @@ Name | Type | Description  | Notes
 > StoporderWarp dev_get_one_stop_order(ctx, exchange, portfolio, order_id, optional)
 Получение информации о выбранной стоп-заявке
 
-Запрос информации о выбранной стоп-заявке
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о выбранной стоп-заявке 
 
 ### Required Parameters
 

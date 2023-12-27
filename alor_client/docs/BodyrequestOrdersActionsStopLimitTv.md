@@ -3,7 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**end_time** | **DateTime<Utc>** | Срок действия | [default to null]
+**comment** | **String** | Пользовательский комментарий к заявке | [default to null]
+**end_time** | **DateTime<Utc>** | Дата и время завершения (UTC) | [default to null]
 **instrument** | [***BodyrequestOrdersActionsLimitTvInstrument**](bodyrequest_OrdersActionsLimitTV_instrument.md) |  | [default to null]
 **price** | **Decimal** | Цена | [default to null]
 **quantity** | **i32** | Количество | [default to null]

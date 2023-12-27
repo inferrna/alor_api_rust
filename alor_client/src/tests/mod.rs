@@ -1,3 +1,4 @@
+mod auth_api_test;
 mod deprecated_api_test;
 mod orders_api_test;
 mod other_api_test;

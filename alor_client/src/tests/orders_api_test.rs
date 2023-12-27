@@ -2,7 +2,6 @@
 package io.swagger.client.api;
 
 import .ApiException;
-import io.swagger.client.model.BodyrequestOrdersActionsLimitTVput;
 import io.swagger.client.model.BodyrequestOrdersActionsLimitTv;
 import io.swagger.client.model.BodyrequestOrdersActionsMarketTVput;
 import io.swagger.client.model.BodyrequestOrdersActionsMarketTv;
@@ -10,6 +9,7 @@ import io.swagger.client.model.EstimateOrderViewModel;
 import io.swagger.client.model.estimateOrderModel;
 import io.swagger.client.model.estimateOrderViewModel;
 import io.swagger.client.model.inline_response_400;
+import io.swagger.client.model.order;
 import io.swagger.client.model.orders_actions_400_CommandAPI;
 import io.swagger.client.model.orders_actions_LimitMarket;
 import io.swagger.client.model.orders_actions_LimitMarket_CommandAPI;
@@ -46,7 +46,7 @@ fn get_client() -> OrdersApiClient<HttpConnector<GaiResolver>> {
 /**
  * Создание лимитной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по указанной в теле запроса цене. 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -61,14 +61,14 @@ async fn command_api_v2clientordersactionslimit_test() {
 /**
  * Изменение лимитной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос изменяет характеристики ранее поданной лимитной заявки с указанным номером 
  *
  */
 #[tokio::test(core_threads = 3)]
 async fn command_api_v2clientordersactionslimitput_test() {
     let api_client = get_client();
     let value = json!(/*Put test json here*/);
-    let body: BodyrequestOrdersActionsLimitTVput = serde_json::from_value(value).unwrap();
+    let body: BodyrequestOrdersActionsLimitTv = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let x_alor_reqid: String = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
@@ -78,7 +78,7 @@ async fn command_api_v2clientordersactionslimitput_test() {
 /**
  * Создание рыночной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос создаёт на бирже новую заявку на покупку или продажу торгового инструмента по рыночной цене. 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -93,7 +93,7 @@ async fn command_api_v2clientordersactionsmarket_test() {
 /**
  * Изменение рыночной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос изменяет характеристики ранее поданной рыночной заявки с указанным номером 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -110,11 +110,11 @@ async fn command_api_v2clientordersactionsmarketput_test() {
 /**
  * Снятие заявки
  *
- * Снятие заявки с указанным идентификатором
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Снятие заявки с указанным идентификатором 
  *
  */
 #[tokio::test(core_threads = 3)]
-async fn command_api_v2clientordersdelete_test() {
+async fn command_api_warp_v2clientordersdelete_test() {
     let api_client = get_client();
     let value = json!(/*Put test json here*/);
     let order_id: i64 = serde_json::from_value(value).unwrap();
@@ -128,12 +128,48 @@ async fn command_api_v2clientordersdelete_test() {
     let json_response: bool = serde_json::from_value(value).unwrap();
     let value = json!(/*Put test json here*/);
     let format: Format = serde_json::from_value(value).unwrap();
-    let response: String = api_client.command_api_v2clientordersdelete(order_id, portfolio, exchange, stop, json_response, format).await.unwrap();
+    let response: String = api_client.command_api_warp_v2clientordersdelete(order_id, portfolio, exchange, stop, json_response, format).await.unwrap();
+}
+/**
+ * Получение информации о всех заявках
+ *
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Возвращает информацию о всех заявках для указанного &#x60;portfolio&#x60;, созданных на заданной в параметре &#x60;exchange&#x60; бирже. 
+ *
+ */
+#[tokio::test(core_threads = 3)]
+async fn dev_get_all_orders_test() {
+    let api_client = get_client();
+    let value = json!(/*Put test json here*/);
+    let exchange: Exchange = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let portfolio: String = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let format: Format = serde_json::from_value(value).unwrap();
+    let response: Vec<Order> = api_client.dev_get_all_orders(exchange, portfolio, format).await.unwrap();
+}
+/**
+ * Получение информации о выбранной заявке
+ *
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Возвращает информацию о выбранной в параметре &#x60;orderId&#x60; заявке. 
+ *
+ */
+#[tokio::test(core_threads = 3)]
+async fn dev_get_one_order_test() {
+    let api_client = get_client();
+    let value = json!(/*Put test json here*/);
+    let exchange: Exchange = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let portfolio: String = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let order_id: i64 = serde_json::from_value(value).unwrap();
+    let value = json!(/*Put test json here*/);
+    let format: Format = serde_json::from_value(value).unwrap();
+    let response: Order = api_client.dev_get_one_order(exchange, portfolio, order_id, format).await.unwrap();
 }
 /**
  * Провести оценку одной заявки
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
  *
  */
 #[tokio::test(core_threads = 3)]
@@ -146,7 +182,7 @@ async fn v2clientordersactionsestimate_test() {
 /**
  * Провести оценку нескольких заявок
  *
- * 
+ * **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;. 
  *
  */
 #[tokio::test(core_threads = 3)]

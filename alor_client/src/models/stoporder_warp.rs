@@ -1,7 +1,7 @@
 /* 
  * Alor OpenAPI V2
  *
- * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> </p>  <h4>Получение списка портфелей</h4> <p>Получить список доступных портфелей можно из JWT токена</p> <p>Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле <b>portfolios</b>.</p> <br/>  <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+ * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение.  **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*.  Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)!  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   ### Доступные типы данных * Все сделки * Все заявки * Информация по инструментам * Котировки * Биржевые стаканы * Исторические данные * Позиции * Информация о клиенте  ### Поддерживаемые виды заявок  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  ### Ограничения по частоте запросов На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.  ### Получение списка портфелей Получить список доступных портфелей можно из JWT токена Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле **portfolios**.  ## Авторизация  ### OAuth  **Внимание!** JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  ### Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе [Примеры](https://alor.dev/examples).  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  ### Для ведения операций от своего имени  Выписать себе **refresh token** для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  ## Краткое описание работы с авторизацией  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  **refresh token**.  Механизм  **refresh token**  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у **refresh token**  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  **refresh token**, получаемого обычным способом — 1 месяц.   Срок жизни  **refresh token**, получаемого самостоятельным выписыванием — год.   ---   Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на [openapi@alor.ru](mailto:openapi@alor.ru) или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).   Тестовый контур: `https://apidev.alor.ru`   Боевой контур: `https://api.alor.ru`   --- 
  *
  * OpenAPI spec version: 1.0
  * Contact: openapi@alor.ru
@@ -36,35 +36,44 @@ pub struct StoporderWarp {
   #[serde(rename = "endTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
-  ///Время действия заявки (UTC)
+  ///Дата и время завершения (UTC)
   end_time: DateTime<Utc>, 
   #[serde(rename = "exchange")]
   
   exchange: Exchange, 
   #[serde(rename = "exchangeOrderId")]
-  ///Уникальный идентификатор стоп-заявки
+  ///Уникальный идентификатор биржевой заявки
   exchange_order_id: i64,  // 425242362 
   #[serde(rename = "existing")]
-  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
-  existing: bool,  // true 
+  ///`True` - для данных из \"снепшота\", то есть из истории. `False` - для новых событий
+  existing: bool,  // false 
+  #[serde(rename = "filled")]
+  ///Количество исполненных (штуки)
+  filled: Decimal,  // 10 
+  #[serde(rename = "filledQtyBatch")]
+  ///Количество исполненных (лоты)
+  filled_qty_batch: Decimal,  // 1 
+  #[serde(rename = "filledQtyUnits")]
+  ///Количество исполненных (штуки)
+  filled_qty_units: Decimal,  // 10 
   #[serde(rename = "id")]
   ///Уникальный идентификатор стоп-заявки
-  id: i64,  // 347499 
+  id: Decimal,  // 347498 
   #[serde(rename = "portfolio")]
-  ///Пара Биржа:Тикер
+  ///Идентификатор клиентского портфеля
   portfolio: String,  // D39004 
   #[serde(rename = "price")]
-  ///Цена(Лимит)
+  ///Цена (Лимит)
   price: Decimal,  // 208.6 
   #[serde(rename = "qty")]
-  ///Количество (Лоты)
-  qty: Decimal,  // 1 
+  ///Количество (лоты)
+  qty: i32,  // 1 
   #[serde(rename = "qtyBatch")]
-  ///Количество (Лоты)
-  qty_batch: Decimal,  // 1 
+  ///Количество (лоты)
+  qty_batch: i32,  // 1 
   #[serde(rename = "qtyUnits")]
-  ///Количество (Штуки)
-  qty_units: Decimal,  // 10 
+  ///Количество (штуки)
+  qty_units: Decimal,  // 20.0 
   #[serde(rename = "side")]
   
   side: Side, 
@@ -80,15 +89,20 @@ pub struct StoporderWarp {
   #[serde(rename = "transTime")]
   //Uncomment this also to deal with limited rfc support on server side
   //#[serde(serialize_with = "serialize_dt", deserialize_with = "deserialize_dt")]
-  ///Время выставления заявки (UTC)
+  ///Дата и время выставления (UTC)
   trans_time: DateTime<Utc>, 
   #[serde(rename = "type")]
   
-  rtype: StopOrderType 
+  rtype: StopOrderType, 
+  #[serde(rename = "volume")]
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(default)]
+  ///Объем, для рыночных заявок - null
+  volume: Option<Decimal>  // 2086.3 
 }
 
 impl StoporderWarp {
-  pub fn new(avg_price: Decimal, broker_symbol: String, condition: Condition, end_time: DateTime<Utc>, exchange: Exchange, exchange_order_id: i64, existing: bool, id: i64, portfolio: String, price: Decimal, qty: Decimal, qty_batch: Decimal, qty_units: Decimal, side: Side, status: OrderStatus, stop_price: Decimal, symbol: String, trans_time: DateTime<Utc>, rtype: StopOrderType, ) -> StoporderWarp {
+  pub fn new(avg_price: Decimal, broker_symbol: String, condition: Condition, end_time: DateTime<Utc>, exchange: Exchange, exchange_order_id: i64, existing: bool, filled: Decimal, filled_qty_batch: Decimal, filled_qty_units: Decimal, id: Decimal, portfolio: String, price: Decimal, qty: i32, qty_batch: i32, qty_units: Decimal, side: Side, status: OrderStatus, stop_price: Decimal, symbol: String, trans_time: DateTime<Utc>, rtype: StopOrderType, ) -> StoporderWarp {
     StoporderWarp {
       avg_price: avg_price,
       broker_symbol: broker_symbol,
@@ -97,6 +111,9 @@ impl StoporderWarp {
       exchange: exchange,
       exchange_order_id: exchange_order_id,
       existing: existing,
+      filled: filled,
+      filled_qty_batch: filled_qty_batch,
+      filled_qty_units: filled_qty_units,
       id: id,
       portfolio: portfolio,
       price: price,
@@ -108,7 +125,8 @@ impl StoporderWarp {
       stop_price: stop_price,
       symbol: symbol,
       trans_time: trans_time,
-      rtype: rtype
+      rtype: rtype,
+      volume: None
     }
   }
 
@@ -162,7 +180,7 @@ impl StoporderWarp {
     self.end_time = end_time;
     self
   }
-  ///Время действия заявки (UTC)
+  ///Дата и время завершения (UTC)
   pub fn end_time(&self) -> &DateTime<Utc> {
     &self.end_time
   }
@@ -190,7 +208,7 @@ impl StoporderWarp {
     self.exchange_order_id = exchange_order_id;
     self
   }
-  ///Уникальный идентификатор стоп-заявки
+  ///Уникальный идентификатор биржевой заявки
   pub fn exchange_order_id(&self) -> &i64 {
     &self.exchange_order_id
   }
@@ -204,22 +222,64 @@ impl StoporderWarp {
     self.existing = existing;
     self
   }
-  ///True - для данных из \"снепшота\", то есть из истории. False - для новых событий
+  ///`True` - для данных из \"снепшота\", то есть из истории. `False` - для новых событий
   pub fn existing(&self) -> &bool {
     &self.existing
   }
 
 
-  pub fn set_id(&mut self, id: i64) {
+  pub fn set_filled(&mut self, filled: Decimal) {
+    self.filled = filled;
+  }
+
+  pub fn with_filled(mut self, filled: Decimal) -> StoporderWarp {
+    self.filled = filled;
+    self
+  }
+  ///Количество исполненных (штуки)
+  pub fn filled(&self) -> &Decimal {
+    &self.filled
+  }
+
+
+  pub fn set_filled_qty_batch(&mut self, filled_qty_batch: Decimal) {
+    self.filled_qty_batch = filled_qty_batch;
+  }
+
+  pub fn with_filled_qty_batch(mut self, filled_qty_batch: Decimal) -> StoporderWarp {
+    self.filled_qty_batch = filled_qty_batch;
+    self
+  }
+  ///Количество исполненных (лоты)
+  pub fn filled_qty_batch(&self) -> &Decimal {
+    &self.filled_qty_batch
+  }
+
+
+  pub fn set_filled_qty_units(&mut self, filled_qty_units: Decimal) {
+    self.filled_qty_units = filled_qty_units;
+  }
+
+  pub fn with_filled_qty_units(mut self, filled_qty_units: Decimal) -> StoporderWarp {
+    self.filled_qty_units = filled_qty_units;
+    self
+  }
+  ///Количество исполненных (штуки)
+  pub fn filled_qty_units(&self) -> &Decimal {
+    &self.filled_qty_units
+  }
+
+
+  pub fn set_id(&mut self, id: Decimal) {
     self.id = id;
   }
 
-  pub fn with_id(mut self, id: i64) -> StoporderWarp {
+  pub fn with_id(mut self, id: Decimal) -> StoporderWarp {
     self.id = id;
     self
   }
   ///Уникальный идентификатор стоп-заявки
-  pub fn id(&self) -> &i64 {
+  pub fn id(&self) -> &Decimal {
     &self.id
   }
 
@@ -232,7 +292,7 @@ impl StoporderWarp {
     self.portfolio = portfolio;
     self
   }
-  ///Пара Биржа:Тикер
+  ///Идентификатор клиентского портфеля
   pub fn portfolio(&self) -> &String {
     &self.portfolio
   }
@@ -246,36 +306,36 @@ impl StoporderWarp {
     self.price = price;
     self
   }
-  ///Цена(Лимит)
+  ///Цена (Лимит)
   pub fn price(&self) -> &Decimal {
     &self.price
   }
 
 
-  pub fn set_qty(&mut self, qty: Decimal) {
+  pub fn set_qty(&mut self, qty: i32) {
     self.qty = qty;
   }
 
-  pub fn with_qty(mut self, qty: Decimal) -> StoporderWarp {
+  pub fn with_qty(mut self, qty: i32) -> StoporderWarp {
     self.qty = qty;
     self
   }
-  ///Количество (Лоты)
-  pub fn qty(&self) -> &Decimal {
+  ///Количество (лоты)
+  pub fn qty(&self) -> &i32 {
     &self.qty
   }
 
 
-  pub fn set_qty_batch(&mut self, qty_batch: Decimal) {
+  pub fn set_qty_batch(&mut self, qty_batch: i32) {
     self.qty_batch = qty_batch;
   }
 
-  pub fn with_qty_batch(mut self, qty_batch: Decimal) -> StoporderWarp {
+  pub fn with_qty_batch(mut self, qty_batch: i32) -> StoporderWarp {
     self.qty_batch = qty_batch;
     self
   }
-  ///Количество (Лоты)
-  pub fn qty_batch(&self) -> &Decimal {
+  ///Количество (лоты)
+  pub fn qty_batch(&self) -> &i32 {
     &self.qty_batch
   }
 
@@ -288,7 +348,7 @@ impl StoporderWarp {
     self.qty_units = qty_units;
     self
   }
-  ///Количество (Штуки)
+  ///Количество (штуки)
   pub fn qty_units(&self) -> &Decimal {
     &self.qty_units
   }
@@ -358,7 +418,7 @@ impl StoporderWarp {
     self.trans_time = trans_time;
     self
   }
-  ///Время выставления заявки (UTC)
+  ///Дата и время выставления (UTC)
   pub fn trans_time(&self) -> &DateTime<Utc> {
     &self.trans_time
   }
@@ -377,6 +437,23 @@ impl StoporderWarp {
     &self.rtype
   }
 
+
+  pub fn set_volume(&mut self, volume: Decimal) {
+    self.volume = Some(volume);
+  }
+
+  pub fn with_volume(mut self, volume: Decimal) -> StoporderWarp {
+    self.volume = Some(volume);
+    self
+  }
+  ///Объем, для рыночных заявок - null
+  pub fn volume(&self) -> Option<&Decimal> {
+    self.volume.as_ref()
+  }
+
+  pub fn reset_volume(&mut self) {
+    self.volume = None;
+  }
 
 
   pub fn validate(&self) {

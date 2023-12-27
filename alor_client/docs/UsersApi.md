@@ -22,7 +22,7 @@ Method | HTTP request | Description
 > Vec<Order> dev_get_all_orders(ctx, exchange, portfolio, optional)
 Получение информации о всех заявках
 
-Запрос информации о всех заявках
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Возвращает информацию о всех заявках для указанного `portfolio`, созданных на заданной в параметре `exchange` бирже. 
 
 ### Required Parameters
 
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 > Vec<Position> dev_get_all_positions(ctx, exchange, portfolio, optional)
 Получение информации о позициях
 
-Запрос информации о позициях
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Возвращает информацию обо всех позициях указанного `portfolio`. 
 
 ### Required Parameters
 
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 > Vec<StoporderWarp> dev_get_all_stop_orders(ctx, exchange, portfolio, optional)
 Получение информации о стоп-заявках
 
-Запрос информации о всех стоп-заявках
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о всех стоп-заявках 
 
 ### Required Parameters
 
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 > Vec<Trade> dev_get_all_trades(ctx, exchange, portfolio, optional)
 Получение информации о сделках
 
-Запрос информации о сделках (только за текущую торговую сессию)
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о сделках (только за текущую торговую сессию) 
 
 ### Required Parameters
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 > Order dev_get_one_order(ctx, exchange, portfolio, order_id, optional)
 Получение информации о выбранной заявке
 
-Запрос информации о выбранной заявке
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Возвращает информацию о выбранной в параметре `orderId` заявке. 
 
 ### Required Parameters
 
@@ -215,7 +215,7 @@ Name | Type | Description  | Notes
 > Position dev_get_one_position(ctx, exchange, portfolio, symbol, optional)
 Получение информации о позициях выбранного инструмента
 
-Запрос информации о позициях выбранного инструмента
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о позициях выбранного инструмента 
 
 ### Required Parameters
 
@@ -255,7 +255,7 @@ Name | Type | Description  | Notes
 > StoporderWarp dev_get_one_stop_order(ctx, exchange, portfolio, order_id, optional)
 Получение информации о выбранной стоп-заявке
 
-Запрос информации о выбранной стоп-заявке
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о выбранной стоп-заявке 
 
 ### Required Parameters
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 > Vec<Trade> dev_get_ticker_trades(ctx, exchange, portfolio, ticker, optional)
 Получение информации о сделках по выбранному инструменту
 
-Запрос информации о сделках по выбранному инструменту
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о сделках по выбранному инструменту 
 
 ### Required Parameters
 
@@ -335,7 +335,7 @@ Name | Type | Description  | Notes
 > Summary exchange_portfolio_summary(ctx, exchange, portfolio, optional)
 Получение информации о портфеле
 
-Запрос сводной информации о портфеле
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос сводной информации о портфеле 
 
 ### Required Parameters
 
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 > Fortsrisk fortsrisk(ctx, exchange, portfolio, optional)
 Получение информации о рисках на срочном рынке
 
-Запрос информации о рисках на срочном рынке для выбранного портфеля
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о рисках на срочном рынке для выбранного портфеля 
 
 ### Required Parameters
 
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 > Risk risk(ctx, exchange, portfolio, optional)
 Получение информации о рисках
 
-Запрос информации о рисках
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос информации о рисках 
 
 ### Required Parameters
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 > Vec<Trade> trade_stats(ctx, exchange, portfolio, optional)
 Получение истории сделок
 
-Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос)
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) 
 
 ### Required Parameters
 
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 > Vec<Trade> trade_stats_by_symbol(ctx, exchange, portfolio, symbol, optional)
 Получение истории сделок (один тикер)
 
-Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту. 
+**Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок `Authorization` со значением `Bearer <ваш JWT>`.  Запрос списка сделок за предыдущие дни (не более 1000 сделок за один запрос) по одному инструменту.  
 
 ### Required Parameters
 

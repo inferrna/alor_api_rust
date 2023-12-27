@@ -1,7 +1,7 @@
 /* 
  * Alor OpenAPI V2
  *
- * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение. <br> **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*. <br> Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)! <br> <br>  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   <h4> Доступные типы данных </h4>  * Все сделки  * Все заявки  * Информация по инструментам  * Котировки  * Биржевые стаканы  * Исторические данные  * Позиции  * Информация о клиенте  <h4>Поддерживаемые виды заявок</h4>  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  <h4>    Ограничения по частоте запросов     </h4> <p>На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. <br/>  Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.<br/> </p>  <h4>Получение списка портфелей</h4> <p>Получить список доступных портфелей можно из JWT токена</p> <p>Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле <b>portfolios</b>.</p> <br/>  <h2> Авторизация </h2>  <h4>OAuth</h4>  <b>Внимание!</b>   JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  <h4>Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.</h4>  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе  <a href=\"/examples\">Примеры</a>.  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  <h4>Для ведения операций от своего имени</h4>  Выписать себе <b>refresh token</b> для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  <h2>Краткое описание работы с авторизацией</h2>  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  <b>refresh token</b> .  Механизм  <b>refresh token</b>  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у  <b>refresh token</b>  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  <b>refresh token</b>, получаемого обычным способом — 1 месяц.   Срок жизни  <b>refresh token</b>, получаемого самостоятельным выписыванием — год.  | |-  > Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на <a href=\"mailto:openapi@alor.ru\">openapi@alor.ru</a> или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).  </br></br> Тестовый контур: `https://apidev.alor.ru`  Боевой контур: `https://api.alor.ru` 
+ * API для работы с торговой системой АЛОР Брокер. Предоставляет интерфейсы для выставления заявок и получения биржевой информации.  Данные для неавторизованных запросов предоставляются с задержкой от 15 минут, для авторизованных - без задержек.   Публичная биржевая информация может быть получена через HTTP(S) API, а также доступна через однократно установленное WebSocket соединение.  **Внимание!** WebSocket соединения могут и будут разрываться *(например, если клиент не успевает обрабатывать сообщения и на стороне API в буфере накопится более 5000 событий)*.  Во внешнем ПО необходимо предусмотреть механизмы переподключения и переподписки (при необходимости)!  В OpenAPI V2 доступны \"Московская Биржа\" (MOEX) и \"Биржа СПБ\" (SPBX).   ### Доступные типы данных * Все сделки * Все заявки * Информация по инструментам * Котировки * Биржевые стаканы * Исторические данные * Позиции * Информация о клиенте  ### Поддерживаемые виды заявок  * рыночные  * лимитные  * стоп-лосс  * тейк-профит  * стоп-лосс лимит  * тейк-профит лимит  ### Ограничения по частоте запросов На текущий момент ограничений по количеству запросов в минуту нет, однако есть ограничение на общее количество подписок (сотни тысяч). При достижении лимита подписок клиент будет заблокирован и в течение нескольких минут не сможет создавать новые подписки. Уже существующие подписки продолжат работать. Сервер может обрабатывать \"тяжелые\" запросы (пример - история за все время) и запросы без авторизации с меньшим приоритетом.  ### Получение списка портфелей Получить список доступных портфелей можно из JWT токена Для получения списка доступных портфелей необходимо декодировать JWT токен. Портфели находятся в поле **portfolios**.  ## Авторизация  ### OAuth  **Внимание!** JWT и refresh token — равносильны логину и паролю. Их нужно скрывать от публичного доступа.  ### Для разработчиков сторонних приложений, в которых торговлю будут вести их пользователи.  Мы предоставляем сервис для авторизации сторониих приложений по стандарту OAuth 2.0. С примером приложения, использующего OAuth сервис для авторизации пользователей можно ознакомиться в разделе [Примеры](https://alor.dev/examples).  Список разрешений (scopes), которые могут быть выданы приложению: <table>   <tr>     <td><b>OrdersRead</b></td>     <td>Чтение выставленных заявок</td>   </tr>   <tr>     <td><b>OrdersCreate</b></td>     <td>Выставление заявок</td>   </tr>   <tr>     <td><b>Trades</b></td>     <td>Чтение совершенных сделок</td>   </tr>   <tr>     <td><b>Personal</b></td>     <td>Персональная информация: ФИО, почта и т.п.</td>   </tr>   <tr>     <td><b>Stats</b></td>     <td>Статистика: прибыль, средние цены и т.п.</td>   </tr> </table>  ### Для ведения операций от своего имени  Выписать себе **refresh token** для ведения операций от своего имени [можно здесь](https://alor.dev/open-api-tokens).  ## Краткое описание работы с авторизацией  Чтобы выполнить авторизованный запрос, добавьте в запрос заголовок с именем \"Authorization\" и значением, состоящим из префикса `\"Bearer \"` и валидного JWT токена.  Срок жизни JWT короткий: это сделано для безопасности.  Для большинства вариантов использования API мы рекоммендуем использовать механизм  **refresh token**.  Механизм  **refresh token**  позволяет получать JWT с новым сроком жизни. Для этого отправьте POST запрос на адрес `https://oauthdev.alor.ru/refresh?token={refreshToken}` *(тестовый контур)* или `https://oauth.alor.ru/refresh?token={refreshToken}` *(боевой контур)*. Если у **refresh token**  не истек срок жизни и не он не был отозван, то в теле ответа в поле AccessToken вернётся свежий JWT токен.   Срок жизни  **refresh token**, получаемого обычным способом — 1 месяц.   Срок жизни  **refresh token**, получаемого самостоятельным выписыванием — год.   ---   Если мы для вас не завели портфели для ведения торговли в игровом контуре, оставьте заявку на [openapi@alor.ru](mailto:openapi@alor.ru) или свяжитесь с нами в [телеграме](https://t.me/AlorOpenAPI).   Тестовый контур: `https://apidev.alor.ru`   Боевой контур: `https://api.alor.ru`   --- 
  *
  * OpenAPI spec version: 1.0
  * Contact: openapi@alor.ru
@@ -49,7 +49,7 @@ pub trait SecuritiesApi {
 ///
 /// Запрос истории для выбранных биржи и инструмента
 ///
-/// Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется.
+/// **Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос истории рынка для выбранных биржи и финансового инструмента. Данные имеют задержку в 15 минут, если запрос не авторизован. Для авторизованных клиентов задержка не применяется. 
 ///
 /// # Arguments
 ///
@@ -85,7 +85,7 @@ pub trait SecuritiesApi {
 ///
 /// Получение информации о биржевом стакане
 ///
-/// Запрос биржевого стакана
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос биржевого стакана 
 ///
 /// # Arguments
 ///
@@ -109,7 +109,7 @@ pub trait SecuritiesApi {
 ///
 /// Получение информации о котировках для выбранных инструментов
 ///
-/// Запрос информации о котировках для выбранных инструментов и бирж
+/// **Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос информации о котировках для выбранных инструментов и бирж 
 ///
 /// # Arguments
 ///
@@ -125,7 +125,7 @@ pub trait SecuritiesApi {
 ///
 /// Получение котировки по ближайшему фьючерсу (код)
 ///
-/// Запрос котировки по ближайшему фьючерсу (только по коду, без даты)
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос котировки по ближайшему фьючерсу (только по коду, без даты) 
 ///
 /// # Arguments
 ///
@@ -141,11 +141,11 @@ pub trait SecuritiesApi {
     /// 
     /// 
     ///
-    async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::Format>) -> Result<SymbolFutures, Error<serde_json::Value>>;
+    async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::Format>) -> Result<Vec<Symbol>, Error<serde_json::Value>>;
 ///
 /// Получение информации о торговых инструментах
 ///
-/// Запрос информации о торговых инструментах
+/// **Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Запрос информации о торговых инструментах 
 ///
 /// # Arguments
 ///
@@ -177,11 +177,11 @@ pub trait SecuritiesApi {
     /// 
     /// 
     ///
-    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::Sector>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>>;
+    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::Market>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>>;
 ///
 /// Получение информации о всех сделках по ценным бумагам за сегодня
 ///
-/// Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запросить данные о всех сделках (лента) по ценным бумагам за сегодняшний день 
 ///
 /// # Arguments
 ///
@@ -229,7 +229,7 @@ pub trait SecuritiesApi {
 ///
 /// Получение исторической информации о всех сделках по ценным бумагам
 ///
-/// Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются)
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запросить данные о сделках (лента) по ценным бумагам за исторический период (за текущий день сделки не отдаются) 
 ///
 /// # Arguments
 ///
@@ -257,11 +257,15 @@ pub trait SecuritiesApi {
     /// Example: 56
     /// 
     ///
-    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>) -> Result<Alltradeshistory, Error<serde_json::Value>>;
+    /// * `format`  (optional)
+    /// 
+    /// 
+    ///
+    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>, format: Option<crate::models::Format>) -> Result<Alltradeshistory, Error<serde_json::Value>>;
 ///
 /// Получение информации о торговых инструментах на выбранной бирже
 ///
-/// Запрос информации об инструментах на выбранной бирже
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос информации об инструментах на выбранной бирже 
 ///
 /// # Arguments
 ///
@@ -273,11 +277,27 @@ pub trait SecuritiesApi {
     /// 
     /// 
     ///
-    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>>;
+    /// * `market`  (optional)
+    /// 
+    /// 
+    ///
+    /// * `include_old`  (optional)
+    /// Example: true
+    /// 
+    ///
+    /// * `limit`  (optional)
+    /// Example: 56
+    /// 
+    ///
+    /// * `offset`  (optional)
+    /// Example: 56
+    /// 
+    ///
+    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::Format>, market: Option<crate::models::Market>, include_old: Option<bool>, limit: Option<i32>, offset: Option<i32>) -> Result<Vec<Security>, Error<serde_json::Value>>;
 ///
 /// Получение информации о выбранном финансовом инструменте
 ///
-/// Запрос информации о выбранном финансовом инструменте на бирже
+/// **Запрос нельзя выполнить анонимно**. Для авторизации запроса добавьте заголовок &#x60;Authorization&#x60; со значением &#x60;Bearer &lt;ваш JWT&gt;&#x60;.  Запрос информации о выбранном финансовом инструменте на бирже 
 ///
 /// # Arguments
 ///
@@ -297,7 +317,7 @@ pub trait SecuritiesApi {
 ///
 /// Запрос ставок риска
 ///
-/// Получение ставок риска для маржинальной торговли.
+/// **Запрос может быть выполнен без авторизации**. При отправке анонимного запроса вернутся данные, бывшие актуальными 15 минут назад.  Получение ставок риска для маржинальной торговли. 
 ///
 /// # Arguments
 ///
@@ -636,7 +656,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::Format>) -> Result<SymbolFutures, Error<serde_json::Value>> {
+    async fn dev_securities_futures(&self, exchange: crate::models::Exchange, symbol: &str, format: Option<crate::models::Format>) -> Result<Vec<Symbol>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -737,7 +757,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::Sector>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>> {
+    async fn dev_securities_search(&self, query: &str, limit: Option<i32>, offset: Option<i32>, sector: Option<crate::models::Market>, cficode: Option<&str>, exchange: Option<crate::models::Exchange>, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -976,7 +996,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>) -> Result<Alltradeshistory, Error<serde_json::Value>> {
+    async fn dev_securities_search_all_trades_history(&self, exchange: crate::models::Exchange, symbol: &str, limit: i32, from: Option<i64>, to: Option<i64>, offset: Option<i32>, format: Option<crate::models::Format>) -> Result<Alltradeshistory, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -998,6 +1018,9 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
             api_query.append_pair("limit", &limit.outline_print() );
         if let Some(offset) = offset {
             api_query.append_pair("offset", &offset.outline_print() );
+        }
+        if let Some(format) = format {
+            api_query.append_pair("format", &format.outline_print());
         }
             for (key, val) in &auth_query {
                 api_query.append_pair(key, val);
@@ -1084,7 +1107,7 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
         res_body
     }
 
-    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::Format>) -> Result<Vec<Security>, Error<serde_json::Value>> {
+    async fn dev_securities_search_exchange(&self, exchange: crate::models::Exchange, format: Option<crate::models::Format>, market: Option<crate::models::Market>, include_old: Option<bool>, limit: Option<i32>, offset: Option<i32>) -> Result<Vec<Security>, Error<serde_json::Value>> {
         let configuration: &configuration::Configuration<C> = self.configuration.borrow();
 
         let mut auth_headers = HashMap::<String, String>::new();
@@ -1099,6 +1122,18 @@ impl<C: hyper::client::connect::Connect + Clone + Send + Sync + 'static>Securiti
             let has_query_params = true;
         if let Some(format) = format {
             api_query.append_pair("format", &format.outline_print());
+        }
+        if let Some(market) = market {
+            api_query.append_pair("market", &market.outline_print());
+        }
+        if let Some(include_old) = include_old {
+            api_query.append_pair("includeOld", &include_old.outline_print() );
+        }
+        if let Some(limit) = limit {
+            api_query.append_pair("limit", &limit.outline_print() );
+        }
+        if let Some(offset) = offset {
+            api_query.append_pair("offset", &offset.outline_print() );
         }
             for (key, val) in &auth_query {
                 api_query.append_pair(key, val);
